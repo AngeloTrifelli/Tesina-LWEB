@@ -1,0 +1,59 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Tipi di utente}{6}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Visitatore}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Cliente}{7}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Concierge}{8}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Amministratore}{8}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}Casi d'uso}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Visualizzazione informazioni relative all'hotel}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Prenotazione di un soggiorno}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Registrazione}{10}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Login}{10}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Visualizzazione e modifica delle informazioni personali}{10}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Pagamento mediante denaro e/o crediti}{11}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Servizio di ristorazione}{11}{subsection.1.2.7}%
+\contentsline {subsection}{\numberline {1.2.8}Scrittura e commento di recensioni/commenti}{12}{subsection.1.2.8}%
+\contentsline {subsection}{\numberline {1.2.9}Attività}{13}{subsection.1.2.9}%
+\contentsline {subsection}{\numberline {1.2.10}Valutazione di recensioni e di commenti}{14}{subsection.1.2.10}%
+\contentsline {subsection}{\numberline {1.2.11}Inserimento e risposta alle domande}{14}{subsection.1.2.11}%
+\contentsline {subsection}{\numberline {1.2.12}Modifica del menù del ristorante}{15}{subsection.1.2.12}%
+\contentsline {subsection}{\numberline {1.2.13}Modifica degli orari}{15}{subsection.1.2.13}%
+\contentsline {subsection}{\numberline {1.2.14}Modifica delle attività}{15}{subsection.1.2.14}%
+\contentsline {subsection}{\numberline {1.2.15}Visualizzazione delle prenotazioni dei clienti}{16}{subsection.1.2.15}%
+\contentsline {subsection}{\numberline {1.2.16}Visualizzazione dei clienti attuali}{16}{subsection.1.2.16}%
+\contentsline {subsection}{\numberline {1.2.17}Check-out di un cliente}{16}{subsection.1.2.17}%
+\contentsline {section}{\numberline {1.3}Strutture dati}{17}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Clienti.xml}{17}{subsection.1.3.1}%
+\contentsline {subsubsection}{Clienti.xml}{17}{section*.2}%
+\contentsline {subsubsection}{Clienti.xsd}{17}{section*.3}%
+\contentsline {subsection}{\numberline {1.3.2}Amministratori.xml}{20}{subsection.1.3.2}%
+\contentsline {subsubsection}{Amministratori.xml}{20}{section*.4}%
+\contentsline {subsubsection}{Amministratori.xsd}{20}{section*.5}%
+\contentsline {subsection}{\numberline {1.3.3}Camere.xml}{21}{subsection.1.3.3}%
+\contentsline {subsubsection}{Camere.xml}{21}{section*.6}%
+\contentsline {subsubsection}{Camere.xsd}{21}{section*.7}%
+\contentsline {subsection}{\numberline {1.3.4}Ristorante.xml}{23}{subsection.1.3.4}%
+\contentsline {subsubsection}{Ristorante.xml}{23}{section*.8}%
+\contentsline {subsubsection}{Ristorante.xsd}{23}{section*.9}%
+\contentsline {subsection}{\numberline {1.3.5}Tavoli.xml}{25}{subsection.1.3.5}%
+\contentsline {subsubsection}{Tavoli.xml}{25}{section*.10}%
+\contentsline {subsubsection}{Tavoli.xsd}{25}{section*.11}%
+\contentsline {subsection}{\numberline {1.3.6}Attivita.xml}{27}{subsection.1.3.6}%
+\contentsline {subsubsection}{Attivita.xml}{27}{section*.12}%
+\contentsline {subsubsection}{Attivita.xsd}{28}{section*.13}%
+\contentsline {subsection}{\numberline {1.3.7}Recensioni.xml}{30}{subsection.1.3.7}%
+\contentsline {subsubsection}{Recensioni.xml}{30}{section*.14}%
+\contentsline {subsubsection}{Recensioni.xsd}{30}{section*.15}%
+\contentsline {section}{\numberline {1.4}Elementi XML}{32}{section.1.4}%
+\contentsline {subsubsection}{Clienti.xml: credenziali}{32}{section*.16}%
+\contentsline {subsubsection}{Camere.xml: tipo}{32}{section*.17}%
+\contentsline {subsubsection}{Camere.xml: listaPrenotazioni}{32}{section*.18}%
+\contentsline {subsubsection}{Camere.xml: codFisc}{32}{section*.19}%
+\contentsline {subsubsection}{Ristorante.xml: listaPortate}{33}{section*.20}%
+\contentsline {subsubsection}{Ristorante.xml: tipologia}{33}{section*.21}%
+\contentsline {subsubsection}{Tavoli.xml: id}{33}{section*.22}%
+\contentsline {subsubsection}{Tavoli.xml: ora}{33}{section*.23}%
+\contentsline {subsubsection}{Attivita.xml: prezzoTotale}{34}{section*.24}%
+\contentsline {subsubsection}{Recensioni.xml: id}{34}{section*.25}%

@@ -1,0 +1,901 @@
+\documentclass [a4paper, 12pt]{book}
+\usepackage [italian] {babel}	
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\graphicspath{ {../Screenshots/} }
+
+
+
+\definecolor {background}{RGB}{237,241,247}
+\definecolor{commentColor}{rgb}{0.4,0.4,0.4}
+\definecolor {keywordColor}{RGB}{224,162,4}
+\definecolor {stringColor}{RGB}{142,74,49}
+\definecolor{tagColor}{rgb}{0.0,0.0,0.6}
+
+\lstdefinestyle{XML}{
+	language = XML,
+	extendedchars=true,
+	breaklines = true,
+	breakatwhitespace=true,	
+	basicstyle=\ttfamily\footnotesize,
+	columns=fullflexible,
+	commentstyle=\color{commentColor}\upshape,
+	morecomment=[s]{<?}{?>},
+	backgroundcolor = \color{background},
+	keywordstyle = \color{keywordColor},
+	stringstyle = \ttfamily\color{black}\normalfont,
+	tagstyle = \color{tagColor}\bf,
+	showstringspaces=false,
+	otherkeywords ={codFisc=,numero=,id=,tipologia=,xmlns:xsi=,
+	xsi:noNamespaceSchemaLocation=,xmlns:xsd=,name=,ref=,minOccurs=,maxOccurs=,
+	type=,use=,base=,value=},
+}
+
+
+
+\begin{document}
+\author{Angelo Trifelli , Simone Amoriello}
+\title{Tesina LWEB}
+\maketitle
+\tableofcontents
+
+\chapter{Introduzione e descrizione dei dati}
+
+Si propone di realizzare un sito web dedicato ad un hotel ed in grado di permettere all'utente di usufruire di tutte le varie funzionalità che l'hotel mette a disposizione.\\\\
+Il sito è visitabile a partire da una pagina home iniziale, accessibile da tutte le tipologie di utenti, che descrive l'hotel fornendo informazioni su quest'ultimo, una serie di FAQ ed alcune attività che vengono messe a disposizione. Dalla home è poi possibile accedere ad una pagina dedicata per la prenotazione di una camera oppure direttamente alla schermata di login nel caso in cui l'utente è già cliente dell'hotel.\\\\
+Il login (mediante username e password) può essere effettuato da tre tipologie di utenti:
+\begin{itemize}
+\item \textbf{Utente registrato:} cioè un utente che deve essere necessariamente registrato all'interno del sito dell'hotel. La registrazione può avvenire al momento del completamento della prima prenotazione di una camera oppure eventualmente l'utente potrà registrarsi anticipatamente (quindi senza dover necessariamente prenotare una camera).
+\item \textbf{Concierge:} utente moderatore che disporrà di credenziali personali e potrà svolgere operazioni volte alla moderazione del sito.
+\item \textbf{Admin:} un utente amministratore che disporrà di credenziali personali e che potrà effettuare operazioni riservate.
+\end{itemize}
+Nel caso in cui il login venga effettuato da un utente registrato allora si verrà portati in una pagina personale dedicata all'utente dalla quale, oltre a poter ottenere un riepilogo dei propri dati personali (con la possibilità di modificarli) e del proprio soggiorno, sarà possibile scegliere di quali servizi si intende usufruire. In particolare viene messo a disposizione: un servizio di ristorazione ed un elenco di attività svolte all'interno dell'hotel. \\\\Un cliente dell'hotel potrà inoltre scrivere una recensione che sarà visibile direttamente dalla home page del sito, ed avrà ad esso associata un proprio voto, una categoria ed eventuali commenti di risposta lasciati da altri utenti clienti dell'hotel. Per ogni recensione e per ogni commento è possibile inserire due ulteriori voti: il primo riguardante l'apprezzamento per il contenuto ed il secondo riguardante l'utilità della recensione o del commento (questi voti verranno inseriti da altri clienti dell'hotel).\\\\
+Infine, un cliente dell'hotel avrà anche la possibilità di inserire una domanda riguardante una particolare categoria e ricevere risposte da altri clienti dell'hotel oppure dal concierge. Le domande con la risposta migliore potranno essere selezionate dalla concierge per essere elevate a FAQ.  \\\\
+Ogni cliente potrà inoltre accumulare dei crediti. Tali crediti verranno assegnati al momento del completamento di un soggiorno oppure periodicamente in base ad i giudizi ricevuti dalle proprie recensioni e commenti e potranno essere utilizzati per integrare un pagamento.\\\\
+Se invece il login viene effettuato dal concierge o da un utente amministratore allora essi verranno portati in delle pagine personali, dalle quali potranno scegliere quale operazione intendono svolgere ed essere portati a pagine dedicate alla specifica operazione che si intende compiere.
+
+\medskip
+
+\section{Tipi di utente}
+Le tipologie di utenti in grado di utilizzare il sito sono le seguenti:
+\begin{enumerate}
+\item \textbf{Visitatore (utente non autenticato/non registrato)}
+\item \textbf{Cliente (utente prenotato)}
+\item \textbf{Concierge}
+\item \textbf{Admin}
+\end{enumerate}
+Vengono di seguito elencate le varie funzionalità associate a ciascuno di esso.
+
+\subsection{Visitatore}
+Un utente visitatore sarà in grado di:
+\begin{enumerate}
+\item Visualizzare le informazioni relative all'hotel reperibili dalla pagina home (comprese le FAQ e le recensioni).
+\item Prenotare un soggiorno presso l'hotel.
+\item Registrarsi presso il sito dell'hotel (nel caso in cui non sia già registrato)
+\item Effettuare il login (nel caso in cui egli abbia completato la registrazione).
+\end{enumerate}
+
+\medskip
+
+\subsection{Cliente}
+Un utente che ha effettuato l'autenticazione mediante il login sarà in grado di:
+\begin{enumerate}
+\item Visualizzare e modificare le proprie informazioni personali.
+\item Effettuare un pagamento mediante denaro e/o crediti.
+\item Accedere alla home del servizio di ristorazione dalla quale potrà visualizzare il menù del ristorante, prenotare un tavolo o un servizio in camera e visualizzare/cancellare le eventuali prenotazioni già effettuate.
+\item Accedere alla home delle attività offerte dall'hotel dalla quale potrà visualizzare le attività che vengono messe a disposizione, effettuare una prenotazione e visualizzare/cancellare le eventuali prenotazioni già effettuate.
+\item Lasciare una recensione riguardante l'hotel oppure commentare una recensione o un commento già esistente.
+\item Esprimere una valutazione su una recensione (o un commento) a cui è abilitato.
+\item Inserire una domanda riguardante una particolare categoria oppure rispondere ad una domanda già esistente.
+\end{enumerate}
+
+\medskip
+
+\subsection{Concierge}
+Un utente che si è autenticato come un utente moderatore (concierge) sarà in grado di:
+\begin{enumerate}
+\item Modificare il menù del ristorante mediante l'inserimento di nuove portate oppure la modifica/cancellazione di portate già esistenti
+\item Modificare gli orari del ristorante o di una specifica attività
+\item Modificare le informazioni relative ad una specifica attività
+\item Visualizzare tutte le prenotazioni di uno specifico cliente con la possibilità di modificare o annullare una specifica prenotazione
+\item Elevare una particolare domanda effettuata da un cliente ed una specifica risposta a FAQ oppure inserire una nuova domanda come FAQ
+\end{enumerate}
+\subsection{Amministratore}
+Un utente che si è autenticato come un utente amministratore (admin) sarà in grado di:
+\begin{enumerate}
+\item Effettuare tutte le operazioni che può svolgere il concierge
+\item Inserire una nuova categoria per le recensioni/domande o disattivare una specifica categoria
+\item Approvare il pagamento di un cliente relativo ad una prenotazione di una camera
+\item Visualizzare i clienti attuali (compresi anche quelli non ancora presenti in struttura) e modificare i loro dati
+\end{enumerate}
+
+\medskip
+\medskip
+
+\section{Casi d'uso}
+In questa sezione verranno approfondite le funzionalità che vengono fornite a ciascun tipo d'utente.
+
+\subsection{Visualizzazione informazioni relative all'hotel}
+Essenzialmente vengono semplicemente mostrate le informazioni principali relative all'hotel quali: 
+\begin{enumerate}
+\item Una breve descrizione dell'hotel e delle camere.
+\item Locazione ed attività messe a disposizione (il tutto accompagnato da una serie di immagini illustrative).
+\item Recensioni lasciate dai clienti.
+\item Una serie di contatti.
+\end{enumerate}
+Dalla pagina home sarà poi possibile accedere ad una pagina dedicata alle FAQ , nella quale verrà mostrato un elenco di domande che vengono effettuate frequentemente, seguite da una risposta.
+
+\medskip
+
+\subsection{Prenotazione di un soggiorno}
+\label{PrenotazioneCamera}
+Mediante un'apposita pagina dedicata è possibile prenotare un soggiorno presso l'hotel. Ciò avviene mediante l'inserimento da parte dell'utente di due date: la data di arrivo presso l'hotel e la data di ripartenza. Sulla base di queste date il sito mostrerà un elenco di camere disponibili che vengono distinte in tre categorie:
+\begin{itemize}
+\item \textbf{Camera standard singola} (prezzo pari a 30€ a notte).
+\item \textbf{Camera standard doppia} (prezzo pari a 60€ a notte).
+\item \textbf{Camera suite} (prezzo pari a 150€ a notte).
+\end{itemize}
+Una camera può essere messa a disposizione anche se ha già una o più prenotazioni associate ad essa (l'importante è che i periodi delle varie prenotazioni non si sovrappongano). Dopo aver selezionato una camera, se l'utente non ha già effettuato l'autenticazione, verrà richiesto di eseguire il login:
+\begin{enumerate}
+\item Se l'utente ha già effettuato la registrazione allora dovrà semplicemente inserire il proprio \textit{username} e \textit{password} per completare la prenotazione in tempi brevi.
+\item Altrimenti, l'utente dovrà necessariamente effettuare la registrazione per completare la prenotazione.
+\end{enumerate}
+
+
+\subsection{Registrazione}
+La registrazione all'interno del sito del hotel può essere effettuata esclusivamente da un utente che non sia già registrato (e dunque che non disponga di un account). Essa può essere effettuata in due circostanze:
+\begin{enumerate}
+\item Quando un utente effettua la sua prima prenotazione di una camera. In questo caso, non avendo ancora usufruito dell'hotel dovrà necessariamente registrare un proprio account per completare la prenotazione.
+\item Oppure l'utente potrà registrarsi all'interno del sito anticipatamente (e quindi con la possibilità di effettuare la prima prenotazione in un secondo momento). In questo caso l'utente potrà comunque accedere alla propria pagina personale per poter modificare i propri dati, ma non potrà ovviamente usufruire di funzionalità addizionali finché non prenoterà un soggiorno.
+\end{enumerate}
+Indipendentemente dal momento in cui viene effettuata la registrazione, verranno richiesti di inserire i seguenti dati: \textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono} ed \textit{email}. Una volta inseriti i dati, l'utente per poter diventare a tutti gli effetti un \textit{cliente registrato} dovrà scegliere le proprie credenziali (\textit{username} e \textit{password}) con cui effettuerà il login.
+
+\medskip
+
+\subsection{Login}
+\label{Login}
+Mediante un apposita pagina l'utente è in grado di inserire le proprie credenziali (username e password) per poter effettuare l'autenticazione. Ogni tipologia di utente disporrà di un form separato per poter inserire le proprie credenziali. Ad esempio un utente amministratore per poter effettuare l'autenticazione dovrà inserire le proprie credenziali nel suo form dedicato ed inserirle in un altro form non porterà il successo del login (anche se le credenziali sono corrette). 
+
+\medskip
+
+\subsection{Visualizzazione e modifica delle informazioni personali}
+Un cliente dopo che avrà effettuato l'autenticazione verrà portato in una pagina personale in cui potrà ottenere un riepilogo di tutti i dati inseriti al momento della registrazione (compresi \textit{username} e \textit{password}). Eventualmente, avrà la possibilità di scegliere un qualsiasi dato per poterlo modificare. Tutte queste possibilità vengono date anche ad i clienti che non hanno un soggiorno prenotato. Inoltre, i clienti potranno visualizzare i dati relativi ad eventuali prenotazioni di soggiorni passati e presenti (senza però poterli modificare)
+
+\medskip
+
+\subsection{Pagamento mediante denaro e/o crediti}
+Un cliente avrà la possibilità di eseguire il pagamento della prenotazione di un soggiorno, di un servizio in camera o di un'attività in tre modi distinti:
+\begin{itemize}
+\item \textbf{Interamente in denaro}
+\item \textbf{Interamente in crediti}
+\item \textbf{Misto} (sia denaro che crediti)
+\end{itemize}
+Ovviamente, un cliente potrà pagare la prenotazione di una camera usando i crediti esclusivamente se ha già effettuato precedenti soggiorni in passato e dunque risulta essere un utente registrato da tempo (un utente che effettua la prima prenotazione non potrà pagare in crediti poiché essendosi appena registrato non ha avuto la possibilità di accumularli).
+
+\medskip
+
+\subsection{Servizio di ristorazione}
+\label{ServizioRistorazione}
+Esso presenta una home page accessibile esclusivamente dalla pagina personale di un \textit{cliente prenotato}. Mediante un apposito menù all'interno di questa home page, sarà possibile selezionare diverse voci per poter:
+\begin{itemize}
+\item \textbf{Visualizzare il menù del ristorante:} si verrà portati in una pagina dedicata in cui sarà possibile visualizzare il menù attualmente disponibile. Verrà mostrata dunque una lista delle portate disponibili con il loro prezzo associato.
+\item \textbf{Prenotare un tavolo:} si verrà portati in una pagina in cui verrà richiesto di specificare alcuni dati di prenotazione:
+\begin{enumerate}
+\item La \textbf{data} a cui la prenotazione fa riferimento (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
+\item \textbf{L'orario} a cui la prenotazione fa riferimento (deve essere compresa negli intervalli di apertura a pranzo o a cena del ristorante).
+\item La \textbf{locazione} del tavolo (che può essere \textit{interna} o \textit{esterna})
+\end{enumerate}
+Tramite un apposito pulsante sarà poi possibile confermare la propria prenotazione (nel caso in cui non vi siano tavoli disponibili che soddisfano le richieste inserite verrà mostrato un apposito messaggio d'errore).
+\item \textbf{Prenotare un servizio in camera:} come per la prenotazione del tavolo, verra richiesto di inserire la \textbf{data} e \textbf{l'orario} della prenotazione. Tuttavia, verrà richiesto inoltre:
+\begin{enumerate}
+\item Le \textbf{portate} che il cliente intende ordinare (volendo un cliente potrà ordinare anche più volte la stessa portata)
+\item Delle eventuali \textbf{richieste} riguardanti il servizio o un particolare piatto, che il cliente può specificare (ad esempio per indicare delle allergie) 
+\end{enumerate}
+Verrà poi mostrato un riepilogo delle proprie scelte ed il prezzo totale calcolato in base alle portate che sono state inserite nell'ordine. Se il cliente conferma il pagamento allora l'ordine verrà registrato.
+\item \textbf{Visualizzare le proprie prenotazioni:} nel caso in cui l'utente abbia già effettuato una prenotazione egli mediante questa pagina sarà in grado di ottenere un riepilogo delle proprie prenotazioni effettuate (sia del servizio al tavolo e sia del servizio in camera). Tale pagina permette anche la loro cancellazione: sarà sufficiente selezionare una prenotazione da cancellare e poi mediante un apposito pulsante la prenotazione verrà rimossa (ovviamente solo se il cliente non ha ancora usufruito della prenotazione).
+\end{itemize} 
+
+\subsection{Scrittura e commento di recensioni/commenti}
+\label{Recensioni}
+Mediante un'apposita voce di un menù della pagina home sarà possibile accedere ad una pagina per poter visualizzare tutte le recensioni che sono state create da utenti clienti dell'hotel. L'utente, oltre a poter visualizzare la lista di recensioni, se ha già effettuato l'autenticazione sarà in grado di scrivere un commento ad una recensione già esistente oppure inserire una propria recensione. Ogni recensione sarà composta da:
+\begin{itemize}
+\item \textbf{Nome e cognome dell'autore}
+\item \textbf{Una categoria}
+\item \textbf{Testo della recensione}.
+\item \textbf{Un voto} (lasciato dall'autore; può variare da 1 a 5)
+\item \textbf{Giudizi lasciati da altri utenti} (la recensione mostrerà solo la somma totale)
+\item \textbf{Eventuali commenti di risposta} (che verranno aggiunti da altri utenti).
+\end{itemize}
+I commenti di risposta a loro volta saranno caratterizzati da: nome e cognome dell'utente che scrive il commento, il testo del commento, giudizi lasciati da altri utenti (analoghi a quelli delle recensioni) ed eventualmente altri commenti di risposta al commento.\\\\
+Tuttavia, un cliente potrà inserire o giudicare una particolare recensione solamente se la categoria di tale recensione corrisponde ad un servizio utilizzato dal cliente. Analogamente, un cliente potrà inserire un commento o giudicare un commento già esistente solamente nell'ambito di recensioni con categorie "valide" per lo specifico cliente.
+
+\medskip
+
+\subsection{Attività}
+\label{Attività}
+Dalla pagina personale di un \textit{cliente prenotato} è possibile accedere ad una pagina dedicata alle attività che l'hotel mette a disposizione dei propri clienti. In questa pagina verrà visualizzata una lista delle attività disponibili, ciascuna avente una breve descrizione ed un'immagine illustrativa. Per ogni attività saranno inoltre visualizzati i rispettivi orari di apertura e di chiusura, un eventuale prezzo orario (alcune attività possono essere gratuite) ed un form contenente:
+\begin{enumerate}
+\item Un campo per inserire la \textbf{data} di prenotazione (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
+\item Due campi per poter inserire \textbf{l'orario di inizio e di fine} della prenotazione (che devono essere compresi nell'intervallo di apertura e di chiusura dell'attività che si sta prenotando).
+\item Un bottone per poter confermare la propria prenotazione.
+\end{enumerate}
+Sempre da questa pagina sarà possibile, tramite una voce di un apposito menù,  visualizzare le proprie prenotazioni che eventualmente sono state già effettuate. Nel caso, l'utente potrà selezionare una prenotazione (di cui non ha ancora usufruito) e cancellarla.
+
+\newpage
+
+\subsection{Valutazione di recensioni e di commenti}
+Nella pagina dedicata alle recensioni, un cliente che ha effettuato l'autenticazione avrà la possibilità di inserire un proprio giudizio sulle recensioni e sui commenti che visualizza. In particolare, è possibile inserire due tipologie di giudizi:
+\begin{itemize}
+\item \textbf{Apprezzamento per l'utilità della recensione/commento} (voto da 1 a 5)
+\item \textbf{Accordo con il contenuto} (voto da 1 a 3)
+\end{itemize}
+Un cliente potrà inserire giudizi solo su recensioni e commenti riguardanti una categoria associata ad un servizio di cui il cliente ha usufruito.\\\\
+Un cliente potrà inserire solo una volta un particolare giudizio associato ad una specifica recensione o uno specifico commento ma potrà modificare un giudizio che ha inserito precedentemente (in sostanza, non possono essere presenti due giudizi distinti dello stesso tipo, inseriti dallo stesso cliente ed associati alla stessa recensione o allo stesso commento).
+
+\medskip
+
+\subsection{Inserimento e risposta alle domande}
+Dalla propria pagina personale l'utente avrà la possibilità di accedere ad una pagina dedicata alle domande inserite dagli utenti clienti dell'hotel. Esse non sono da confondere con le FAQ:
+\begin{enumerate}
+\item Le FAQ sono accessibili direttamente dalla home page del sito e visibili a tutte le tipologie di utenti (e sono in numero ridotto)
+\item Le \textit{domande} che inseriscono i clienti dell'hotel sono visibili esclusivamente da un utente che abbia effettuato l'autenticazione (e dunque la registrazione)
+\end{enumerate}
+Ogni domanda sarà composta da una \textit{categoria}, un \textit{testo} e da eventuali risposte lasciate da altri clienti dell'hotel o dal concierge. Tuttavia, un cliente dell'hotel potrà inserire delle domande o rispondere a domande già esistenti solo  se la categoria della domanda fa parte di un servizio utilizzato effettivamente dal cliente.
+
+
+\subsection{Modifica del menù del ristorante}
+\label{ModificaMenu}
+L'utente moderatore/amministratore sarà portato in una pagina in cui egli potrà scegliere la tipologia di azione che intende compiere:
+\begin{itemize}
+\item \textbf{Aggiunta:} verrà mostrato all'utente un form in cui egli dovrà inserire tutti gli attributi (\textit{tipologia}, \textit{nome} e \textit{prezzo}) della portata che intende aggiungere.
+\item \textbf{Modifica/cancellazione:} verrà richiesto, mediante un apposito menù a tendina, di inserire la tipologia di portata (antipasti, primi piatti, ecc..) che si intende modificare/cancellare. Dopodiché, verrà mostrata la lista di portate che corrispondono alla tipologia scelta. L'utente potrà selezionare una portata e, mediante degli appositi pulsanti, decidere se intende cancellarla dal menù oppure modificarla. Nel caso in cui egli intende modificare la portata verrà data la possibilità di modificare il campo del nome e del prezzo.
+\end{itemize} 
+
+\medskip
+
+\subsection{Modifica degli orari}
+Verrà mostrata all'utente moderatore/amministratore una lista contenente tutte le attività organizzate dall'hotel con i loro rispettivi orari di inizio e di fine. In questa lista sarà inoltre incluso il ristorante dell'hotel con i rispettivi orari di apertura e chiusura a pranzo ed a cena. L'utente poi potrà selezionare l'attività della quale intende modificare l'orario, inserire le nuove fasce orarie e confermare la modifica mediante un apposito pulsante. Ciò vale anche per il ristorante con la differenza che l'utente potrà modificare al più \textbf{due fasce orarie} (quella del pranzo e quella della cena).
+
+\medskip
+
+\subsection{Modifica delle attività}
+All'utente moderatore/amministratore verrà data la possibilità di modificare tutte le informazioni relative ad un'attività. Verrà prima mostrata una lista contenente tutte le attività dell'hotel; dopodiché, dopo aver selezionato l'attività che si intende modificare, verrà data la possibilità di modificare il suo \textit{nome}, la \textit{descrizione}, \textit{l'immagine} ed il suo \textit{prezzo orario} (gli orari non possono essere modificati poiché la loro modifica avviene nella pagina dedicata alla modifica degli orari).
+
+\subsection{Visualizzazione delle prenotazioni dei clienti}
+\label{VisualizzaPrenotazioniClienti}
+Verrà mostrata al concierge (o all'admin) una pagina contenente le prenotazioni di ogni singolo cliente. Le prenotazioni sono distinte tra: prenotazioni del servizio di ristorazione e prenotazioni di attività. A prescindere dal tipo, l'utente sarà in grado di selezionare una specifica prenotazione e poi potrà scegliere se intende annullarla (e quindi cancellarla) oppure modificarla. La modifica dipende dal tipo di prenotazione che è stata selezionata:
+\begin{enumerate}
+\item Se si vuole modificare una prenotazione del servizio di ristorazione: l'admin potrà modificare il numero del tavolo (e di conseguenza anche la locazione), l'orario di prenotazione o la data di prenotazione.
+\item Se si vuole modificare una prenotazione di una attività: l'admin potrà modificare l'orario di inizio o di fine della prenotazione oppure la data della prenotazione stessa.
+\end{enumerate}
+
+\subsection{Visualizzazione dei clienti attuali}
+Il concierge (o l'admin) verrà portato in una pagina dedicata per ottenere un \textit{report} dei clienti che hanno prenotato un soggiorno presso l'hotel. In particolare viene visualizzata una lista che, per ogni cliente, mostra le generalità di quest'ultimo e la prenotazione che egli ha effettuato. Sono inoltre mostrati, in modo distinto da i clienti precedenti, anche i clienti che \textit{non sono ancora presenti in struttura} (per poterli identificare la piattaforma effettua un confronto tra la data odierna e la data di inizio prenotazione). Eventualmente, l'utente potrà modificare i dati personali di uno specifico cliente.
+
+
+
+\subsection{Check-out di un cliente}
+Il check-out di un cliente serve per indicare che il soggiorno di quest'ultimo è terminato e che dunque non è più necessario tener traccia dei dati relativi al cliente. Viene richiesto all'utente amministratore di inserire il codice fiscale del cliente di cui si intende effettuare il check-out. Dopodiché, verrà visualizzata una lista contenente i dati del cliente inserito e tutte le prenotazioni effettuate da quest'ultimo. Se l'amministratore conferma di voler effettuare il check-out allora il soggiorno del cliente viene considerato \textit{terminato} e, di conseguenza, vengono eliminati dalla piattaforma tutti i dati relativi a quest'ultimo e le prenotazioni che ha effettuato.
+
+
+\medskip
+\medskip
+
+\section{Strutture dati}
+In questa sezione verranno descritti la serie di file xml necessari per gestire i dati dell'applicazione.
+
+\subsection{Clienti.xml}
+File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli utenti che hanno prenotato una camera). Per ogni utente verranno memorizzati tutti i campi richiesti al momento della prenotazione (\textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita} e \textit{numero della carta di credito}) insieme alle credenziali che verranno utilizzate per l'autenticazione (\textit{username} e \textit{password}). Per motivi pratici, le prenotazioni di ogni cliente verranno memorizzate in altri file xml.
+\subsubsection{Clienti.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaClienti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Clienti.xsd">
+    <cliente codFisc = "RSSGNN64R03E472G">
+        <nome>Giovanni</nome>
+        <cognome>Rossi</cognome>
+        <dataDiNascita>1964-10-03</dataDiNascita>
+        <numeroCarta>0000-0000-0000-0000</numeroCarta>
+        <credenziali>
+            <username>Camera110</username>
+            <password>qwerty</password>
+        </credenziali>
+    </cliente>
+</listaClienti>
+
+\end{lstlisting}
+\subsubsection{Clienti.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaClienti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="cliente" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="cliente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataDiNascita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="numeroCarta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="credenziali" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="codFisc" type="xsd:string"  use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="cognome" type="xsd:string" />
+    <xsd:element name="dataDiNascita" type="xsd:date" />
+    <xsd:element name="numeroCarta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="credenziali">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="username" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="password" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="username">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="Camera[0-9]{3}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="password">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[a-zA-Z0-9]{6}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}\pagebreak
+
+\subsection{Amministratori.xml}
+Questo file essenzialmente ha il solo scopo di conservare le credenziali degli utenti amministratori del sistema (\textit{username} e \textit{password}).
+\subsubsection{Amministratori.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaAdmin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Amministratori.xsd">
+    <Admin>
+        <username>Admin</username>
+        <password>hotel123</password>
+    </Admin>
+</listaAdmin> 
+\end{lstlisting}
+\subsubsection{Amministratori.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaAdmin">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Admin" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="Admin">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="username" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="password" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="username" type="xsd:string" />
+    <xsd:element name="password" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
+\subsection{Camere.xml}
+File che servirà per memorizzare la lista di camere che l'hotel mette a disposizione. Ogni camera sarà costituita da: un \textit{numero} (univoco) , un campo \textit{tipo}, un campo \textit{prezzo} (dipendente dal tipo di camera) ed una serie di \textit{prenotazioni} associate alla camera. Per ogni \textit{prenotazione} viene registrato il \textit{codice fiscale} del cliente che ha prenotato la camera, la \textit{data di arrivo} e la \textit{data di partenza}.
+\subsubsection{Camere.xml}
+\begin{lstlisting}[style=XML] 	
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCamere xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Camere.xsd">
+    <Camera numero="C110">
+        <tipo>Standard Doppia</tipo>
+        <prezzo>60</prezzo>
+        <listaPrenotazioni>
+            <prenotazione>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <dataArrivo>2022-10-28</dataArrivo>
+                <dataPartenza>2022-10-31</dataPartenza>
+            </prenotazione>
+        </listaPrenotazioni>
+    </Camera>
+</listaCamere>
+\end{lstlisting}
+\subsubsection{Camere.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaCamere">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Camera" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="Camera">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tipo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="numero" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tipo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Standard Singola" />
+                <xsd:enumeration value="Standard Doppia" />
+                <xsd:enumeration value="Suite" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:enumeration value="30" />
+                <xsd:enumeration value="60" />
+                <xsd:enumeration value="150" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataArrivo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataPartenza" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="dataArrivo" type="xsd:date" />
+    <xsd:element name="dataPartenza" type="xsd:date" />
+</xsd:schema>
+\end{lstlisting}
+\subsection{Ristorante.xml}
+Questo file verrà utilizzato per conservare al suo interno gli orari di apertura e di chiusura del ristorante ed il menu. In particolare, si avrà: \textit{ora apertura pranzo}, \textit{ora chiusura pranzo}, \textit{ora apertura cena}, \textit{ora chiusura cena} ed una \textit{lista di portate}. Ogni \textit{portata} sarà caratterizzata da:
+una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto}, \textit{secondo piatto} o \textit{dolce}), una \textit{descrizione} ed il \textit{prezzo}.
+\subsubsection{Ristorante.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<ristoranti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Ristorante.xsd">
+    <ristorante>
+        <oraAperturaPranzo>12:00:00</oraAperturaPranzo>
+        <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
+        <oraAperturaCena>19:00:00</oraAperturaCena>
+        <oraChiusuraCena>23:00:00</oraChiusuraCena>
+        <listaPortate>
+            <portata tipologia="primo piatto">
+                <descrizione>Spaghetti alla carbonara</descrizione>
+                <prezzo>12</prezzo>
+            </portata>
+        </listaPortate>
+    </ristorante>
+</ristoranti>
+\end{lstlisting}
+\subsubsection{Ristorante.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ristoranti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ristorante" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ristorante">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="oraAperturaPranzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusuraPranzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraAperturaCena" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusuraCena" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPortate" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="oraAperturaPranzo" type="xsd:time" />
+    <xsd:element name="oraChiusuraPranzo" type="xsd:time" />
+    <xsd:element name="oraAperturaCena" type="xsd:time" />
+    <xsd:element name="oraChiusuraCena" type="xsd:time" />
+    <xsd:element name="listaPortate">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="portata" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="portata">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="tipologia" use="required">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="antipasto" />
+                        <xsd:enumeration value="primo piatto" />
+                        <xsd:enumeration value="secondo piatto" />
+                        <xsd:enumeration value="dolce" />
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="descrizione" type="xsd:string" />
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsection{Tavoli.xml}
+Il file in questione memorizza tutti i tavoli che vengono messi a disposizione dal ristorante, con le relative prenotazioni associate effettuate dai clienti dell'hotel. In particolare, ogni \textit{tavolo} avrà associato ad esso: il proprio \textit{numero} (univoco), la \textit{locazione} (che può essere \textit{esterna} o \textit{interna}), il \textit{numero di posti} ed una \textit{lista di prenotazioni}. Ogni \textit{prenotazione} avrà ad esso associata: un \textit{id univoco}, il \textit{codice fiscale} del cliente, la \textit{data} e \textit{l'orario} della prenotazione.
+\subsubsection{Tavoli.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaTavoli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Tavoli.xsd">
+    <tavolo numero="T2">
+        <locazione>Interna</locazione>
+        <listaPrenotazioni>
+            <prenotazione id="PT1">
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <data>2022-10-30</data>
+                <ora>21:30:00</ora>
+            </prenotazione>
+        </listaPrenotazioni>
+    </tavolo>
+</listaTavoli>
+\end{lstlisting}
+\subsubsection{Tavoli.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaTavoli">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tavolo" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tavolo">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="locazione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="numero" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="locazione">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Interna" />
+                <xsd:enumeration value="Esterna" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="ora" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="data" type="xsd:date" />
+    <xsd:element name="ora" type="xsd:time" />
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsection{Attivita.xml}
+Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{attività} che l'hotel mette a disposizione, con le relative prenotazioni associate. Per ogni attività si avrà: il relativo \textit{nome} (che sarà univoco tra tutte le attività), una \textit{descrizione}, un \textit{link di un'immagine}, l'\textit{ora d'apertura} e di \textit{chiusura}, il \textit{prezzo orario} ed una \textit{lista di prenotazioni}. Per ogni \textit{prenotazione} si avrà: un \textit{id} univoco, il \textit{codice fiscale} del cliente, la \textit{data}, l'\textit{ora d'inizio e di fine} prenotazione e il \textit{prezzo totale} (dipendente dal prezzo orario dell'attività e dal numero di ore della prenotazione).
+
+\subsubsection{Attivita.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaAttivita xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Attivita.xsd">
+    <attivita>
+        <nome>Palestra</nome>
+        <descrizione>
+            Ubicata all'interno dell'hotel ed equipaggiata con le ultime
+            macchine di Technogym, una palestra interna rappresenta la
+            soluzione perfetta per mantenersi in forma anche se lontani
+            da casa. Hotel Sapienza vi propone una palestra dotata di:
+            <![CDATA[<br />]]>Tapis roulant e cyclette<![CDATA[
+            <br />]]>Materassini e ball per aerobica e pilates
+            <![CDATA[<br />]]>Pesi e bilancieri di varie dimensioni
+            <![CDATA[<br />]]>. Vengono inoltre messi a disposizione
+            gli spogliatoi dotati di armadietti e docce
+        </descrizione>
+        <linkImmagine>https://www.destinazioneavventura.it/wp-content/
+        uploads/2019/01/Excelsior-Sport-Hotel-Gala-Milano-Vacanza
+        -Sportive.jpg</linkImmagine>
+        <oraApertura>06:00:00</oraApertura>
+        <oraChiusura>22:00:00</oraChiusura>
+        <prezzoOrario>10</prezzoOrario>
+        <listaPrenotazioni>
+            <prenotazione id="PA1">
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <data>2022-10-29</data>
+                <oraInizio>17:00:00</oraInizio>
+                <oraFine>19:00:00</oraFine>
+                <prezzoTotale>20</prezzoTotale>
+            </prenotazione>
+        </listaPrenotazioni>
+    </attivita>
+</listaAttivita>
+\end{lstlisting}
+
+\subsubsection{Attivita.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaAttivita">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="attivita" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="attivita">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="linkImmagine" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraApertura" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusura" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzoOrario" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:ID" />
+    <xsd:element name="descrizione" type="xsd:string" />
+    <xsd:element name="linkImmagine" type="xsd:string" />
+    <xsd:element name="oraApertura" type="xsd:time" />
+    <xsd:element name="oraChiusura" type="xsd:time" />
+    <xsd:element name="prezzoOrario">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:double">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" /> 
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraInizio" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraFine" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzoTotale" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="data" type="xsd:date" />
+    <xsd:element name="oraInizio" type="xsd:time" />
+    <xsd:element name="oraFine" type="xsd:time" />
+    <xsd:element name="prezzoTotale">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:double">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}
+\subsection{Recensioni.xml}
+Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventualmente scrivere delle recensioni, sarà necessario memorizzare tutte le recensioni che vengono scritte dai clienti dell'hotel. Per ogni \textit{recensione} si avrà: un \textit{id} univoco, il \textit{nome} e \textit{cognome} del cliente che ha scritto la recensione, un \textit{testo}, un \textit{voto} (compreso tra 1 e 5) ed una \textit{lista di commenti di risposta}. Per ogni \textit{commento} si avrà: il \textit{nome} e \textit{cognome} del cliente che ha scritto il commento ed il \textit{testo} del commento.
+
+\subsubsection{Recensioni.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaRecensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Recensioni.xsd">
+    <recensione id="R1">
+        <nomeAutore>Giovanni</nomeAutore>
+        <cognomeAutore>Rossi</cognomeAutore>
+        <testoRecensione>
+            Soggiorno fantastico! Il ristorante offre sempre piatti di
+            immensa qualita' ed il personale  e' estremamente professionale
+            e sempre disponibile. 
+        </testoRecensione>
+        <voto>5</voto>
+        <listaCommenti>
+            <commento>
+                <nomeAutoreCommento>Luigi</nomeAutoreCommento>
+                <cognomeAutoreCommento>Verdi</cognomeAutore
+                Commento>
+                <testoCommento>Concordo pienamente!</testoCommento>
+            </commento>
+        </listaCommenti>
+    </recensione>
+</listaRecensioni>
+\end{lstlisting}
+\subsubsection{Recensioni.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaRecensioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="recensione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="recensione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutore" minOccurs="1"  maxOccurs="1" />
+                <xsd:element ref="testoRecensione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="voto" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaCommenti" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAutore" type="xsd:string" />
+    <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="testoRecensione" type="xsd:string" />
+    <xsd:element name="voto">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="1" />
+                <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="listaCommenti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="commento" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="commento">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAutoreCommento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutoreCommento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoCommento" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAutoreCommento" type="xsd:string" />
+    <xsd:element name="cognomeAutoreCommento" type="xsd:string" />
+    <xsd:element name="testoCommento" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+\medskip
+
+\section{Elementi XML}
+In questa sezione verranno analizzati dieci elementi XML scelti a campione, per poter giustificare la loro presenza nei vari file XML appena presentati.
+
+\subsubsection{Clienti.xml: credenziali}
+Come detto più volte nel corso di questo capitolo e descritto nella sezione \hyperref[Login]{\textbf{1.2.3}}, un utente che prenota una camera avrà bisogno di credenziali personali per poter effettuare il login nella piattaforma. Lo scopo di questo elemento è dunque quello di incapsulare al suo interno, mediante l'utilizzo di altri due sottoelementi \textit{username} e \textit{password}, le credenziali che vengono assegnate ad un utente al completamento della prenotazione.
+
+\subsubsection{Camere.xml: tipo}
+Nella sezione \hyperref[PrenotazioneCamera]{\textbf{1.2.2}} nel descrivere la funzionalità di prenotazione di un soggiorno, è stato messo in evidenza che le camere vengono distinte tra loro in base alla loro \textit{tipologia} e, in base a quest'ultima, viene assegnato loro un prezzo fisso. L'elemento \textbf{tipo} viene dunque inserito per poter identificare le tipologie di camere ed assegnare correttamente il prezzo corrispondente.
+
+\subsubsection{Camere.xml: listaPrenotazioni}
+Poiché nella sezione \hyperref[PrenotazioneCamera]{\textbf{1.2.2}} viene specificato che una camera può avere anche più di una prenotazione associata ad essa, questo elemento avrà il compito di incapsulare al suo interno tutte le prenotazioni associate ad una specifica camera.
+
+\subsubsection{Camere.xml: codFisc}
+Nell'introduzione del capitolo viene detto che un cliente dell'hotel, dopo che ha effettuato il login, verrà portato ad una pagina personale in cui potrà visualizzare un riepilogo del proprio soggiorno. La presenza di questo elemento è dunque giustificata dalla necessità di dover associare correttamente la prenotazione di una camera al cliente che l'ha effettuata (per poter poi reperire i dati corretti). In particolare, tutti gli altri elementi omonimi presenti nelle prenotazioni che si trovano in altri file XML, avranno lo stesso scopo (cioè quello di associare correttamente la prenotazione).
+
+\subsubsection{Ristorante.xml: listaPortate}
+Nella sezione \hyperref[ServizioRistorazione]{\textbf{1.2.4}} viene detto che dalla home page del servizio di ristorazione sarà possibile visualizzare il menù del ristorante. Questo elemento avrà dunque lo scopo di contenere al suo interno tutto il menù con le relative portate che vengono messe a disposizione.
+
+\subsubsection{Ristorante.xml: tipologia}
+La presenza di questo attributo è giustificata da ciò che viene detto nella sezione \hyperref[ModificaMenu]{\textbf{1.2.9}}. Infatti, l'admin dovrà prima di tutto inserire la tipologia della quale fa parte la portata che intende modificare/cancellare. Inoltre, per poter inserire una nuova portata, l'admin dovrà specificare la tipologia di quest'ultima. La presenza di questo elemento inoltre, permette una corretta suddivisione delle portate durante l'elencazione del menù.
+
+\subsubsection{Tavoli.xml: id}
+Come detto nelle sezioni \hyperref[ServizioRistorazione]{\textbf{1.2.4}} e \hyperref[VisualizzaPrenotazioniClienti]{\textbf{1.2.11}}, sia il cliente che l'admin avranno la possibilità di visualizzare tutte le prenotazioni che sono state effettuate per ogni tavolo: il cliente può annullarle, l'admin potrà anche modificarle. A prescindere dell'azione che si intende compiere, in entrambi i casi quando un utente selezionerà una prenotazione sarà necessario identificarla univocamente per poterla ritrovare correttamente all'interno del file XML e compiere l'azione richiesta. Poiché un tavolo può avere più prenotazioni associate ad esso, l'attributo \textbf{\textit{id}} avrà dunque lo scopo di garantire tale univocità.
+
+
+\subsubsection{Tavoli.xml: ora}
+Come detto nella sezione \hyperref[ServizioRistorazione]{\textbf{1.2.4}}, il cliente dovrà inserire l'orario nel quale intende prenotare il tavolo. Lo scopo principale di questo elemento è dunque quello di conservare tale informazione. Tuttavia, non è l'unico: infatti, nel momento in cui si andrà a verificare se un tavolo può essere assegnato o meno ad una prenotazione, il controllo del \textit{range} dell'orario diventa fondamentale. Per esempio, se un cliente intende prenotare un tavolo ad un orario appartenente al range orario del pranzo, un tavolo che è stato prenotato per l'ora di cena dello stesso giorno deve essere considerato disponibile per soddisfare la prenotazione del pranzo (ovviamente deve valere anche il viceversa).
+
+\subsubsection{Attivita.xml: prezzoTotale}
+Nella sezione \hyperref[Attività]{\textbf{1.2.6}} viene detto che un cliente, per poter effettuare la prenotazione di un attività, dovrà necessariamente inserire l'ora di inizio e di fine prenotazione. Però, poiché ciascuna attività è caratterizzata da un prezzo \textit{orario}, il prezzo di ogni prenotazione è \textit{variabile}. Questo elemento avrà dunque lo scopo di registrare al suo interno il prezzo corretto di ogni prenotazione effettuata per ogni attività. In particolare, tale prezzo dipenderà dall'ora di inizio e di fine prenotazione e dal prezzo orario della specifica attività (il calcolo verrà effettuato a livello applicativo nella pagina di prenotazione).
+
+\subsubsection{Recensioni.xml: id}
+Lo scopo di questo attributo è quello di identificare univocamente la singola recensione. Infatti, nella sezione \hyperref[Recensioni]{\textbf{1.2.5}} viene detto che un cliente avrà la possibilità di inserire un commento in una recensione già esistente. Tuttavia, poiché possono essere presenti più recensioni, diventa necessario identificare univocamente la singola recensione che il cliente intende commentare per poter associare correttamente il commento ad essa.
+
+
+
+
+
+
+
+\end{document}
