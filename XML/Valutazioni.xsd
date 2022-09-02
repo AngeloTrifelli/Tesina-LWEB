@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaValutazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="valutazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="valutazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idOggettoValutato" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="votoUtilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="votoAccordo" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idOggettoValutato" type="xsd:string" />
+    <xsd:element name="codFisc" type="xsd:string" />
+
+    <xsd:element name="votoUtilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+                <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="votoAccordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+                <xsd:maxInclusive value="3" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>

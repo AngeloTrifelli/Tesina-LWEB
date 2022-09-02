@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaRecensioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="recensione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="recensione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutore" minOccurs="1"  maxOccurs="1" />
+                <xsd:element ref="codFiscAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="categoria" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoRecensione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="voto" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAutore" type="xsd:string" />
+    <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="codFiscAutore" type="xsd:string" />
+    <xsd:element name="categoria" type="xsd:string" />
+    <xsd:element name="testoRecensione" type="xsd:string" />
+    <xsd:element name="voto">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="1" />
+                <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="utilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCamere xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Camere.xsd">
+    <Camera numero="C110">
+        <tipo>Standard Doppia</tipo>
+        <prezzo>60</prezzo>
+        <listaPrenotazioni>
+            <prenotazione>
+                <idPrenotazione>C110-PC1</idPrenotazione>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <statoPagamento>Approvato</statoPagamento>
+                <creditiUsati>0</creditiUsati>
+                <dataArrivo>2022-10-28</dataArrivo>
+                <dataPartenza>2022-10-31</dataPartenza>
+            </prenotazione>
+        </listaPrenotazioni>
+    </Camera>
+</listaCamere>

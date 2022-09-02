@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaAttivita">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="attivita" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="attivita">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="linkImmagine" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraApertura" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusura" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzoOrario" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:ID" />
+    <xsd:element name="descrizione" type="xsd:string" />
+    <xsd:element name="linkImmagine" type="xsd:string" />
+    <xsd:element name="oraApertura" type="xsd:time" />
+    <xsd:element name="oraChiusura" type="xsd:time" />
+    <xsd:element name="prezzoOrario">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:double">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" /> 
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraInizio" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraFine" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzoTotale" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="data" type="xsd:date" />
+    <xsd:element name="oraInizio" type="xsd:time" />
+    <xsd:element name="oraFine" type="xsd:time" />
+    <xsd:element name="prezzoTotale">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:double">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="creditiUsati">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>

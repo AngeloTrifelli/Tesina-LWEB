@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaTavoli">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tavolo" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tavolo">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="locazione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="numero" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="locazione">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Interna" />
+                <xsd:enumeration value="Esterna" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="ora" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="data" type="xsd:date" />
+    <xsd:element name="ora" type="xsd:time" />
+</xsd:schema>

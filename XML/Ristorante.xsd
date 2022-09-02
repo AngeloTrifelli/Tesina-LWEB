@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ristoranti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ristorante" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ristorante">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="oraAperturaPranzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusuraPranzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraAperturaCena" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraChiusuraCena" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="menu" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="oraAperturaPranzo" type="xsd:time" />
+    <xsd:element name="oraChiusuraPranzo" type="xsd:time" />
+    <xsd:element name="oraAperturaCena" type="xsd:time" />
+    <xsd:element name="oraChiusuraCena" type="xsd:time" />
+    <xsd:element name="menu">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="portata" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="portata">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tipologia" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tipologia">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="antipasto" />
+                <xsd:enumeration value="primo piatto" />
+                <xsd:enumeration value="secondo piatto" />
+                <xsd:enumeration value="dolce" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="descrizione" type="xsd:string" />
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>

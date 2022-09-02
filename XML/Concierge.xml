@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaModeratori xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Concierge.xsd">
+    <moderatore>
+        <username>Concierge1</username>
+        <password>Concierge1</password>
+    </moderatore>
+</listaModeratori>
