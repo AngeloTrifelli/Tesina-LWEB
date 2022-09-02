@@ -53,7 +53,7 @@ Il login (mediante username e password) può essere effettuato da tre tipologie 
 \end{itemize}
 Nel caso in cui il login venga effettuato da un utente registrato allora si verrà portati in una pagina personale dedicata all'utente dalla quale, oltre a poter ottenere un riepilogo dei propri dati personali (con la possibilità di modificarli) e del proprio soggiorno, sarà possibile scegliere di quali servizi si intende usufruire. In particolare viene messo a disposizione: un servizio di ristorazione ed un elenco di attività svolte all'interno dell'hotel. \\\\Un cliente dell'hotel potrà inoltre scrivere una recensione che sarà visibile direttamente dalla home page del sito, ed avrà ad esso associata un proprio voto, una categoria ed eventuali commenti di risposta lasciati da altri utenti clienti dell'hotel. Per ogni recensione e per ogni commento è possibile inserire due ulteriori voti: il primo riguardante l'apprezzamento per il contenuto ed il secondo riguardante l'utilità della recensione o del commento (questi voti verranno inseriti da altri clienti dell'hotel).\\\\
 Infine, un cliente dell'hotel avrà anche la possibilità di inserire una domanda riguardante una particolare categoria e ricevere risposte da altri clienti dell'hotel oppure dal concierge. Le domande con la risposta migliore potranno essere selezionate dalla concierge per essere elevate a FAQ.  \\\\
-Ogni cliente potrà inoltre accumulare dei crediti. Tali crediti verranno assegnati al momento del completamento di un soggiorno oppure periodicamente in base ad i giudizi ricevuti dalle proprie recensioni e commenti e potranno essere utilizzati per integrare un pagamento.\\\\
+Ogni cliente potrà inoltre accumulare dei crediti. Tali crediti verranno assegnati al momento del completamento di un soggiorno oppure quotidianamente in base ad i giudizi ricevuti dalle proprie recensioni e commenti e potranno essere utilizzati per integrare un pagamento.\\\\
 Se invece il login viene effettuato dal concierge o da un utente amministratore allora essi verranno portati in delle pagine personali, dalle quali potranno scegliere quale operazione intendono svolgere ed essere portati a pagine dedicate alla specifica operazione che si intende compiere.
 
 \medskip
@@ -150,7 +150,7 @@ La registrazione all'interno del sito del hotel può essere effettuata esclusiva
 \item Quando un utente effettua la sua prima prenotazione di una camera. In questo caso, non avendo ancora usufruito dell'hotel dovrà necessariamente registrare un proprio account per completare la prenotazione.
 \item Oppure l'utente potrà registrarsi all'interno del sito anticipatamente (e quindi con la possibilità di effettuare la prima prenotazione in un secondo momento). In questo caso l'utente potrà comunque accedere alla propria pagina personale per poter modificare i propri dati, ma non potrà ovviamente usufruire di funzionalità addizionali finché non prenoterà un soggiorno.
 \end{enumerate}
-Indipendentemente dal momento in cui viene effettuata la registrazione, verranno richiesti di inserire i seguenti dati: \textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono} ed \textit{email}. Una volta inseriti i dati, l'utente per poter diventare a tutti gli effetti un \textit{cliente registrato} dovrà scegliere le proprie credenziali (\textit{username} e \textit{password}) con cui effettuerà il login.
+Indipendentemente dal momento in cui viene effettuata la registrazione, verranno richiesti di inserire i seguenti dati: \textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}. Una volta inseriti i dati, l'utente per poter diventare a tutti gli effetti un \textit{cliente registrato} dovrà scegliere le proprie credenziali (\textit{username} e \textit{password}) con cui effettuerà il login.
 
 \medskip
 
@@ -172,7 +172,14 @@ Un cliente avrà la possibilità di eseguire il pagamento della prenotazione di 
 \item \textbf{Interamente in crediti}
 \item \textbf{Misto} (sia denaro che crediti)
 \end{itemize}
-Ovviamente, un cliente potrà pagare la prenotazione di una camera usando i crediti esclusivamente se ha già effettuato precedenti soggiorni in passato e dunque risulta essere un utente registrato da tempo (un utente che effettua la prima prenotazione non potrà pagare in crediti poiché essendosi appena registrato non ha avuto la possibilità di accumularli).
+Ovviamente, un cliente potrà pagare la prenotazione di una camera usando i crediti esclusivamente se ha già effettuato precedenti soggiorni in passato e dunque risulta essere un utente registrato da tempo (un utente che effettua la prima prenotazione non potrà pagare in crediti poiché essendosi appena registrato non ha avuto la possibilità di accumularli).\\\\
+I crediti seguono le seguenti regole: 
+\begin{enumerate}
+\item Cinque crediti corrispondono ad 1€
+\item Al termine di un soggiorno vengono assegnati al cliente 25 crediti per ogni giorno di soggiorno
+\item Quotidianamente vengono assegnati ad un cliente un numero di crediti pari alla somma dei giudizi ricevuti nelle proprie recensioni o nei propri commenti. L'assegnazione avviene nel momento del login: se l'utente non dovesse effettuare il login ogni giorno allora il numero di crediti quotidiani da dover assegnare verrà accumulato e verranno tutti assegnati al momento del successivo login.
+
+\end{enumerate}
 
 \medskip
 
@@ -197,6 +204,20 @@ Verrà poi mostrato un riepilogo delle proprie scelte ed il prezzo totale calcol
 \item \textbf{Visualizzare le proprie prenotazioni:} nel caso in cui l'utente abbia già effettuato una prenotazione egli mediante questa pagina sarà in grado di ottenere un riepilogo delle proprie prenotazioni effettuate (sia del servizio al tavolo e sia del servizio in camera). Tale pagina permette anche la loro cancellazione: sarà sufficiente selezionare una prenotazione da cancellare e poi mediante un apposito pulsante la prenotazione verrà rimossa (ovviamente solo se il cliente non ha ancora usufruito della prenotazione).
 \end{itemize} 
 
+\medskip
+
+\subsection{Attività}
+\label{Attività}
+Dalla pagina personale di un \textit{cliente prenotato} è possibile accedere ad una pagina dedicata alle attività che l'hotel mette a disposizione dei propri clienti. In questa pagina verrà visualizzata una lista delle attività disponibili, ciascuna avente una breve descrizione ed un'immagine illustrativa. Per ogni attività saranno inoltre visualizzati i rispettivi orari di apertura e di chiusura, un eventuale prezzo orario (alcune attività possono essere gratuite) ed un form contenente:
+\begin{enumerate}
+\item Un campo per inserire la \textbf{data} di prenotazione (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
+\item Due campi per poter inserire \textbf{l'orario di inizio e di fine} della prenotazione (che devono essere compresi nell'intervallo di apertura e di chiusura dell'attività che si sta prenotando).
+\item Un bottone per poter confermare la propria prenotazione.
+\end{enumerate}
+Sempre da questa pagina sarà possibile, tramite una voce di un apposito menù,  visualizzare le proprie prenotazioni che eventualmente sono state già effettuate. Nel caso, l'utente potrà selezionare una prenotazione (di cui non ha ancora usufruito) e cancellarla.
+
+\medskip
+
 \subsection{Scrittura e commento di recensioni/commenti}
 \label{Recensioni}
 Mediante un'apposita voce di un menù della pagina home sarà possibile accedere ad una pagina per poter visualizzare tutte le recensioni che sono state create da utenti clienti dell'hotel. L'utente, oltre a poter visualizzare la lista di recensioni, se ha già effettuato l'autenticazione sarà in grado di scrivere un commento ad una recensione già esistente oppure inserire una propria recensione. Ogni recensione sarà composta da:
@@ -212,18 +233,6 @@ I commenti di risposta a loro volta saranno caratterizzati da: nome e cognome de
 Tuttavia, un cliente potrà inserire o giudicare una particolare recensione solamente se la categoria di tale recensione corrisponde ad un servizio utilizzato dal cliente. Analogamente, un cliente potrà inserire un commento o giudicare un commento già esistente solamente nell'ambito di recensioni con categorie "valide" per lo specifico cliente.
 
 \medskip
-
-\subsection{Attività}
-\label{Attività}
-Dalla pagina personale di un \textit{cliente prenotato} è possibile accedere ad una pagina dedicata alle attività che l'hotel mette a disposizione dei propri clienti. In questa pagina verrà visualizzata una lista delle attività disponibili, ciascuna avente una breve descrizione ed un'immagine illustrativa. Per ogni attività saranno inoltre visualizzati i rispettivi orari di apertura e di chiusura, un eventuale prezzo orario (alcune attività possono essere gratuite) ed un form contenente:
-\begin{enumerate}
-\item Un campo per inserire la \textbf{data} di prenotazione (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
-\item Due campi per poter inserire \textbf{l'orario di inizio e di fine} della prenotazione (che devono essere compresi nell'intervallo di apertura e di chiusura dell'attività che si sta prenotando).
-\item Un bottone per poter confermare la propria prenotazione.
-\end{enumerate}
-Sempre da questa pagina sarà possibile, tramite una voce di un apposito menù,  visualizzare le proprie prenotazioni che eventualmente sono state già effettuate. Nel caso, l'utente potrà selezionare una prenotazione (di cui non ha ancora usufruito) e cancellarla.
-
-\newpage
 
 \subsection{Valutazione di recensioni e di commenti}
 Nella pagina dedicata alle recensioni, un cliente che ha effettuato l'autenticazione avrà la possibilità di inserire un proprio giudizio sulle recensioni e sui commenti che visualizza. In particolare, è possibile inserire due tipologie di giudizi:
@@ -261,24 +270,46 @@ Verrà mostrata all'utente moderatore/amministratore una lista contenente tutte 
 \medskip
 
 \subsection{Modifica delle attività}
-All'utente moderatore/amministratore verrà data la possibilità di modificare tutte le informazioni relative ad un'attività. Verrà prima mostrata una lista contenente tutte le attività dell'hotel; dopodiché, dopo aver selezionato l'attività che si intende modificare, verrà data la possibilità di modificare il suo \textit{nome}, la \textit{descrizione}, \textit{l'immagine} ed il suo \textit{prezzo orario} (gli orari non possono essere modificati poiché la loro modifica avviene nella pagina dedicata alla modifica degli orari).
+All'utente moderatore/amministratore verrà data la possibilità di modificare tutte le informazioni relative ad un'attività. Verrà prima mostrata una lista contenente tutte le attività dell'hotel; dopodiché, dopo aver selezionato l'attività che si intende modificare, verrà data la possibilità di modificare la sua \textit{descrizione}, \textit{l'immagine} ed il suo \textit{prezzo orario} (gli orari non possono essere modificati poiché la loro modifica avviene nella pagina dedicata alla modifica degli orari).
 
 \subsection{Visualizzazione delle prenotazioni dei clienti}
 \label{VisualizzaPrenotazioniClienti}
 Verrà mostrata al concierge (o all'admin) una pagina contenente le prenotazioni di ogni singolo cliente. Le prenotazioni sono distinte tra: prenotazioni del servizio di ristorazione e prenotazioni di attività. A prescindere dal tipo, l'utente sarà in grado di selezionare una specifica prenotazione e poi potrà scegliere se intende annullarla (e quindi cancellarla) oppure modificarla. La modifica dipende dal tipo di prenotazione che è stata selezionata:
 \begin{enumerate}
-\item Se si vuole modificare una prenotazione del servizio di ristorazione: l'admin potrà modificare il numero del tavolo (e di conseguenza anche la locazione), l'orario di prenotazione o la data di prenotazione.
-\item Se si vuole modificare una prenotazione di una attività: l'admin potrà modificare l'orario di inizio o di fine della prenotazione oppure la data della prenotazione stessa.
+\item Se si vuole modificare una prenotazione del servizio al tavolo: l'utente potrà modificare il numero del tavolo (e di conseguenza anche la locazione), l'orario di prenotazione o la data di prenotazione.
+\item Se si vuole modificare una prenotazione del servizio in camera: l'utente potrà modificare l'orario di prenotazione, la data di prenotazione oppure potrà rimuovere una particolare portata dall'ordine.
+\item Se si vuole modificare una prenotazione di una attività: l'utente potrà modificare l'orario di inizio o di fine della prenotazione oppure la data della prenotazione stessa.
 \end{enumerate}
 
+\medskip
+
+\subsection{Elevazione/inserimento di domande come FAQ}
+Tra le tante domande che i clienti dell'hotel pongono, alcune possono essere selezionate da un utente moderatore o amministratore per poterle elevare a FAQ. In sostanza, tale domanda verrà trasportata direttamente nella pagina dedicata alle FAQ insieme ad una risposta che potrà:
+\begin{enumerate}
+\item Essere stata inserita precedentemente da un'utente moderatore/amministratore
+\item Essere scelta tra le varie risposte date da i clienti dell'hotel.
+\end{enumerate}
+In particolare, nel secondo caso l'utente che ha dato tale risposta verrà premiato mediante l'assegnazione di 100 crediti\\\\
+In alternativa, l'utente moderatore/amministratore avrà la possibilità di ideare una propria FAQ personale mediante l'inserimento di una domanda e di una risposta entrambe ideate dall'utente (non basandosi dunque sulle domande dei clienti dell'hotel).
+
+\medskip
+
+\subsection{Inserimento/disattivazione di una categoria} 
+Di default all'interno del sito saranno presenti tre categorie per le recensioni e domande:
+\begin{itemize}
+\item \textbf{Generale} (per indicare l'hotel in generale)
+\item \textbf{Stanze}
+\item \textbf{Servizi} (per indicare in modo generico i servizi che l'hotel offre)
+\end{itemize}
+Tuttavia, l'amministratore avrà la possibilità di inserire nuove categorie, eventualmente anche più specifiche (ad esempio potrebbe inserire la categoria del servizio in camera). Per poter inserire una nuova categoria l'admin dovrà specificare, oltre al \textit{nome} di quest'ultima, le particolari \textit{azioni} che un cliente dovrà fare per averla assegnata ad esso.\\\\
+Una categoria può anche essere \textit{disattivata} da un utente amministratore: se una categoria è disattivata allora i clienti non potranno effettuare domande e scrivere recensioni riguardo tale categoria finché essa non verrà riattivata
+
+\medskip
+
+\subsection{Approvazione di un pagamento}
+Essenzialmente l'utente amministratore avrà il compito di approvare il pagamento di una prenotazione di una camera (si presume che l'approvazione avvenga nel momento in cui egli abbia verificato che i soldi siano arrivati). Vi sarà dunque una pagina dedicata in cui sarà presente una lista di tutti i pagamenti in sospeso. Un cliente non potrà usufruire delle funzionalità aggiuntive (prenotazione di servizi, accesso alla home del servizio di ristorazione, ecc..) finché il pagamento non verrà approvato. Se un utente amministratore dovesse rifiutare un pagamento allora la prenotazione verrà annullata e saranno restituiti gli eventuali crediti utilizzati.
 \subsection{Visualizzazione dei clienti attuali}
-Il concierge (o l'admin) verrà portato in una pagina dedicata per ottenere un \textit{report} dei clienti che hanno prenotato un soggiorno presso l'hotel. In particolare viene visualizzata una lista che, per ogni cliente, mostra le generalità di quest'ultimo e la prenotazione che egli ha effettuato. Sono inoltre mostrati, in modo distinto da i clienti precedenti, anche i clienti che \textit{non sono ancora presenti in struttura} (per poterli identificare la piattaforma effettua un confronto tra la data odierna e la data di inizio prenotazione). Eventualmente, l'utente potrà modificare i dati personali di uno specifico cliente.
-
-
-
-\subsection{Check-out di un cliente}
-Il check-out di un cliente serve per indicare che il soggiorno di quest'ultimo è terminato e che dunque non è più necessario tener traccia dei dati relativi al cliente. Viene richiesto all'utente amministratore di inserire il codice fiscale del cliente di cui si intende effettuare il check-out. Dopodiché, verrà visualizzata una lista contenente i dati del cliente inserito e tutte le prenotazioni effettuate da quest'ultimo. Se l'amministratore conferma di voler effettuare il check-out allora il soggiorno del cliente viene considerato \textit{terminato} e, di conseguenza, vengono eliminati dalla piattaforma tutti i dati relativi a quest'ultimo e le prenotazioni che ha effettuato.
-
+L'amministratore verrà portato in una pagina dedicata per ottenere un \textit{report} dei clienti che hanno prenotato un soggiorno presso l'hotel. In particolare viene visualizzata una lista che, per ogni cliente, mostra le generalità di quest'ultimo e la prenotazione che egli ha effettuato. Sono inoltre mostrati, in modo distinto da i clienti precedenti, anche i clienti che \textit{non sono ancora presenti in struttura} (per poterli identificare la piattaforma effettua un confronto tra la data odierna e la data di inizio prenotazione). Eventualmente, l'admin potrà modificare i dati personali di uno specifico cliente.
 
 \medskip
 \medskip
@@ -287,22 +318,29 @@ Il check-out di un cliente serve per indicare che il soggiorno di quest'ultimo �
 In questa sezione verranno descritti la serie di file xml necessari per gestire i dati dell'applicazione.
 
 \subsection{Clienti.xml}
-File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli utenti che hanno prenotato una camera). Per ogni utente verranno memorizzati tutti i campi richiesti al momento della prenotazione (\textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita} e \textit{numero della carta di credito}) insieme alle credenziali che verranno utilizzate per l'autenticazione (\textit{username} e \textit{password}). Per motivi pratici, le prenotazioni di ogni cliente verranno memorizzate in altri file xml.
+File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli utenti che hanno prenotato una camera o che abbiano effettuato la registrazione). Per ogni utente verranno memorizzati tutti i campi richiesti al momento della prenotazione (\textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}) insieme alle credenziali che verranno utilizzate per l'autenticazione (\textit{username} e \textit{password}). Verranno inoltre memorizzati il \textit{numero di crediti}, la più recente \textit{data di assegnazione} dei crediti giornalieri e la \textit{somma totale} dei giudizi ricevuti nelle proprie recensioni e nei propri commenti. Per motivi pratici, le prenotazioni di ogni cliente verranno memorizzate in altri file xml.
 \subsubsection{Clienti.xml}
 \begin{lstlisting}[style=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <listaClienti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Clienti.xsd">
-    <cliente codFisc = "RSSGNN64R03E472G">
+    <cliente codFisc= "RSSGNN64R03E472G">
         <nome>Giovanni</nome>
         <cognome>Rossi</cognome>
         <dataDiNascita>1964-10-03</dataDiNascita>
+        <indirizzo>via del quasimodo 7</indirizzo>
+        <telefono>0123456789</telefono>
+        <email>giovanni.rossi64@gmail.com</email>
         <numeroCarta>0000-0000-0000-0000</numeroCarta>
         <credenziali>
-            <username>Camera110</username>
+            <username>GiovanniRossi</username>
             <password>qwerty</password>
         </credenziali>
+        <crediti>0</crediti>
+        <dataAssegnazioneCrediti>2022-01-01</dataAssegnazioneCrediti>
+        <sommaGiudizi>0</sommaGiudizi>
     </cliente>
 </listaClienti>
+
 
 \end{lstlisting}
 \subsubsection{Clienti.xsd}
@@ -323,16 +361,31 @@ File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli
                 <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="cognome" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataDiNascita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="indirizzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="telefono" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="email" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="numeroCarta" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="credenziali" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="crediti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataAssegnazioneCrediti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="sommaGiudizi" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
-            <xsd:attribute name="codFisc" type="xsd:string"  use="required" />
+            <xsd:attribute name="codFisc" type="xsd:ID"  use="required" />
         </xsd:complexType>
     </xsd:element>
 
     <xsd:element name="nome" type="xsd:string" />
     <xsd:element name="cognome" type="xsd:string" />
     <xsd:element name="dataDiNascita" type="xsd:date" />
+    <xsd:element name="indirizzo" type="xsd:string" />
+    <xsd:element name="telefono">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:pattern value="[0-9]{10}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="email" type="xsd:string" />
     <xsd:element name="numeroCarta">
         <xsd:simpleType>
             <xsd:restriction base="xsd:string">
@@ -350,24 +403,67 @@ File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="username">
+    <xsd:element name="username" type="xsd:string" />
+    <xsd:element name="password" type="xsd:string" />
+    <xsd:element name="crediti">
         <xsd:simpleType>
-            <xsd:restriction base="xsd:string">
-                <xsd:pattern value="Camera[0-9]{3}" />
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
-    
-    <xsd:element name="password">
+
+    <xsd:element name="dataAssegnazioneCrediti" type="xsd:date" />
+    <xsd:element name="sommaGiudizi">
         <xsd:simpleType>
-            <xsd:restriction base="xsd:string">
-                <xsd:pattern value="[a-zA-Z0-9]{6}" />
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
 </xsd:schema>
-\end{lstlisting}\pagebreak
 
+\end{lstlisting}
+
+\subsection{Concierge.xml}
+Questo file avrà il solo scopo di conservare le credenziali degli utenti moderatori (concierge) del sistema (\textit{username} e \textit{password})
+
+\subsubsection{Concierge.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaModeratori xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Concierge.xsd">
+    <moderatore>
+        <username>Concierge1</username>
+        <password>Concierge1</password>
+    </moderatore>
+</listaModeratori>
+\end{lstlisting}
+\subsubsection{Concierge.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaModeratori">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="moderatore" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="moderatore">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="username" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="password" minOccurs="1"
+                 maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="username" type="xsd:string" />
+    <xsd:element name="password" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
 \subsection{Amministratori.xml}
 Questo file essenzialmente ha il solo scopo di conservare le credenziali degli utenti amministratori del sistema (\textit{username} e \textit{password}).
 \subsubsection{Amministratori.xml}
@@ -406,7 +502,7 @@ Questo file essenzialmente ha il solo scopo di conservare le credenziali degli u
 </xsd:schema>
 \end{lstlisting}
 \subsection{Camere.xml}
-File che servirà per memorizzare la lista di camere che l'hotel mette a disposizione. Ogni camera sarà costituita da: un \textit{numero} (univoco) , un campo \textit{tipo}, un campo \textit{prezzo} (dipendente dal tipo di camera) ed una serie di \textit{prenotazioni} associate alla camera. Per ogni \textit{prenotazione} viene registrato il \textit{codice fiscale} del cliente che ha prenotato la camera, la \textit{data di arrivo} e la \textit{data di partenza}.
+File che servirà per memorizzare la lista di camere che l'hotel mette a disposizione. Ogni camera sarà costituita da: un \textit{numero} (univoco) , un campo \textit{tipo}, un campo \textit{prezzo} (dipendente dal tipo di camera) ed una serie di \textit{prenotazioni} associate alla camera. Per ogni \textit{prenotazione} viene registrato un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha prenotato la camera, lo \textit{stato} del pagamento ed i \textit{crediti} utilizzati per quest'ultimo, la \textit{data di arrivo} e la \textit{data di partenza}.
 \subsubsection{Camere.xml}
 \begin{lstlisting}[style=XML] 	
 <?xml version="1.0" encoding="UTF-8"?>
@@ -416,7 +512,10 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
         <prezzo>60</prezzo>
         <listaPrenotazioni>
             <prenotazione>
+                <idPrenotazione>C110-PC1</idPrenotazione>
                 <codFisc>RSSGNN64R03E472G</codFisc>
+                <statoPagamento>Approvato</statoPagamento>
+                <creditiUsati>0</creditiUsati>
                 <dataArrivo>2022-10-28</dataArrivo>
                 <dataPartenza>2022-10-31</dataPartenza>
             </prenotazione>
@@ -478,14 +577,36 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
     <xsd:element name="prenotazione">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="statoPagamento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataArrivo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataPartenza" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
     <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="statoPagamento">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Sospeso" />
+                <xsd:enumeration value="Approvato" />
+                <xsd:enumeration value="Rifiutato" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="creditiUsati">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
     <xsd:element name="dataArrivo" type="xsd:date" />
     <xsd:element name="dataPartenza" type="xsd:date" />
 </xsd:schema>
@@ -502,12 +623,13 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
         <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
         <oraAperturaCena>19:00:00</oraAperturaCena>
         <oraChiusuraCena>23:00:00</oraChiusuraCena>
-        <listaPortate>
-            <portata tipologia="primo piatto">
+        <menu>
+            <portata>
+                <tipologia>primo piatto</tipologia>
                 <descrizione>Spaghetti alla carbonara</descrizione>
-                <prezzo>12</prezzo>
+                <prezzo>8</prezzo>
             </portata>
-        </listaPortate>
+        </menu>
     </ristorante>
 </ristoranti>
 \end{lstlisting}
@@ -530,7 +652,7 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
                 <xsd:element ref="oraChiusuraPranzo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraAperturaCena" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraChiusuraCena" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="listaPortate" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="menu" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -539,7 +661,7 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
     <xsd:element name="oraChiusuraPranzo" type="xsd:time" />
     <xsd:element name="oraAperturaCena" type="xsd:time" />
     <xsd:element name="oraChiusuraCena" type="xsd:time" />
-    <xsd:element name="listaPortate">
+    <xsd:element name="menu">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="portata" minOccurs="1" maxOccurs="unbounded" />
@@ -550,22 +672,24 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
     <xsd:element name="portata">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="tipologia" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
-            <xsd:attribute name="tipologia" use="required">
-                <xsd:simpleType>
-                    <xsd:restriction base="xsd:string">
-                        <xsd:enumeration value="antipasto" />
-                        <xsd:enumeration value="primo piatto" />
-                        <xsd:enumeration value="secondo piatto" />
-                        <xsd:enumeration value="dolce" />
-                    </xsd:restriction>
-                </xsd:simpleType>
-            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="tipologia">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="antipasto" />
+                <xsd:enumeration value="primo piatto" />
+                <xsd:enumeration value="secondo piatto" />
+                <xsd:enumeration value="dolce" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
     <xsd:element name="descrizione" type="xsd:string" />
     <xsd:element name="prezzo">
         <xsd:simpleType>
@@ -588,7 +712,8 @@ Il file in questione memorizza tutti i tavoli che vengono messi a disposizione d
     <tavolo numero="T2">
         <locazione>Interna</locazione>
         <listaPrenotazioni>
-            <prenotazione id="PT1">
+            <prenotazione>
+            	<idPrenotazione>T2-PT1</idPrenotazione>
                 <codFisc>RSSGNN64R03E472G</codFisc>
                 <data>2022-10-30</data>
                 <ora>21:30:00</ora>
@@ -639,14 +764,15 @@ Il file in questione memorizza tutti i tavoli che vengono messi a disposizione d
     <xsd:element name="prenotazione">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="ora" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
     <xsd:element name="codFisc" type="xsd:string" />
     <xsd:element name="data" type="xsd:date" />
     <xsd:element name="ora" type="xsd:time" />
@@ -655,8 +781,110 @@ Il file in questione memorizza tutti i tavoli che vengono messi a disposizione d
 
 \medskip
 
+\subsection{ServizioCamera.xml}
+Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei servizi in camera richiesti da i clienti. Per ogni prenotazione verrà memorizzato: un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha effettuato la prenotazione, la \textit{data}, l'\textit{ora} ed il \textit{prezzo totale} della prenotazione, le eventuali \textit{richieste}, i \textit{crediti} utilizzati per il pagamento e la \textit{lista di portate} ordinate. Per ogni portata si avrà un \textit{nome} e la \textit{quantità} che è stata richiesta.
+
+\subsubsection{ServizioCamera.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaPrenotazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ServizioCamera.xsd">
+    <prenotazione id="PSC1">
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <data>2022-10-29</data>
+        <ora>13:00:00</ora>
+        <richieste>Spaghetti senza pecorino</richieste>
+        <prezzoTotale>16</prezzoTotale>
+        <creditiUsati>0</creditiUsati>
+        <listaPortate>
+            <portata>
+                <nome>Spaghetti alla carbonara</nome>
+                <quantita>2</quantita>
+            </portata>
+        </listaPortate>
+    </prenotazione>
+</listaPrenotazioni>
+\end{lstlisting}
+\subsubsection{ServizioCamera.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:sequence>
+                    <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
+                </xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1"
+                 maxOccurs="1" />
+                <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="ora" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="richieste" minOccurs="0"
+                 maxOccurs="1" />
+                <xsd:element ref="prezzoTotale" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPortate" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="data" type="xsd:date" />
+    <xsd:element name="ora" type="xsd:time" />
+    <xsd:element name="richieste" type="xsd:string" />
+    <xsd:element name="prezzoTotale">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="creditiUsati">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaPortate">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="portata" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="portata">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="quantita" minOccurs="1"
+                 maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="quantita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="1" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}
 \subsection{Attivita.xml}
-Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{attività} che l'hotel mette a disposizione, con le relative prenotazioni associate. Per ogni attività si avrà: il relativo \textit{nome} (che sarà univoco tra tutte le attività), una \textit{descrizione}, un \textit{link di un'immagine}, l'\textit{ora d'apertura} e di \textit{chiusura}, il \textit{prezzo orario} ed una \textit{lista di prenotazioni}. Per ogni \textit{prenotazione} si avrà: un \textit{id} univoco, il \textit{codice fiscale} del cliente, la \textit{data}, l'\textit{ora d'inizio e di fine} prenotazione e il \textit{prezzo totale} (dipendente dal prezzo orario dell'attività e dal numero di ore della prenotazione).
+Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{attività} che l'hotel mette a disposizione, con le relative prenotazioni associate. Per ogni attività si avrà: il relativo \textit{nome} (che sarà univoco tra tutte le attività), una \textit{descrizione}, un \textit{link di un'immagine}, l'\textit{ora d'apertura} e di \textit{chiusura}, il \textit{prezzo orario} ed una \textit{lista di prenotazioni}. Per ogni \textit{prenotazione} si avrà: un \textit{id} univoco, il \textit{codice fiscale} del cliente, la \textit{data}, l'\textit{ora d'inizio e di fine} prenotazione e il \textit{prezzo totale} (dipendente dal prezzo orario dell'attività e dal numero di ore della prenotazione) ed i \textit{crediti} utilizzati per il pagamento.
 
 \subsubsection{Attivita.xml}
 \begin{lstlisting}[style=XML]
@@ -682,12 +910,14 @@ Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{at
         <oraChiusura>22:00:00</oraChiusura>
         <prezzoOrario>10</prezzoOrario>
         <listaPrenotazioni>
-            <prenotazione id="PA1">
+            <prenotazione>
+            	<idPrenotazione>A1-PA1</idPrenotazione>
                 <codFisc>RSSGNN64R03E472G</codFisc>
                 <data>2022-10-29</data>
                 <oraInizio>17:00:00</oraInizio>
                 <oraFine>19:00:00</oraFine>
                 <prezzoTotale>20</prezzoTotale>
+                <creditiUsati>0</creditiUsati>
             </prenotazione>
         </listaPrenotazioni>
     </attivita>
@@ -728,7 +958,7 @@ Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{at
     <xsd:element name="prezzoOrario">
         <xsd:simpleType>
             <xsd:restriction base="xsd:double">
-                <xsd:minExclusive value="0" />
+                <xsd:minInclusive value="0" />
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
@@ -744,16 +974,18 @@ Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{at
     <xsd:element name="prenotazione">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraInizio" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraFine" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="prezzoTotale" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
     <xsd:element name="codFisc" type="xsd:string" />
     <xsd:element name="data" type="xsd:date" />
     <xsd:element name="oraInizio" type="xsd:time" />
@@ -765,10 +997,18 @@ Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{at
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
+
+    <xsd:element name="creditiUsati">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
 </xsd:schema>
 \end{lstlisting}
 \subsection{Recensioni.xml}
-Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventualmente scrivere delle recensioni, sarà necessario memorizzare tutte le recensioni che vengono scritte dai clienti dell'hotel. Per ogni \textit{recensione} si avrà: un \textit{id} univoco, il \textit{nome} e \textit{cognome} del cliente che ha scritto la recensione, un \textit{testo}, un \textit{voto} (compreso tra 1 e 5) ed una \textit{lista di commenti di risposta}. Per ogni \textit{commento} si avrà: il \textit{nome} e \textit{cognome} del cliente che ha scritto il commento ed il \textit{testo} del commento.
+Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventualmente scrivere delle recensioni, sarà necessario memorizzare tutte le recensioni che vengono scritte dai clienti dell'hotel. Per ogni \textit{recensione} si avrà: un \textit{id} univoco, il \textit{nome}, \textit{cognome} ed il \textit{codice fiscale} del cliente che ha scritto la recensione, la \textit{categoria}, un \textit{testo}, un \textit{voto} (compreso tra 1 e 5), una somma dei giudizi di \textit{apprezzamento per l'utilità} ricevuti da altri utenti ed una somma dei giudizi di \textit{accordo} con il contenuto ricevuti da altri utenti.
 
 \subsubsection{Recensioni.xml}
 \begin{lstlisting}[style=XML]
@@ -777,20 +1017,16 @@ Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventual
     <recensione id="R1">
         <nomeAutore>Giovanni</nomeAutore>
         <cognomeAutore>Rossi</cognomeAutore>
+        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+        <categoria>Servizi</categoria>
         <testoRecensione>
             Soggiorno fantastico! Il ristorante offre sempre piatti di
-            immensa qualita' ed il personale  e' estremamente professionale
+            immensa qualita' ed il personale e' estremamente professionale
             e sempre disponibile. 
         </testoRecensione>
         <voto>5</voto>
-        <listaCommenti>
-            <commento>
-                <nomeAutoreCommento>Luigi</nomeAutoreCommento>
-                <cognomeAutoreCommento>Verdi</cognomeAutore
-                Commento>
-                <testoCommento>Concordo pienamente!</testoCommento>
-            </commento>
-        </listaCommenti>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
     </recensione>
 </listaRecensioni>
 \end{lstlisting}
@@ -811,9 +1047,12 @@ Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventual
             <xsd:sequence>
                 <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="cognomeAutore" minOccurs="1"  maxOccurs="1" />
+                <xsd:element ref="codFiscAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="categoria" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="testoRecensione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="voto" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="listaCommenti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
@@ -821,6 +1060,8 @@ Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventual
 
     <xsd:element name="nomeAutore" type="xsd:string" />
     <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="codFiscAutore" type="xsd:string" />
+    <xsd:element name="categoria" type="xsd:string" />
     <xsd:element name="testoRecensione" type="xsd:string" />
     <xsd:element name="voto">
         <xsd:simpleType>
@@ -830,7 +1071,64 @@ Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventual
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
-    
+
+    <xsd:element name="utilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}
+
+\subsection{Commenti.xml}
+Poiché gli utenti avranno la possibilità di commentare le recensioni (ed anche i commenti) questo file memorizzerà tutti i commenti lasciati da i clienti dell'hotel. Per ogni commento si avrà: un \textit{id} univoco, l'\textit{id della recensione} in cui è contenuto il commento, il \textit{nome} \textit{cognome} ed il \textit{codice fiscale} dell'autore del commento, il \textit{testo}, una somma dei giudizi di \textit{apprezzamento per l'utilità} ricevuti da altri utenti ed una somma dei giudizi di \textit{accordo} con il contenuto ricevuti da altri utenti.. Per ogni commento si avrà poi una \textit{lista di risposte} (poiché ogni risposta è un commento ognuna di esse sarà essenzialmente strutturata nello stesso modo appena descritto)
+
+\subsubsection{Commenti.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCommenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Commenti.xsd">
+    <commento id="CM1">
+        <idRecensione>R1</idRecensione>
+        <nomeAutore>Roberto</nomeAutore>
+        <cognomeAutore>Verdi</cognomeAutore>
+        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+        <testo>Concordo pienamente!</testo>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+        <listaRisposte>
+            <risposta>
+            	<idRisposta>CM1-CMR1</idRisposta>
+                <nomeAutoreRisposta>
+                	Carlo
+                </nomeAutoreRisposta>
+                <cognomeAutoreRisposta>
+                	Bianchi
+                </cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>
+                	BNCCRL01P23E472A
+                </codFiscAutoreRisposta>
+                <testoRisposta>Lo consiglio anche io!</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+        </listaRisposte>
+    </commento>
+</listaCommenti>
+\end{lstlisting}
+\subsubsection{Commenti.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:element name="listaCommenti">
         <xsd:complexType>
             <xsd:sequence>
@@ -842,20 +1140,395 @@ Poiché l'hotel mette a disposizione la possibilità di visualizzare ed eventual
     <xsd:element name="commento">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="nomeAutoreCommento" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="cognomeAutoreCommento" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="testoCommento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="idRecensione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFiscAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaRisposte" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idRecensione" type="xsd:string" />
+    <xsd:element name="nomeAutore" type="xsd:string" />
+    <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="codFiscAutore" type="xsd:string" />
+    <xsd:element name="testo" type="xsd:string" />
+    
+    <xsd:element name="utilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaRisposte">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="risposta" minOccurs="0" maxOccurs="unbounded" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="nomeAutoreCommento" type="xsd:string" />
-    <xsd:element name="cognomeAutoreCommento" type="xsd:string" />
-    <xsd:element name="testoCommento" type="xsd:string" />
+    <xsd:element name="risposta">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="nomeAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFiscAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilitaRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordoRisposta" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idRisposta" type="xsd:ID" />
+    <xsd:element name="nomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="cognomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="codFiscAutoreRisposta" type="xsd:string" />
+    <xsd:element name="testoRisposta" type="xsd:string" />
+
+    <xsd:element name="utilitaRisposta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordoRisposta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
 </xsd:schema>
 \end{lstlisting}
 
-\medskip
+\subsection{Valutazioni.xml}
+Questo file servirà per tener traccia delle valutazioni che i vari utenti inseriscono nelle recensioni o nei commenti. Per ogni valutazione si avrà: un \textit{id dell'oggetto valutato} (che può essere una recensione o un commento), il \textit{codice fiscale} dell'autore della valutazione, il \textit{voto dell'apprezzamento per l'utilità} ed il \textit{voto per l'accordo} con il contenuto (se uno dei due è pari a zero allora significa che il cliente non ha inserito tale voto)
+
+\subsubsection{Valutazioni.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaValutazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Valutazioni.xsd">
+    <valutazione>
+        <idOggettoValutato>CM1</idOggettoValutato>
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <votoUtilita>5</votoUtilita>
+        <votoAccordo>3</votoAccordo>
+    </valutazione>
+</listaValutazioni>
+\end{lstlisting}
+\subsubsection{Valutazioni.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaValutazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="valutazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="valutazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idOggettoValutato" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="votoUtilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="votoAccordo" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idOggettoValutato" type="xsd:string" />
+    <xsd:element name="codFisc" type="xsd:string" />
+
+    <xsd:element name="votoUtilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+                <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="votoAccordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+                <xsd:maxInclusive value="3" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
+\end{lstlisting}
+
+\subsection{Domande.xml}
+Questo file andrà a memorizzare al suo interno tutte le domande che verranno scritte da i clienti dell'hotel. Ciascuna domanda sarà composta da:  un \textit{id} univoco, un attributo \textit{faq} (opzionale, la sua presenza indicherà che tale domanda è stata già scelta per essere elevata a faq), il \textit{nome}, \textit{cognome} ed il \textit{codice fiscale} dell'autore della domanda, una \textit{categoria}, un \textit{testo} ed una \textit{lista di risposte}. Ciascuna risposta sarà composta da: un \textit{id} univoco, l'\textit{autore} della risposta (che potrà essere un cliente o il concierge o l'amministratore), il \textit{nome} \textit{cognome} ed il \textit{codice fiscale} dell'autore della risposta (questi tre campi saranno presenti solo se l'autore è un cliente) ed il \textit{testo} della risposta.
+
+\subsubsection{Domande.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaDomande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Domande.xsd">
+    <domanda id="D1">
+        <nomeAutore>Giovanni</nomeAutore>
+        <cognomeAutore>Rossi</cognomeAutore>
+        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+        <categoria>Generale</categoria>
+        <testoDomanda>La palestra ha un phon?</testoDomanda>
+        <listaRisposte>
+            <risposta>
+            	<idRisposta>D1-RSP1</idRisposta>
+                <autore>Cliente</autore>
+                <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>
+                	VRDRRT00L13E472M
+                </codFiscAutoreRisposta>
+                <testoRisposta>Si, certo</testoRisposta>
+            </risposta>
+        </listaRisposte>
+    </domanda>
+</listaDomande>
+\end{lstlisting}
+\subsubsection{Domande.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaDomande">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="domanda" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="domanda">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFiscAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="categoria" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoDomanda" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaRisposte" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+            <xsd:attribute name="faq" use="optional">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="true" />
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAutore" type="xsd:string" />
+    <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="codFiscAutore" type="xsd:string" />
+    <xsd:element name="categoria" type="xsd:string" />
+    <xsd:element name="testoDomanda" type="xsd:string" />
+    <xsd:element name="listaRisposte">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="risposta" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="risposta">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="autore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="nomeAutoreRisposta" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="cognomeAutoreRisposta" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="codFiscAutoreRisposta" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="testoRisposta" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idRisposta" type="xsd:ID" />
+    <xsd:element name="autore">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Cliente" />
+                <xsd:enumeration value="Staff" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="nomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="cognomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="codFiscAutoreRisposta" type="xsd:string" />
+    <xsd:element name="testoRisposta" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
+
+\subsection{FAQs.xml}
+Poiché il concierge o l'amministratore avranno la possibilità di elevare qualsiasi domanda a FAQ oppure di inserire un qualsiasi numero di FAQ a proprio piacimento, questo file servirà per poter permettere tale azioni. Ogni FAQ sarà composta da il \textit{testo della domanda}, una \textit{risposta} ed un eventuale \textit{id} della domanda del cliente (tale id sarà presente esclusivamente se la FAQ proviene da una domanda effettuata da un cliente dell'hotel).
+
+\subsubsection{FAQs.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
+    <FAQ>
+        <testoDomanda>
+            La colazione viene inclusa con la prenotazione di un
+            qualsiasi tipo di camera?
+        </testoDomanda>
+        <testoRisposta>
+            Certamente. Il ristorante offre la colazione a tutti i
+            clienti, a prescindere dalla tipologia di camera
+            prenotata.
+        </testoRisposta>
+    </FAQ>
+</listaFAQ>
+\end{lstlisting}
+\subsubsection{FAQs.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaFAQ">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="FAQ" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FAQ">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idDomandaCliente" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="testoDomanda" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoRisposta" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <xsd:element name="idDomandaCliente" type="xsd:string" />
+    <xsd:element name="testoDomanda" type="xsd:string" />
+    <xsd:element name="testoRisposta" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
+
+\subsection{Categorie.xml}
+Anche se le categorie di default sono tre, l'amministratore avrà la possibilità di espandere tale numero aggiungendo nuove categorie. Questo file servirà dunque per memorizzare al suo interno tutte le categorie e per poter permettere all'amministratore di aggiungerne delle nuove. Ogni categoria sarà composta da un \textit{nome}, uno \textit{stato della categoria} (che può essere \textit{attiva} o \textit{disabilitata}) una serie di \textit{azioni} che l'utente dovrà compiere per poter essere associato a  tale categoria ed una \textit{lista di utenti} associati a tale categoria. Per ogni utente verrà memorizzato solo il suo \textit{codice fiscale}
+
+\subsubsection{Categorie.xml}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCategorie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Categorie.xsd">
+    <categoria>
+        <nome>Stanza</nome>
+        <stato>Attiva</stato>
+        <listaAzioni>
+            <azioneUtente>
+                <nomeAzione>Prenotazione soggiorno</nomeAzione>
+            </azioneUtente>
+        </listaAzioni>        
+        <listaUtenti>
+            <utente>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+            </utente>
+        </listaUtenti>
+    </categoria>
+</listaCategorie>
+\end{lstlisting}
+\subsubsection{Categorie.xsd}
+\begin{lstlisting}[style=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaCategorie">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="categoria" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="categoria">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaAzioni" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaUtenti" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="stato">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Attiva" />
+                <xsd:enumeration value="Disabilitata" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaAzioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="azioneUtente" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="listaUtenti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="utente" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="azioneUtente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAzione" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="utente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAzione" type="xsd:string" />
+    <xsd:element name="codFisc" type="xsd:string" />
+</xsd:schema>
+\end{lstlisting}
+
 \medskip
 
 \section{Elementi XML}
