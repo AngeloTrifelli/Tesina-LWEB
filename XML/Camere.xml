@@ -7,7 +7,7 @@
             <prenotazione>
                 <idPrenotazione>C110-PC1</idPrenotazione>
                 <codFisc>RSSGNN64R03E472G</codFisc>
-                <statoPagamento>Approvato</statoPagamento>
+                <statoSoggiorno>Approvato</statoSoggiorno>
                 <creditiUsati>0</creditiUsati>
                 <dataArrivo>2022-10-28</dataArrivo>
                 <dataPartenza>2022-10-31</dataPartenza>

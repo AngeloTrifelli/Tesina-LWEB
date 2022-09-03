@@ -52,7 +52,7 @@
             <xsd:sequence>
                 <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="statoPagamento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="statoSoggiorno" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataArrivo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataPartenza" minOccurs="1" maxOccurs="1" />
@@ -62,12 +62,13 @@
 
     <xsd:element name="idPrenotazione" type="xsd:ID" />
     <xsd:element name="codFisc" type="xsd:string" />
-    <xsd:element name="statoPagamento">
+    <xsd:element name="statoSoggiorno">
         <xsd:simpleType>
             <xsd:restriction base="xsd:string">
-                <xsd:enumeration value="Sospeso" />
+                <xsd:enumeration value="Pagamento sospeso" />
+                <xsd:enumeration value="Pagamento rifiutato" />
                 <xsd:enumeration value="Approvato" />
-                <xsd:enumeration value="Rifiutato" />
+                <xsd:enumeration value="Terminato" />
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
