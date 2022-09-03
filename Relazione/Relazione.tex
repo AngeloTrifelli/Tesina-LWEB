@@ -51,7 +51,7 @@ Il login (mediante username e password) può essere effettuato da tre tipologie 
 \item \textbf{Concierge:} utente moderatore che disporrà di credenziali personali e potrà svolgere operazioni volte alla moderazione del sito.
 \item \textbf{Admin:} un utente amministratore che disporrà di credenziali personali e che potrà effettuare operazioni riservate.
 \end{itemize}
-Nel caso in cui il login venga effettuato da un utente registrato allora si verrà portati in una pagina personale dedicata all'utente dalla quale, oltre a poter ottenere un riepilogo dei propri dati personali (con la possibilità di modificarli) e del proprio soggiorno, sarà possibile scegliere di quali servizi si intende usufruire. In particolare viene messo a disposizione: un servizio di ristorazione ed un elenco di attività svolte all'interno dell'hotel. \\\\Un cliente dell'hotel potrà inoltre scrivere una recensione che sarà visibile direttamente dalla home page del sito, ed avrà ad esso associata un proprio voto, una categoria ed eventuali commenti di risposta lasciati da altri utenti clienti dell'hotel. Per ogni recensione e per ogni commento è possibile inserire due ulteriori voti: il primo riguardante l'apprezzamento per il contenuto ed il secondo riguardante l'utilità della recensione o del commento (questi voti verranno inseriti da altri clienti dell'hotel).\\\\
+Nel caso in cui il login venga effettuato da un utente registrato allora si verrà portati in una pagina personale dedicata all'utente dalla quale, oltre a poter ottenere un riepilogo dei propri dati personali (con la possibilità di modificarli) e del proprio soggiorno, sarà possibile scegliere di quali servizi si intende usufruire. In particolare viene messo a disposizione: un servizio di ristorazione ed un elenco di attività svolte all'interno dell'hotel. \\\\Un cliente dell'hotel potrà inoltre scrivere una recensione che sarà visibile in una pagina raggiungibile direttamente dalla home page del sito, ed avrà ad esso associata un proprio voto, una categoria ed eventuali commenti di risposta lasciati da altri utenti clienti dell'hotel. Per ogni recensione e per ogni commento è possibile inserire due ulteriori voti: il primo riguardante l'apprezzamento per l'utilità del contenuto ed il secondo riguardante l'accordo con il contenuto della recensione o del commento (questi voti verranno inseriti da altri clienti dell'hotel).\\\\
 Infine, un cliente dell'hotel avrà anche la possibilità di inserire una domanda riguardante una particolare categoria e ricevere risposte da altri clienti dell'hotel oppure dal concierge. Le domande con la risposta migliore potranno essere selezionate dalla concierge per essere elevate a FAQ.  \\\\
 Ogni cliente potrà inoltre accumulare dei crediti. Tali crediti verranno assegnati al momento del completamento di un soggiorno oppure quotidianamente in base ad i giudizi ricevuti dalle proprie recensioni e commenti e potranno essere utilizzati per integrare un pagamento.\\\\
 Se invece il login viene effettuato dal concierge o da un utente amministratore allora essi verranno portati in delle pagine personali, dalle quali potranno scegliere quale operazione intendono svolgere ed essere portati a pagine dedicate alla specifica operazione che si intende compiere.
@@ -166,6 +166,7 @@ Un cliente dopo che avrà effettuato l'autenticazione verrà portato in una pagi
 \medskip
 
 \subsection{Pagamento mediante denaro e/o crediti}
+\label{Crediti}
 Un cliente avrà la possibilità di eseguire il pagamento della prenotazione di un soggiorno, di un servizio in camera o di un'attività in tre modi distinti:
 \begin{itemize}
 \item \textbf{Interamente in denaro}
@@ -229,12 +230,13 @@ Mediante un'apposita voce di un menù della pagina home sarà possibile accedere
 \item \textbf{Giudizi lasciati da altri utenti} (la recensione mostrerà solo la somma totale)
 \item \textbf{Eventuali commenti di risposta} (che verranno aggiunti da altri utenti).
 \end{itemize}
-I commenti di risposta a loro volta saranno caratterizzati da: nome e cognome dell'utente che scrive il commento, il testo del commento, giudizi lasciati da altri utenti (analoghi a quelli delle recensioni) ed eventualmente altri commenti di risposta al commento.\\\\
+I commenti di risposta a loro volta saranno caratterizzati da: nome e cognome dell'utente che scrive il commento, il testo del commento, giudizi lasciati da altri utenti (analoghi a quelli delle recensioni) ed eventualmente altri commenti di risposta al commento (non sarà però possibile rispondere ad un commento di risposta di un altro commento).\\\\
 Tuttavia, un cliente potrà inserire o giudicare una particolare recensione solamente se la categoria di tale recensione corrisponde ad un servizio utilizzato dal cliente. Analogamente, un cliente potrà inserire un commento o giudicare un commento già esistente solamente nell'ambito di recensioni con categorie "valide" per lo specifico cliente.
 
 \medskip
 
 \subsection{Valutazione di recensioni e di commenti}
+\label{ValutazioneRecensioni}
 Nella pagina dedicata alle recensioni, un cliente che ha effettuato l'autenticazione avrà la possibilità di inserire un proprio giudizio sulle recensioni e sui commenti che visualizza. In particolare, è possibile inserire due tipologie di giudizi:
 \begin{itemize}
 \item \textbf{Apprezzamento per l'utilità della recensione/commento} (voto da 1 a 5)
@@ -307,6 +309,7 @@ Una categoria può anche essere \textit{disattivata} da un utente amministratore
 \medskip
 
 \subsection{Approvazione di un pagamento}
+\label{ApprovazionePagamento}
 Essenzialmente l'utente amministratore avrà il compito di approvare il pagamento di una prenotazione di una camera (si presume che l'approvazione avvenga nel momento in cui egli abbia verificato che i soldi siano arrivati). Vi sarà dunque una pagina dedicata in cui sarà presente una lista di tutti i pagamenti in sospeso. Un cliente non potrà usufruire delle funzionalità aggiuntive (prenotazione di servizi, accesso alla home del servizio di ristorazione, ecc..) finché il pagamento non verrà approvato. Se un utente amministratore dovesse rifiutare un pagamento allora la prenotazione verrà annullata e saranno restituiti gli eventuali crediti utilizzati.
 \subsection{Visualizzazione dei clienti attuali}
 L'amministratore verrà portato in una pagina dedicata per ottenere un \textit{report} dei clienti che hanno prenotato un soggiorno presso l'hotel. In particolare viene visualizzata una lista che, per ogni cliente, mostra le generalità di quest'ultimo e la prenotazione che egli ha effettuato. Sono inoltre mostrati, in modo distinto da i clienti precedenti, anche i clienti che \textit{non sono ancora presenti in struttura} (per poterli identificare la piattaforma effettua un confronto tra la data odierna e la data di inizio prenotazione). Eventualmente, l'admin potrà modificare i dati personali di uno specifico cliente.
@@ -318,7 +321,7 @@ L'amministratore verrà portato in una pagina dedicata per ottenere un \textit{r
 In questa sezione verranno descritti la serie di file xml necessari per gestire i dati dell'applicazione.
 
 \subsection{Clienti.xml}
-File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli utenti che hanno prenotato una camera o che abbiano effettuato la registrazione). Per ogni utente verranno memorizzati tutti i campi richiesti al momento della prenotazione (\textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}) insieme alle credenziali che verranno utilizzate per l'autenticazione (\textit{username} e \textit{password}). Verranno inoltre memorizzati il \textit{numero di crediti}, la più recente \textit{data di assegnazione} dei crediti giornalieri e la \textit{somma totale} dei giudizi ricevuti nelle proprie recensioni e nei propri commenti. Per motivi pratici, le prenotazioni di ogni cliente verranno memorizzate in altri file xml.
+File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli utenti che hanno prenotato una camera o che abbiano effettuato la registrazione). Per ogni utente verranno memorizzati tutti i campi richiesti al momento della prenotazione (\textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}) insieme alle credenziali che verranno utilizzate per l'autenticazione (\textit{username} e \textit{password}). Verranno inoltre memorizzati il \textit{numero di crediti}, la più recente \textit{data di assegnazione} dei crediti giornalieri e la \textit{somma totale} dei giudizi ricevuti nelle proprie recensioni e nei propri commenti (viene memorizzata per evitare di doverla ricalcolare ogni volta al momento dell'assegnazione dei crediti giornalieri). Per motivi pratici, le prenotazioni di ogni cliente verranno memorizzate in altri file xml.
 \subsubsection{Clienti.xml}
 \begin{lstlisting}[style=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -502,7 +505,7 @@ Questo file essenzialmente ha il solo scopo di conservare le credenziali degli u
 </xsd:schema>
 \end{lstlisting}
 \subsection{Camere.xml}
-File che servirà per memorizzare la lista di camere che l'hotel mette a disposizione. Ogni camera sarà costituita da: un \textit{numero} (univoco) , un campo \textit{tipo}, un campo \textit{prezzo} (dipendente dal tipo di camera) ed una serie di \textit{prenotazioni} associate alla camera. Per ogni \textit{prenotazione} viene registrato un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha prenotato la camera, lo \textit{stato} del pagamento ed i \textit{crediti} utilizzati per quest'ultimo, la \textit{data di arrivo} e la \textit{data di partenza}.
+File che servirà per memorizzare la lista di camere che l'hotel mette a disposizione. Ogni camera sarà costituita da: un \textit{numero} (univoco) , un campo \textit{tipo}, un campo \textit{prezzo} (dipendente dal tipo di camera) ed una serie di \textit{prenotazioni} associate alla camera. Per ogni \textit{prenotazione} viene registrato un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha prenotato la camera, lo \textit{stato} del soggiorno (che potrà essere: \textit{pagamento sospeso}, \textit{pagamento rifiutato}, \textit{approvato} e \textit{terminato}) ed i \textit{crediti} utilizzati per quest'ultimo, la \textit{data di arrivo} e la \textit{data di partenza}.
 \subsubsection{Camere.xml}
 \begin{lstlisting}[style=XML] 	
 <?xml version="1.0" encoding="UTF-8"?>
@@ -514,7 +517,7 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
             <prenotazione>
                 <idPrenotazione>C110-PC1</idPrenotazione>
                 <codFisc>RSSGNN64R03E472G</codFisc>
-                <statoPagamento>Approvato</statoPagamento>
+                <statoSoggiorno>Approvato</statoSoggiorno>
                 <creditiUsati>0</creditiUsati>
                 <dataArrivo>2022-10-28</dataArrivo>
                 <dataPartenza>2022-10-31</dataPartenza>
@@ -579,7 +582,7 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
             <xsd:sequence>
                 <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="statoPagamento" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="statoSoggiorno" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataArrivo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="dataPartenza" minOccurs="1" maxOccurs="1" />
@@ -589,12 +592,13 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
 
     <xsd:element name="idPrenotazione" type="xsd:ID" />
     <xsd:element name="codFisc" type="xsd:string" />
-    <xsd:element name="statoPagamento">
+    <xsd:element name="statoSoggiorno">
         <xsd:simpleType>
             <xsd:restriction base="xsd:string">
-                <xsd:enumeration value="Sospeso" />
+                <xsd:enumeration value="Pagamento sospeso" />
+                <xsd:enumeration value="Pagamento rifiutato" />
                 <xsd:enumeration value="Approvato" />
-                <xsd:enumeration value="Rifiutato" />
+                <xsd:enumeration value="Terminato" />
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
@@ -1107,7 +1111,7 @@ Poiché gli utenti avranno la possibilità di commentare le recensioni (ed anche
         <accordo>0</accordo>
         <listaRisposte>
             <risposta>
-            	<idRisposta>CM1-CMR1</idRisposta>
+            	<idRisposta>CM1-RCM1</idRisposta>
                 <nomeAutoreRisposta>
                 	Carlo
                 </nomeAutoreRisposta>
@@ -1532,38 +1536,74 @@ Anche se le categorie di default sono tre, l'amministratore avrà la possibilit�
 \medskip
 
 \section{Elementi XML}
-In questa sezione verranno analizzati dieci elementi XML scelti a campione, per poter giustificare la loro presenza nei vari file XML appena presentati.
+In questa sezione verranno analizzati dodici elementi XML scelti a campione, per poter giustificare la loro presenza nei vari file XML appena presentati.
 
-\subsubsection{Clienti.xml: credenziali}
-Come detto più volte nel corso di questo capitolo e descritto nella sezione \hyperref[Login]{\textbf{1.2.3}}, un utente che prenota una camera avrà bisogno di credenziali personali per poter effettuare il login nella piattaforma. Lo scopo di questo elemento è dunque quello di incapsulare al suo interno, mediante l'utilizzo di altri due sottoelementi \textit{username} e \textit{password}, le credenziali che vengono assegnate ad un utente al completamento della prenotazione.
+\subsubsection{Clienti.xml: dataAssegnazioneCrediti}
+Come descritto nella sezione \hyperref[Crediti]{\textbf{1.2.6}}, ad un utente vengono assegnati quotidianamente dei crediti sulla base della somma totale dei giudizi ricevuti nelle proprie recensioni e commenti. Lo scopo di questo campo sarà dunque quello di tener traccia della data di assegnazione dei crediti giornalieri. Ciò non solo impedisce di assegnare i crediti giornalieri più volte allo stesso utente nello stesso giorno, ma permette anche di stabilire se sarà necessario contare più giorni. Infatti, l'assegnazione avviene nel momento del login ma poiché l'utente potrebbe non effettuarlo ogni giorno, potrebbe capitare che al momento del login dovranno essere assegnati i crediti giornalieri di più giorni.
 
-\subsubsection{Camere.xml: tipo}
-Nella sezione \hyperref[PrenotazioneCamera]{\textbf{1.2.2}} nel descrivere la funzionalità di prenotazione di un soggiorno, è stato messo in evidenza che le camere vengono distinte tra loro in base alla loro \textit{tipologia} e, in base a quest'ultima, viene assegnato loro un prezzo fisso. L'elemento \textbf{tipo} viene dunque inserito per poter identificare le tipologie di camere ed assegnare correttamente il prezzo corrispondente.
+\subsubsection{Clienti.xml: sommaGiudizi}
+Nella sezione \hyperref[Crediti]{\textbf{1.2.6}} viene detto che i crediti giornalieri sono assegnati in base alla somma totale dei giudizi ricevuti nelle proprie recensioni e commenti. Tuttavia, poiché ogni volta che verrà effettuato il login in un giorno diverso vi sarà la necessità di svolgere tale assegnazione, lo scopo di questo campo è quello di tener traccia della somma totale dei giudizi ricevuti senza doverla ricalcolare ogni volta. Senza questo campo si dovrebbe ogni volta ricercare all'interno dei file \textit{Recensioni.xml} e \textit{Commenti.xml} le recensioni ed i commenti scritti dall'utente che ha effettuato il login, per poi ricercare all'interno del file \textit{Giudizi.xml} i rispettivi giudizi che sono stati assegnati. Questo campo \textit{sommaGiudizi} verrà modificato in modo appropriato ogni volta che un cliente inserisce o modifica un giudizio. 
 
-\subsubsection{Camere.xml: listaPrenotazioni}
-Poiché nella sezione \hyperref[PrenotazioneCamera]{\textbf{1.2.2}} viene specificato che una camera può avere anche più di una prenotazione associata ad essa, questo elemento avrà il compito di incapsulare al suo interno tutte le prenotazioni associate ad una specifica camera.
+\subsubsection{Camere.xml: idPrenotazione}
+Nella sezione \hyperref[ApprovazionePagamento]{\textbf{1.2.18}} viene detto che un utente amministratore dovrà approvare i pagamenti effettuati da i clienti per la prenotazione di una camera. Tuttavia, poiché potrebbe capitare che l'amministratore abbia più pagamenti da dover approvare, sarà necessario identificare univocamente ogni prenotazione di ogni camera per poter modificare correttamente il suo stato al momento del rifiuto o dell'approvazione del pagamento (senza questa identificazione univoca si rischierebbe di modificare lo stato di un'altra prenotazione). Per convenzione, l'id segue la seguente struttura:
+\begin{center}
+C\textit{"numero di camera"} - PC\textit{"id prenotazione associata alla camera"}
+\end{center}
+C e PC sono le abbreviazioni di "Camera" e "Prenotazione Camera". In particolare, l'id della prenotazione associata alla camera è sequenziale (cioè verrà incrementato di uno ogni volta che verrà aggiunta una prenotazione alla camera). Poiché tale id è univoco solo all'interno della lista delle prenotazioni in cui si trova, esso può essere replicato nelle liste di prenotazioni associate ad altre camere. Esso viene dunque combinato insieme al \textit{numero di camera} per poter ottenere l'univocità all'interno del documento.
 
 \subsubsection{Camere.xml: codFisc}
 Nell'introduzione del capitolo viene detto che un cliente dell'hotel, dopo che ha effettuato il login, verrà portato ad una pagina personale in cui potrà visualizzare un riepilogo del proprio soggiorno. La presenza di questo elemento è dunque giustificata dalla necessità di dover associare correttamente la prenotazione di una camera al cliente che l'ha effettuata (per poter poi reperire i dati corretti). In particolare, tutti gli altri elementi omonimi presenti nelle prenotazioni che si trovano in altri file XML, avranno lo stesso scopo (cioè quello di associare correttamente la prenotazione).
 
-\subsubsection{Ristorante.xml: listaPortate}
-Nella sezione \hyperref[ServizioRistorazione]{\textbf{1.2.4}} viene detto che dalla home page del servizio di ristorazione sarà possibile visualizzare il menù del ristorante. Questo elemento avrà dunque lo scopo di contenere al suo interno tutto il menù con le relative portate che vengono messe a disposizione.
-
 \subsubsection{Ristorante.xml: tipologia}
 La presenza di questo attributo è giustificata da ciò che viene detto nella sezione \hyperref[ModificaMenu]{\textbf{1.2.9}}. Infatti, l'admin dovrà prima di tutto inserire la tipologia della quale fa parte la portata che intende modificare/cancellare. Inoltre, per poter inserire una nuova portata, l'admin dovrà specificare la tipologia di quest'ultima. La presenza di questo elemento inoltre, permette una corretta suddivisione delle portate durante l'elencazione del menù.
 
-\subsubsection{Tavoli.xml: id}
-Come detto nelle sezioni \hyperref[ServizioRistorazione]{\textbf{1.2.4}} e \hyperref[VisualizzaPrenotazioniClienti]{\textbf{1.2.11}}, sia il cliente che l'admin avranno la possibilità di visualizzare tutte le prenotazioni che sono state effettuate per ogni tavolo: il cliente può annullarle, l'admin potrà anche modificarle. A prescindere dell'azione che si intende compiere, in entrambi i casi quando un utente selezionerà una prenotazione sarà necessario identificarla univocamente per poterla ritrovare correttamente all'interno del file XML e compiere l'azione richiesta. Poiché un tavolo può avere più prenotazioni associate ad esso, l'attributo \textbf{\textit{id}} avrà dunque lo scopo di garantire tale univocità.
-
+\subsubsection{Tavoli.xml: idPrenotazione}
+Come detto nelle sezioni \hyperref[ServizioRistorazione]{\textbf{1.2.7}} e \hyperref[VisualizzaPrenotazioniClienti]{\textbf{1.2.15}}, sia il cliente che il concierge (o l'admin) avranno la possibilità di visualizzare tutte le prenotazioni che sono state effettuate per ogni tavolo: il cliente può annullarle, il concierge e l'admin potranno anche modificarle. A prescindere dell'azione che si intende compiere, in entrambi i casi quando un utente selezionerà una prenotazione sarà necessario identificarla univocamente per poterla ritrovare correttamente all'interno del file XML e compiere l'azione richiesta. Poiché un tavolo può avere più prenotazioni associate ad esso, questo campo \textbf{\textit{idPrenotazione}} avrà dunque lo scopo di garantire tale univocità. Esso ha la seguente struttura:
+\begin{center}
+T\textit{"numero tavolo"} - PT\textit{"id prenotazione associata al tavolo"}
+\end{center}
+\textbf{T} e \textbf{PT} sono le abbreviazioni di "Tavolo" e "Prenotazione Tavolo". Il motivo di questa logica è analogo a ciò che è stato detto per l'idPrenotazione di \textit{Camere.xml}
 
 \subsubsection{Tavoli.xml: ora}
 Come detto nella sezione \hyperref[ServizioRistorazione]{\textbf{1.2.4}}, il cliente dovrà inserire l'orario nel quale intende prenotare il tavolo. Lo scopo principale di questo elemento è dunque quello di conservare tale informazione. Tuttavia, non è l'unico: infatti, nel momento in cui si andrà a verificare se un tavolo può essere assegnato o meno ad una prenotazione, il controllo del \textit{range} dell'orario diventa fondamentale. Per esempio, se un cliente intende prenotare un tavolo ad un orario appartenente al range orario del pranzo, un tavolo che è stato prenotato per l'ora di cena dello stesso giorno deve essere considerato disponibile per soddisfare la prenotazione del pranzo (ovviamente deve valere anche il viceversa).
 
 \subsubsection{Attivita.xml: prezzoTotale}
-Nella sezione \hyperref[Attività]{\textbf{1.2.6}} viene detto che un cliente, per poter effettuare la prenotazione di un attività, dovrà necessariamente inserire l'ora di inizio e di fine prenotazione. Però, poiché ciascuna attività è caratterizzata da un prezzo \textit{orario}, il prezzo di ogni prenotazione è \textit{variabile}. Questo elemento avrà dunque lo scopo di registrare al suo interno il prezzo corretto di ogni prenotazione effettuata per ogni attività. In particolare, tale prezzo dipenderà dall'ora di inizio e di fine prenotazione e dal prezzo orario della specifica attività (il calcolo verrà effettuato a livello applicativo nella pagina di prenotazione).
+Nella sezione \hyperref[Attività]{\textbf{1.2.8}} viene detto che un cliente, per poter effettuare la prenotazione di un attività, dovrà necessariamente inserire l'ora di inizio e di fine prenotazione. Però, poiché ciascuna attività è caratterizzata da un prezzo \textit{orario} (nel caso in cui non sia gratuita), il prezzo di ogni prenotazione è \textit{variabile}. Questo elemento avrà dunque lo scopo di registrare al suo interno il prezzo corretto di ogni prenotazione effettuata per ogni attività. In particolare, tale prezzo dipenderà dall'ora di inizio e di fine prenotazione e dal prezzo orario della specifica attività (il calcolo verrà effettuato a livello applicativo nella pagina di prenotazione).
 
 \subsubsection{Recensioni.xml: id}
-Lo scopo di questo attributo è quello di identificare univocamente la singola recensione. Infatti, nella sezione \hyperref[Recensioni]{\textbf{1.2.5}} viene detto che un cliente avrà la possibilità di inserire un commento in una recensione già esistente. Tuttavia, poiché possono essere presenti più recensioni, diventa necessario identificare univocamente la singola recensione che il cliente intende commentare per poter associare correttamente il commento ad essa.
+Lo scopo di questo attributo è quello di identificare univocamente la singola recensione. Infatti, nella sezione \hyperref[Recensioni]{\textbf{1.2.9}} viene detto che un cliente avrà la possibilità di inserire un commento in una recensione già esistente. Tuttavia, poiché possono essere presenti più recensioni, diventa necessario identificare univocamente la singola recensione che il cliente intende commentare per poter associare correttamente il commento ad essa.
+
+\subsubsection{Recensioni.xml: utilita}
+Nella sezione \hyperref[Recensioni]{\textbf{1.2.9}} viene detto che per ogni recensione verrà mostrata solo la somma \textbf{totale} dei giudizi di utilità ricevuti (stessa cosa per i giudizi di accordo con il contenuto). Pertanto, lo scopo di questo campo sarà quello di tener traccia di tale somma e di evitare di doverla calcolare ogni volta per ogni recensione che dovrà essere visualizzata all'utente che apre la pagina delle recensioni. In particolare, questo campo verrà modificato in modo appropriato ogni volta che un utente inserisce o modifica un giudizio per una particolare recensione (il campo \textbf{accordo} avrà lo stesso scopo con la differenza che terrà traccia della somma dei giudizi di accordo con il contenuto).
+
+\subsubsection{Commenti.xml: idRisposta}
+Poiché ogni utente avrà la possibilità di rispondere ad i commenti, come detto nella sezione \hyperref[Recensioni]{\textbf{1.2.9}}, vi sarà la necessità di identificare univocamente anche le risposte. Infatti, questa necessità deriva dal fatto che nella sezione \hyperref[ValutazioneRecensioni]{\textbf{1.2.10}} viene detto che un cliente potrà valutare anche i commenti (le risposte ad i commenti sono sempre dei commenti). In questo modo, si avrà la garanzia che la valutazione inserita da un utente venga assegnata correttamente alla risposta selezionata. Questo campo ha la seguente struttura:
+\begin{center}
+CM\textit{"id commento"} - RCM\textit{"id risposta associata al commento"}
+\end{center}
+\textbf{CM} e \textbf{RCM} sono le abbreviazioni di "Commento" e "Risposta commento".  Il motivo di questa logica è analogo a ciò che è stato detto per l'idPrenotazione di \textit{Camere.xml} 
+
+\subsubsection{Valutazioni.xml: idOggettoValutato}
+Poiché nella sezione \hyperref[ValutazioneRecensioni]{\textbf{1.2.10}} viene detto che un utente avrà la possibilità di valutare sia le recensioni che i commenti, questo campo avrà lo scopo di identificare il tipo di oggetto a cui è associata la valutazione. In particolare, il suo contenuto dipende dall'oggetto valutato:
+\begin{enumerate}
+\item Se la valutazione è associata ad una \textbf{recensione} esso avrà la seguente struttura:
+\begin{center}
+R\textit{"id recensione"}
+\end{center}
+R è l'abbreviazione di "Recensione"
+\item Se la valutazione è associata ad un \textbf{commento} esso avrà la seguente struttura:
+\begin{center}
+CM\textit{"id commento"}
+\end{center}
+CM è l'abbreviazione di "Commento"
+\item Se la valutazione è associata ad una \textbf{risposta di un commento} esso avrà la seguente struttura:
+\begin{center}
+CM\textit{"id commento"} - RCM\textit{"id risposta associata al commento"}
+\end{center}
+CM e RCM sono le abbreviazioni di "Commento" e "Risposta commento"
+\end{enumerate}
+In questo modo, mediante una semplice analisi della struttura, si sarà in grado di determinare se l'oggetto valutato deve essere ricercato all'interno del file \textit{Recensioni.xml} o all'interno di \textit{Commenti.xml} (nel momento in cui un utente inserisce o modifica una valutazione).
+
 
 
 

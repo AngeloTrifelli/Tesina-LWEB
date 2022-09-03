@@ -40,7 +40,7 @@
 \contentsline {subsubsection}{Camere.xml}{23}{section*.8}%
 \contentsline {subsubsection}{Camere.xsd}{23}{section*.9}%
 \contentsline {subsection}{\numberline {1.3.5}Ristorante.xml}{25}{subsection.1.3.5}%
-\contentsline {subsubsection}{Ristorante.xml}{25}{section*.10}%
+\contentsline {subsubsection}{Ristorante.xml}{26}{section*.10}%
 \contentsline {subsubsection}{Ristorante.xsd}{26}{section*.11}%
 \contentsline {subsection}{\numberline {1.3.6}Tavoli.xml}{28}{subsection.1.3.6}%
 \contentsline {subsubsection}{Tavoli.xml}{28}{section*.12}%
@@ -70,13 +70,15 @@
 \contentsline {subsubsection}{Categorie.xml}{46}{section*.28}%
 \contentsline {subsubsection}{Categorie.xsd}{47}{section*.29}%
 \contentsline {section}{\numberline {1.4}Elementi XML}{48}{section.1.4}%
-\contentsline {subsubsection}{Clienti.xml: credenziali}{48}{section*.30}%
-\contentsline {subsubsection}{Camere.xml: tipo}{49}{section*.31}%
-\contentsline {subsubsection}{Camere.xml: listaPrenotazioni}{49}{section*.32}%
-\contentsline {subsubsection}{Camere.xml: codFisc}{49}{section*.33}%
-\contentsline {subsubsection}{Ristorante.xml: listaPortate}{49}{section*.34}%
-\contentsline {subsubsection}{Ristorante.xml: tipologia}{49}{section*.35}%
-\contentsline {subsubsection}{Tavoli.xml: id}{50}{section*.36}%
-\contentsline {subsubsection}{Tavoli.xml: ora}{50}{section*.37}%
-\contentsline {subsubsection}{Attivita.xml: prezzoTotale}{50}{section*.38}%
-\contentsline {subsubsection}{Recensioni.xml: id}{50}{section*.39}%
+\contentsline {subsubsection}{Clienti.xml: dataAssegnazioneCrediti}{48}{section*.30}%
+\contentsline {subsubsection}{Clienti.xml: sommaGiudizi}{49}{section*.31}%
+\contentsline {subsubsection}{Camere.xml: idPrenotazione}{49}{section*.32}%
+\contentsline {subsubsection}{Camere.xml: codFisc}{50}{section*.33}%
+\contentsline {subsubsection}{Ristorante.xml: tipologia}{50}{section*.34}%
+\contentsline {subsubsection}{Tavoli.xml: idPrenotazione}{50}{section*.35}%
+\contentsline {subsubsection}{Tavoli.xml: ora}{50}{section*.36}%
+\contentsline {subsubsection}{Attivita.xml: prezzoTotale}{51}{section*.37}%
+\contentsline {subsubsection}{Recensioni.xml: id}{51}{section*.38}%
+\contentsline {subsubsection}{Recensioni.xml: utilita}{51}{section*.39}%
+\contentsline {subsubsection}{Commenti.xml: idRisposta}{52}{section*.40}%
+\contentsline {subsubsection}{Valutazioni.xml: idOggettoValutato}{52}{section*.41}%
