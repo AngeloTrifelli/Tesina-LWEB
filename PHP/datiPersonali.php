@@ -13,9 +13,6 @@
         <?php include "../CSS/datiPersonali.css" ?>
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
-
-
-
 </head>
 
 
@@ -30,43 +27,45 @@
 
     
     <h3 class="titoloImportante alignCenter">I TUOI DATI:</h3>
-    <div class="mainContainer">
-        <div class="containerDati">
-            <div class="datiUtenteSx">
-                <div>
-                    <strong>Nome:</strong> Angelo
+    <div class="mainContainer marginBottom">
+        <form>
+            <div class="containerDati">
+                <div class="datiUtenteSx">
+                    <div>
+                        <strong>Nome:</strong> Angelo <input type="submit" class="modificaButton" value="Modifica" />
+                    </div>
+                    <div>
+                        <strong>Cognome:</strong> Trifelli <input type="submit" class="modificaButton" value="Modifica" />
+                    </div>
+                    <div>
+                        <strong>Codice fiscale:</strong> TRFNGL00T25A341U <input type="submit" class="modificaButton" value="Modifica" />
+                    </div>
+                    <div>
+                        <strong>Data di nascita:</strong> 25-12-2000 <input type="submit" class="modificaButton" value="Modifica" />
+                    </div>
+                    <div>
+                        <strong>Indirizzo:</strong> via Francesco Cilea 7 <input type="submit" class="modificaButton" value="Modifica" />
+                    </div>
                 </div>
-                <div>
-                    <strong>Cognome:</strong> Trifelli
-                </div>
-                <div>
-                    <strong>Codice fiscale:</strong> TRFNGL00T25A341U
-                </div>
-                <div>
-                    <strong>Data di nascita:</strong> 25-12-2000
-                </div>
-                <div>
-                    <strong>Indirizzo:</strong> via Francesco Cilea 7
+                <div class="datiUtenteDx">
+                    <div class="data">
+                        <strong>Telefono:</strong> 3490750745 <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    </div>
+                    <div class="data">
+                        <strong>Email:</strong> trifelli.angelo@outlook.it <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    </div>
+                    <div>
+                        <strong>Numero carta:</strong> 0000-0000-0000-0000 <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    </div>
+                    <div class="data">
+                        <strong>Username:</strong> AngeloTrifelli<input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    </div>
+                    <div class="data">
+                        <strong>Password:</strong> FioreDiZucca <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    </div>
                 </div>
             </div>
-            <div class="datiUtenteDx">
-                <div>
-                    <strong>Telefono:</strong> 3490750745
-                </div>
-                <div>
-                    <strong>Email:</strong> trifelli.angelo@outlook.it
-                </div>
-                <div>
-                    <strong>Numero carta:</strong> 0000-0000-0000-0000
-                </div>
-                <div>
-                    <strong>Username:</strong> AngeloTrifelli
-                </div>
-                <div>
-                    <strong>Password:</strong> FioreDiZucca
-                </div>
-            </div>
-        </div>
+        </form>
         <div class="datiUtenteCentro">
             <strong>Crediti: 0</strong>
             <strong>Somma giudizi ricevuti: 0</strong>
@@ -75,35 +74,88 @@
    
 
     <h3 class="titoloImportante alignCenter">IL TUO SOGGIORNO:</h3>
-        <table>
+    <div class="mainContainer">
+        <table class="prenotazione alignCenter" align="center">
             <tr>
                 <td>
-                    Numero Camera<br />
+                    <strong>Numero Camera</strong><br />
                     110
                 </td>
                 <td>
-                    Tipo<br />
+                    <strong>Tipo</strong><br />
                     Standard Doppia
                 </td>
                 <td>
-                    Stato soggiorno<br />
-                    Approvato
+                    <strong>Stato soggiorno</strong><br />
+                    <span class="success">Approvato</span>
                 </td>
                 <td>
-                    Inizio<br />
+                    <strong>Inizio</strong><br />
                     28-10-2022
                 </td>
                 <td>
-                    Fine<br />
+                    <strong>Fine</strong><br />
                     31-10-2022
                 </td>
             </tr>
         </table>
+    </div>
+    <!-- <p class="alignCenter scrittaCentrale">Non è stata trovata una prenotazione attiva...</p> -->
+    <!-- Con il php poi controlla quando mostrare questa scritta o meno -->  
 
     <h3 class="titoloImportante alignCenter">SOGGIORNI PASSATI:</h3>
-      
-    
-        
+    <div class="mainContainer">
+        <table class="prenotazione alignCenter" align="center">
+            <tr>
+                <td>
+                    <strong>Numero Camera</strong><br />
+                    110
+                </td>
+                <td>
+                    <strong>Tipo</strong><br />
+                    Standard Doppia
+                </td>
+                <td>
+                    <strong>Stato soggiorno</strong><br />
+                    <span class="insuccess">Pagamento rifiutato</span>
+                </td>
+                <td>
+                    <strong>Inizio</strong><br />
+                    28-10-2022
+                </td>
+                <td>
+                    <strong>Fine</strong><br />
+                    31-10-2022
+                </td>
+            </tr>
+        </table>
+        <table class="prenotazione alignCenter" align="center">
+            <tr>
+                <td>
+                    <strong>Numero Camera</strong><br />
+                    200
+                </td>
+                <td>
+                    <strong>Tipo</strong><br />
+                    Standard Singola
+                </td>
+                <td>
+                    <strong>Stato soggiorno</strong><br />
+                    <span class="success">Terminato</span>
+                </td>
+                <td>
+                    <strong>Inizio</strong><br />
+                    13-06-2022
+                </td>
+                <td>
+                    <strong>Fine</strong><br />
+                    18-06-2022
+                </td>
+            </tr>
+        </table>
+    </div>      
+    <!-- <p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati...</p> -->
+    <!-- come prima, con php controlli se mostrare questa scritta o meno -->
 </body>
 
 
