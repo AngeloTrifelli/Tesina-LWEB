@@ -28,40 +28,70 @@
     
     <h3 class="titoloImportante alignCenter">I TUOI DATI:</h3>
     <div class="mainContainer marginBottom">
-        <form>
+        <form action="modificaDatiUtente.php"  method="post">
             <div class="containerDati">
                 <div class="datiUtenteSx">
                     <div>
-                        <strong>Nome:</strong> Angelo <input type="submit" class="modificaButton" value="Modifica" />
+                        <strong>Nome:</strong> Angelo 
+                        <button class="button" type="submit" name="nome" value="nome">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                     <div>
-                        <strong>Cognome:</strong> Trifelli <input type="submit" class="modificaButton" value="Modifica" />
+                        <strong>Cognome:</strong> Trifelli
+                        <button class="button" type="submit" name="cognome" value="cognome">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                     <div>
-                        <strong>Codice fiscale:</strong> TRFNGL00T25A341U <input type="submit" class="modificaButton" value="Modifica" />
+                        <strong>Codice fiscale:</strong> TRFNGL00T25A341U 
+                        <button class="button" type="submit" name="codFisc" value="codFisc">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                     <div>
-                        <strong>Data di nascita:</strong> 25-12-2000 <input type="submit" class="modificaButton" value="Modifica" />
+                        <strong>Data di nascita:</strong> 25-12-2000
+                        <button class="button" type="submit" name="dataNascita" value="dataNascita">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                     <div>
-                        <strong>Indirizzo:</strong> via Francesco Cilea 7 <input type="submit" class="modificaButton" value="Modifica" />
+                        <strong>Indirizzo:</strong> via Francesco Cilea 7 
+                        <button class="button" type="submit" name="indirizzo" value="indirizzo">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                 </div>
                 <div class="datiUtenteDx">
-                    <div class="data">
-                        <strong>Telefono:</strong> 3490750745 <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
-                    </div>
-                    <div class="data">
-                        <strong>Email:</strong> trifelli.angelo@outlook.it <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    <div>
+                        <strong>Telefono:</strong> 3490750745
+                        <button class="button" type="submit" name="telefono" value="telefono">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                     <div>
-                        <strong>Numero carta:</strong> 0000-0000-0000-0000 <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                        <strong>Email:</strong> trifelli.angelo@outlook.it
+                        <button class="button" type="submit" name="email" value="email">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
-                    <div class="data">
-                        <strong>Username:</strong> AngeloTrifelli<input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    <div>
+                        <strong>Numero carta:</strong> 0000-0000-0000-0000
+                        <button class="button" type="submit" name="numeroCarta" value="numeroCarta">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
-                    <div class="data">
-                        <strong>Password:</strong> FioreDiZucca <input type="image" class="immagine" alt="modifica"  src="../Immagini/edit.png"/>
+                    <div>
+                        <strong>Username:</strong> AngeloTrifelli
+                        <button class="button" type="submit" name="username" value="username">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
+                    </div>
+                    <div>
+                        <strong>Password:</strong> **********
+                        <button class="button" type="submit" name="password" value="password">
+                            <img class="immagine" src="../Immagini/edit.png" />
+                        </button>
                     </div>
                 </div>
             </div>
