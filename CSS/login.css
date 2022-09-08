@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box; 
+    background-color:#f4f7f4;
+}
+
+a{
+    text-decoration: none;  
+
+}
+
+#leftColumn{
+    float: left;
+    text-align: justify;
+    width: 25%;
+    position: fixed;
+    background-color: #f8fefa;
+    height: 100%;
+    
+}
+
+#rightColumn{
+    float: right;
+    text-align: justify;
+    width: 75%;
+   
+
+}
+
+.item{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 30px;
+    color: #a65b6c;
+    transition: all 300ms ease;
+    background-color: inherit;
+}
+
+.item:hover{
+    color:#871f30 ;
+}
+
+#links{
+    padding-top: 55%;
+      text-align: center;
+      background-color: inherit;
+}
+
+#logo{
+    width:80%;
+    padding-top: 10%;
+    padding-left: 5%;
+    background-color: inherit;
+}
+
+
+#mainTitle{
+    color: #871f30;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 60px;
+    margin-top: 5%;
+    background-color: inherit;
+}
+
+
+.textInput{
+    border: 1px solid #ccc;
+    padding-left: 10px; 
+    padding-right: 15px;
+    height: 40px;
+    width:100%;
+    min-width: 200px;
+}
+
+.continuaButton{
+    margin-left: 85.5%;
+    margin-top: 5%;
+    border: 1px solid #ccc;
+    padding: 10px 20px 10px 20px;
+    cursor: pointer;
+    font-weight: 1000;
+}
+
+.button{
+    transition: all 200ms ease;
+    float: left;
+    text-decoration: none;
+    color: #a65b6c; 
+    transition: all 200ms ease;
+}
+
+.button:hover{
+    color:#871f30!important;
+    background-color: #ccc!important;
+}
+
+#registrazione a{
+    text-decoration: none;
+    color: black;
+}
+
+#registrazione a:hover{
+    color: #871f30;
+}
+
+#registrazione{
+    margin-top: 10%;
+    margin-bottom: 4%;
+    margin-left: 40%;
+
+}
+
+.divSx{
+    display: flex;
+    flex-direction:column;
+    margin-left: 10%;
+    font-size: 20px;
+    width: 35%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.divDx{
+    margin-right: 20%;
+    font-size: 16px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.containerDati{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    color: #871f30;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+}
