@@ -12,7 +12,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <?php include "../CSS/areaUtente.css" ?>
         </style>
     
-        <link rel="stylesheet" href="/CSS/areaUtente.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
