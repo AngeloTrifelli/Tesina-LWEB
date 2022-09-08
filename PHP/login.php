@@ -11,6 +11,8 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
             <?php include "../CSS/login.css" ?>
         </style>
     
+    
+        <link rel="stylesheet" href="/CSS/login.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -29,10 +31,10 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
             <div id="links">
             
 
-            <a class="item" href="/index.html">HOME</a>
+            <a class="item" href="./index.php">HOME</a>
             <br/>
          
-            <a class="item" href="/HTML/camere.html">CAMERE E SUITE</a>
+            <a class="item" href="./camere.php">CAMERE E SUITE</a>
             <br/> 
           
             <a class="item" href="#">RECENSIONI</a>
@@ -41,7 +43,7 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
             <a class="item" href="#">PRENOTA ORA</a>
             <br/>
 
-            <a class="item" href="/HTML/registrazioneUtente.html">REGISTRATI</a>
+            <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
             <br/>
 
   
@@ -87,7 +89,7 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
             <input type="submit" class="continuaButton button" name="accedi" value="Accedi">
 
             <div id="registrazione">
-                <a  href="/HTML/registrazioneUtente.html">Non sei ancora registrato? Clicca qui!</a>
+                <a  href="./registrazioneUtente.php">Non sei ancora registrato? Clicca qui!</a>
             </div>
 
         </div>
