@@ -19,7 +19,7 @@
 <body>
     <div class="top">
         <div class="topLeft">
-            <a href="test">TORNA INDIETRO</a>    
+            <a href="./areaUtente.php">TORNA INDIETRO</a>    
         </div>
         <h1 class="alignCenter">Ciao Angelo !</h1>
         <div style="width: 18.5%;"></div>
@@ -34,31 +34,31 @@
                     <div>
                         <strong>Nome:</strong> Angelo 
                         <button class="button" type="submit" name="nome" value="nome">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Cognome:</strong> Trifelli
                         <button class="button" type="submit" name="cognome" value="cognome">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Codice fiscale:</strong> TRFNGL00T25A341U 
                         <button class="button" type="submit" name="codFisc" value="codFisc">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Data di nascita:</strong> 25-12-2000
-                        <button class="button" type="submit" name="dataNascita" value="dataNascita">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                        <button class="button" type="submit" name="dataDiNascita" value="dataDiNascita">
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Indirizzo:</strong> via Francesco Cilea 7 
                         <button class="button" type="submit" name="indirizzo" value="indirizzo">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                 </div>
@@ -66,31 +66,31 @@
                     <div>
                         <strong>Telefono:</strong> 3490750745
                         <button class="button" type="submit" name="telefono" value="telefono">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Email:</strong> trifelli.angelo@outlook.it
                         <button class="button" type="submit" name="email" value="email">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Numero carta:</strong> 0000-0000-0000-0000
                         <button class="button" type="submit" name="numeroCarta" value="numeroCarta">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Username:</strong> AngeloTrifelli
                         <button class="button" type="submit" name="username" value="username">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                     <div>
                         <strong>Password:</strong> **********
                         <button class="button" type="submit" name="password" value="password">
-                            <img class="immagine" src="../Immagini/edit.png" />
+                            <img class="immagine" src="../img/edit.png" />
                         </button>
                     </div>
                 </div>
