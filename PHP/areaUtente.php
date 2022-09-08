@@ -12,12 +12,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <?php include "../CSS/areaUtente.css" ?>
         </style>
     
-        <link rel="stylesheet" href="/CSS/areaUtente.css" type="text/css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">    </head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" /> 
+    </head>
 
     <body>
 
@@ -30,7 +29,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <div id="links">
             
 
-            <a class="item" href="./index.php">HOME</a>
+            <a class="item" href="./intro.php">HOME</a>
             <br/>
          
             <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
