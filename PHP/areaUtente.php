@@ -12,6 +12,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <?php include "../CSS/areaUtente.css" ?>
         </style>
     
+        <link rel="stylesheet" href="/CSS/areaUtente.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -29,7 +30,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <div id="links">
             
 
-            <a class="item" href="/index.html">HOME</a>
+            <a class="item" href="./index.php">HOME</a>
             <br/>
          
             <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
@@ -41,10 +42,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <a class="item" href="#domande">DOMANDE</a>
             <br/>
        
-            <a class="item" href="/HTML/datiPersonali.html">DATI PERSONALI</a>
+            <a class="item" href="./datiPersonali.php">DATI PERSONALI</a>
             <br/>
       
-            <a class="item" href="/HTML/login.html">LOGOUT</a>
+            <a class="item" href="#">LOGOUT</a>
             <br/>
   
             </div>
@@ -55,7 +56,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
         <h1 id="mainTitle">AREA UTENTE</h1>
 
-        <img id="img" src="/img/hotel.jpg" alt="Immagine non trovata"/>
+        <img id="img" src="../img/hotel.jpg" alt="Immagine non trovata"/>
             
     </div>
 
