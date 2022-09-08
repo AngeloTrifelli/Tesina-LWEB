@@ -138,3 +138,8 @@ a{
     font-family: 'Bebas Neue', cursive;
     font-size: 20px;
 }
+
+.errorLabel{
+    color: red;
+    font-weight: bold;
+}
