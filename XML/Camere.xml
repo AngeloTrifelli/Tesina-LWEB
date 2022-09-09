@@ -14,4 +14,9 @@
             </prenotazione>
         </listaPrenotazioni>
     </Camera>
+    <Camera numero="C200">
+        <tipo>Standard Singola</tipo>
+        <prezzo>30</prezzo>
+        <listaPrenotazioni></listaPrenotazioni>
+    </Camera>
 </listaCamere>
