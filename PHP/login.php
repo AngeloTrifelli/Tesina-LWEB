@@ -10,6 +10,8 @@
                     session_start();
                     $_SESSION['codFiscUtenteLoggato'] = $codFisc;
                     $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
+                    $_SESSION['loginType'] = "Cliente";
+                    header('Location: areaUtente.php');
                 }
             }
             else{
@@ -108,7 +110,7 @@
                         if(isset($_POST['accedi']) && $_POST['username'] == ""){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">Inserisci l'username!</p>";
+                                <p class=\"errorLabel\">Inserire l'username!</p>";
                         }
                     ?>
                         <br>
@@ -117,7 +119,12 @@
                         if(isset($_POST['accedi']) && $_POST['password'] == ""){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">Inserisci la password!</p>";
+                                <p class=\"errorLabel\">Inserire la password!</p>";
+                        }
+                        if(isset($_POST['accedi']) && $_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) && $codFisc=="null"){
+                            echo "
+                                <br />
+                                <p class=\"errorLabel\">Username e/o password errati!</p>";
                         }
                     ?>
                     </div>
