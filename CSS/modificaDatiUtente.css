@@ -1,0 +1,98 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+body , html{
+    font-family: "Lato" , sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    margin: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: #871f30;
+}
+
+.containerCentrale{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    height: 500px;
+    border-radius: 70px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.zonaDati{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.zonaInput{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.zonaBottoni{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20%;
+}
+
+.alignCenter{
+    text-align: center;
+}
+
+h1{
+    font-family: 'Bebas Neue', cursive;
+    color: #871f30;
+    font-size: 48px;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+}
+
+
+.button{
+    background-color: #871f30;
+    color: white;
+    cursor: pointer;
+    height: 60px;
+    width: 110px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.textInput{
+    border: 1px solid #ccc;
+    padding-left: 10px; 
+    padding-right: 15px;
+    height: 40px;
+    width: 70%;
+    margin-top: 3%;
+}
+
+.dateInput{
+    padding: 10px 40px 10px 40px;
+    font-family: "Roboto Mono" , monospace;
+    border: 1px solid #ccc
+}
+
+.textInput:hover{
+    background-color: honeydew;
+}
+
+.errorLabel{
+    color: red;
+    font-weight: bold;
+}

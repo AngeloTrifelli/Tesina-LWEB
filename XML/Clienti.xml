@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaClienti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Clienti.xsd">
+    <cliente codFisc = "RSSGNN64R03E472G">
+        <nome>Giovanni</nome>
+        <cognome>Rossi</cognome>
+        <dataDiNascita>1964-10-03</dataDiNascita>
+        <indirizzo>via del quasimodo 7</indirizzo>
+        <telefono>0123456789</telefono>
+        <email>giovanni.rossi64@gmail.com</email>
+        <numeroCarta>0000-0000-0000-0000</numeroCarta>
+        <credenziali>
+            <username>GiovanniRossi</username>
+            <password>d8578edf8458ce06fbc5bb76a58c5ca4</password>
+        </credenziali>
+        <crediti>0</crediti>
+        <dataAssegnazioneCrediti>2022-01-01</dataAssegnazioneCrediti>
+        <sommaGiudizi>0</sommaGiudizi>
+    </cliente>
+</listaClienti>

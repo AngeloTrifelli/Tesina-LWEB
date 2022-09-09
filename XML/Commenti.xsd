@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaCommenti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="commento" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="commento">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idRecensione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="nomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFiscAutore" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaRisposte" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idRecensione" type="xsd:string" />
+    <xsd:element name="nomeAutore" type="xsd:string" />
+    <xsd:element name="cognomeAutore" type="xsd:string" />
+    <xsd:element name="codFiscAutore" type="xsd:string" />
+    <xsd:element name="testo" type="xsd:string" />
+    
+    <xsd:element name="utilita">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaRisposte">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="risposta" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="risposta">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="nomeAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognomeAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFiscAutoreRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="testoRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="utilitaRisposta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="accordoRisposta" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idRisposta" type="xsd:ID" />
+    <xsd:element name="nomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="cognomeAutoreRisposta" type="xsd:string" />
+    <xsd:element name="codFiscAutoreRisposta" type="xsd:string" />
+    <xsd:element name="testoRisposta" type="xsd:string" />
+
+    <xsd:element name="utilitaRisposta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="accordoRisposta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+</xsd:schema>

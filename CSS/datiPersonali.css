@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+body , html{
+    font-family: "Lato" , sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+form{
+    display: inline;
+}
+
+.top{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    background-color:#871f30;
+    color: white;
+    display: flex;
+    justify-content:space-between;
+}
+
+.topLeft{
+    padding: 2% 4%;
+    
+}
+
+.alignCenter{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.titoloImportante{
+    margin-top: 5%!important;
+    font-size: 32px;
+}
+
+.scrittaCentrale{
+    font-size: 24px;
+    font-style: oblique;
+}
+
+.mainContainer{
+    background-color:rgb(228, 228, 228);
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerDati{
+    display: flex;
+    justify-content: space-between;
+}
+
+.datiUtenteSx{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    font-size: 24px;
+    line-height: 2;
+    width: 40%;
+}
+
+.datiUtenteDx{
+    display: flex;
+    flex-direction:column;
+    font-size: 24px;
+    line-height: 2;
+    width: 40%;
+    margin-left: 3%;
+}
+
+.datiUtenteCentro{
+    margin-top: 3%;
+    display: flex;
+    justify-content:space-evenly;
+    font-size: 24px;
+}
+
+.data{
+    display: flex;
+    flex-direction: row;
+}
+
+.prenotazione{
+    border: 1px solid rgb(111, 111, 111);
+    background-color: rgb(250, 250, 250);
+    width: 80%;
+    height: 50%;
+    border-radius: 5px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+td{
+    font-size: 24px;
+    font-style: oblique;
+}
+
+.success{
+    color: green;
+    font-weight:bold;
+}
+
+.insuccess{
+    color: red;
+    font-weight: bold;
+}
+
+
+.button {
+  background-color: rgb(228, 228, 228);
+  border: 0px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.immagine{
+    width: 25px;
+    height: 25px;
+    vertical-align:middle;
+    margin-left: 2%;
+}
