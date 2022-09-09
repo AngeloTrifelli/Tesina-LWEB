@@ -1,4 +1,7 @@
 <?php
+    require_once('funzioniModificaPHP.php');
+
+
 // Funzione per controllare se le credenziali inserite dall'utente sono corrette in login.php (login cliente)
 
 function eseguiLoginCliente ($username , $password){
@@ -33,7 +36,7 @@ function eseguiLoginCliente ($username , $password){
         $date = date('Y-m-d');
         $dataAssegnazioneCrediti = $cliente->getElementsByTagName("dataAssegnazioneCrediti")->item(0)->textContent;
         if($date != $dataAssegnazioneCrediti){
-            assegnaCreditiGiornalieri($codFisc);
+            modificaDataCreditiGiornalieri($codFisc);
         }
         return $codFisc;
     }
@@ -43,9 +46,6 @@ function eseguiLoginCliente ($username , $password){
 }
 
 
-function assegnaCreditiGiornalieri($codFisc){
-    //DA IMPLEMENTARE
-}
 
 
 
