@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaAttivita xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Attivita.xsd">
     <attivita>
@@ -25,4 +26,33 @@
             </prenotazione>
         </listaPrenotazioni>
     </attivita>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaAttivita xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Attivita.xsd">
+    <attivita>
+        <nome>Palestra</nome>
+        <descrizione>
+            Ubicata all'interno dell'hotel ed equipaggiata con le ultime macchine di Technogym, una palestra interna rappresenta 
+            la soluzione perfetta per mantenersi in forma anche se lontani da casa. Hotel Sapienza vi propone una palestra dotata di:
+            <![CDATA[<br />]]>Tapis roulant e cyclette<![CDATA[<br />]]>Materassini e ball per aerobica e pilates<![CDATA[<br />]]>Pesi
+            e bilancieri di varie dimensioni<![CDATA[<br />]]>. Vengono inoltre messi a disposizione gli spogliatoi dotati di armadietti
+            e docce.
+        </descrizione>
+        <linkImmagine>https://www.destinazioneavventura.it/wp-content/uploads/2019/01/Excelsior-Sport-Hotel-Gala-Milano-Vacanza-Sportive.jpg</linkImmagine>
+        <oraApertura>06:00:00</oraApertura>
+        <oraChiusura>22:00:00</oraChiusura>
+        <prezzoOrario>10</prezzoOrario>
+        <listaPrenotazioni>
+            <prenotazione>
+                <idPrenotazione>A1-PA1</idPrenotazione>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <data>2022-10-29</data>
+                <oraInizio>17:00:00</oraInizio>
+                <oraFine>19:00:00</oraFine>
+                <prezzoTotale>20</prezzoTotale>
+                <creditiUsati>0</creditiUsati>
+            </prenotazione>
+        </listaPrenotazioni>
+    </attivita>
+>>>>>>> master
 </listaAttivita>

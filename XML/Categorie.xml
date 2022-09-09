@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaCategorie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Categorie.xsd">
     <categoria>
@@ -14,4 +15,22 @@
             </utente>
         </listaUtenti>
     </categoria>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCategorie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Categorie.xsd">
+    <categoria>
+        <nome>Stanza</nome>
+        <stato>Attiva</stato>
+        <listaAzioni>
+            <azioneUtente>
+                <nomeAzione>Prenotazione soggiorno</nomeAzione>
+            </azioneUtente>
+        </listaAzioni>        
+        <listaUtenti>
+            <utente>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+            </utente>
+        </listaUtenti>
+    </categoria>
+>>>>>>> master
 </listaCategorie>

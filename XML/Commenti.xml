@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaCommenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Commenti.xsd">
     <commento id="CM1">
@@ -20,4 +21,28 @@
             </risposta>
         </listaRisposte>
     </commento>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCommenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Commenti.xsd">
+    <commento id="CM1">
+        <idRecensione>R1</idRecensione>
+        <nomeAutore>Roberto</nomeAutore>
+        <cognomeAutore>Verdi</cognomeAutore>
+        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+        <testo>Concordo pienamente!</testo>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+        <listaRisposte>
+            <risposta>
+                <idRisposta>CM1-CMR1</idRisposta>
+                <nomeAutoreRisposta>Carlo</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Bianchi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>BNCCRL01P23E472A</codFiscAutoreRisposta>
+                <testoRisposta>Lo consiglio anche io!</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+        </listaRisposte>
+    </commento>
+>>>>>>> master
 </listaCommenti>

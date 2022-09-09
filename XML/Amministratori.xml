@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaAdmin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Amministratori.xsd">
     <Admin>
         <username>Admin</username>
         <password>hotel123</password>
     </Admin>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaAdmin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Amministratori.xsd">
+    <Admin>
+        <username>Admin</username>
+        <password>hotel123</password>
+    </Admin>
+>>>>>>> master
 </listaAdmin> 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:element name="listaCategorie">
@@ -63,4 +64,71 @@
 
     <xsd:element name="nomeAzione" type="xsd:string" />
     <xsd:element name="codFisc" type="xsd:string" />
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaCategorie">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="categoria" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="categoria">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaAzioni" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaUtenti" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="stato">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Attiva" />
+                <xsd:enumeration value="Disabilitata" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaAzioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="azioneUtente" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="listaUtenti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="utente" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="azioneUtente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nomeAzione" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="utente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nomeAzione" type="xsd:string" />
+    <xsd:element name="codFisc" type="xsd:string" />
+>>>>>>> master
 </xsd:schema>

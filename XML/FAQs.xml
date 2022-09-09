@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
     <FAQ>
@@ -9,4 +10,17 @@
             di camera prenotata.
         </testoRisposta>
     </FAQ>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
+    <FAQ>
+        <testoDomanda>
+            La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?
+        </testoDomanda>
+        <testoRisposta>
+            Certamente. Il ristorante offre la colazione a tutti i clienti, a prescindere dalla tipologia
+            di camera prenotata.
+        </testoRisposta>
+    </FAQ>
+>>>>>>> master
 </listaFAQ>

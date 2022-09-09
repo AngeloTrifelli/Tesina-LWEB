@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *{
     margin: 0;
     padding: 0%;
@@ -97,3 +98,104 @@ a{
     display: flex;
     justify-content: space-between;
 }
+=======
+*{
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box; 
+    background-color: #f8fefa
+
+}
+
+a{
+    text-decoration: none;  
+
+}
+
+
+
+#leftColumn{
+    float: left;
+    width: 25%;
+    position: fixed;
+}
+
+#rightColumn{
+    float: right;
+    width: 75%;
+}
+
+#logo{
+    width:80%;
+    padding-top: 10%;
+    padding-left: 5%;
+}
+
+#links{
+    padding-top: 50%;
+      text-align: center;
+}
+
+
+.item{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 30px;
+    color: #a65b6c;
+    transition: all 300ms ease;
+}
+
+#mainTitle{
+    color: #871f30;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 80px;
+    margin-top: 5%;
+}
+
+
+.title{
+    color: #871f30;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 60px;
+    margin-top: 5%;
+}
+
+.imgcamera{
+    width: 70%;
+    margin-left: 15%;
+    border-radius: 10px;
+}
+
+.descrizione{
+    margin-top: 2%;
+    margin-left: 40%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 12px;
+}
+
+.divSx{
+    display: flex;
+    flex-direction:column;
+    margin-left: 18%;
+    font-size: 20px;
+    line-height: 2;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.divDx{
+    display: flex;
+    flex-direction:column;
+    margin-right: 18%;
+    font-size: 20px;
+    line-height: 2;
+    margin-left: 3%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.containerDati{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+>>>>>>> master

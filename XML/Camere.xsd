@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:element name="listaCamere">
@@ -83,4 +84,91 @@
 
     <xsd:element name="dataArrivo" type="xsd:date" />
     <xsd:element name="dataPartenza" type="xsd:date" />
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaCamere">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Camera" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="Camera">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tipo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="numero" type="xsd:ID" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tipo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Standard Singola" />
+                <xsd:enumeration value="Standard Doppia" />
+                <xsd:enumeration value="Suite" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:enumeration value="30" />
+                <xsd:enumeration value="60" />
+                <xsd:enumeration value="150" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="listaPrenotazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prenotazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="idPrenotazione" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="codFisc" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="statoSoggiorno" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="creditiUsati" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataArrivo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataPartenza" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="idPrenotazione" type="xsd:ID" />
+    <xsd:element name="codFisc" type="xsd:string" />
+    <xsd:element name="statoSoggiorno">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Pagamento sospeso" />
+                <xsd:enumeration value="Pagamento rifiutato" />
+                <xsd:enumeration value="Approvato" />
+                <xsd:enumeration value="Terminato" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="creditiUsati">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="dataArrivo" type="xsd:date" />
+    <xsd:element name="dataPartenza" type="xsd:date" />
+>>>>>>> master
 </xsd:schema>

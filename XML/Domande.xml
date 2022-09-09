@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaDomande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Domande.xsd">
     <domanda id="D1">
@@ -17,4 +18,25 @@
             </risposta>
         </listaRisposte>
     </domanda>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaDomande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Domande.xsd">
+    <domanda id="D1">
+        <nomeAutore>Giovanni</nomeAutore>
+        <cognomeAutore>Rossi</cognomeAutore>
+        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+        <categoria>Generale</categoria>
+        <testoDomanda>La palestra e' dotata di un phon?</testoDomanda>
+        <listaRisposte>
+            <risposta>
+                <idRisposta>D1-RSP1</idRisposta>
+                <autore>Cliente</autore>
+                <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
+                <testoRisposta>Si, certo</testoRisposta>
+            </risposta>
+        </listaRisposte>
+    </domanda>
+>>>>>>> master
 </listaDomande>

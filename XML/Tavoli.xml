@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaTavoli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Tavoli.xsd">
     <tavolo numero="T2">
@@ -11,4 +12,19 @@
             </prenotazione>
         </listaPrenotazioni>
     </tavolo>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<listaTavoli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Tavoli.xsd">
+    <tavolo numero="T2">
+        <locazione>Interna</locazione>
+        <listaPrenotazioni>
+            <prenotazione>
+                <idPrenotazione>T2-PT1</idPrenotazione>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+                <data>2022-10-30</data>
+                <ora>21:30:00</ora>
+            </prenotazione>
+        </listaPrenotazioni>
+    </tavolo>
+>>>>>>> master
 </listaTavoli>
