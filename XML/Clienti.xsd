@@ -33,7 +33,7 @@
     <xsd:element name="indirizzo" type="xsd:string" />
     <xsd:element name="telefono">
         <xsd:simpleType>
-            <xsd:restriction base="xsd:int">
+            <xsd:restriction base="xsd:string">
                 <xsd:pattern value="[0-9]{10}" />
             </xsd:restriction>
         </xsd:simpleType>
