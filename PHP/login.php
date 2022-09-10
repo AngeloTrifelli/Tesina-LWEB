@@ -1,32 +1,36 @@
 <?php 
     require_once('funzioniPHP.php');
     require_once('funzioniGetPHP.php');
+    session_start();
 
-    if(isset($_POST['accedi'])){
-        if($_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) ){
-            if($_POST['type'] == "cliente"){
-                $codFisc = eseguiLoginCliente($_POST['username'], md5($_POST['password']));
-                if($codFisc != "null"){
-                    session_start();
-                    $_SESSION['codFiscUtenteLoggato'] = $codFisc;
-                    $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
-                    $_SESSION['loginType'] = "Cliente";
-                    header('Location: areaUtente.php');
-                }
-            }
-            else{
-                if($_POST['type'] == "concierge"){
-                    die(var_dump("test2"));
-                    // DA IMPLEMENTARE 
+    if(isset($_SESSION['loginType'])){
+        header('Location: areaUtente.php');
+    }
+    else{
+        if(isset($_POST['accedi'])){
+            if($_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) ){
+                if($_POST['type'] == "cliente"){
+                    $codFisc = eseguiLoginCliente($_POST['username'], md5($_POST['password']));
+                    if($codFisc != "null"){
+                        $_SESSION['codFiscUtenteLoggato'] = $codFisc;
+                        $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
+                        $_SESSION['loginType'] = "Cliente";
+                        header('Location: areaUtente.php');
+                    }
                 }
                 else{
-                    die(var_dump("test3"));
-                    // DA IMPLEMENTARE
+                    if($_POST['type'] == "concierge"){
+                        die(var_dump("test2"));
+                        // DA IMPLEMENTARE 
+                    }
+                    else{
+                        die(var_dump("test3"));
+                        // DA IMPLEMENTARE
+                    }
                 }
             }
         }
     }
-
 
 
 
