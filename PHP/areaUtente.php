@@ -19,7 +19,13 @@
         if($_SESSION['loginType'] == "Cliente"){
             $tipoLogin = "Cliente";
             if($_SESSION['soggiornoAttivo'] != "null"){
-                $soggiornoAttivo = "True";
+                $temp = $_SESSION['soggiornoAttivo'];
+                if($temp['statoSoggiorno'] == "Approvato"){
+                    $soggiornoAttivo = "True";
+                }
+                else{
+                    $soggiornoAttivo = "False";
+                }
             }
             else{
                 $soggiornoAttivo = "False";
