@@ -1,5 +1,7 @@
 <?php 
 echo'<?xml version="1.0" encoding="UTF-8"?>';
+require_once('funzioniGetPHP.php');
+
 
 $duplicato = "False";
 
@@ -12,26 +14,9 @@ if(isset($_POST['continua'])){
     if ($_POST['nome']!="" && $_POST['cognome']!=""  && $_POST['codFisc']!="" && $_POST['dataNascita']!="" && $_POST['indirizzo']!="" && $_POST['telefono']!="" && $_POST['email']!="" && $_POST['numeroCarta']!="" ){
          
         if(preg_match($patternCodFisc, $_POST['codFisc'])){
-            $xmlStringClienti = "";
-            foreach(file("../XML/Clienti.xml") as $node){
-                $xmlStringClienti .= trim($node);
-            }
 
-            $docClienti = new DOMDocument();
-            $docClienti->loadXML($xmlStringClienti);
-
-            $listaClienti = $docClienti->documentElement->childNodes;
-            $i = 0;
-            while($i < $listaClienti->length && $duplicato == "False"){          //Controllo se l'utente è già registrato
-                $cliente = $listaClienti->item($i);
-                $codFiscale = $cliente->getAttribute("codFisc");
-                if($codFiscale == $_POST['codFisc']){
-                    $duplicato = "True";
-                }
-                else{
-                    $i++;
-                }
-            }
+            $duplicato = getCodFisc($_POST['codFisc']);                           //Controllo se l'utente è già registrato
+           
 
             if ($duplicato == "False"){
                 session_start();
