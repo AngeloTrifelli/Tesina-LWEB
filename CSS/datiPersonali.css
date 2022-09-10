@@ -119,6 +119,10 @@ td{
     font-weight: bold;
 }
 
+.waiting{
+    color: grey;
+}
+
 
 .button {
   background-color: rgb(228, 228, 228);
@@ -138,4 +142,4 @@ td{
     vertical-align:middle;
     margin-left: 2%;
 }
->>>>>>> master
+
