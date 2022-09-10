@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <listaValutazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Valutazioni.xsd">
     <valutazione>
@@ -7,14 +6,4 @@
         <votoUtilita>5</votoUtilita>
         <votoAccordo>3</votoAccordo>
     </valutazione>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<listaValutazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Valutazioni.xsd">
-    <valutazione>
-        <idOggettoValutato>CM1</idOggettoValutato>
-        <codFisc>RSSGNN64R03E472G</codFisc>
-        <votoUtilita>5</votoUtilita>
-        <votoAccordo>3</votoAccordo>
-    </valutazione>
->>>>>>> master
 </listaValutazioni>
