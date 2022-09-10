@@ -1,5 +1,44 @@
 <?php
-echo '<?xml version="1.0" encoding="UTF-8"?>';
+    session_start();
+    $soggiornoAttivo = "";
+    $tipoLogin = "";
+
+    if(isset($_SESSION['loginType'])){
+        if(isset($_POST['LOGOUT'])){
+            if($_SESSION['loginType'] == "Cliente"){
+                unset($_SESSION['codFiscUtenteLoggato']);
+                unset($_SESSION['soggiornoAttivo']);
+                unset($_SESSION['loginType']);
+            }
+            else{
+                unset($_SESSION['loginType']);
+            }
+            header('Location: intro.php');
+        }
+
+        if($_SESSION['loginType'] == "Cliente"){
+            $tipoLogin = "Cliente";
+            if($_SESSION['soggiornoAttivo'] != "null"){
+                $soggiornoAttivo = "True";
+            }
+            else{
+                $soggiornoAttivo = "False";
+            }
+        }
+        else{
+            if($_SESSION['loginType'] == "Concierge"){
+                $tipoLogin = "Concierge";
+            }
+            else{
+                $tipoLogin = "Admin";
+            }
+        }
+    }
+    else{   
+        header('Location: intro.php');
+    }
+
+    echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -28,23 +67,83 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
             <div id="links">
             
+            <?php
+                switch($tipoLogin){
+                    case "Cliente":
+                        echo ' <a class="item" href="./intro.php">HOME</a><br />';
+                        if($soggiornoAttivo == "True"){
+                            echo '
+                            <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
+                            <br /> 
+                          
+                            <a class="item" href="#attivita">ATTIVIT&agrave;</a>
+                            <br />
+                
+                            <a class="item" href="#domande">DOMANDE</a>
+                            <br />';
+                        }
+                        echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';
+                        break;
+                    case "Concierge":
+                        echo '
+                        <a class="item" href="#">HOME</a>
+                        <br /> 
+                          
+                        <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
+                        <br />
+            
+                        <a class="item" href="#">MODIFICA ORARI</a>
+                        <br />
+                        
+                        <a class="item" href="#">MODIFICA ATTIVIT&agrave;</a>
+                        <br /> 
+                    
+                        <a class="item" href="#attivita">VISUALIZZA PRENOTAZIONI CLIENTI</a>
+                        <br />
+            
+                        <a class="item" href="#">DOMANDE</a>
+                        <br />';
+                        break;
+                    case "Admin":
+                        echo '
+                        <a class="item" href="#">HOME</a>
+                        <br /> 
+                          
+                        <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
+                        <br />
+            
+                        <a class="item" href="#">MODIFICA ORARI</a>
+                        <br />
+                        
+                        <a class="item" href="#">MODIFICA ATTIVIT&agrave;</a>
+                        <br /> 
+                    
+                        <a class="item" href="#attivita">VISUALIZZA PRENOTAZIONI CLIENTI</a>
+                        <br />
+            
+                        <a class="item" href="#">DOMANDE</a>
+                        <br />
+        
+                        <br />
+                        <br />
+                        <br />
 
-            <a class="item" href="./intro.php">HOME</a>
-            <br/>
-         
-            <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
-            <br/> 
-          
-            <a class="item" href="#attivita">ATTIVIT&agrave;</a>
-            <br/>
+                        <a class="item" href="#">CATEGORIE</a>
+                        <br />
+                        
+                        <a class="item" href="#">PAGAMENTI CLIENTI</a>
+                        <br />
 
-            <a class="item" href="#domande">DOMANDE</a>
-            <br/>
-       
-            <a class="item" href="./datiPersonali.php">DATI PERSONALI</a>
-            <br/>
-      
-            <a class="item" href="#">LOGOUT</a>
+                        <a class="item" href="#">VISUALIZZA CLIENTI</a>
+                        <br />';
+                        break;
+                }
+            ?>
+
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <br />
+                <input type="submit" class="logoutButton" value="LOGOUT" name="LOGOUT" />
+            </form>
             <br/>
   
             </div>
@@ -53,8 +152,19 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
     <div id="rightColumn">
 
-        <h1 id="mainTitle">AREA UTENTE</h1>
-
+        <?php 
+            if($tipoLogin == "Cliente"){
+                echo '<h1 class="mainTitle">AREA CLIENTE</h1>';
+            }
+            else{
+                if($tipoLogin == "Concierge"){
+                    echo '<h1 class="mainTitle">AREA CONCIERGE</h1>';
+                }
+                else{
+                    echo '<h1 class="mainTitle">AREA ADMIN</h1>';
+                }
+            }
+        ?>
         <img id="img" src="../img/hotel.jpg" alt="Immagine non trovata"/>
             
     </div>
