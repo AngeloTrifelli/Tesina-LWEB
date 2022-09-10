@@ -1,5 +1,8 @@
 <?php 
 echo'<?xml version="1.0" encoding="UTF-8"?>';
+require_once('funzioniGetPHP.php');
+require_once('funzioniInsertPHP.php');
+
 
 $duplicato = "False";
 
@@ -18,85 +21,15 @@ session_start();
     else{    
         if($_POST['username']!="" && $_POST['password']!="" && $_POST['confermaPassword']!="" && $_POST['password']==$_POST['confermaPassword']){
 
-            $xmlStringClienti = "";
-            foreach(file("../XML/Clienti.xml") as $node){
-            $xmlStringClienti .= trim($node);
-            }
-            
-            $docClienti = new DOMDocument();
-            $docClienti->loadXML($xmlStringClienti);
-            $docClienti->formatOutput = true;
+            $duplicato = getUsername($_POST['username']);
 
-            $listaClienti = $docClienti->documentElement->childNodes;
-            $i = 0;
-            while($i < $listaClienti->length && $duplicato == "False"){          //Controllo se un utente con tale username è già registrato
-                $cliente = $listaClienti->item($i);
-                $elemCredenziali= $cliente->getElementsByTagName("credenziali")->item(0);
-                $testoUsername=$elemCredenziali->firstChild->textContent;
-                if($testoUsername == $_POST['username']){
-                    $duplicato = "True";
-                }
-                else{
-                    $i++;
-                }
-            }
             if($duplicato == "False"){
 
                 $username= $_POST['username'];
                 $password= $_POST['password'];
                 $_SESSION['username'] = $_POST['username'];   //Imposto questa variabile di sessione in modo tale da permettere di effettuare il controllo dentro registrazioneCompletata.php
 
-                $anno = mb_substr($_SESSION['dataNascita'], 0 , 4);
-                $mese = mb_substr($_SESSION['dataNascita'], 5 , 2);
-                $giorno = mb_substr($_SESSION['dataNascita'], 8 , 2);
-
-                $currentDate= date('Y-m-d');
-
-                $nuovoCliente = $docClienti->createElement("cliente");
-                $nuovoCliente->setAttribute("codFisc", $_SESSION['codFisc']);
-                $listaClienti = $docClienti->documentElement;
-                $listaClienti->appendChild($nuovoCliente);
-
-                $nuovoNome = $docClienti->createElement("nome", $_SESSION['nome']);
-                $nuovoCliente->appendChild($nuovoNome);
-
-                $nuovoCognome = $docClienti->createElement("cognome", $_SESSION['cognome']);
-                $nuovoCliente->appendChild($nuovoCognome);
-
-                $nuovaDataNascita = $docClienti->createElement("dataDiNascita", $anno."-".$mese."-".$giorno);
-                $nuovoCliente->appendChild($nuovaDataNascita);
-
-                $nuovoIndirizzo = $docClienti->createElement("indirizzo", $_SESSION['indirizzo']);
-                $nuovoCliente->appendChild($nuovoIndirizzo);
-
-                $nuovoTelefono = $docClienti->createElement("telefono", $_SESSION['telefono']);
-                $nuovoCliente->appendChild($nuovoTelefono);
-
-                $nuovaEmail = $docClienti->createElement("email", $_SESSION['email']);
-                $nuovoCliente->appendChild($nuovaEmail);
-
-                $nuovoNumCarta = $docClienti->createElement("numeroCarta", $_SESSION['numeroCarta']);
-                $nuovoCliente->appendChild($nuovoNumCarta);
-
-                $nuoveCredenziali = $docClienti->createElement("credenziali");
-                $nuovoCliente->appendChild($nuoveCredenziali);
-
-                $nuovoUsername = $docClienti->createElement("username", $username);
-                $nuoveCredenziali->appendChild($nuovoUsername);
-
-                $nuovaPassword = $docClienti->createElement("password", $password);
-                $nuoveCredenziali->appendChild($nuovaPassword);
-
-                $nuoviCrediti = $docClienti->createElement("crediti", 0);
-                $nuovoCliente->appendChild($nuoviCrediti);
-
-                $nuovaDataAssegnazioneCrediti = $docClienti->createElement("dataAssegnazioneCrediti", $currentDate);
-                $nuovoCliente->appendChild($nuovaDataAssegnazioneCrediti);
-
-                $nuovaSommaGiudizi= $docClienti->createElement("sommaGiudizi", 0);
-                $nuovoCliente->appendChild($nuovaSommaGiudizi);
-
-                $docClienti->save("../XML/clienti.xml");
+                nuovoCliente();
 
                 header('Location: registrazioneCompletata.php');
                 exit();
