@@ -24,8 +24,6 @@ a{
     float: right;
     text-align: justify;
     width: 75%;
-   
-
 }
 
 .item{
@@ -76,7 +74,7 @@ a{
 }
 
 .riga{
-    margin-top: 7%;
+    margin-top: 5.5%;
     display: flex;
     justify-content:space-between;
     background-color: inherit;
@@ -105,8 +103,6 @@ a{
     border: 1px solid #ccc
 }
 
-
-
 .containerData{
     margin-right: 40px ;
     margin-left: 15%;
@@ -129,7 +125,8 @@ a{
 }
 
 .continuaButton{
-    margin-left: 85%;
+    margin-top: 5%;
+    margin-left: 86%;
     border: 1px solid #ccc;
     padding: 10px 20px 10px 20px;
     cursor: pointer;
@@ -149,8 +146,9 @@ a{
     background-color: #ccc!important;
 }
 
-.floatLeft{
-    margin-right: 10%;
+.errorLabel{
+    color : red;
+    /* font-weight: bolder; */
 }
 
 .title{
@@ -161,4 +159,3 @@ a{
     margin-top: 7%;
     background-color: inherit;
 }
->>>>>>> master
