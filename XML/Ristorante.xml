@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <ristoranti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Ristorante.xsd">
     <ristorante>
@@ -14,21 +13,4 @@
             </portata>
         </menu>
     </ristorante>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<ristoranti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Ristorante.xsd">
-    <ristorante>
-        <oraAperturaPranzo>12:00:00</oraAperturaPranzo>
-        <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
-        <oraAperturaCena>19:00:00</oraAperturaCena>
-        <oraChiusuraCena>23:00:00</oraChiusuraCena>
-        <menu>
-            <portata>
-                <tipologia>primo piatto</tipologia>
-                <descrizione>Spaghetti alla carbonara</descrizione>
-                <prezzo>8</prezzo>
-            </portata>
-        </menu>
-    </ristorante>
->>>>>>> master
 </ristoranti>
