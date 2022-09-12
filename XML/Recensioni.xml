@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaRecensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Recensioni.xsd">
+    <recensione id="R1">
+        <nomeAutore>Giovanni</nomeAutore>
+        <cognomeAutore>Rossi</cognomeAutore>
+        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+        <categoria>Servizi</categoria>
+        <testoRecensione>
+            Soggiorno fantastico! Il ristorante offre sempre piatti di immensa qualità ed il personale è 
+            estremamente professionale e sempre disponibile. 
+        </testoRecensione>
+        <voto>5</voto>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+    </recensione>
+</listaRecensioni>

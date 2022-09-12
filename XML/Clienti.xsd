@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="listaClienti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="cliente" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="cliente">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="cognome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataDiNascita" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="indirizzo" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="telefono" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="email" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="numeroCarta" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="credenziali" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="crediti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="dataAssegnazioneCrediti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="sommaGiudizi" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="codFisc" type="xsd:ID"  use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="cognome" type="xsd:string" />
+    <xsd:element name="dataDiNascita" type="xsd:date" />
+    <xsd:element name="indirizzo" type="xsd:string" />
+    <xsd:element name="telefono">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[0-9]{10}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="email" type="xsd:string" />
+    <xsd:element name="numeroCarta">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="credenziali">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="username" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="password" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="username" type="xsd:string" />
+    <xsd:element name="password" type="xsd:string" />
+    <xsd:element name="crediti">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="dataAssegnazioneCrediti" type="xsd:date" />
+    <xsd:element name="sommaGiudizi">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+</xsd:schema>
