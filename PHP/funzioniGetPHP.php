@@ -3,6 +3,61 @@
 
     require_once("funzioniModificaPHP.php");
 
+// Funzione per ottenere tutti i soggiorni passati di un cliente in datiPersonali.php
+
+function getSoggiorniPassati($codFiscCliente){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathCamere = new DOMXPath($doc);
+
+    $soggiorniPassati = $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc= '$codFiscCliente' and (statoSoggiorno='Pagamento rifiutato' or statoSoggiorno='Terminato')]");
+    if($soggiorniPassati->length >= 1){
+        $tabellaSoggiorni = array();
+
+        for($i=0 ; $i < $soggiorniPassati->length ; $i++){
+            $soggiorno = $soggiorniPassati->item($i);
+
+            $idPrenotazione = $soggiorno->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+
+            $pieces = explode("-",$idPrenotazione);
+            $idCamera = $pieces[0];
+            $camera = $xpathCamere->query("/listaCamere/Camera[@numero='$idCamera']");
+            $camera = $camera->item(0);
+
+            $numeroCamera = substr($idCamera, 1);
+            $tipoCamera = $camera->getElementsByTagName("tipo")->item(0)->textContent; 
+            $statoSoggiorno = $soggiorno->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
+            $dataArrivo = $soggiorno->getElementsByTagName("dataArrivo")->item(0)->textContent;
+            $dataPartenza = $soggiorno->getElementsByTagName("dataPartenza")->item(0)->textContent;
+
+            $temp = array(
+                "idPrenotazione"=>$idPrenotazione,
+                "numeroCamera"=>$numeroCamera,
+                "tipoCamera"=>$tipoCamera,
+                "statoSoggiorno"=>$statoSoggiorno,
+                "dataArrivo"=>$dataArrivo,
+                "dataPartenza"=>$dataPartenza 
+            );
+
+            array_push($tabellaSoggiorni , $temp);
+        }
+        array_multisort(array_column($tabellaSoggiorni, 'dataArrivo') , SORT_DESC , $tabellaSoggiorni );        //Ordino i soggiorni in ordine descrescente rispetto alla data di arrivo
+        return $tabellaSoggiorni;
+    }
+    else{
+        return $soggiorniPassati;
+    }
+}
+
+
+
+
+
 // Funzione per verificare se il cliente che ha effettuato il login ha un soggiorno attivo al momento (cioè con pagamento approvato)
 
 function getSoggiornoAttivo($codFiscCliente){
@@ -15,33 +70,37 @@ function getSoggiornoAttivo($codFiscCliente){
 
     $xpathCamere = new DOMXPath($doc);
 
-    $prenotazione = $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente' and statoSoggiorno='Approvato']");
+    $prenotazione= $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente' and (statoSoggiorno='Approvato' or statoSoggiorno='Pagamento sospeso')]");
+   
     if($prenotazione->length == 1){
         $prenotazione = $prenotazione->item(0);
         $dataPartenza = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
         $idPrenotazione = $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
-        $todayDate = date('Y-m-d');
+        $statoPrenotazione = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
 
-        if($todayDate >= $dataPartenza){
-            modificaStatoSoggiorno($idPrenotazione , "Terminato");      
-            return "null";
-        }
-        else{
-            $pieces = explode("-",$idPrenotazione);
-            $numeroCamera = $pieces[0];
+        if($statoPrenotazione == "Approvato"){
+            $todayDate = date('Y-m-d');
 
-            $camera = $xpathCamere->query("/listaCamere/Camera[@numero='$numeroCamera']");
-            $camera = $camera->item(0);
-            
-            $arrayDati['idPrenotazione'] = $idPrenotazione;
-            $arrayDati['numeroCamera'] = substr($numeroCamera, 1);
-            $arrayDati['tipoCamera'] = $camera->getElementsByTagName("tipo")->item(0)->textContent;
-            $arrayDati['statoSoggiorno'] = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
-            $arrayDati['dataArrivo'] = $prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
-            $arrayDati['dataPartenza'] = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
-            
-            return $arrayDati;
+            if($todayDate >= $dataPartenza){
+                modificaStatoSoggiorno($idPrenotazione , "Terminato");      
+                return "null";
+            }
         }
+
+        $pieces = explode("-",$idPrenotazione);
+        $numeroCamera = $pieces[0];
+
+        $camera = $xpathCamere->query("/listaCamere/Camera[@numero='$numeroCamera']");
+        $camera = $camera->item(0);
+        
+        $arrayDati['idPrenotazione'] = $idPrenotazione;
+        $arrayDati['numeroCamera'] = substr($numeroCamera, 1);
+        $arrayDati['tipoCamera'] = $camera->getElementsByTagName("tipo")->item(0)->textContent;
+        $arrayDati['statoSoggiorno'] = $statoPrenotazione;
+        $arrayDati['dataArrivo'] = $prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
+        $arrayDati['dataPartenza'] = $dataPartenza;
+        
+        return $arrayDati;
     }
     else{
         return "null";      //Questo significa che non è stato trovato nessun soggiorno attivo

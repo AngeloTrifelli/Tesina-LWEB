@@ -4,6 +4,7 @@
     session_start();
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
+        $soggiorniPassati = getSoggiorniPassati($_SESSION['codFiscUtenteLoggato']);
     }
     else{
         header('Location: intro.php');
@@ -195,58 +196,73 @@
 
 
     <h3 class="titoloImportante alignCenter">SOGGIORNI PASSATI:</h3>
+    <?php
+        $numSoggiorniPassati = count($soggiorniPassati);
+        if($numSoggiorniPassati >= 1){
+    ?>
     <div class="mainContainer">
-        <table class="prenotazione alignCenter" align="center">
-            <tr>
-                <td>
-                    <strong>Numero Camera</strong><br />
-                    110
-                </td>
-                <td>
-                    <strong>Tipo</strong><br />
-                    Standard Doppia
-                </td>
-                <td>
-                    <strong>Stato soggiorno</strong><br />
-                    <span class="insuccess">Pagamento rifiutato</span>
-                </td>
-                <td>
-                    <strong>Inizio</strong><br />
-                    28-10-2022
-                </td>
-                <td>
-                    <strong>Fine</strong><br />
-                    31-10-2022
-                </td>
-            </tr>
-        </table>
-        <table class="prenotazione alignCenter" align="center">
-            <tr>
-                <td>
-                    <strong>Numero Camera</strong><br />
-                    200
-                </td>
-                <td>
-                    <strong>Tipo</strong><br />
-                    Standard Singola
-                </td>
-                <td>
-                    <strong>Stato soggiorno</strong><br />
-                    <span class="success">Terminato</span>
-                </td>
-                <td>
-                    <strong>Inizio</strong><br />
-                    13-06-2022
-                </td>
-                <td>
-                    <strong>Fine</strong><br />
-                    18-06-2022
-                </td>
-            </tr>
-        </table>
+    
+    <?php
+            for($i=0 ; $i < $numSoggiorniPassati ; $i++){
+                $temp = $soggiorniPassati[$i];
+    ?>
+                <table class="prenotazione alignCenter" align="center">
+                    <tr>
+                        <td>
+                            <strong>Numero Camera</strong><br />
+                            <?php echo $temp['numeroCamera'];?>
+                        </td>
+                        <td>
+                            <strong>Tipo</strong><br />
+                            <?php echo $temp['tipoCamera'];?>
+                        </td>
+                        <td>
+                            <strong>Stato soggiorno</strong><br />
+                            <?php
+                                if($temp['statoSoggiorno'] == "Terminato"){
+                            ?>
+                                <span class="success"><?php echo $temp['statoSoggiorno'];?></span>    
+                            <?php
+                                }
+                                else{
+                            ?>
+                                <span class="insuccess"><?php echo $temp['statoSoggiorno'];?></span>
+                            <?php                            
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <strong>Inizio</strong><br />
+                            <?php
+                                $stringaData = $temp['dataArrivo'];
+                                $giorno = substr($stringaData, 8,2);       
+                                $mese = substr($stringaData,5,2 );
+                                $anno = substr($stringaData,0,4 );
+                                echo $giorno."-".$mese."-".$anno;
+                            ?>
+                        </td>
+                        <td>
+                            <strong>Fine</strong><br />
+                            <?php
+                                $stringaData = $temp['dataPartenza'];
+                                $giorno = substr($stringaData, 8,2);       
+                                $mese = substr($stringaData,5,2 );
+                                $anno = substr($stringaData,0,4 );
+                                echo $giorno."-".$mese."-".$anno;
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+    <?php
+            }
+    ?>
     </div>      
-    <!-- <p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati...</p> -->
-    <!-- come prima, con php controlli se mostrare questa scritta o meno -->
+    <?php
+        }
+        else{
+            echo '<p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati...</p>';
+        }
+    ?>
 </body>
 
 
