@@ -41,7 +41,7 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
                 <a class="item" href="./login.php">LOGIN</a>
                 <br/>
 
-                <a class="item" href="#">PRENOTA ORA</a>
+                <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
                 <br/>
   
             </div>

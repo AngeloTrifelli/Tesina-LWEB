@@ -89,4 +89,5 @@
             </xsd:restriction>
         </xsd:simpleType>
     </xsd:element>
+
 </xsd:schema>

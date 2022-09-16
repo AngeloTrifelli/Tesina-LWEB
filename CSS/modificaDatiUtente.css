@@ -88,12 +88,13 @@ h1{
     border: 1px solid #ccc
 }
 
+
 .textInput:hover{
     background-color: honeydew;
 }
 
+
 .errorLabel{
     color: red;
     font-weight: bold;
->>>>>>> master
 }

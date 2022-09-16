@@ -43,6 +43,11 @@ a{
     transition: all 300ms ease;
 }
 
+
+.item:hover{
+    color:#871f30 ;
+}
+
 #mainTitle{
     color: #871f30;
     text-align: center;
@@ -97,4 +102,4 @@ a{
     display: flex;
     justify-content: space-between;
 }
->>>>>>> master
+
