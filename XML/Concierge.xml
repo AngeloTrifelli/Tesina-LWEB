@@ -2,6 +2,6 @@
 <listaModeratori xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Concierge.xsd">
     <moderatore>
         <username>Concierge1</username>
-        <password>Concierge1</password>
+        <password>908c8ec15e4f8fe27527393619b345ec</password>
     </moderatore>
 </listaModeratori>
