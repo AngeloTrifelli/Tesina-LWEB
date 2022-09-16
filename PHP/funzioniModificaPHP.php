@@ -1,13 +1,69 @@
 <?php
-
     // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PHP PER MODIFICARE I FILE XML
 
-function modificaDatiUtente ($datoDaModificare , $arrayValore){
+
+function modificaDatiUtente ($codFiscUtente, $datoDaModificare , $valore){
+    $xmlString = "";
+    foreach(file("../XML/Clienti.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathClienti = new DOMXPath($doc);
+    $cliente = $xpathClienti->query("/listaClienti/cliente[@codFisc = '$codFiscUtente']");   
+    $cliente = $cliente->item(0);
+
     if($datoDaModificare != "codFisc" && $datoDaModificare != "username" && $datoDaModificare != "password"){
-        // DA IMPLEMENTARE
+        $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
+        $nodoDato->nodeValue = "";
+        $nodoDato->appendChild($doc->createTextNode($valore));
+
+        $doc->save("../XML/Clienti.xml");
+        return "success";
     }
     else{
-        // DA IMPLEMENTARE (controlli per codFisc , username e password vecchia)
+        if($datoDaModificare == "codFisc"){
+            $duplicato = $xpathClienti->query("/listaClienti/cliente[@codFisc = '$valore']");
+            if($duplicato->length == 1 && $valore != $codFiscUtente){
+                return "insuccess";
+            }
+            else{
+                $cliente->setAttribute('codFisc' , $valore);
+                $doc->save("../XML/Clienti.xml");
+                return "success";
+            }
+        }
+
+        if($datoDaModificare == "username"){
+            $duplicato = $xpathClienti->query("/listaClienti/cliente/credenziali[username='$valore']");
+            if($duplicato->length == 1){
+                return "insuccess";
+            }
+            else{
+                $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
+                $nodoDato->nodeValue = "";
+                $nodoDato->appendChild($doc->createTextNode($valore));
+                $doc->save("../XML/Clienti.xml");
+                return "success";
+            }
+        }
+
+        if($datoDaModificare == "password"){
+            $oldPassword = $valore['oldPassword'];
+            $test = $xpathClienti->query("/listaClienti/cliente/credenziali[password='$oldPassword']");
+            if($test->length == 1){
+                $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
+                $nodoDato->nodeValue = "";
+                $nodoDato->appendChild($doc->createTextNode($valore['newPassword']));
+                $doc->save("../XML/Clienti.xml");
+                return "success";
+            }
+            else{
+                return "insuccess";
+            }
+        }
     }
 }
 

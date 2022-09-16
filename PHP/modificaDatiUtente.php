@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('funzioniPHP.php');
     require_once('funzioniModificaPHP.php');
 
@@ -15,7 +16,7 @@
             $datoDaModificare = $_POST['datoDaModificare'];
             if($datoDaModificare == "nome" || $datoDaModificare == "cognome" || $datoDaModificare == "indirizzo" ||  $datoDaModificare == "dataDiNascita" ||  $datoDaModificare == "username"){
                 if($_POST['textInput']!=""){
-                    $result = modificaDatiUtente($datoDaModificare , $_POST['textInput']);
+                    $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'] ,$datoDaModificare , $_POST['textInput']);
                     if($result == "success"){    
                         header('Location: datiPersonali.php');
                     }
@@ -24,8 +25,9 @@
             else{
                 if($datoDaModificare == "codFisc"){
                     if(preg_match($patternCodFisc , $_POST['nuovoCodFisc'])){
-                        $result = modificaDatiUtente($datoDaModificare , $_POST['nuovoCodFisc']);
+                        $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoCodFisc']);
                         if($result == "success"){    
+                            $_SESSION['codFiscUtenteLoggato'] = $_POST['nuovoCodFisc'];
                             header('Location: datiPersonali.php');
                         }
                     }
@@ -33,30 +35,36 @@
                 else{
                     if($datoDaModificare == "telefono"){
                         if(preg_match($patternNumTelefono , $_POST['nuovoTelefono'])){
-                            $result = modificaDatiUtente($datoDaModificare , $_POST['nuovoTelefono']);
-                            header('Location: datiPersonali.php');   
+                            $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoTelefono']);
+                            if($result == "success"){    
+                                header('Location: datiPersonali.php');
+                            }
                         }
                     }
                     else{
                         if($datoDaModificare == "email"){
                             if(filter_var($_POST['nuovaEmail'] , FILTER_VALIDATE_EMAIL)){
-                                $result = modificaDatiUtente($datoDaModificare , $_POST['nuovaEmail']);
-                                header('Location: datiPersonali.php');   
+                                $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovaEmail']);
+                                if($result == "success"){    
+                                    header('Location: datiPersonali.php');
+                                }
                             }
                         }
                         else{
                             if($datoDaModificare == "numeroCarta"){
                                 if(preg_match($patternNumeroCarta , $_POST['nuovoNumeroCarta'])){
-                                    $result = modificaDatiUtente($datoDaModificare , $_POST['nuovoNumeroCarta']);
-                                    header('Location: datiPersonali.php');   
+                                    $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoNumeroCarta']);
+                                    if($result == "success"){    
+                                        header('Location: datiPersonali.php');
+                                    }   
                                 }
                             }
                             else{
                                 if($datoDaModificare == "password"){
                                     if($_POST['oldPassword']!="" && $_POST['newPassword']!=""){
-                                        $arrayPassword['oldPassword'] = $_POST['oldPassword'];
-                                        $arrayPassword['newPassword'] = $_POST['newPassword'];
-                                        $result = modificaDatiUtente($datoDaModificare , $arrayPassword);
+                                        $arrayPassword['oldPassword'] = md5($_POST['oldPassword']);
+                                        $arrayPassword['newPassword'] = md5($_POST['newPassword']);
+                                        $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $arrayPassword);
                                         if($result == "success"){    
                                             header('Location: datiPersonali.php');
                                         }
