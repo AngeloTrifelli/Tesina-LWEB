@@ -1,6 +1,9 @@
 <?php 
     require_once('funzioniPHP.php');
     require_once('funzioniGetPHP.php');
+    $codFisc = "";
+    $trovato = "";
+
     session_start();
 
     if(isset($_SESSION['loginType'])){
@@ -20,12 +23,18 @@
                 }
                 else{
                     if($_POST['type'] == "concierge"){
-                        die(var_dump("test2"));
-                        // DA IMPLEMENTARE 
+                        $trovato = eseguiLoginStaff($_POST['username'], md5($_POST['password']), "Concierge");
+                        if($trovato != "False"){
+                            $_SESSION['loginType'] = "Concierge";
+                            header('Location: areaUtente.php');
+                        }
                     }
                     else{
-                        die(var_dump("test3"));
-                        // DA IMPLEMENTARE
+                        $trovato = eseguiLoginStaff($_POST['username'], md5($_POST['password']), "Admin");
+                        if($trovato != "False"){
+                            $_SESSION['loginType'] = "Admin";
+                            header('Location: areaUtente.php');
+                        }
                     }
                 }
             }
@@ -125,7 +134,7 @@
                                 <br />
                                 <p class=\"errorLabel\">Inserire la password!</p>";
                         }
-                        if(isset($_POST['accedi']) && $_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) && $codFisc=="null"){
+                        if(isset($_POST['accedi']) && $_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) && ($codFisc=="null" || $trovato == "False")){
                             echo "
                                 <br />
                                 <p class=\"errorLabel\">Username e/o password errati!</p>";

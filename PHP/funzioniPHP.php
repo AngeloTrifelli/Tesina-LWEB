@@ -2,6 +2,45 @@
     require_once('funzioniModificaPHP.php');
 
 
+
+
+
+// Funzione per controllare se le credenziali inserite dal concierge o dall'admin in login.php sono corrette
+
+function eseguiLoginStaff($username , $password , $tipoLogin){
+    $xmlString = "";
+    if($tipoLogin == "Concierge"){
+        foreach(file("../XML/Concierge.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+    else{
+        foreach(file("../XML/Amministratori.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    
+    $listaStaff = $doc->documentElement->childNodes;
+    $trovato = "False";
+    $i = 0;
+    while ($i < $listaStaff->length && $trovato == "False"){
+        $staff = $listaStaff->item($i);
+        $testoUsername = $staff->firstChild->textContent;
+        $testoPassword = $staff->lastChild->textContent;
+        if($testoUsername == $username && $testoPassword == $password){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+    return $trovato;
+}
+
+
 // Funzione per controllare se le credenziali inserite dall'utente sono corrette in login.php (login cliente)
 
 function eseguiLoginCliente ($username , $password){
