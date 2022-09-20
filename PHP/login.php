@@ -3,14 +3,58 @@
     require_once('funzioniGetPHP.php');
     $codFisc = "";
     $trovato = "";
+    $erroreSoggiornoAttivo = "";
 
     session_start();
 
     if(isset($_SESSION['loginType'])){
         header('Location: areaUtente.php');
     }
-    else{
-        if(isset($_POST['accedi'])){
+
+    if(isset($_SESSION['prenotazioneCamera'])){
+        $prenotazioneCamera = $_SESSION['prenotazioneCamera'];
+        $idCamera = $prenotazioneCamera['idCamera'];
+        $dataArrivo = $prenotazioneCamera['dataArrivo'];
+        $dataPartenza = $prenotazioneCamera['dataPartenza'];
+        unset($_SESSION['prenotazioneCamera']);
+    }
+
+
+    if(isset($_POST['accedi'])){
+        if(isset($_POST['idCamera'])){
+            if($_POST['username']!= "" && $_POST['password'] != ""){
+                $codFisc = eseguiLoginCliente($_POST['username'], md5($_POST['password']));
+                if($codFisc != "null"){
+                    $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
+                    if($_SESSION['soggiornoAttivo'] == "null"){
+                        $arrayDati['idCamera'] = $_POST['idCamera'];
+                        $arrayDati['dataArrivo'] = $_POST['dataArrivo'];
+                        $arrayDati['dataPartenza'] = $_POST['dataPartenza'];
+                        $_SESSION['prenotazioneCamera'] = $arrayDati;
+                        $_SESSION['codFiscUtenteLoggato'] = $codFisc;
+                        $_SESSION['loginType'] = "Cliente";
+                        header('Location: confermaPrenotazione.php');
+                    }
+                    else{
+                        $erroreSoggiornoAttivo = "True";
+                        $idCamera = $_POST['idCamera'];
+                        $dataArrivo = $_POST['dataArrivo'];
+                        $dataPartenza = $_POST['dataPartenza'];
+                    }
+                }
+                else{
+                    $idCamera = $_POST['idCamera'];
+                    $dataArrivo = $_POST['dataArrivo'];
+                    $dataPartenza = $_POST['dataPartenza'];
+                }
+            }
+            else{
+                $idCamera = $_POST['idCamera'];
+                $dataArrivo = $_POST['dataArrivo'];
+                $dataPartenza = $_POST['dataPartenza'];
+            }
+        }
+        else{
             if($_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) ){
                 if($_POST['type'] == "cliente"){
                     $codFisc = eseguiLoginCliente($_POST['username'], md5($_POST['password']));
@@ -18,7 +62,7 @@
                         $_SESSION['codFiscUtenteLoggato'] = $codFisc;
                         $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
                         $_SESSION['loginType'] = "Cliente";
-                        header('Location: areaUtente.php');
+                        header('Location: intro.php');
                     }
                 }
                 else{
@@ -40,6 +84,7 @@
             }
         }
     }
+    
 
 
 
@@ -85,21 +130,27 @@
 
             <div id="links">
             
-
-            <a class="item" href="./intro.php">HOME</a>
-            <br/>
-         
-            <a class="item" href="./camere.php">CAMERE E SUITE</a>
-            <br/> 
-          
-            <a class="item" href="#">RECENSIONI</a>
-            <br/>
-
-            <a class="item" href="#">PRENOTA ORA</a>
-            <br/>
-
-            <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
-            <br/>
+            <?php
+                if(isset($idCamera)){
+            ?>
+                    <a class="item" href="./prenotaOra.php">ANNULLA PRENOTAZIONE</a>  
+            <?php
+                }
+                else{
+            ?>
+                <a class="item" href="./intro.php">HOME</a>
+                <br/>            
+                <a class="item" href="./camere.php">CAMERE E SUITE</a>
+                <br/>             
+                <a class="item" href="#">RECENSIONI</a>
+                <br/>
+                <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
+                <br/>
+                <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
+                <br/>
+            <?php
+                }
+            ?>
 
   
             </div>
@@ -139,25 +190,41 @@
                                 <br />
                                 <p class=\"errorLabel\">Username e/o password errati!</p>";
                         }
-                    ?>
-                    </div>
 
-                    <div class="divDx">    
-                        
-                        <p class="title">Che tipo di utente sei?</p>
-                        <br />
-                        <input type="radio" id="cliente" name="type" value="cliente" <?php if(isset($_POST['type'])){if($_POST['type']=="cliente"){echo 'checked';}} ?> />
-                        <label for="cliente">Cliente</label><br /> 
-                        <input type="radio" id="concierge" name="type" value="concierge"  <?php if(isset($_POST['type'])){if($_POST['type']=="concierge"){echo 'checked';}} ?> />
-                        <label for="concierge">Concierge</label><br />
-                        <input type="radio" id="admin" name="type" value="admin"  <?php if(isset($_POST['type'])){if($_POST['type']=="admin"){echo 'checked';}} ?> />
-                        <label for="admin">Admin</label>
-                    <?php
-                        if(isset($_POST['accedi']) && !isset($_POST['type'])){
+                        if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $codFisc == "null"){
                             echo "
                                 <br />
+                                <p class=\"errorLabel\">Username e/o password errati!</p>";
+                        }
+
+                        if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $erroreSoggiornoAttivo == "True"){
+                            echo "
                                 <br />
-                                <p class=\"errorLabel\">Scegliere il tipo di utente!</p>";
+                                <p class=\"errorLabel\">L'utente ha già un soggiorno attivo. Impossibile completare la prenotazione!</p>";
+                        }
+                    ?>
+                    </div>
+                    
+                    <?php
+                        if(!isset($idCamera)){
+                    ?>
+                        <div class="divDx">    
+                            
+                            <p class="title">Che tipo di utente sei?</p>
+                            <br />
+                            <input type="radio" id="cliente" name="type" value="cliente" <?php if(isset($_POST['type'])){if($_POST['type']=="cliente"){echo 'checked';}} ?> />
+                            <label for="cliente">Cliente</label><br /> 
+                            <input type="radio" id="concierge" name="type" value="concierge"  <?php if(isset($_POST['type'])){if($_POST['type']=="concierge"){echo 'checked';}} ?> />
+                            <label for="concierge">Concierge</label><br />
+                            <input type="radio" id="admin" name="type" value="admin"  <?php if(isset($_POST['type'])){if($_POST['type']=="admin"){echo 'checked';}} ?> />
+                            <label for="admin">Admin</label>
+                    <?php
+                            if(isset($_POST['accedi']) && !isset($_POST['type'])){
+                                echo "
+                                    <br />
+                                    <br />
+                                    <p class=\"errorLabel\">Scegliere il tipo di utente!</p>";
+                            }
                         }
                     ?>
 
@@ -165,7 +232,18 @@
                     </div>
                 </div> 
 
-                <input type="submit" class="continuaButton button" name="accedi" value="Accedi">
+                <input type="submit" class="continuaButton button" name="accedi" value="Accedi" />
+
+            <?php
+                if(isset($idCamera)){
+            ?>
+                    <input type="hidden" class="continuaButton button" name="idCamera" value="<?php echo $idCamera;?>" />
+                    <input type="hidden" class="continuaButton button" name="dataArrivo" value="<?php echo $dataArrivo;?>" />
+                    <input type="hidden" class="continuaButton button" name="dataPartenza" value="<?php echo $dataPartenza;?>" />
+            <?php
+                }
+            ?>
+
             </form>
             <div id="registrazione">
                 <a  href="./registrazioneUtente.php">Non sei ancora registrato? Clicca qui!</a>
