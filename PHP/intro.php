@@ -1,5 +1,17 @@
 <?php 
-echo'<?xml version="1.0" encoding="UTF-8"?>';
+    session_start();
+
+    if(isset($_POST['LOGOUT'])){
+        if($_SESSION['loginType'] == "Cliente"){
+            unset($_SESSION['codFiscUtenteLoggato']);
+            unset($_SESSION['soggiornoAttivo']);
+            unset($_SESSION['loginType']);
+        }
+        else{
+            unset($_SESSION['loginType']);
+        }
+    }
+    echo'<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -8,15 +20,15 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
     <head>
         <title>Sapienza hotel</title>
 
-        <style>
+        <style type="text/css">
             <?php include "../CSS/intro.css" ?>
          </style>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />  
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet" />  
       </head>
 
     <body>
@@ -47,14 +59,35 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
                     <a class="item" href="#">RECENSIONI</a>
                     <br/>
 
-                    <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
-                    <br/>
+                    <?php
+                        if(!isset($_SESSION['codFiscUtenteLoggato'])){
+                    ?>
+                            <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
+                            <br/>
 
-                    <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
-                    <br/>
+                            <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
+                            <br/>
 
-                    <a class="item" href="./login.php">LOGIN</a>
-                    <br/>
+                            <a class="item" href="./login.php">LOGIN</a>
+                            <br/>
+                    <?php
+                        }
+                        else{
+                            if($_SESSION['soggiornoAttivo'] == "null"){
+                                echo '
+                                <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
+                                <br />';
+                            }
+                    ?>
+                            <a class="item" href="./areaUtente.php">AREA PERSONALE</a>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                                <br />
+                                <input type="submit" class="logoutButton" value="LOGOUT" name="LOGOUT" />
+                            </form>
+                    <?php
+                        }
+                    ?>
+                    
           
                     </div>
                     

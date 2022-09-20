@@ -144,3 +144,16 @@ a{
     border-radius: 8px;
 }
 
+
+.logoutButton{
+    border: none;
+    cursor: pointer;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 30px;
+    color: #a65b6c;
+    transition: all 300ms ease;
+}
+
+.logoutButton:hover{
+    color:#871f30 ;
+}
