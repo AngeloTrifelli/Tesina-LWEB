@@ -1,5 +1,6 @@
 <?php
     require_once('funzioniModificaPHP.php');
+    require_once('funzioniGetPHP.php');
 
 
 
@@ -123,6 +124,28 @@ function individuaDatoDaModificare(){
     else{
         return "null";       //Questo significa che ho aperto la pagina modificaDatiUtente.php senza esser passato prima per datiPersonali.php
     }
+}
+
+
+// Funzione per capire che bottone ha premuto l'utente in visualizzaDisponibilita.php
+
+function individuaBottoneCamereDisponibili(){
+    $listaIdCamere = getIdCamere();
+
+    $i = 0;
+    $trovato = "False";
+
+    while($i < $listaIdCamere->length && $trovato == "False"){
+        $idCamera = $listaIdCamere->item($i)->textContent;
+        if(isset($_POST[$idCamera])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idCamera;
 }
 
 

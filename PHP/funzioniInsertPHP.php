@@ -1,4 +1,6 @@
 <?php
+    require_once("funzioniModificaPHP.php");
+
 // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PER INSERIRE DATI NEI FILE XML
 
 
@@ -71,4 +73,73 @@ function nuovoCliente(){
                 $docClienti->save("../XML/Clienti.xml");
 
 }
+
+
+//Funzione per inserire una nuova prenotazione di una camera 
+
+function inserisciPrenotazioneCamera($idCamera ,$codFiscCliente , $creditiUsati, $dataArrivo , $dataPartenza){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathCamere = new DOMXPath($doc);
+
+    $camera = $xpathCamere->query("/listaCamere/Camera[@numero='$idCamera']");
+    $camera = $camera->item(0);
+
+    $listaPrenotazioni = $camera->getElementsByTagName("listaPrenotazioni")->item(0);
+    $ultimaPrenotazione = $listaPrenotazioni->lastChild;
+    if(is_null($ultimaPrenotazione)){
+        $idNuovaPrenotazione = $idCamera."-PC1";
+    }
+    else{
+        $idUltimaPrenotazione = $ultimaPrenotazione->getElementsByTagName('idPrenotazione')->item(0)->textContent;
+
+        $pieces = explode("-",$idUltimaPrenotazione);
+
+        $nuovoNumero = substr($pieces[1] , 2) + 1;
+        $idNuovaPrenotazione = $idCamera."-PC".$nuovoNumero;    
+    }
+    
+
+    $nuovaPrenotazione = $doc->createElement("prenotazione");
+    $listaPrenotazioni->appendChild($nuovaPrenotazione);
+
+    $nuovoID = $doc->createElement("idPrenotazione" , $idNuovaPrenotazione);
+    $nuovaPrenotazione->appendChild($nuovoID);
+
+    $nuovoCodFisc = $doc->createElement("codFisc" , $codFiscCliente);
+    $nuovaPrenotazione->appendChild($nuovoCodFisc);
+
+    $nuovoStato = $doc->createElement("statoSoggiorno" , "Pagamento sospeso");
+    $nuovaPrenotazione->appendChild($nuovoStato);
+
+    $nuoviCrediti = $doc->createElement("creditiUsati" , $creditiUsati);
+    $nuovaPrenotazione->appendChild($nuoviCrediti);
+
+    $nuovaDataArrivo = $doc->createElement("dataArrivo" , $dataArrivo);
+    $nuovaPrenotazione->appendChild($nuovaDataArrivo);
+
+    $nuovaDataPartenza = $doc->createElement("dataPartenza" , $dataPartenza);
+    $nuovaPrenotazione->appendChild($nuovaDataPartenza);
+
+
+    modificaCreditiCliente($codFiscCliente, -$creditiUsati);    
+
+    $doc->save("../XML/Camere.xml");
+}
+
+
+
+
+
+
+
+
+
+
 ?>

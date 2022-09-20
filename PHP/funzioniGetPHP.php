@@ -209,6 +209,111 @@ function getDatiCliente ($codFiscCliente){
 
 
 
+// Funzione per ottenere le camere disponibili per la prenotazione e visualizzarle in visualizzaDisponibilita.php
+// (in base alle date inserite dall'utente in prenotaOra.php)
+
+function getCamereDisponibili ($dataArrivo , $dataPartenza){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $tabellaCamere = array();
+
+    $listaCamere = $doc->documentElement->childNodes;
+    for($i=0 ; $i < $listaCamere->length ; $i++ ){
+        $camera = $listaCamere->item($i);
+
+        $idCamera = $camera->getAttribute("numero");
+
+        $listaPrenotazioni = $camera->getElementsByTagName("prenotazione");
+        $disponibile = "True";
+        $j = 0;
+
+        while($j < $listaPrenotazioni->length && $disponibile == "True"){
+            $prenotazione = $listaPrenotazioni->item($j);
+            
+            $dataInizioPrenotazione = $prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
+            $dataFinePrenotazione = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
+            $statoSoggiorno = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
+
+
+            if($statoSoggiorno != "Pagamento rifiutato" && $statoSoggiorno != "Terminato"){
+                if(($dataArrivo >= $dataInizioPrenotazione && $dataArrivo <= $dataFinePrenotazione) || ($dataPartenza >= $dataInizioPrenotazione && $dataPartenza <= $dataFinePrenotazione) || ($dataInizioPrenotazione >= $dataArrivo && $dataFinePrenotazione <= $dataPartenza)){
+                    $disponibile = "False";
+                }
+                else{
+                    $j++;
+                }
+            }
+            else{
+                $j++;
+            }
+        } 
+
+        if($disponibile == "True"){
+            $tipoCamera = $camera->getElementsByTagName("tipo")->item(0)->textContent;
+            $prezzo = $camera->getElementsByTagName("prezzo")->item(0)->textContent;
+
+            $temp = array(
+                "idCamera"=>$idCamera,
+                "tipoCamera"=>$tipoCamera,
+                "prezzo"=>$prezzo
+            );
+            array_push($tabellaCamere , $temp);
+        }
+    }
+
+    if(count($tabellaCamere) >= 1){
+        array_multisort(array_column($tabellaCamere, 'prezzo') , SORT_ASC , $tabellaCamere);
+    }
+    
+    return $tabellaCamere;
+}
+
+
+
+// Funzione per ottenere gli id di tutte le camere 
+
+function getIdCamere (){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathCamere = new DOMXPath($doc);
+
+    $listaID = $xpathCamere->query("//@numero");
+    return $listaID;
+}
+
+// Funzione per ottere le informazioni di una camera a partire da un ID 
+
+function getCamera($idCamera){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathCamere = new DOMXPath($doc);
+
+    $camera = $xpathCamere->query("/listaCamere/Camera[@numero='$idCamera']");
+    $camera = $camera->item(0);
+
+    $arrayDati['tipoCamera'] = $camera->getElementsByTagName("tipo")->item(0)->textContent;
+    $arrayDati['prezzo'] = $camera->getElementsByTagName("prezzo")->item(0)->textContent;
+    
+    return $arrayDati;
+}
+
+
+
 
 
 ?>
