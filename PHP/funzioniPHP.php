@@ -149,6 +149,62 @@ function individuaBottoneCamereDisponibili(){
 }
 
 
+// Funzione per capire se la prenotazione dell'attività si può effettuare perchè disponibile
+
+// function checkPrenotazione($idAttivita,$dataAttivita,$oraInizio,$oraFine){
+//     $oraInizio=explode(':', $oraInizio);
+//     $oraFine=explode(':', $oraFine);
+
+
+
+//     $temp = $_SESSION['soggiornoAttivo'];
+
+//     $xmlStringAttivita= "";
+
+//     foreach(file("../XML/Attivita.xml") as $node){
+//         $xmlStringAttivita .= trim($node);
+
+//     }
+
+//     $docAttivita = new DOMDocument();
+//     $docAttivita->loadXML($xmlStringAttivita);
+
+//     $xpathAttivita = new DOMXPath($docAttivita);
+
+//     $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
+//     $attivita = $attivita->item(0);
+//     $oraApertura=$attivita->getElementsByTagName("oraApertura")->item(0)->textContent;
+//     $oraInizioMinima=explode(':', $oraApertura);
+//     $oraChiusura=$attivita->getElementsByTagName("oraChiusura")->item(0)->textContent;
+//     $oraFineMassima=explode(':', $oraChiusura);
+    
+//     if(($oraInizioMinima[0]<$oraInizio[0])&&($oraFineMassima[0]>$oraFine[0])&&($temp['dataArrivo']<=$dataAttivita)&&($temp['dataPartenza']>=$dataAttivita)){
+//         return "True";
+//     }else{
+//         return "False";
+//     }
+
+// }
+
+function individuaBottoneidAttivita(){
+
+    $listaIdAttivita = getIdAttivita();
+
+    $i = 0;
+    $trovato = "False";
+
+    while($i < $listaIdAttivita->length && $trovato == "False"){
+        $idAttivita = $listaIdAttivita->item($i)->textContent;
+        if(isset($_POST[$idAttivita])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idAttivita;
+}
 
 
 

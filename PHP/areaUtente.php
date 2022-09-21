@@ -82,7 +82,7 @@
                             <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
                             <br /> 
                           
-                            <a class="item" href="#attivita">ATTIVIT&agrave;</a>
+                            <a class="item" href="./attivita.php">ATTIVIT&agrave;</a>
                             <br />
                 
                             <a class="item" href="#domande">DOMANDE</a>
