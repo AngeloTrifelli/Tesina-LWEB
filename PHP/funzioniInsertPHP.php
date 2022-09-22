@@ -133,6 +133,63 @@ function inserisciPrenotazioneCamera($idCamera ,$codFiscCliente , $creditiUsati,
     $doc->save("../XML/Camere.xml");
 }
 
+//Funzione  per aggiungere una prenotazione alle attività
+
+function aggiungiPrenotazioneAttivita($idAttivita,$codFisc,$data,$oraInizio,$oraFine,$prezzoTotale,$creditiInseriti){
+
+
+    $xmlStringAttivita= "";
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+        $xmlStringAttivita .= trim($node);
+
+    }
+
+    $docAttivita = new DOMDocument();
+    $docAttivita->loadXML($xmlStringAttivita);
+    $docAttivita->formatOutput = true;
+
+    $xpathAttivita = new DOMXPath($docAttivita);
+
+    $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
+    $attivita = $attivita->item(0);
+
+    $listaPrenotazioni=$attivita->getElementsByTagName("listaPrenotazioni")->item(0);
+    $prenotazioni=$attivita->getElementsByTagName("prenotazione");
+    $numPrenotazioni=count($prenotazioni);
+    
+
+    $nuovaPrenotazione = $docAttivita->createElement("prenotazione");
+    $listaPrenotazioni->appendChild($nuovaPrenotazione);
+
+    $nuovoIdPrenotazione = $docAttivita->createElement("idPrenotazione", $idAttivita."-PA".($numPrenotazioni+1));
+    $nuovaPrenotazione->appendChild($nuovoIdPrenotazione);
+
+    $nuovoCodFisc= $docAttivita->createElement("codFisc", $codFisc);
+    $nuovaPrenotazione->appendChild($nuovoCodFisc);
+
+    $nuovaData= $docAttivita->createElement("data", $data);
+    $nuovaPrenotazione->appendChild($nuovaData);
+
+    $nuovaOraInizio= $docAttivita->createElement("oraInizio", $oraInizio.":00");
+    $nuovaPrenotazione->appendChild($nuovaOraInizio);
+
+    $nuovaOraFine= $docAttivita->createElement("oraFine", $oraFine.":00");
+    $nuovaPrenotazione->appendChild($nuovaOraFine);
+
+    $nuovoPrezzoTotale= $docAttivita->createElement("prezzoTotale", $prezzoTotale);
+    $nuovaPrenotazione->appendChild($nuovoPrezzoTotale);
+
+    modificaCreditiCliente($codFisc , -$creditiInseriti);
+    $nuovoCreditiUsati= $docAttivita->createElement("creditiUsati", $creditiInseriti);
+    $nuovaPrenotazione->appendChild($nuovoCreditiUsati);
+
+    $docAttivita->save("../XML/Attivita.xml");
+
+}
+
+
 
 
 

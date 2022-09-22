@@ -312,6 +312,73 @@ function getCamera($idCamera){
     return $arrayDati;
 }
 
+//Funzione per recuperare il numero delle attività presenti nel file Attivita.xml
+
+function numAttivita(){
+    $xmlStringAttivita= "";
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+        $xmlStringAttivita .= trim($node);
+
+    }
+
+    $docAttivita = new DOMDocument();
+    $docAttivita->loadXML($xmlStringAttivita);
+
+    $listaAttivita = $docAttivita->documentElement->childNodes;
+    
+    return ($listaAttivita->length);
+
+}
+
+
+//Funzione per recuperare TUTTI i dati di una specifica attività
+
+function getDatiAttivita($idAttivita){
+
+    $xmlStringAttivita= "";
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+        $xmlStringAttivita .= trim($node);
+
+    }
+
+    $docAttivita = new DOMDocument();
+    $docAttivita->loadXML($xmlStringAttivita);
+
+    $xpathAttivita = new DOMXPath($docAttivita);
+
+    $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
+    $attivita = $attivita->item(0);
+
+    $arrayDati['nome'] = $attivita->getElementsByTagName("nome")->item(0)->textContent;
+    $arrayDati['descrizione'] = $attivita->getElementsByTagName("descrizione")->item(0)->textContent;
+    $arrayDati['linkImmagine'] = $attivita->getElementsByTagName("linkImmagine")->item(0)->textContent;
+    $arrayDati['oraApertura'] = $attivita->getElementsByTagName("oraApertura")->item(0)->textContent;
+    $arrayDati['oraChiusura'] = $attivita->getElementsByTagName("oraChiusura")->item(0)->textContent;
+    $arrayDati['prezzoOrario'] = $attivita->getElementsByTagName("prezzoOrario")->item(0)->textContent;
+
+    return $arrayDati;
+
+}
+
+function getIdAttivita(){
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    $listaID = $xpathAttivita->query("//@id");
+    return $listaID;
+}
+
+
 
 
 

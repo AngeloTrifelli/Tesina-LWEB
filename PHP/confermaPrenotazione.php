@@ -24,7 +24,7 @@
         }
         
     }
-    else{
+    elseif((!(isset($_POST['idAttivita']))) && (!(isset($_SESSION['prenotazioneAttivita'])))){
         if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
             if(isset($_POST['ANNULLA'])){
                 unset($_SESSION['prenotazioneCamera']);
@@ -41,6 +41,44 @@
         }          
     }
 
+    if(isset($_SESSION['prenotazioneAttivita'])){
+        if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] != "null"){ 
+            $temp = $_SESSION['prenotazioneAttivita'];
+            $datiAttivita=getDatiAttivita($temp['idAttivita']);
+            $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
+
+            $oraInizio=$temp['oraInizio'];
+            $oraFine=$temp['oraFine'];
+            settype($oraInizio,"integer");
+            settype($oraFine,"integer");
+
+            $oraDiAttivita=$oraFine-$oraInizio;
+
+            $prezzoOrario=$datiAttivita['prezzoOrario'];
+            settype($prezzoOrario,"integer");
+
+            $prezzoTotale=$prezzoOrario*$oraDiAttivita;
+
+            unset($_SESSION['prenotazioneAttivita']);
+
+    }else{
+        header('Location: intro.php');
+    }
+}else{
+    if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
+        if(isset($_POST['ANNULLA'])){
+            unset($_SESSION['prenotazioneAttivita']);
+            header('Location: prenotaAttivita.php');
+        }
+        else{
+            aggiungiPrenotazioneAttivita($_POST['idAttivita'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['dataAttivita'] , $_POST['oraInizio'], $_POST['oraFine'],$_POST['prezzoTotale'], $_POST['creditiUsati']);
+            header('Location: registrazioneCompletata.php');
+        }
+    }
+    else{
+        header('Location: intro.php');
+    }          
+}
    
 
    
@@ -70,7 +108,6 @@
     </head>
 
     <body>
-
         <div class="containerCentrale">
         <h1>CONFERMA PRENOTAZIONE:</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
@@ -118,9 +155,51 @@
                     <input type="hidden" name="idCamera" value="<?php echo $temp['idCamera'];?>" />
                     <input type="hidden" name="dataArrivo" value="<?php echo $temp['dataArrivo'];?>" />
                     <input type="hidden" name="dataPartenza" value="<?php echo $temp['dataPartenza'];?>" />
-                <?php
+                <?php   
                     }
+                    if(isset($datiAttivita)){
                 ?>
+                    <div class="zonaSuperiore">
+                        
+                        <div class="zonaDati">
+                            <span class="item">Nome attivit&agrave; : <?php echo $datiAttivita['nome'];?></span>
+                            <span class="item">Prezzo all'ora : <?php echo $datiAttivita['prezzoOrario'];?>&euro;</span>
+                            <span class="item">Data:
+                                <?php
+                                    $stringaData = $temp['dataAttivita'];
+                                    $giorno = substr($stringaData, 8,2);       
+                                    $mese = substr($stringaData,5,2 );
+                                    $anno = substr($stringaData,0,4 );
+                                    echo $giorno."-".$mese."-".$anno;
+                                ?>
+                            </span>
+                            <span class="item">Orario inizio : <?php echo $temp['oraInizio']?></span>
+                            <span class="item">Orario fine  : <?php echo $temp['oraFine']?></span>
+
+                        </div>
+
+                        <div class="zonaPagamento">
+                            <span class="item">Totale: <?php echo $prezzoTotale;?>&euro;</span>
+                            <span class="item">Crediti disponibili: <?php echo $cliente['crediti'];?></span>
+                            <span class="item">Utilizza crediti: <input type="number" name="creditiUsati" value="0"  id="textInput" autocomplete="off" /> </span>
+                            <span class="hide"></span>
+                            <br />
+                            <hr />
+                            <span class="item" id="totComplessivo">Totale complessivo: <?php echo $prezzoTotale;?>&euro;</span>
+                        </div>    
+
+                    </div>
+                    <input type="hidden" name="idAttivita" value="<?php echo $temp['idAttivita'];?>" />
+                    <input type="hidden" name="dataAttivita" value="<?php echo $temp['dataAttivita'];?>" />
+                    <input type="hidden" name="oraInizio" value="<?php echo $temp['oraInizio'];?>" />
+                    <input type="hidden" name="oraFine" value="<?php echo $temp['oraFine'];?>" />
+                    <input type="hidden" name="prezzoTotale" value="<?php echo $prezzoTotale?>" />
+
+
+                    <?php 
+                    }
+                    ?>
+
 
                     <div class="zonaBottoni">
                         <input type="submit" class="button" name="ANNULLA" value="ANNULLA" />

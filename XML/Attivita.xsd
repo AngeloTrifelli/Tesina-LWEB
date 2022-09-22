@@ -19,6 +19,7 @@
                 <xsd:element ref="prezzoOrario" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
     </xsd:element>
 

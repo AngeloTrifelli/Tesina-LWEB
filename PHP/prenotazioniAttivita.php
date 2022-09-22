@@ -1,97 +1,197 @@
-<?php
-    session_start();
-    if(!isset($_SESSION['codFiscUtenteLoggato'])){
-        if(!isset($_SESSION['loginType'])){
-            header('Location: intro.php');
-        }
-    }
-    else{
-        header('Location: areaUtente.php');
-    }
+<?php 
+echo'<?xml version="1.0" encoding="UTF-8"?>';
+require_once("funzioniGetPHP.php");
 
-    echo '<?xml version="1.0" encoding="UTF-8"?>';
+session_start();
+
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
     <head>
-        <title>Prenotazioni attivit&agrave;</title>
+        <title>Sapienza hotel: Attività prenotate</title>
 
         <style>
             <?php include "../CSS/prenotazioniAttivita.css" ?>
         </style>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" /> 
+
     </head>
 
-
     <body>
-        <div class="top">
+        
+        <div id="leftColumn">
+                     
+            <img id="logo" src="https://upload.wikimedia.org/wikipedia/it/thumb/0/0d/Uniroma1.svg/2560px-Uniroma1.svg.png" alt="Immagine non caricata"/>
 
-            <div class="topLeft">               
-                <a href="./prenotazioniClienti.php">TORNA INDIETRO</a>  
+
+            <div id="links">
+
+               <a class="item" href="../PHP/attivita.php">TORNA INDIETRO</a>
+
             </div>
-
-            <h1 class="alignCenter">LISTA PRENOTAZIONI ATTIVIT&Agrave;</h1>
-           
-            <div style="width: 18.5%;"></div>
-               
+            
+            
         </div>
 
-    
-        <h3 class="titoloImportante alignCenter">PRENOTAZIONI ATTIVE:</h3>
-        <div class="mainContainer marginBottom">
-            <div class="areaDati">
-                <table class="alignCenter tabella"  align="center">
-                    <tr>
-                        <td><strong>Codice fiscale cliente</strong></td>
-                        <td><strong>Nome attivita</strong></td>
-                        <td><strong>Data</strong></td>
-                        <td><strong>Ora inizio</strong></td>
-                        <td><strong>Ora fine</strong></td>
-                        <td><strong>Prezzo totale</strong></td>
-                        <td><strong>Crediti usati</strong></td>
-                    </tr>
-                    <tr>
-                        <td>RSSGNN64R03E472G</td>
-                        <td>Palestra</td>
-                        <td>29-10-2022</td>
-                        <td>17:00</td>
-                        <td>19:00</td>
-                        <td>20 &euro;</td>
-                        <td>0</td>
-                        <td><input type="submit" class="button" name="MODIFICA" value="MODIFICA" />  </td>
-                        <td><input type="submit" class="button" name="ANNULLA" value="ANNULLA" />  </td>
-                    </tr>
-                </table>
-            </div>
+        <div id="rightColumn">
+        
+            <h1 id="mainTitle">LE TUE ATTIVIT&Agrave; PRENOTATE:</h1>
+
+            <?php 
+            
+            $xmlStringAttivita= "";
+
+             foreach(file("../XML/Attivita.xml") as $node){
+
+                $xmlStringAttivita .= trim($node);
+
+            }
+
+            $docAttivita = new DOMDocument();
+            $docAttivita->loadXML($xmlStringAttivita);
+
+            $listaAttivita = $docAttivita->documentElement->childNodes;
+
+            $numAttivita= numAttivita();
+            $i=0;
+            while($i<$numAttivita){
+                $attivita=$listaAttivita->item($i);
+                
+                $listaPrenotazioni=$attivita->getElementsByTagName("prenotazione");
+                $numPrenotazioni= $listaPrenotazioni->length;
+
+                $testoNomeAttivita=array();
+                $testoDataPrenotazione=array();
+                $testoOrarioInizio=array();
+                $testoOrarioFine=array();
+                $testoPrezzo=array();
+                $testoCreditiUsati=array();
+                for($j=0; $j<$numPrenotazioni; $j++){
+                    $elemPrenotazione=$attivita->getElementsByTagName("prenotazione")->item($j); //prenotazione utente
+                   
+                    if(($elemPrenotazione->firstChild->nextSibling->textContent)== $_SESSION['codFiscUtenteLoggato']){
+                        $testoNomeAttivita[$j]= $attivita->firstChild->textContent;
+                        $testoDataPrenotazione[$j]=$elemPrenotazione->getElementsByTagName("data")->item(0)->textContent;
+                        $testoOrarioInizio[$j]=$elemPrenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
+                        $testoOrarioFine[$j]=$elemPrenotazione->getElementsByTagName("oraFine")->item(0)->textContent;
+                        $testoPrezzo[$j]=$elemPrenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+                        $testoCreditiUsati[$j]=$elemPrenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+                        ?>
+
+                        <table class="box" align="center">
+
+                        <tr>
+                    
+                            <td>
+                                <div class="miniBox">
+
+                                    <div class="titleBox">
+                                        Attivit&agrave;:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoNomeAttivita[$j]; ?>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div class="miniBox">
+                                    <div class="titleBox">
+                                        Data prenotazione:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoDataPrenotazione[$j]; ?>
+                                    </div>
+                                    
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div class="miniBox">
+                                    <div class="titleBox">
+                                        Orario Apertura:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoOrarioInizio[$j]; ?>
+                                    </div>
+                                    
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div class="miniBox">
+                                    <div class="titleBox">
+                                        Orario Chiusura:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoOrarioFine[$j]; ?>
+                                    </div>
+                                    
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div class="miniBox">
+
+                                    <div class="prezzo">
+                                        Prezzo totale:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoPrezzo[$j]."&euro;"; ?>
+                                    </div>
+                                    
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div class="miniBox">
+
+                                    <div class="prezzo">
+                                        Crediti utilizzati:
+                                    </div>
+                            
+                                    <div>
+                                        <?php echo $testoCreditiUsati[$j]; ?>
+                                    </div>
+                                    
+                                </div>
+
+                            </td>
+        
+                        </tr>
+
+                    </table>
+                    <?php
+
+                    }
+                }
+
+                $i++;
+            }
+
+            ?>
+
         </div>
 
-        <h3 class="titoloImportante alignCenter">PRENOTAZIONI PASSATE:</h3>
-        <div class="mainContainer marginBottom">
-            <div class="areaDati">
-                <table class="alignCenter tabella"  align="center">
-                    <tr>
-                        <td><strong>Codice fiscale cliente</strong></td>
-                        <td><strong>Nome attivita</strong></td>
-                        <td><strong>Data</strong></td>
-                        <td><strong>Ora inizio</strong></td>
-                        <td><strong>Ora fine</strong></td>
-                        <td><strong>Prezzo totale</strong></td>
-                        <td><strong>Crediti usati</strong></td>
-                    </tr>
-                    <tr>
-                        <td>RSSGNN64R03E472G</td>
-                        <td>Spa</td>
-                        <td>15-06-2022</td>
-                        <td>16:00</td>
-                        <td>17:00</td>
-                        <td>30 &euro;</td>
-                        <td>0</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    
-       
     </body>
+
 </html>
