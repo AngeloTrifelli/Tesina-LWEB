@@ -39,7 +39,7 @@
             <div id="links">
                 <a class="item" href="./prenotazioniRistorante.php">PRENOTAZIONI RISTORANTE</a>
                 <br />
-                <a class="item" href="./prenotazioniAttivita.php">PRENOTAZIONI ATTIVIT&Agrave;</a>
+                <a class="item" href="./listaPrenotazioniAttivita.php">PRENOTAZIONI ATTIVIT&Agrave;</a>
                 <br />
                 <br />
                 <a class="item" href="./areaUtente.php">TORNA INDIETRO</a>
