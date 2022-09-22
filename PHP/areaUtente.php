@@ -79,7 +79,7 @@
                         echo ' <a class="item" href="./intro.php">HOME</a><br />';
                         if($soggiornoAttivo == "True"){
                             echo '
-                            <a class="item" href="#">SERVIZIO DI RISTORAZIONE</a>
+                            <a class="item" href="./homeRistorante.php">SERVIZIO DI RISTORAZIONE</a>
                             <br /> 
                           
                             <a class="item" href="#attivita">ATTIVIT&agrave;</a>
@@ -91,40 +91,34 @@
                         echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';
                         break;
                     case "Concierge":
-                        echo '
-                        <a class="item" href="#">HOME</a>
-                        <br /> 
-                          
-                        <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
+                        echo '                         
+                        <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             
-                        <a class="item" href="#">MODIFICA ORARI</a>
+                        <a class="item" href="./listaOrari.php">MODIFICA ORARI</a>
                         <br />
                         
-                        <a class="item" href="#">MODIFICA ATTIVIT&agrave;</a>
+                        <a class="item" href="./listaAttivita.php">MODIFICA ATTIVIT&agrave;</a>
                         <br /> 
                     
-                        <a class="item" href="#attivita">VISUALIZZA PRENOTAZIONI CLIENTI</a>
+                        <a class="item" href="./prenotazioniClienti.php">VISUALIZZA PRENOTAZIONI CLIENTI</a>
                         <br />
             
                         <a class="item" href="#">DOMANDE</a>
                         <br />';
                         break;
                     case "Admin":
-                        echo '
-                        <a class="item" href="#">HOME</a>
-                        <br /> 
-                          
-                        <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
+                        echo '            
+                        <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             
-                        <a class="item" href="#">MODIFICA ORARI</a>
+                        <a class="item" href="./listaOrari.php">MODIFICA ORARI</a>
                         <br />
                         
-                        <a class="item" href="#">MODIFICA ATTIVIT&agrave;</a>
+                        <a class="item" href="./listaAttivita.php">MODIFICA ATTIVIT&agrave;</a>
                         <br /> 
                     
-                        <a class="item" href="#attivita">VISUALIZZA PRENOTAZIONI CLIENTI</a>
+                        <a class="item" href="./prenotazioniClienti.php">VISUALIZZA PRENOTAZIONI CLIENTI</a>
                         <br />
             
                         <a class="item" href="#">DOMANDE</a>
