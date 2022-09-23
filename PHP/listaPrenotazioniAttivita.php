@@ -18,7 +18,7 @@
         <title>Prenotazioni attivit&agrave;</title>
 
         <style>
-            <?php include "../CSS/prenotazioniAttivita.css" ?>
+            <?php include "../CSS/listaPrenotazioniAttivita.css" ?>
         </style>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
     </head>
