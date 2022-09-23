@@ -2,29 +2,17 @@
     require_once('funzioniGetPHP.php');
 
     session_start();
-    if(isset($_SESSION['codFiscUtenteLoggato'])){
-        $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
-        $soggiorniPassati = getSoggiorniPassati($_SESSION['codFiscUtenteLoggato']);
+    if(isset($_SESSION['loginType'])){
+        if(isset($_SESSION['codFiscUtenteLoggato'])){
+            $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
+            $soggiorniPassati = getSoggiorniPassati($_SESSION['codFiscUtenteLoggato']);
+        }else{
+            $cliente = getDatiCliente($_SESSION['codFiscUtenteDaModificare']);
+        }
     }
     else{
         header('Location: intro.php');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -47,7 +35,13 @@
 <body>
     <div class="top">
         <div class="topLeft">
-            <a href="./areaUtente.php">TORNA INDIETRO</a>    
+            <?php
+            if(isset($_SESSION['codFiscUtenteLoggato'])){
+            echo "<a href=\"./areaUtente.php\">TORNA INDIETRO</a> ";
+            }else{
+                echo "<a href=\"./visualizzaClienti.php\">TORNA INDIETRO</a> ";
+            }
+            ?>   
         </div>
         <h1 class="alignCenter">Ciao <?php echo $cliente['nome'];?>!</h1>
         <div style="width: 18.5%;"></div>
@@ -130,7 +124,9 @@
         </div>
     </div>
    
-
+    <?php
+        if(isset($_SESSION['codFiscUtenteLoggato'])){  //Se sono un admin non mi interessa visualizzare i soggiorni
+    ?>
     <h3 class="titoloImportante alignCenter">IL TUO SOGGIORNO:</h3>
 
     <?php 
@@ -263,6 +259,10 @@
             echo '<p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati...</p>';
         }
     ?>
+
+<?php
+    } 
+?>
 </body>
 
 
