@@ -364,6 +364,9 @@ function getDatiAttivita($idAttivita){
 
 }
 
+// Funzione per ottenere gli id di tutte le attivita 
+
+
 function getIdAttivita(){
     $xmlString = "";
     foreach(file("../XML/Attivita.xml") as $node){
@@ -378,6 +381,108 @@ function getIdAttivita(){
     return $listaID;
 }
 
+// Funzione per ottenere i codici fiscali di tutti i clienti 
+
+function getCodFiscClienti(){
+    $xmlString = "";
+    foreach(file("../XML/Clienti.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathClienti = new DOMXPath($doc);
+
+    $listaCodFisc= $xpathClienti->query("//@codFisc");
+    return $listaCodFisc;
+
+}
+
+//Funzione che restituisce il numero di Clienti presenti e non in struttura(che hanno il soggiorno attivo)
+
+function getNumClientiConSoggiorno(){
+
+    $dataAttuale=date('Y-m-d');
+
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaCamere = $doc->documentElement->childNodes;
+    $numClientiPresenti = 0;
+    $numClientiNonPresenti =0;
+    for($i=0 ; $i < $listaCamere->length ; $i++ ){
+        $camera = $listaCamere->item($i);
+
+        $listaPrenotazioni = $camera->getElementsByTagName("prenotazione");
+        $j = 0;
+        while($j < $listaPrenotazioni->length){
+            $prenotazione = $listaPrenotazioni->item($j);
+
+            $statoSoggiorno = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
+
+            if($statoSoggiorno != "Pagamento rifiutato" && $statoSoggiorno != "Terminato"){
+            $dataInizioPrenotazione = $prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
+            $dataFinePrenotazione = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
+            
+                if(($dataInizioPrenotazione<=$dataAttuale)&&($dataFinePrenotazione>=$dataAttuale)){
+                    $numClientiPresenti+=1;
+                }else{
+                    $numClientiNonPresenti+=1;
+                }
+            }
+            $j++;
+        }
+    }
+    $numClienti=array();
+    $numClienti['presenti']=$numClientiPresenti;
+    $numClienti['nonPresenti']=$numClientiNonPresenti;
+
+    return $numClienti;
+
+}
+
+//Funzione che restituisce il numero di clienti presenti nel file Clienti.xml
+
+function getNumClientiTotali(){
+    $xmlStringCliente= "";
+
+    foreach(file("../XML/Clienti.xml") as $node){
+
+        $xmlStringCliente .= trim($node);
+
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlStringCliente);
+
+    $listaClienti = $doc->documentElement->childNodes;
+    
+    return ($listaClienti->length);
+
+}
+
+function restituisciClienteIEsimo($i){
+    $xmlStringCliente= "";
+
+    foreach(file("../XML/Clienti.xml") as $node){
+
+        $xmlStringCliente .= trim($node);
+
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlStringCliente);
+
+    $listaClienti = $doc->documentElement->childNodes;
+    $cliente=$listaClienti->item($i);
+    $codFisc=$cliente->getAttribute("codFisc");
+    return(getDatiCliente($codFisc));
+
+}
 
 
 
