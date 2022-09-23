@@ -92,7 +92,7 @@
                         break;
                     case "Concierge":
                         echo '
-                        <a class="item" href="#">HOME</a>
+                        <a class="item" href="./intro.php">HOME</a>
                         <br /> 
                           
                         <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
@@ -112,7 +112,7 @@
                         break;
                     case "Admin":
                         echo '
-                        <a class="item" href="#">HOME</a>
+                        <a class="item" href="./intro.php">HOME</a>
                         <br /> 
                           
                         <a class="item" href="#">MODIFICA MENU RISTORANTE</a>
@@ -134,13 +134,13 @@
                         <br />
                         <br />
 
-                        <a class="item" href="#">CATEGORIE</a>
+                        <a class="item" href="./categorie.php">CATEGORIE</a>
                         <br />
                         
-                        <a class="item" href="#">PAGAMENTI CLIENTI</a>
+                        <a class="item" href="./pagamentiClienti.php">PAGAMENTI CLIENTI</a>
                         <br />
 
-                        <a class="item" href="#">VISUALIZZA CLIENTI</a>
+                        <a class="item" href="./visualizzaClienti.php">VISUALIZZA CLIENTI</a>
                         <br />';
                         break;
                 }
