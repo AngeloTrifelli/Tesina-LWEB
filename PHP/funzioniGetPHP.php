@@ -400,7 +400,7 @@ function getCodFiscClienti(){
 
 //Funzione che restituisce il numero di Clienti presenti e non in struttura(che hanno il soggiorno attivo)
 
-function getNumClientiConSoggiorno(){
+function getNumClientiConSoggiornoAttivo(){
 
     $dataAttuale=date('Y-m-d');
 
@@ -465,6 +465,8 @@ function getNumClientiTotali(){
 
 }
 
+//Funzione che restituisce l'iesimo cliente presente nel file Clienti.xml
+
 function restituisciClienteIEsimo($i){
     $xmlStringCliente= "";
 
@@ -484,8 +486,123 @@ function restituisciClienteIEsimo($i){
 
 }
 
+//Funzione che restituisce una tabella contente array composti da tutti i soggiorni distinti per Approvati,sospesi, rifiutati e terminati
 
+function getSoggiorni(){
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
 
+    $tabellaSoggiorni = array();
+    $soggiorniSospesi = array();
+    $soggiorniApprovati= array();
+    $soggiorniRifiutati = array();
+    $soggiorniTerminati= array();
 
+    $listaCamere = $doc->documentElement->childNodes;
+
+    for($i=0 ; $i < $listaCamere->length ; $i++ ){
+        $camera = $listaCamere->item($i);
+        $listaPrenotazioni = $camera->getElementsByTagName("prenotazione");
+        $j = 0;
+
+        while($j < $listaPrenotazioni->length){
+
+            $prenotazione = $listaPrenotazioni->item($j);
+            $idPrenotazione = $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+            $codFisc=$prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+            $statoSoggiorno = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
+            $creditiUsati=$prenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+            $dataArrivo=$prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
+            $dataPartenza=$prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
+            $temp = array(
+                "idPrenotazione"=>$idPrenotazione,
+                "codFisc"=>$codFisc,
+                "statoSoggiorno"=>$statoSoggiorno,
+                "creditiUsati"=>$creditiUsati,
+                "dataArrivo"=>$dataArrivo,
+                "dataPartenza"=>$dataPartenza
+            );
+            if($statoSoggiorno == "Approvato"){
+                array_push($soggiorniApprovati , $temp);
+            }elseif($statoSoggiorno=="Pagamento sospeso"){
+                array_push($soggiorniSospesi , $temp);
+            }elseif($statoSoggiorno=="Pagamento rifiutato"){
+                array_push($soggiorniRifiutati , $temp);
+            }else{
+                array_push($soggiorniApprovati , $temp);
+            }
+                $j++;
+        }
+    }
+
+    if(count($soggiorniApprovati) >= 1){
+        array_multisort(array_column($soggiorniApprovati, 'dataArrivo') , SORT_DESC , $soggiorniApprovati);
+    }
+    if(count($soggiorniSospesi) >= 1){
+        array_multisort(array_column($soggiorniSospesi, 'dataArrivo') , SORT_DESC , $soggiorniSospesi);
+    }
+    if(count($soggiorniRifiutati) >= 1){
+        array_multisort(array_column($soggiorniRifiutati, 'dataArrivo') , SORT_DESC , $soggiorniRifiutati);
+    }
+    if(count($soggiorniTerminati) >= 1){
+        array_multisort(array_column($soggiorniTerminati, 'dataArrivo') , SORT_DESC , $soggiorniTerminati);
+    }
+
+    array_push($tabellaSoggiorni , $soggiorniApprovati);
+    array_push($tabellaSoggiorni , $soggiorniSospesi);
+    array_push($tabellaSoggiorni , $soggiorniRifiutati);
+    array_push($tabellaSoggiorni , $soggiorniTerminati);
+
+    return $tabellaSoggiorni;
+    
+}
+
+function getCategorie(){
+    $xmlString = "";
+    foreach(file("../XML/Categorie.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $tabellaCategorie = array();
+    $categorieAttivate=array();
+    $categorieDisattivate=array();
+
+    $listaCategorie = $doc->documentElement->childNodes;
+    
+    for($i=0;$i<$listaCategorie->length;$i++){
+        $categoria=$listaCategorie->item($i);
+        $nome=$categoria->getElementsByTagName("nome")->item(0)->textContent;
+        $stato=$categoria->getElementsByTagName("stato")->item(0)->textContent;
+
+        $temp = array(
+            "nome"=>$nome,
+            "stato"=>$stato
+        );
+        
+        if($stato=="Attiva"){
+            array_push($categorieAttivate , $temp);
+        }else{
+            array_push($categorieDisattivate , $temp);
+        }
+    }
+    
+    if(count($categorieAttivate) >= 1){
+        array_multisort(array_column($categorieAttivate, 'nome') , SORT_ASC , $categorieAttivate);
+    }
+    if(count($categorieDisattivate) >= 1){
+        array_multisort(array_column($categorieDisattivate, 'nome') , SORT_ASC , $categorieDisattivate);
+    }
+
+    array_push($tabellaCategorie, $categorieAttivate);
+    array_push($tabellaCategorie, $categorieDisattivate);
+
+    return($tabellaCategorie);
+}
 
 ?>

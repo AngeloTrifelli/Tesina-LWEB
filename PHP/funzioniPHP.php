@@ -271,10 +271,82 @@ function presenzaClienteInStruttura($codFisc){
     return("False");
 }
 
+// Funzione per capire che bottone ha premuto l'admin in pagamentiClienti.php
+function individuaBottonePagamentoPremuto(){
+
+    $tabellaSoggiorni=getSoggiorni();
+    $listaSoggiorniSospesi=$tabellaSoggiorni[1];
+
+    $i=0;
+    $trovato="False";
+
+    while($i < count($listaSoggiorniSospesi) && $trovato == "False"){
+
+        $soggiorno= $listaSoggiorniSospesi[$i];
+        $idPrenotazione= $soggiorno['idPrenotazione'];
+        if(isset($_POST[$idPrenotazione])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+    if($_POST[$idPrenotazione]=="Approva"){
+        modificaStatoSoggiorno($idPrenotazione,"Approvato");
+    
+    }else{
+        modificaStatoSoggiorno($idPrenotazione,"Pagamento rifiutato");
+
+    }
+
+}
+
+// Funzione per capire che bottone ha premuto l'admin in categorie.php
+
+function individuaBottoneCategoriaPremuto(){
+
+    $tabellaCategorie=getCategorie();
+    $listaCategorieAttivate=$tabellaCategorie[0];
+    $listaCategorieDisattivate=$tabellaCategorie[1];
 
 
 
+    $i=0;
+    $j=0;
+    $trovato="False";
 
+    while($i < count($listaCategorieAttivate) && $trovato == "False"){
+        $categoria= $listaCategorieAttivate[$i];
+        $nome= $categoria['nome'];
+        if(isset($_POST[$nome])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    while($j<count($listaCategorieDisattivate) && $trovato == "False"){
+        $categoria=$listaCategorieDisattivate[$j];
+        $nome=$categoria['nome'];
+        if(isset($_POST[$nome])){
+            $trovato = "True";
+        }
+        else{
+            $j++;
+        }
+
+    }
+
+
+    if($_POST[$nome]=="Attiva"){
+        modificaStatoCategoria($nome,"Attiva");
+    
+    }else{
+        modificaStatoCategoria($nome,"Disabilitata");
+    }
+
+}
 
 
 
