@@ -189,6 +189,73 @@ function aggiungiPrenotazioneAttivita($idAttivita,$codFisc,$data,$oraInizio,$ora
 
 }
 
+//Funzione che inserisce una nuova categoria nel file Categorie.xml
+
+function aggiungiCategoriaNuova($categoriaDaAggiungere){
+
+    $xmlStringCategoria= "";
+
+    foreach(file("../XML/Categorie.xml") as $node){
+
+        $xmlStringCategoria .= trim($node);
+
+    }
+
+    $docCategoria = new DOMDocument();
+    $docCategoria->loadXML($xmlStringCategoria);
+    $docCategoria->formatOutput = true;
+
+    $nuovaCategoria = $docCategoria->createElement("categoria");
+    $listaCategorie= $docCategoria->documentElement;
+    $listaCategorie->appendChild($nuovaCategoria);
+
+    $nuovoNome = $docCategoria->createElement("nome", $categoriaDaAggiungere['nome']);
+    $nuovaCategoria->appendChild($nuovoNome);
+
+    $nuovoStato = $docCategoria->createElement("stato", "Attiva");
+    $nuovaCategoria->appendChild($nuovoStato);
+
+    $nuovaListaAzioni = $docCategoria->createElement("listaAzioni");
+    $nuovaCategoria->appendChild($nuovaListaAzioni);
+
+    if($categoriaDaAggiungere['prenotazioneTavolo']!=""){
+        $nuovaAzioneUtente = $docCategoria->createElement("azioneUtente");
+        $nuovaListaAzioni->appendChild($nuovaAzioneUtente);
+        $nuovaNomeAzione = $docCategoria->createElement("nomeAzione", "Prenotazione tavolo");
+        $nuovaAzioneUtente->appendChild($nuovaNomeAzione);
+    }
+    if($categoriaDaAggiungere['prenotazioneServizioInCamera']!=""){
+        $nuovaAzioneUtente = $docCategoria->createElement("azioneUtente");
+        $nuovaListaAzioni->appendChild($nuovaAzioneUtente);
+        $nuovaNomeAzione = $docCategoria->createElement("nomeAzione", "Prenotazione servizio in camera");
+        $nuovaAzioneUtente->appendChild($nuovaNomeAzione);
+    }
+    if($categoriaDaAggiungere['attivita']!=""){
+        $nuovaAzioneUtente = $docCategoria->createElement("azioneUtente");
+        $nuovaListaAzioni->appendChild($nuovaAzioneUtente);
+        $nuovaNomeAzione = $docCategoria->createElement("nomeAzione", "Prenotazione attivita");
+        $nuovaAzioneUtente->appendChild($nuovaNomeAzione);
+    }
+    if($categoriaDaAggiungere['prenotazioneSoggiorno']!=""){
+        $nuovaAzioneUtente = $docCategoria->createElement("azioneUtente");
+        $nuovaListaAzioni->appendChild($nuovaAzioneUtente);
+        $nuovaNomeAzione = $docCategoria->createElement("nomeAzione", "Prenotazione soggiorno");
+        $nuovaAzioneUtente->appendChild($nuovaNomeAzione);
+    }
+    if($categoriaDaAggiungere['registrazione']!=""){
+        $nuovaAzioneUtente = $docCategoria->createElement("azioneUtente");
+        $nuovaListaAzioni->appendChild($nuovaAzioneUtente);
+        $nuovaNomeAzione = $docCategoria->createElement("nomeAzione", "Registrazione cliente");
+        $nuovaAzioneUtente->appendChild($nuovaNomeAzione);
+    }
+
+    $nuovaListaUtenti = $docCategoria->createElement("listaUtenti");
+    $nuovaCategoria->appendChild($nuovaListaUtenti);
+
+    $docCategoria->save("../XML/Categorie.xml");
+
+}
+
 
 
 // Funzione per inserire una prenotazione ad un determinato tavolo

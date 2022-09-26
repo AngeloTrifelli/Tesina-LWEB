@@ -192,6 +192,30 @@ function modificaCreditiCliente($codFiscCliente , $creditiDaSommare){
     $doc->save('../XML/Clienti.xml');
 }
 
+//Funzione che abilita o disabilita una categoria in base al parametro passato
+
+function modificaStatoCategoria($nome,$nuovoStato){
+    $xmlString = "";
+    foreach(file("../XML/Categorie.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathCategorie = new DOMXPath($doc);
+
+    $categoria = $xpathCategorie->query("/listaCategorie/categoria[nome='$nome']");
+    $categoria = $categoria->item(0);
+
+    $statoCategoria = $categoria->getElementsByTagName("stato")->item(0);    
+    
+    $statoCategoria->nodeValue = "";
+    $statoCategoria->appendChild($doc->createTextNode($nuovoStato));
+
+    $doc->save("../XML/Categorie.xml");
+}
 
 
 ?>

@@ -128,13 +128,13 @@
                         <br />
                         <br />
 
-                        <a class="item" href="#">CATEGORIE</a>
+                        <a class="item" href="./categorie.php">CATEGORIE</a>
                         <br />
                         
-                        <a class="item" href="#">PAGAMENTI CLIENTI</a>
+                        <a class="item" href="./pagamentiClienti.php">PAGAMENTI CLIENTI</a>
                         <br />
 
-                        <a class="item" href="#">VISUALIZZA CLIENTI</a>
+                        <a class="item" href="./visualizzaClienti.php">VISUALIZZA CLIENTI</a>
                         <br />';
                         break;
                 }

@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+body , html{
+    font-family: "Lato" , sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.top{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    background-color:#871f30;
+    color: white;
+    display: flex;
+    justify-content:space-between;
+}
+
+.topLeft{
+    padding: 2% 4%;
+    
+}
+
+.alignCenter{
+    text-align: center;
+}
+
+.titoloImportante{
+    margin-top: 5%!important;
+    font-size: 32px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.mainContainer{
+    background-color:rgb(228, 228, 228);
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+.waiting{
+    color: grey;
+}
+
+.prenotazione{
+    border: 1px solid rgb(111, 111, 111);
+    background-color: rgb(250, 250, 250);
+    width: 95%;
+    height: 50%;
+    border-radius: 5px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.button{
+    color: white;
+    background-color: #871f30;
+    cursor: pointer;
+    height: 30px;
+    width: 75px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.button:hover{
+    background-color: #640c1b;
+}
+
+.buttonApprova{
+    color: white;
+    background-color: green;
+    cursor: pointer;
+    height: 30px;
+    width: 75px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.buttonApprova:hover{
+    background-color: rgb(0, 176, 0);
+}
+
+.success{
+    color: green;
+    font-weight:bold;
+}
+
+.insuccess{
+    color: red;
+    font-weight: bold;
+}
+
+.trePuntini{
+    color: grey;
+    font-size: 100px;
+    margin-left: 48%;
+}

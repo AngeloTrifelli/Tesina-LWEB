@@ -16,7 +16,11 @@
             $datoDaModificare = $_POST['datoDaModificare'];
             if($datoDaModificare == "nome" || $datoDaModificare == "cognome" || $datoDaModificare == "indirizzo" ||  $datoDaModificare == "dataDiNascita" ||  $datoDaModificare == "username"){
                 if($_POST['textInput']!=""){
+                    if(isset($_SESSION['codFiscUtenteLoggato'])){
                     $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'] ,$datoDaModificare , $_POST['textInput']);
+                    }else{
+                    $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'] ,$datoDaModificare , $_POST['textInput']);
+                    }
                     if($result == "success"){    
                         header('Location: datiPersonali.php');
                     }
@@ -25,17 +29,29 @@
             else{
                 if($datoDaModificare == "codFisc"){
                     if(preg_match($patternCodFisc , $_POST['nuovoCodFisc'])){
+                        if(isset($_SESSION['codFiscUtenteLoggato'])){
                         $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoCodFisc']);
                         if($result == "success"){    
                             $_SESSION['codFiscUtenteLoggato'] = $_POST['nuovoCodFisc'];
                             header('Location: datiPersonali.php');
+                        }
+                        }else{
+                            $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $_POST['nuovoCodFisc']);
+                            if($result == "success"){    
+                                $_SESSION['codFiscUtenteDaModificare'] = $_POST['nuovoCodFisc'];
+                                header('Location: datiPersonali.php');
+                            }
                         }
                     }
                 }
                 else{
                     if($datoDaModificare == "telefono"){
                         if(preg_match($patternNumTelefono , $_POST['nuovoTelefono'])){
+                            if(isset($_SESSION['codFiscUtenteLoggato'])){
                             $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoTelefono']);
+                            }else{
+                                $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $_POST['nuovoTelefono']);
+                            }
                             if($result == "success"){    
                                 header('Location: datiPersonali.php');
                             }
@@ -44,7 +60,11 @@
                     else{
                         if($datoDaModificare == "email"){
                             if(filter_var($_POST['nuovaEmail'] , FILTER_VALIDATE_EMAIL)){
+                                if(isset($_SESSION['codFiscUtenteLoggato'])){
                                 $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovaEmail']);
+                                }else{
+                                    $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $_POST['nuovaEmail']);
+                                }
                                 if($result == "success"){    
                                     header('Location: datiPersonali.php');
                                 }
@@ -53,7 +73,11 @@
                         else{
                             if($datoDaModificare == "numeroCarta"){
                                 if(preg_match($patternNumeroCarta , $_POST['nuovoNumeroCarta'])){
+                                    if(isset($_SESSION['codFiscUtenteLoggato'])){
                                     $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $_POST['nuovoNumeroCarta']);
+                                    }else{
+                                        $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $_POST['nuovoNumeroCarta']);
+                                    }
                                     if($result == "success"){    
                                         header('Location: datiPersonali.php');
                                     }   
@@ -64,7 +88,11 @@
                                     if($_POST['oldPassword']!="" && $_POST['newPassword']!=""){
                                         $arrayPassword['oldPassword'] = md5($_POST['oldPassword']);
                                         $arrayPassword['newPassword'] = md5($_POST['newPassword']);
+                                        if(isset($_SESSION['codFiscUtenteLoggato'])){
                                         $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $arrayPassword);
+                                        }else{
+                                            $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $arrayPassword);
+                                        }
                                         if($result == "success"){    
                                             header('Location: datiPersonali.php');
                                         }

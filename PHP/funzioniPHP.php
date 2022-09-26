@@ -185,6 +185,8 @@ function individuaBottoneCamereDisponibili(){
 
 // }
 
+// Funzione per capire che bottone ha premuto l'utente in attivita.php
+
 function individuaBottoneidAttivita(){
 
     $listaIdAttivita = getIdAttivita();
@@ -202,8 +204,148 @@ function individuaBottoneidAttivita(){
         }
     }
 
-    return $idAttivita;
+    return $idAttivita; 
 }
+
+// Funzione per capire che bottone ha premuto l'utente in visualizzaClienti.php
+
+function individuaBottoneCodFiscUtenteSelezionato(){
+
+    $listaCodFiscClienti=getCodFiscClienti();
+
+    $i=0;
+    $trovato="False";
+
+    while($i < $listaCodFiscClienti->length && $trovato == "False"){
+        $codFisc = $listaCodFiscClienti->item($i)->textContent;
+        if(isset($_POST[$codFisc])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $codFisc;
+}
+
+//Funzione che restitusce true se il cliente è presente in struttura al momento del run,altrimenti restituisce false
+function presenzaClienteInStruttura($codFisc){
+
+    $dataAttuale=date('Y-m-d');
+
+    $xmlString = "";
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaCamere = $doc->documentElement->childNodes;
+
+    for($i=0 ; $i < $listaCamere->length ; $i++ ){
+        $camera = $listaCamere->item($i);
+
+        $listaPrenotazioni = $camera->getElementsByTagName("prenotazione");
+        $j = 0;
+        while($j < $listaPrenotazioni->length){
+            $prenotazione = $listaPrenotazioni->item($j);
+            $codiceFiscale= $prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+            $statoSoggiorno = $prenotazione->getElementsByTagName("statoSoggiorno")->item(0)->textContent;
+
+            if($statoSoggiorno != "Pagamento rifiutato" && $statoSoggiorno != "Terminato"  && $codiceFiscale == $codFisc){
+            $dataInizioPrenotazione = $prenotazione->getElementsByTagName("dataArrivo")->item(0)->textContent;
+            $dataFinePrenotazione = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;
+                if(($dataInizioPrenotazione<=$dataAttuale)&&($dataFinePrenotazione>=$dataAttuale)){
+                    return("True");
+                }
+            }
+            $j++;
+        }
+        
+    }
+    return("False");
+}
+
+// Funzione per capire che bottone ha premuto l'admin in pagamentiClienti.php
+function individuaBottonePagamentoPremuto(){
+
+    $tabellaSoggiorni=getSoggiorni();
+    $listaSoggiorniSospesi=$tabellaSoggiorni[1];
+
+    $i=0;
+    $trovato="False";
+
+    while($i < count($listaSoggiorniSospesi) && $trovato == "False"){
+
+        $soggiorno= $listaSoggiorniSospesi[$i];
+        $idPrenotazione= $soggiorno['idPrenotazione'];
+        if(isset($_POST[$idPrenotazione])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+    if($_POST[$idPrenotazione]=="Approva"){
+        modificaStatoSoggiorno($idPrenotazione,"Approvato");
+    
+    }else{
+        modificaStatoSoggiorno($idPrenotazione,"Pagamento rifiutato");
+
+    }
+
+}
+
+// Funzione per capire che bottone ha premuto l'admin in categorie.php
+
+function individuaBottoneCategoriaPremuto(){
+
+    $tabellaCategorie=getCategorie();
+    $listaCategorieAttivate=$tabellaCategorie[0];
+    $listaCategorieDisattivate=$tabellaCategorie[1];
+
+
+
+    $i=0;
+    $j=0;
+    $trovato="False";
+
+    while($i < count($listaCategorieAttivate) && $trovato == "False"){
+        $categoria= $listaCategorieAttivate[$i];
+        $nome= $categoria['nome'];
+        if(isset($_POST[$nome])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    while($j<count($listaCategorieDisattivate) && $trovato == "False"){
+        $categoria=$listaCategorieDisattivate[$j];
+        $nome=$categoria['nome'];
+        if(isset($_POST[$nome])){
+            $trovato = "True";
+        }
+        else{
+            $j++;
+        }
+
+    }
+
+
+    if($_POST[$nome]=="Attiva"){
+        modificaStatoCategoria($nome,"Attiva");
+    
+    }else{
+        modificaStatoCategoria($nome,"Disabilitata");
+    }
+
+}
+
+
+
 
 
 
@@ -309,7 +451,6 @@ function cercaTavoloDisponibile($dataPrenotazioneScelta, $locazioneScelta , $pas
 
 }
 
-
 // Funzione per capire quali portate sono state scelte in listaPortate.php
 
 function individuaPortateSelezionate(){
@@ -351,6 +492,19 @@ function individuaPortateSelezionate(){
     }
 
 }
+
+
+
+
+
+   
+
+
+
+
+
+
+
 
 
 
