@@ -1,8 +1,7 @@
 <?php
     require_once('funzioniModificaPHP.php');
     require_once('funzioniGetPHP.php');
-
-
+    require_once('funzioniInsertPHP.php');
 
 
 
@@ -208,10 +207,150 @@ function individuaBottoneidAttivita(){
 
 
 
+// Funzione per effettuare la sottrazione tra due orari
+
+function differenzaOrari($orarioIniziale , $orarioDaSottrarre){
+
+    $diff = $orarioDaSottrarre->diff($orarioIniziale);
+    $nuoviMinuti = $diff->i;
+    $nuovaOra = $diff->h;
+    if(strlen($nuoviMinuti) == 1){
+        $nuoviMinuti = "0".$nuoviMinuti;
+    }
+
+    if(strlen($nuovaOra) == 1){
+        $nuovaOra = "0".$nuovaOra;
+    }
+
+    $nuovaOraFine = $nuovaOra.":".$nuoviMinuti.":00";
+    return $nuovaOraFine;
+}
 
 
+// Funzione per cercare un tavolo disponibile all'interno di prenotaTavolo.php
+
+function cercaTavoloDisponibile($dataPrenotazioneScelta, $locazioneScelta , $pasto , $oraPrenotazioneScelta , $codFiscCliente){
+    $xmlString = "";
+
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlString .= trim($node);
+    } 
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaTavoli = $doc->documentElement->childNodes;
+    
+    $orariRistorante = getOrariRistorante();
+
+    $i=0;
+    $trovato = "False";
+
+    while($i < $listaTavoli->length && $trovato == "False"){
+        $tavolo = $listaTavoli->item($i);
+
+        $locazioneTavolo = $tavolo->getElementsByTagName("locazione")->item(0)->textContent;
+
+        if($locazioneTavolo == $locazioneScelta ){
+            $listaPrenotazioni = $tavolo->getElementsByTagName("prenotazione");
+            $j=0;
+            $disponibile = "True";
+
+            while($j < $listaPrenotazioni->length && $disponibile == "True"){
+                $prenotazione = $listaPrenotazioni->item($j);
+
+                $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
+                if($dataPrenotazione == $dataPrenotazioneScelta){
+                    $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;
+                    if($pasto == "Pranzo"){
+                        if($oraPrenotazione >= $orariRistorante['aperturaPranzo'] && $oraPrenotazione <= $orariRistorante['chiusuraPranzo']){
+                            $disponibile = "False";
+                        }
+                        else{
+                            $j++;
+                        }
+                    }
+                    else{
+                        if($oraPrenotazione >= $orariRistorante['aperturaCena'] && $oraPrenotazione <= $orariRistorante['chiusuraCena']){
+                            $disponibile = "False";
+                        }
+                        else{
+                            $j++;
+                        } 
+                    }
+
+                }
+                else{
+                    $j++;
+                }
+            }
+
+            if($disponibile == "True"){
+                $trovato = "True";
+            }
+            else{
+                $i++;
+            }
+
+        }
+        else{            
+            $i++;
+        }
+    }
+
+    if($trovato == "True"){
+        $numTavolo = $tavolo->getAttribute("numero");        
+        inserisciPrenotazioneTavolo($numTavolo ,$codFiscCliente ,$dataPrenotazioneScelta , $oraPrenotazioneScelta);
+        return "success";
+    }
+    else{        
+        return "insuccess";             // Questo significa che non ho trovato un tavolo disponibile 
+    }
+
+}
 
 
+// Funzione per capire quali portate sono state scelte in listaPortate.php
+
+function individuaPortateSelezionate(){
+    $portate = getPortate();
+    $antipasti = $portate[0];
+    $primiPiatti = $portate[1];
+    $secondiPiatti = $portate[2];
+    $dolci = $portate[3];
+
+    $tabellaPortateScelte = array();
+
+    for($i=0 ; $i < 4 ; $i++){
+        $tipoPortata = $portate[$i];
+        
+        for($j=0 ; $j < count($tipoPortata) ; $j++){
+            $portata = $tipoPortata[$j];
+            $nomePortata = str_replace(" ", "", $portata['descrizione']);
+
+            if(isset($_POST[$nomePortata])){
+                $prezzoPortata = $portata['prezzo'];
+                $quantitaScelta = $_POST[$nomePortata."-quantita"];
+                
+                $temp = array(
+                    "descrizione"=>$portata['descrizione'],
+                    "prezzo"=>$prezzoPortata,
+                    "quantita"=>$quantitaScelta
+                );
+
+                array_push($tabellaPortateScelte , $temp);
+            }
+        }
+    }
+
+    if(count($tabellaPortateScelte) >= 1){
+        return $tabellaPortateScelte;
+    }
+    else{
+        return "null";  // Questo significa che l'utente non ha selezionato nessuna checkbox
+    }
+
+}
 
 
 

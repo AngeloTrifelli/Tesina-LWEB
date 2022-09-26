@@ -191,6 +191,102 @@ function aggiungiPrenotazioneAttivita($idAttivita,$codFisc,$data,$oraInizio,$ora
 
 
 
+// Funzione per inserire una prenotazione ad un determinato tavolo
+
+function inserisciPrenotazioneTavolo($numeroTavolo , $codFiscCliente , $data , $ora){
+    $xmlString= "";
+
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathTavoli = new DOMXPath($doc);
+
+    $tavolo = $xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']");
+    $tavolo = $tavolo->item(0);
+
+    $listaPrenotazioni = $tavolo->getElementsByTagName("listaPrenotazioni")->item(0);
+    $prenotazioni = $tavolo->getElementsByTagName("prenotazione");
+    $numPrenotazioni = count($prenotazioni);
+
+    $nuovaPrenotazione = $doc->createElement("prenotazione");
+    $listaPrenotazioni->appendChild($nuovaPrenotazione);
+
+    $nuovoIdPrenotazione = $doc->createElement("idPrenotazione" , $numeroTavolo."-PT".($numPrenotazioni + 1));
+    $nuovaPrenotazione->appendChild($nuovoIdPrenotazione);
+
+    $nuovoCodFisc = $doc->createElement("codFisc" , $codFiscCliente);
+    $nuovaPrenotazione->appendChild($nuovoCodFisc);
+
+    $nuovaDataPrenotazione = $doc->createElement("data" , $data);
+    $nuovaPrenotazione->appendChild($nuovaDataPrenotazione);
+
+    $nuovaOraPrenotazione = $doc->createElement("ora" , $ora);
+    $nuovaPrenotazione->appendChild($nuovaOraPrenotazione);
+
+    $doc->save("../XML/Tavoli.xml");
+}
+
+// Funzione per inserire la prenotazione di un servizio in camera in dettagliPrenotazioneSC.php
+
+function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   ,$data , $ora , $richieste , $prezzoTotale , $creditiUsati){
+    $xmlString = "";
+    foreach(file("../XML/ServizioCamera.xml") as $node ){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $elemRadice = $doc->documentElement;
+    $listaPrenotazioni = $elemRadice->childNodes;
+    $numPrenotazioni = $listaPrenotazioni->length;
+
+    $nuovaPrenotazione = $doc->createElement("prenotazione");
+    $nuovaPrenotazione->setAttribute("id" , "PSC".($numPrenotazioni + 1) );
+    $elemRadice->appendChild($nuovaPrenotazione);
+
+    $nuovoCodFisc = $doc->createElement("codFisc" , $codFiscCliente);
+    $nuovaPrenotazione->appendChild($nuovoCodFisc);
+
+    $nuovaData = $doc->createElement("data" , $data);
+    $nuovaPrenotazione->appendChild($nuovaData);
+
+    $nuovaOra = $doc->createElement("ora" , $ora);
+    $nuovaPrenotazione->appendChild($nuovaOra);
+
+    $nuoveRichieste = $doc->createElement("richieste" , $richieste);
+    $nuovaPrenotazione->appendChild($nuoveRichieste);
+
+    $nuovoPrezzoTotale = $doc->createElement("prezzoTotale" , $prezzoTotale);
+    $nuovaPrenotazione->appendChild($nuovoPrezzoTotale);
+
+    modificaCreditiCliente($codFiscCliente , -$creditiUsati);
+
+    $nuoviCreditiUsati = $doc->createElement("creditiUsati" , $creditiUsati);
+    $nuovaPrenotazione->appendChild($nuoviCreditiUsati);
+
+    $nuovaListaPortate = $doc->createElement("listaPortate");
+    $nuovaPrenotazione->appendChild($nuovaListaPortate);
+
+    for($i=0 ; $i < count($portateScelte) ; $i++){
+        $portata = $portateScelte[$i];
+        $nuovaPortata = $doc->createElement("portata");
+        $nuovaListaPortate->appendChild($nuovaPortata);
+
+        $nuovoNome = $doc->createElement("nome" , $portata['descrizione']);
+        $nuovaPortata->appendChild($nuovoNome);
+
+        $nuovaQuantita =$doc->createElement("quantita" , $portata['quantita']);
+        $nuovaPortata->appendChild($nuovaQuantita);
+    }
+
+    $doc->save("../XML/ServizioCamera.xml");
+}
 
 
 

@@ -381,6 +381,93 @@ function getIdAttivita(){
 
 
 
+// Funzione per ottenere TUTTE le portate inserite nel menu del ristorante 
+
+function getPortate(){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+
+    $tabellaPortate = array();
+    $antipasti = array();
+    $primiPiatti = array();
+    $secondiPiatti = array();
+    $dolci = array();
+
+    $listaPortate = $xpathRistorante->query("/ristoranti/ristorante/menu/portata");
+    for($i=0 ; $i<$listaPortate->length ; $i++){
+        $portata = $listaPortate->item($i);
+
+        $tipologia = $portata->getElementsByTagName("tipologia")->item(0)->textContent;
+        $descrizione = $portata->getElementsByTagName("descrizione")->item(0)->textContent;
+        $prezzo = $portata->getElementsByTagName("prezzo")->item(0)->textContent;
+
+        $temp = array(
+            "tipologia"=>$tipologia,
+            "descrizione"=>$descrizione,
+            "prezzo"=>$prezzo
+        );
+
+        if($tipologia == "antipasto"){
+            array_push($antipasti , $temp);
+        }
+        elseif($tipologia == "primo piatto"){
+            array_push($primiPiatti , $temp);
+        }elseif($tipologia == "secondo piatto"){
+            array_push($secondiPiatti , $temp);
+        }else{
+            array_push($dolci , $temp);
+        }
+    }
+
+    if(count($antipasti) >= 1){
+        array_multisort(array_column($antipasti , "descrizione") , SORT_ASC , $antipasti);
+    }
+    if(count($primiPiatti) >= 1){
+        array_multisort(array_column($primiPiatti , "descrizione") , SORT_ASC , $primiPiatti);
+    }
+    if(count($secondiPiatti) >= 1){
+        array_multisort(array_column($secondiPiatti , "descrizione") , SORT_ASC , $secondiPiatti);
+    }
+    if(count($primiPiatti) >= 1){
+        array_multisort(array_column($dolci , "descrizione") , SORT_ASC , $dolci);
+    }
+    
+    array_push($tabellaPortate , $antipasti);
+    array_push($tabellaPortate , $primiPiatti);
+    array_push($tabellaPortate , $secondiPiatti);
+    array_push($tabellaPortate , $dolci);
+
+    return $tabellaPortate;
+}
+
+
+// Funzione per ottenere gli orari del ristorante 
+
+function getOrariRistorante(){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $ristorante = $doc->documentElement->childNodes->item(0);
+
+    $arrayDati['aperturaPranzo'] = $ristorante->getElementsByTagName("oraAperturaPranzo")->item(0)->textContent;
+    $arrayDati['chiusuraPranzo'] = $ristorante->getElementsByTagName("oraChiusuraPranzo")->item(0)->textContent;
+    $arrayDati['aperturaCena'] = $ristorante->getElementsByTagName("oraAperturaCena")->item(0)->textContent;
+    $arrayDati['chiusuraCena'] = $ristorante->getElementsByTagName("oraChiusuraCena")->item(0)->textContent;
+
+    return $arrayDati;
+}
 
 
 ?>
