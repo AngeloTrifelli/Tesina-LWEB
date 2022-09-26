@@ -11,4 +11,24 @@
             </prenotazione>
         </listaPrenotazioni>
     </tavolo>
+    <tavolo numero="T5">
+        <locazione>Interna</locazione>
+        <listaPrenotazioni></listaPrenotazioni>
+    </tavolo>
+    <tavolo numero="T8">
+        <locazione>Interna</locazione>
+        <listaPrenotazioni /> 
+    </tavolo>
+    <tavolo numero="T10">
+        <locazione>Esterna</locazione>
+        <listaPrenotazioni />
+    </tavolo>
+    <tavolo numero="T17">
+        <locazione>Esterna</locazione>
+        <listaPrenotazioni></listaPrenotazioni>
+    </tavolo>
+    <tavolo numero="T25">
+        <locazione>Esterna</locazione>
+        <listaPrenotazioni />
+    </tavolo>
 </listaTavoli>
