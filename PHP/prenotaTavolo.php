@@ -1,10 +1,37 @@
 <?php
+    require_once('funzioniGetPHP.php');
+    require_once('funzioniPHP.php');
+
     session_start();
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp = $_SESSION['soggiornoAttivo'];
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+            }
+            else{
+                $stringaData = $temp['dataArrivo'];
+                $giorno = substr($stringaData, 8,2);       
+                $mese = substr($stringaData,5,2 );
+                $anno = substr($stringaData,0,4 );
+                $dataMin= $giorno."-".$mese."-".$anno;
+
+                $stringaData = $temp['dataPartenza'];
+                $giorno = substr($stringaData, 8,2);       
+                $mese = substr($stringaData,5,2 );
+                $anno = substr($stringaData,0,4 );
+                $dataMax= $giorno."-".$mese."-".$anno;
+
+                $orari = getOrariRistorante();
+                $hour = new DateTime('00:30:00');
+
+                $temp2 = new DateTime($orari['chiusuraPranzo']);            
+                $nuovaOraFinePranzo = differenzaOrari($temp2 , $hour );
+
+                $temp2 = new DateTime($orari['chiusuraCena']);                
+                $nuovaOraFineCena = differenzaOrari($temp2 , $hour );
+
+                $result = "";
             }
         }
         else{
@@ -15,11 +42,33 @@
         header('Location: login.php');
     }
 
+
+
+
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
             header('Location: homeRistorante.php');
         }
+        else{
+            if($_POST['dataPrenotazione'] != "" && isset($_POST['locazione']) && isset($_POST['pasto']) && $_POST['oraPrenotazione'] != ""   ){
+                $stringaData = $_POST['dataPrenotazione'];
+                $anno = substr($stringaData, 6 , 4);
+                $mese = substr($stringaData, 3 , 2);
+                $giorno = substr($stringaData , 0 , 2 );
+                $dataPrenotazione= $anno."-".$mese."-".$giorno;
+
+                $oraPrenotazione = $_POST['oraPrenotazione'].":00";
+
+                $result = cercaTavoloDisponibile($dataPrenotazione , $_POST['locazione'] , $_POST['pasto'] , $oraPrenotazione , $_SESSION['codFiscUtenteLoggato']  );
+
+                if($result == "success"){
+                    header('Location: registrazioneCompletata.php');
+                }
+            }
+        }
     }
+
+
 
 
 
@@ -58,26 +107,61 @@
                     <div class="zonaSuperiore">
                         
                         <div class="zonaSx">
-                            <span class="item">Inserisci la data di prenotazione:</span>
-                            <input type="text" name="dataPrenotazione" class="dateInput dataPrenotazione"/>
-                            <span class="item marginTop">Inserisci l'orario di prenotazione:</span>
-                            <input name="oraPrenotazione" class="textInput oraPrenotazione" />
+                            <span class="item">Inserisci la data di prenotazione:</span>                            
+                        <?php
+                            if(isset($_POST['dataPrenotazione'])){
+                                echo "<input type=\"text\" name=\"dataPrenotazione\" class=\"dateInput dataPrenotazione\" value=\"{$_POST['dataPrenotazione']}\"/>";
+                            }
+                            else{
+                                echo '<input type="text" name="dataPrenotazione" class="dateInput dataPrenotazione"/>';
+                            }
+
+                            if(isset($_POST['CONFERMA']) && $_POST['dataPrenotazione'] == ""){
+                                echo '<p class="errorLabel">Inserire una data!</p>';
+                            }
+                        ?>
+                            <h2>Locazione:</h2>
+                            <span>
+                                <input type="radio" id="Interna" name="locazione" value="Interna" <?php if(isset($_POST['locazione'])){if($_POST['locazione']=="Interna"){echo 'checked';}} ?> />
+                                <label for="Interna">Interna</label><br />                         
+                            </span>
+                            <span>
+                                <input type="radio" id="Esterna" name="locazione" value="Esterna"  <?php if(isset($_POST['locazione'])){if($_POST['locazione']=="Esterna"){echo 'checked';}} ?> />
+                                <label for="Esterna">Esterna</label>
+                            </span>                            
+                        <?php                            
+                            if(isset($_POST['CONFERMA']) && !isset($_POST['locazione'])){
+                                echo '<p class="errorLabel">Scegliere la locazione!</p>';
+                            }
+                        ?>
                         </div>
 
                         <div class="zonaDx">
-                            <h2>Locazione:</h2>
+                            <span class="item marginTop">Selezionare un pasto:</span>
                             <span>
-                                <input type="radio" id="Interna" name="type" value="Interna" <?php if(isset($_POST['type'])){if($_POST['type']=="Interna"){echo 'checked';}} ?> />
-                                <label for="Interna">Interna</label><br /> 
-                            </span>
-                            <span>
-                                <input type="radio" id="Esterna" name="type" value="Esterna"  <?php if(isset($_POST['type'])){if($_POST['type']=="Esterna"){echo 'checked';}} ?> />
-                                <label for="Esterna">Esterna</label>
+                                <input type="radio" id="Pranzo" name="pasto" value="Pranzo"  />
+                                <label for="Pranzo">Pranzo</label><br /> 
                             </span>                        
+                            <span>
+                                <input type="radio" id="Cena" name="pasto" value="Cena" />
+                                <label for="Cena">Cena</label>
+                            </span>         
+                        <?php
+                            if(isset($_POST['CONFERMA']) && !isset($_POST['pasto'])){
+                                echo '<p class="errorLabel">Scegliere un pasto!</p>';
+                            }
+                        ?>
+                            <span class="item marginTop">Inserisci l'orario di prenotazione:</span>
+                            <input name="oraPrenotazione" class="textInput oraPrenotazione" />                                               
                         </div>    
 
                     </div>
 
+                    <?php
+                        if(isset($_POST['CONFERMA']) && $result == "insuccess"){
+                            echo '<p class="errorLabel">Non sono stati trovati tavoli disponibili!</p>';
+                        }
+                    ?>
                     <div class="zonaBottoni">
                         <input type="submit" class="button" name="ANNULLA" value="ANNULLA" />
                         <input type="submit" class="button" name="CONFERMA" value="CONFERMA" />
@@ -87,18 +171,86 @@
         </div>
 
         <script>
+            var dataInizio=<?php echo json_encode($dataMin); ?>;
+            var dataFine=<?php echo json_encode($dataMax); ?>;
+
+            var oraInizioPranzo = <?php echo json_encode($orari['aperturaPranzo']); ?>; 
+            var oraFinePranzo = <?php echo json_encode($nuovaOraFinePranzo); ?>;                    
+
+            var oraInizioCena = <?php echo json_encode($orari['aperturaCena']); ?>; 
+            var oraFineCena = <?php echo json_encode($nuovaOraFineCena); ?>;   
+          
+
+    
+            $(".oraPrenotazione").prop("disabled", true);
+            $(".oraPrenotazione").attr("autocomplete" , "off");
+
+            $('input[type=radio][name=pasto]').change(function() {
+                if(this.value == 'Pranzo'){                    
+                    $(".oraPrenotazione").prop("disabled", false);
+                    $(".oraPrenotazione").off();
+                    $(".oraPrenotazione").timepicker('destroy');
+                    $('.oraPrenotazione').timepicker({
+                        timeFormat: 'HH:mm',
+                        dynamic: false,
+                        dropdown: true,
+                        scrollbar: true,
+                        interval: 15,                   
+                        minTime: oraInizioPranzo,
+                        maxTime: oraFinePranzo,                                                   
+                    });                  
+                    $(".oraPrenotazione").val(oraInizioPranzo.substring(0,5));  
+                    $(".oraPrenotazione").on("change", function(){                                           
+                        var element = $(this).val();                        
+                        if(element < oraInizioPranzo){
+                            $(this).val(oraInizioPranzo.substring(0,5));
+                        }
+                        
+                        if(element > oraFinePranzo){                                                                        
+                            $(this).val(oraFinePranzo.substring(0,5));
+                        }                                                
+                    });
+                }
+                else if (this.value == 'Cena'){               
+                    $(".oraPrenotazione").prop("disabled", false); 
+                    $(".oraPrenotazione").off();
+                    $(".oraPrenotazione").timepicker('destroy'); 
+                    $('.oraPrenotazione').timepicker({
+                        timeFormat: 'HH:mm',
+                        dynamic: false,
+                        dropdown: true,
+                        scrollbar: true,
+                        interval: 15,       
+                        minTime: oraInizioCena,
+                        maxTime: oraFineCena,        
+                    });                    
+                    $(".oraPrenotazione").val(oraInizioCena.substring(0,5));
+                    $(".oraPrenotazione").on("change", function(){                    
+                        var element = $(this).val();                        
+                        if(element < oraInizioCena){
+                            $(this).val(oraInizioCena.substring(0,5));
+                        }
+                        
+                        if(element > oraFineCena){                                                        
+                            $(this).val(oraFineCena.substring(0,5));
+                        }                                                
+                    });
+                }
+            });
+
+
+
+
+
+            $(".dataPrenotazione").attr("autocomplete" , "off");
+
             $(".dataPrenotazione").datepicker({
                 dateFormat: 'dd-mm-yy',         
-
+                minDate: dataInizio,
+                maxDate: dataFine
             });
-
-            $('.oraPrenotazione').timepicker({
-                timeFormat: 'HH:mm',
-                dynamic: true,
-                dropdown: true,
-                scrollbar: true,
-                interval: 15
-            });
+        
+           
 
         </script>
     </body>

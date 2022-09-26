@@ -25,8 +25,9 @@ body , html{
     width: 100%;
     min-height: 550px;
     border-radius: 70px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 2%;
 }
 
 .zonaSuperiore{
@@ -47,8 +48,8 @@ body , html{
 .zonaDx{
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin-left: 10%;
+    width: 80%;
+    margin-left: 5%;
     text-align: left;
     line-height: 2;
 }
