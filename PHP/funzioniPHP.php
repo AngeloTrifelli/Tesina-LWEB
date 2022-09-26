@@ -148,42 +148,6 @@ function individuaBottoneCamereDisponibili(){
 }
 
 
-// Funzione per capire se la prenotazione dell'attività si può effettuare perchè disponibile
-
-// function checkPrenotazione($idAttivita,$dataAttivita,$oraInizio,$oraFine){
-//     $oraInizio=explode(':', $oraInizio);
-//     $oraFine=explode(':', $oraFine);
-
-
-
-//     $temp = $_SESSION['soggiornoAttivo'];
-
-//     $xmlStringAttivita= "";
-
-//     foreach(file("../XML/Attivita.xml") as $node){
-//         $xmlStringAttivita .= trim($node);
-
-//     }
-
-//     $docAttivita = new DOMDocument();
-//     $docAttivita->loadXML($xmlStringAttivita);
-
-//     $xpathAttivita = new DOMXPath($docAttivita);
-
-//     $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
-//     $attivita = $attivita->item(0);
-//     $oraApertura=$attivita->getElementsByTagName("oraApertura")->item(0)->textContent;
-//     $oraInizioMinima=explode(':', $oraApertura);
-//     $oraChiusura=$attivita->getElementsByTagName("oraChiusura")->item(0)->textContent;
-//     $oraFineMassima=explode(':', $oraChiusura);
-    
-//     if(($oraInizioMinima[0]<$oraInizio[0])&&($oraFineMassima[0]>$oraFine[0])&&($temp['dataArrivo']<=$dataAttivita)&&($temp['dataPartenza']>=$dataAttivita)){
-//         return "True";
-//     }else{
-//         return "False";
-//     }
-
-// }
 
 // Funzione per capire che bottone ha premuto l'utente in attivita.php
 
