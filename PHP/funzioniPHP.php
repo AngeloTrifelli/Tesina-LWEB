@@ -348,7 +348,51 @@ function individuaBottoneCategoriaPremuto(){
 
 }
 
+//funzione per capire che attività il cliente ha deciso di eliminare
 
+function individuaBottoneAttivitaDaEliminare(){
+   
+
+    $xmlStringAttivita= "";
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+       $xmlStringAttivita .= trim($node);
+
+   }
+
+   $docAttivita = new DOMDocument();
+   $docAttivita->loadXML($xmlStringAttivita);
+   $docAttivita->formatOutput = true;
+
+   $listaAttivita = $docAttivita->documentElement->childNodes;
+   $i=0;
+   $j = 0;
+   $trovato="False";
+   while($i<$listaAttivita->length && $trovato=="False"){
+
+    $attivita=$listaAttivita->item($i);
+
+   $listaPrenotazioni=$attivita->getElementsByTagName("listaPrenotazioni")->item(0);
+   $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
+
+   while($j < count($listaPrenotazione) && $trovato=="False"){
+
+       $prenotazione = $listaPrenotazione->item($j);
+       $idPrenotazione= $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+       
+       if(isset($_POST[$idPrenotazione])){
+        $trovato = "True";
+        $listaPrenotazioni->removeChild($prenotazione);
+    }
+    $j++;
+   }
+   $i++;
+}
+
+$docAttivita->save("../XML/Attivita.xml");
+    
+}
 
 
 

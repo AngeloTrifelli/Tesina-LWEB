@@ -605,4 +605,173 @@ function getCategorie(){
     return($tabellaCategorie);
 }
 
+function getAttivita(){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $arrayAttivita = array();
+
+    $listaAttivita = $doc->documentElement->childNodes;
+
+    for($i=0;$i<$listaAttivita->length;$i++){
+        $attivita=$listaAttivita->item($i);
+        $idAttivita=$attivita->getAttribute("id");
+        $nome=$attivita->getElementsByTagName("nome")->item(0)->textContent;
+        $descrizione=$attivita->getElementsByTagName("descrizione")->item(0)->textContent;
+        $linkImmagine=$attivita->getElementsByTagName("linkImmagine")->item(0)->textContent;
+        $oraApertura=$attivita->getElementsByTagName("oraApertura")->item(0)->textContent;
+        $oraChiusura=$attivita->getElementsByTagName("oraChiusura")->item(0)->textContent;
+        $prezzoOrario=$attivita->getElementsByTagName("prezzoOrario")->item(0)->textContent;
+
+        $temp = array(
+            "id"=>$idAttivita,
+            "nome"=>$nome,
+            "descrizione"=>$descrizione,
+            "linkImmagine"=>$linkImmagine,
+            "oraApertura"=>$oraApertura,
+            "oraChiusura"=>$oraChiusura,
+            "prezzoOrario"=>$prezzoOrario
+        );
+
+        array_push($arrayAttivita , $temp);
+
+    }
+
+    return($arrayAttivita);
+
+}
+
+//Funzione che restituisce le attivita persenti in Attivita.xml
+
+function getPrenotazioniAttivita($idAttivita){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
+    $attivita = $attivita->item(0);
+
+    $arrayPrenotazioniAttivita=array();
+
+    $listaPrenotazioni = $attivita->getElementsByTagName("prenotazione");
+    $i=0;
+    while($i< $listaPrenotazioni->lenght){
+        $prenotazione=$listaPrenotazioni->item($i);
+        $idPrenotazione=$prenotazione->getElementsByTagName("idPrenotazione");
+        $codFisc=$prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+        $data=$prenotazione->getElementsByTagName("data")->item(0)->textContent;
+        $oraInizio=$prenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
+        $oraFine=$prenotazione->getElementsByTagName("oraFine")->item(0)->textContent;
+        $prezzoTotale=$prenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+        $creditiUsati=$prenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+
+        $temp = array(
+            "idPrenotazione"=>$idPrenotazione,
+            "codFisc"=>$codFisc,
+            "data"=>$data,
+            "oraInizio"=>$oraInizio,
+            "oraFine"=>$oraFine,
+            "prezzoTotale"=>$prezzoTotale,
+            "creditiUsati"=>$creditiUsati
+        );
+
+        array_push($arrayPrenotazioniAttivita , $temp);
+        $i++;
+    }
+
+
+    return($arrayPrenotazioniAttivita);
+
+}
+
+//Funzione che restituisce le attivita di un cliente in particolare
+
+function getPrenotazioniAttivitaUtente($codFiscUtenteLoggato){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $arrayPrenotazioniAttivitaUtente=array();
+    $listaAttivita = $doc->documentElement->childNodes;
+    for($i=0;$i<$listaAttivita->length;$i++){
+    $attivita=$listaAttivita->item($i);
+
+    $nomeAttivita=$attivita->getElementsByTagName("nome")->item(0)->textContent;
+
+    $listaPrenotazioni = $attivita->getElementsByTagName("prenotazione");
+    $j=0;
+    while($j< count($listaPrenotazioni)){
+        $prenotazione=$listaPrenotazioni->item($j);
+        $idPrenotazione=$prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+        $codFisc=$prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+        $data=$prenotazione->getElementsByTagName("data")->item(0)->textContent;
+        $oraInizio=$prenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
+        $oraFine=$prenotazione->getElementsByTagName("oraFine")->item(0)->textContent;
+        $prezzoTotale=$prenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+        $creditiUsati=$prenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+        if($codFiscUtenteLoggato==$codFisc){
+            $temp = array(
+                "nome"=>$nomeAttivita,
+                "idPrenotazione"=>$idPrenotazione,
+                "codFisc"=>$codFisc,
+                "data"=>$data,
+                "oraInizio"=>$oraInizio,
+                "oraFine"=>$oraFine,
+                "prezzoTotale"=>$prezzoTotale,
+                "creditiUsati"=>$creditiUsati
+            );
+            array_push($arrayPrenotazioniAttivitaUtente , $temp);
+        }
+            $j++;
+        
+
+            }
+    }
+
+    if(count($arrayPrenotazioniAttivitaUtente) >= 1){
+        array_multisort(array_column($arrayPrenotazioniAttivitaUtente, 'data') , SORT_ASC , $arrayPrenotazioniAttivitaUtente);
+    }
+
+    return($arrayPrenotazioniAttivitaUtente);
+
+}
+
+//Funzione che restituisce le informazioni riguardo il ristorante
+
+function getRistorante(){
+
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $arrayRistorante=array();
+    $listaRistoranti = $doc->documentElement->childNodes;
+    $ristorante=$listaRistoranti->item(0);
+    $arrayRistorante['oraAperturaPranzo']=$ristorante->getElementsByTagName("oraAperturaPranzo")->item(0)->textContent;
+    $arrayRistorante['oraChiusuraPranzo']=$ristorante->getElementsByTagName("oraChiusuraPranzo")->item(0)->textContent;
+    $arrayRistorante['oraAperturaCena']=$ristorante->getElementsByTagName("oraAperturaCena")->item(0)->textContent;
+    $arrayRistorante['oraChiusuraCena']=$ristorante->getElementsByTagName("oraChiusuraCena")->item(0)->textContent;
+
+    return($arrayRistorante);
+
+}
+
 ?>
