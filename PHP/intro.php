@@ -56,7 +56,7 @@
                     <a class="item" href="#contatti">CONTATTI</a>
                     <br/>
               
-                    <a class="item" href="#">RECENSIONI</a>
+                    <a class="item" href="./recensioni.php">RECENSIONI</a>
                     <br/>
 
                     <?php

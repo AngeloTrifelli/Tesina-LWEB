@@ -85,7 +85,7 @@
                             <a class="item" href="./attivita.php">ATTIVIT&agrave;</a>
                             <br />
                 
-                            <a class="item" href="#domande">DOMANDE</a>
+                            <a class="item" href="./domande.php">DOMANDE</a>
                             <br />';
                         }
                         echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';

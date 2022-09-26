@@ -1,4 +1,6 @@
 <?php
+    require_once('funzioniGetPHP.php');
+
     session_start();
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp = $_SESSION['soggiornoAttivo'];
@@ -19,6 +21,13 @@
             $accessoStaff = "True";
         }
     }
+
+    $portate = getPortate();
+    $antipasti = $portate[0];
+    $primiPiatti = $portate[1];
+    $secondiPiatti = $portate[2];
+    $dolci = $portate[3];
+
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -76,54 +85,57 @@
 
     
         <h3 class="titoloImportante alignCenter">ANTIPASTI:</h3>
-        <div class="mainContainer marginBottom">
-            <div class="areaDati">
-                <table class="alignCenter tabella"  align="center">
-                    <tr>
-                        <td><strong>Nome</strong></td>
-                        <td><strong>Prezzo</strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Antipasto di montagna
-                        </td>
-                        <td>
-                            8&euro;
-                        </td>
+        <?php
+            $numAntipasti = count($antipasti);
+            if($numAntipasti >= 1){
+        ?>
+            <div class="mainContainer marginBottom">
+                <div class="areaDati">
+                    <table class="alignCenter tabella"  align="center">
+                        <tr>
+                            <td><strong>Nome</strong></td>
+                            <td><strong>Prezzo</strong></td>
+                        </tr>
                     <?php
-                        if(isset($accessoStaff)){
+                        for($i=0 ; $i < $numAntipasti ; $i++){
+                            $temp = $antipasti[$i];
                     ?>
-                        <td>
-                            <input type="submit" class="button" name="Antipastodimontagna" value="MODIFICA" />
-                            <input type="submit" class="button" name="Antipastodimontagna" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
-                    <tr>
-                        <td>
-                            Antipasto di mare
-                        </td>
-                        <td>
-                            7&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Antipasto di mare" value="MODIFICA" />
-                            <input type="submit" class="button" name="Antipasto di mare" value="ELIMINA" />
-                        </td>
+                            <tr>
+                                <td>
+                                    <?php echo $temp['descrizione'];?>
+                                </td>
+                                <td>
+                                    <?php echo $temp['prezzo'];?>&euro;
+                                </td>
+                            <?php
+                                if(isset($accessoStaff)){
+                            ?>
+                                <td>
+                                    <input type="submit" class="button" name="Antipastodimontagna" value="MODIFICA" />
+                                    <input type="submit" class="button" name="Antipastodimontagna" value="ELIMINA" />
+                                </td>
+                            <?php
+                                }
+                            ?>
+                            </tr>
                     <?php
                         }
-                    ?>
-                    </tr>
-                </table>
+                    ?>                       
+                    </table>
+                </div>
             </div>
-        </div>
+        <?php
+            }
+            else{
+                echo '<p class="alignCenter scrittaCentrale">Non sono disponibili antipasti al momento...</p>';
+            }
+        ?>
     
         <h3 class="titoloImportante alignCenter">PRIMI PIATTI:</h3>
+        <?php
+            $numPrimiPiatti = count($primiPiatti);
+            if($numPrimiPiatti >= 1){
+        ?>
         <div class="mainContainer marginBottom">
             <div class="areaDati">
                 <table class="alignCenter tabella"  align="center">
@@ -131,47 +143,46 @@
                         <td><strong>Nome</strong></td>
                         <td><strong>Prezzo</strong></td>
                     </tr>
-                    <tr>
-                        <td>
-                            Spaghetti alla carbonara
-                        </td>
-                        <td>
-                            8&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
-                            <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
-                    <tr>
-                        <td>
-                            Lasagne
-                        </td>
-                        <td>
-                            9&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Lasagne" value="MODIFICA" />
-                            <input type="submit" class="button" name="Lasagne" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
+                <?php
+                    for($i=0 ; $i < $numPrimiPiatti ; $i++){
+                        $temp = $primiPiatti[$i];
+                ?>
+                        <tr>
+                            <td>
+                                <?php echo $temp['descrizione'];?>
+                            </td>
+                            <td>
+                                <?php echo $temp['prezzo'];?>&euro;
+                            </td>
+                        <?php
+                            if(isset($accessoStaff)){
+                        ?>
+                            <td>
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                            </td>
+                        <?php
+                            }
+                        ?>
+                        </tr>
+                <?php
+                    }
+                ?>                     
                 </table>
             </div>
         </div>
+        <?php
+            }
+            else{
+                echo '<p class="alignCenter scrittaCentrale">Non sono disponibili primi piatti al momento...</p>';
+            }
+        ?>
 
         <h3 class="titoloImportante alignCenter">SECONDI PIATTI:</h3>
+        <?php
+            $numSecondiPiatti = count($secondiPiatti);
+            if($numSecondiPiatti >= 1){
+        ?>
         <div class="mainContainer marginBottom">
             <div class="areaDati">
                 <table class="alignCenter tabella"  align="center">
@@ -179,47 +190,46 @@
                         <td><strong>Nome</strong></td>
                         <td><strong>Prezzo</strong></td>
                     </tr>
-                    <tr>
-                        <td>
-                            Tagliata di manzo
-                        </td>
-                        <td>
-                            15&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Tagliata di manzo" value="MODIFICA" />
-                            <input type="submit" class="button" name="Tagliata di manzo" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
-                    <tr>
-                        <td>
-                            Grigliata mista
-                        </td>
-                        <td>
-                            20&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Grigliata mista" value="MODIFICA" />
-                            <input type="submit" class="button" name="Grigliata mista" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
+                <?php
+                    for($i=0 ; $i < $numSecondiPiatti ; $i++){
+                        $temp = $secondiPiatti[$i];
+                ?>
+                        <tr>
+                            <td>
+                                <?php echo $temp['descrizione'];?>
+                            </td>
+                            <td>
+                                <?php echo $temp['prezzo'];?>&euro;
+                            </td>
+                        <?php
+                            if(isset($accessoStaff)){
+                        ?>
+                            <td>
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                            </td>
+                        <?php
+                            }
+                        ?>
+                        </tr>
+                <?php
+                    }
+                ?>                     
                 </table>
             </div>
         </div>
+        <?php
+            }
+            else{
+                echo '<p class="alignCenter scrittaCentrale">Non sono disponibili secondi piatti al momento...</p>';
+            }
+        ?>
 
         <h3 class="titoloImportante alignCenter">DOLCI:</h3>
+        <?php
+            $numDolci = count($dolci);
+            if($numDolci >= 1){
+        ?>
         <div class="mainContainer marginBottom">
             <div class="areaDati">
                 <table class="alignCenter tabella"  align="center">
@@ -227,45 +237,40 @@
                         <td><strong>Nome</strong></td>
                         <td><strong>Prezzo</strong></td>
                     </tr>
-                    <tr>
-                        <td>
-                            Tiramisu
-                        </td>
-                        <td>
-                            3&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Tiramisu" value="MODIFICA" />
-                            <input type="submit" class="button" name="Tiramisu" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
-                    <tr>
-                        <td>
-                            Sorbetto al limone
-                        </td>
-                        <td>
-                            2&euro;
-                        </td>
-                    <?php
-                        if(isset($accessoStaff)){
-                    ?>
-                        <td>
-                            <input type="submit" class="button" name="Sorbetto al limone" value="MODIFICA" />
-                            <input type="submit" class="button" name="Sorbetto al limone" value="ELIMINA" />
-                        </td>
-                    <?php
-                        }
-                    ?>
-                    </tr>
+                <?php
+                    for($i=0 ; $i < $numDolci ; $i++){
+                        $temp = $dolci[$i];
+                ?>
+                        <tr>
+                            <td>
+                                <?php echo $temp['descrizione'];?>
+                            </td>
+                            <td>
+                                <?php echo $temp['prezzo'];?>&euro;
+                            </td>
+                        <?php
+                            if(isset($accessoStaff)){
+                        ?>
+                            <td>
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
+                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                            </td>
+                        <?php
+                            }
+                        ?>
+                        </tr>
+                <?php
+                    }
+                ?>                     
                 </table>
             </div>
         </div>
+        <?php
+            }
+            else{
+                echo '<p class="alignCenter scrittaCentrale">Non sono disponibili dolci al momento...</p>';
+            }
+        ?>
 
         <?php
             if(isset($accessoStaff)){

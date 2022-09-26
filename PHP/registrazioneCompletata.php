@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    if(!isset($_SESSION['username']) && !isset($_SESSION['soggiornoAttivo'])){        //Ora controllo questa variabile di sessione per verificare che l'utente sia arrivato in questa pagina passando per registrazioneFinale.php
+    if(!isset($_SESSION['username']) && !isset($_SESSION['soggiornoAttivo'])){        
         header('Location: registrazioneUtente.php');
         exit();
     }
@@ -27,7 +27,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
     <head>
-        <title>Sapienza hotel: Registrazione Completata</title>
+        <title>Sapienza hotel: Successo</title>
 
         <style>
             <?php include "../CSS/registrazioneCompletata.css" ?>

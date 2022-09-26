@@ -95,7 +95,7 @@ h1{
     padding-left: 10px; 
     padding-right: 15px;
     height: 40px;
-    width: 30%;
+    width: 35%;
     margin-top: 3%;
     margin-left: 2%;
 }
@@ -120,6 +120,17 @@ h1{
     font-style: oblique;
 }
 
+.info{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+
+table{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 hr {
     border: 0;
     clear:both;
@@ -128,18 +139,11 @@ hr {
     height: 1px;
 }
 
-.marginLeft{
-    margin-left: 50%;
-}
-
-.hide{
-    display: flex;
-    width: 100%;    
-}
 
 .row{
     display: flex;
     width: 100%;
+    justify-content: space-evenly;
 }
 
 .large{
