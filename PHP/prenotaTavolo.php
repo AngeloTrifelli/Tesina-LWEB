@@ -10,7 +10,15 @@
                 header('Location: areaUtente.php');
             }
             else{
-                $stringaData = $temp['dataArrivo'];
+                $todayDate = date("Y-m-d");
+
+                if($todayDate > $temp['dataArrivo']){
+                    $stringaData = $todayDate;
+                }
+                else{
+                    $stringaData = $temp['dataArrivo'];
+                }
+            
                 $giorno = substr($stringaData, 8,2);       
                 $mese = substr($stringaData,5,2 );
                 $anno = substr($stringaData,0,4 );
