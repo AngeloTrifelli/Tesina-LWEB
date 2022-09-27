@@ -140,3 +140,9 @@ a{
 .red{
     color: #871f30;
 }
+
+.trePuntini{
+    color: grey;
+    font-size: 100px;
+    margin-left: 48%;
+}

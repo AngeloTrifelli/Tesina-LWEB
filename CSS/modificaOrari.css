@@ -41,7 +41,7 @@ h1{
 }
 
 .riga{
-    margin-top: 5%;
+    /* margin-top: 5%; */
     display: flex;
     justify-content:space-between;
     background-color: inherit;
@@ -53,16 +53,6 @@ h1{
     width: 55%;
     background-color: inherit;
     margin-right: 5%;
-}
-
-
-.dateInput{
-    padding: 10px 45px 10px 40px;
-    font-family: "Roboto Mono" , monospace;
-    border: 1px solid #ccc;
-    background-color: inherit;
-    width: 50%;
-    text-align: center;
 }
 
 .buttonSx{
@@ -103,29 +93,3 @@ h1{
     font-weight: bold;
     background-color: inherit;
 }
-
-.marginRight{
-    margin-right: 20%;
-}
-
-.row{
-    background-color: inherit;  
-    display: flex;
-    justify-content: space-around;
-}
-
-.containerData{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: inherit;
-    margin-left: 1%;
-    
-}
-
-.data{
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 3%;
-}
-

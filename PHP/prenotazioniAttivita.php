@@ -1,8 +1,20 @@
 <?php 
 echo'<?xml version="1.0" encoding="UTF-8"?>';
 require_once("funzioniGetPHP.php");
+require_once('funzioniPHP.php');
 
 session_start();
+
+if(isset($_POST['bottonePremuto'])){
+    individuaBottoneAttivitaDaEliminare();
+   }
+
+if(!(isset($_SESSION['codFiscUtenteLoggato']))){
+    header('Location: login.php');
+}
+
+$arrayPrenotazioniAttivitaUtente=getPrenotazioniAttivitaUtente($_SESSION['codFiscUtenteLoggato']);
+
 
 
 ?>
@@ -42,48 +54,17 @@ session_start();
         </div>
 
         <div id="rightColumn">
-        
-            <h1 id="mainTitle">LE TUE ATTIVIT&Agrave; PRENOTATE:</h1>
 
             <?php 
             
-            $xmlStringAttivita= "";
-
-             foreach(file("../XML/Attivita.xml") as $node){
-
-                $xmlStringAttivita .= trim($node);
-
-            }
-
-            $docAttivita = new DOMDocument();
-            $docAttivita->loadXML($xmlStringAttivita);
-
-            $listaAttivita = $docAttivita->documentElement->childNodes;
-
-            $numAttivita= numAttivita();
-            $i=0;
-            while($i<$numAttivita){
-                $attivita=$listaAttivita->item($i);
-                
-                $listaPrenotazioni=$attivita->getElementsByTagName("prenotazione");
-                $numPrenotazioni= $listaPrenotazioni->length;
-
-                $testoNomeAttivita=array();
-                $testoDataPrenotazione=array();
-                $testoOrarioInizio=array();
-                $testoOrarioFine=array();
-                $testoPrezzo=array();
-                $testoCreditiUsati=array();
-                for($j=0; $j<$numPrenotazioni; $j++){
-                    $elemPrenotazione=$attivita->getElementsByTagName("prenotazione")->item($j); //prenotazione utente
-                   
-                    if(($elemPrenotazione->firstChild->nextSibling->textContent)== $_SESSION['codFiscUtenteLoggato']){
-                        $testoNomeAttivita[$j]= $attivita->firstChild->textContent;
-                        $testoDataPrenotazione[$j]=$elemPrenotazione->getElementsByTagName("data")->item(0)->textContent;
-                        $testoOrarioInizio[$j]=$elemPrenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
-                        $testoOrarioFine[$j]=$elemPrenotazione->getElementsByTagName("oraFine")->item(0)->textContent;
-                        $testoPrezzo[$j]=$elemPrenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
-                        $testoCreditiUsati[$j]=$elemPrenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+            if(count($arrayPrenotazioniAttivitaUtente)>0){
+                echo "<h1 id=\"mainTitle\">LE TUE ATTIVIT&Agrave; PRENOTATE:</h1>";
+            }else{
+                echo "<h1 id=\"mainTitle\">NON HAI ATTIVITA ATTUALMENTE PRENOTATE</h1>";
+                echo "<span class=\"trePuntini\">...</span>";
+                }
+            for($i=0;$i<count($arrayPrenotazioniAttivitaUtente);$i++){
+                    $prenotazioneUtente=$arrayPrenotazioniAttivitaUtente[$i];
                         ?>
 
                         <table class="box" align="center">
@@ -98,7 +79,7 @@ session_start();
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoNomeAttivita[$j]; ?>
+                                        <?php echo $prenotazioneUtente['nome'];  ?>
                                     </div>
 
                                 </div>
@@ -112,7 +93,7 @@ session_start();
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoDataPrenotazione[$j]; ?>
+                                        <?php echo $prenotazioneUtente['data']; ?>
                                     </div>
                                     
                                 </div>
@@ -122,11 +103,11 @@ session_start();
                             <td>
                                 <div class="miniBox">
                                     <div class="titleBox">
-                                        Orario Apertura:
+                                        Orario apertura:
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoOrarioInizio[$j]; ?>
+                                        <?php echo $prenotazioneUtente['oraInizio']; ?>
                                     </div>
                                     
                                 </div>
@@ -136,11 +117,11 @@ session_start();
                             <td>
                                 <div class="miniBox">
                                     <div class="titleBox">
-                                        Orario Chiusura:
+                                        Orario chiusura:
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoOrarioFine[$j]; ?>
+                                        <?php echo $prenotazioneUtente['oraFine']; ?>
                                     </div>
                                     
                                 </div>
@@ -155,7 +136,7 @@ session_start();
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoPrezzo[$j]."&euro;"; ?>
+                                        <?php echo $prenotazioneUtente['prezzoTotale']."&euro;"; ?>
                                     </div>
                                     
                                 </div>
@@ -170,10 +151,20 @@ session_start();
                                     </div>
                             
                                     <div>
-                                        <?php echo $testoCreditiUsati[$j]; ?>
+                                        <?php echo $prenotazioneUtente['creditiUsati']; ?>
                                     </div>
                                     
                                 </div>
+
+                            </td>
+
+                            <td>
+                            <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+
+                                    <input type="submit" class="buttonElimina" name="<?php echo $prenotazioneUtente['idPrenotazione'];?>" value="Elimina" />
+                                    <input type="hidden" name="bottonePremuto"/>
+ 
+                            </form>
 
                             </td>
         
@@ -183,11 +174,6 @@ session_start();
                     <?php
 
                     }
-                }
-
-                $i++;
-            }
-
             ?>
 
         </div>
