@@ -67,6 +67,7 @@
 }else{
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
+            $_SESSION['idAttivita']=$_POST['idAttivita'];
             unset($_SESSION['prenotazioneAttivita']);
             header('Location: prenotaAttivita.php');
         }
