@@ -8,6 +8,11 @@
     $datiMancanti="";
     $orariScorretti="";
 
+    if(isset($_POST['annulla'])){
+        unset($_SESSION['idAttivita']);
+        header('Location:attivita.php');
+    }
+
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp=$_SESSION['soggiornoAttivo'];
         if($temp!="null"){
@@ -44,6 +49,8 @@
                             $arrayAttivita['oraInizio']=$_POST['oraInizio'];
                             $arrayAttivita['oraFine']=$_POST['oraFine'];
                             $_SESSION['prenotazioneAttivita'] = $arrayAttivita;
+
+                            unset($_SESSION['idAttivita']);
                        
                             header('Location: confermaPrenotazione.php');
                         }else{
@@ -57,6 +64,7 @@
                 }
                 }
             }else{
+                unset($_SESSION['idAttivita']);
                 header('Location: areaUtente.php');
                  }
     }
@@ -151,8 +159,12 @@
 
                     </div>
 
-                    <input type="submit" class="button" value="Prenota" name="prenota" />
-
+                    <div class="spaceBetween">
+                    <input type="submit" class="buttonSx" value="Annulla" name="annulla" />
+                    <input type="submit" class="buttonDx" value="Prenota" name="prenota" />
+                    </div>
+                    
+                
                     <?php
                         if(isset($_POST['prenota']) && $datiMancanti == "True"){
                     ?>

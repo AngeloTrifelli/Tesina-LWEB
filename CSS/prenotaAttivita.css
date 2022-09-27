@@ -65,7 +65,7 @@ h1{
     text-align: center;
 }
 
-.button{
+.buttonSx{
     background-color: #871f30;
     color: white;
     cursor: pointer;
@@ -75,6 +75,26 @@ h1{
     border-radius: 15px;
     font-weight: bold;
     margin-top: 12%;
+}
+.buttonDx{
+    background-color: #871f30;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    width: 90px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 12%;
+    margin-left: 40%;
+}
+
+.buttonSx:hover{
+    background-color: #640c1b;
+}
+
+.buttonDx:hover{
+    background-color: #640c1b;
 }
 
 .errorLabel{
@@ -108,3 +128,4 @@ h1{
     margin-left: 10%;
     margin-bottom: 3%;
 }
+
