@@ -57,12 +57,21 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="quantita" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
     <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
     <xsd:element name="quantita">
         <xsd:simpleType>
             <xsd:restriction base="xsd:int">

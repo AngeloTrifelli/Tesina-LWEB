@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaPrenotazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ServizioCamera.xsd">
-    <prenotazione id="PSC1">
-        <codFisc>RSSGNN64R03E472G</codFisc>
-        <data>2022-10-29</data>
-        <ora>13:00:00</ora>
-        <richieste>Spaghetti senza pecorino</richieste>
-        <prezzoTotale>16</prezzoTotale>
-        <creditiUsati>0</creditiUsati>
-        <listaPortate>
-            <portata>
-                <nome>Spaghetti alla carbonara</nome>
-                <quantita>2</quantita>
-            </portata>
-        </listaPortate>
-    </prenotazione>
+  <prenotazione id="PSC1">
+    <codFisc>RSSGNN64R03E472G</codFisc>
+    <data>2022-06-14</data>
+    <ora>20:30:00</ora>
+    <richieste/>
+    <prezzoTotale>26</prezzoTotale>
+    <creditiUsati>0</creditiUsati>
+    <listaPortate>
+      <portata>
+        <nome>Antipasto di montagna</nome>
+        <prezzo>9</prezzo>
+        <quantita>1</quantita>
+      </portata>
+      <portata>
+        <nome>Tagliata di manzo</nome>
+        <prezzo>15</prezzo>
+        <quantita>1</quantita>
+      </portata>
+      <portata>
+        <nome>Sorbetto al limone</nome>
+        <prezzo>2</prezzo>
+        <quantita>1</quantita>
+      </portata>
+    </listaPortate>
+  </prenotazione>
+  <prenotazione id="PSC2">
+    <codFisc>RSSGNN64R03E472G</codFisc>
+    <data>2022-10-28</data>
+    <ora>22:00:00</ora>
+    <richieste>BUSSARE PRIMA DI ENTRARE</richieste>
+    <prezzoTotale>42</prezzoTotale>
+    <creditiUsati>0</creditiUsati>
+    <listaPortate>
+      <portata>
+        <nome>Spaghetti alla carbonara</nome>
+        <prezzo>8</prezzo>
+        <quantita>2</quantita>
+      </portata>
+      <portata>
+        <nome>Grigliata mista</nome>
+        <prezzo>20</prezzo>
+        <quantita>1</quantita>
+      </portata>
+      <portata>
+        <nome>Tiramisu</nome>
+        <prezzo>3</prezzo>
+        <quantita>2</quantita>
+      </portata>
+    </listaPortate>
+  </prenotazione>
 </listaPrenotazioni>
