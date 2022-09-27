@@ -619,7 +619,7 @@ function getSoggiorni(){
             }elseif($statoSoggiorno=="Pagamento rifiutato"){
                 array_push($soggiorniRifiutati , $temp);
             }else{
-                array_push($soggiorniApprovati , $temp);
+                array_push($soggiorniTerminati , $temp);
             }
                 $j++;
         }
@@ -834,29 +834,6 @@ function getPrenotazioniAttivitaUtente($codFiscUtenteLoggato){
     }
 
     return($arrayPrenotazioniAttivitaUtente);
-
-}
-
-//Funzione che restituisce le informazioni riguardo il ristorante
-
-function getRistorante(){
-
-    $xmlString = "";
-    foreach(file("../XML/Ristorante.xml") as $node){
-        $xmlString .=trim($node);
-    }
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-
-    $arrayRistorante=array();
-    $listaRistoranti = $doc->documentElement->childNodes;
-    $ristorante=$listaRistoranti->item(0);
-    $arrayRistorante['oraAperturaPranzo']=$ristorante->getElementsByTagName("oraAperturaPranzo")->item(0)->textContent;
-    $arrayRistorante['oraChiusuraPranzo']=$ristorante->getElementsByTagName("oraChiusuraPranzo")->item(0)->textContent;
-    $arrayRistorante['oraAperturaCena']=$ristorante->getElementsByTagName("oraAperturaCena")->item(0)->textContent;
-    $arrayRistorante['oraChiusuraCena']=$ristorante->getElementsByTagName("oraChiusuraCena")->item(0)->textContent;
-
-    return($arrayRistorante);
 
 }
 

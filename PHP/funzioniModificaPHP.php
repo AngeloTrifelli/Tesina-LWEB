@@ -217,5 +217,68 @@ function modificaStatoCategoria($nome,$nuovoStato){
     $doc->save("../XML/Categorie.xml");
 }
 
+//Funzione che modifica gli orari di apertura e di chiusura del ristorante
+
+function modificaOrariRistorante($nuovaOraAperturaPranzo,$nuovaOraChiusuraPranzo,$nuovaOraAperturaCena,$nuovaOraChiusuraCena){
+
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true; 
+
+    $listaRistoranti = $doc->documentElement->childNodes;
+
+    $ristorante = $listaRistoranti->item(0);
+
+    $oraAperturaPranzo = $ristorante->getElementsByTagName("oraAperturaPranzo")->item(0);    
+    $oraAperturaPranzo->nodeValue = "";
+    $oraAperturaPranzo->appendChild($doc->createTextNode($nuovaOraAperturaPranzo.":00"));
+
+    $oraChiusuraPranzo = $ristorante->getElementsByTagName("oraChiusuraPranzo")->item(0);    
+    $oraChiusuraPranzo->nodeValue = "";
+    $oraChiusuraPranzo->appendChild($doc->createTextNode($nuovaOraChiusuraPranzo.":00"));
+
+    $oraAperturaCena = $ristorante->getElementsByTagName("oraAperturaCena")->item(0);    
+    $oraAperturaCena->nodeValue = "";
+    $oraAperturaCena->appendChild($doc->createTextNode($nuovaOraAperturaCena.":00"));
+
+    $oraChiusuraCena = $ristorante->getElementsByTagName("oraChiusuraCena")->item(0);    
+    $oraChiusuraCena->nodeValue = "";
+    $oraChiusuraCena->appendChild($doc->createTextNode($nuovaOraChiusuraCena.":00"));
+
+    $doc->save("../XML/Ristorante.xml");
+
+}
+
+function modificaOrariAttivita($idAttivita,$nuovaOraAperturaAttivita,$nuovaOraChiusuraAttivita){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    $oraApertura = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/oraApertura");
+    $oraApertura = $oraApertura->item(0);
+    $oraApertura->nodeValue = "";
+    $oraApertura->appendChild($doc->createTextNode($nuovaOraAperturaAttivita.":00"));
+
+    $oraChiusura = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/oraChiusura");
+    $oraChiusura = $oraChiusura->item(0);
+    $oraChiusura->nodeValue = "";
+    $oraChiusura->appendChild($doc->createTextNode($nuovaOraChiusuraAttivita.":00"));
+
+    $doc->save("../XML/Attivita.xml");
+
+}
 
 ?>
