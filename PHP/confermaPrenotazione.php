@@ -3,87 +3,86 @@
     require_once('funzioniInsertPHP.php');
     session_start();
 
-    if(isset($_SESSION['prenotazioneCamera'])){         // Poi questo si modifica per adattare la pagina ad altre prenotazioni
-        if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] == "null"){ 
-            $temp = $_SESSION['prenotazioneCamera'];
-            $datiCamera = getCamera($temp['idCamera']);
-            $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
+    if(isset($_SESSION['prenotazioneCamera'])  || isset($_SESSION['prenotazioneAttivita'])){         // Poi questo si modifica per adattare la pagina ad altre prenotazioni
+        if(isset($_SESSION['prenotazioneCamera'])){
+            if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] == "null"){ 
+                $temp = $_SESSION['prenotazioneCamera'];
+                $datiCamera = getCamera($temp['idCamera']);
+                $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
 
-            $prezzoCamera = $datiCamera['prezzo'];
+                $prezzoCamera = $datiCamera['prezzo'];
 
-            $temp1 = new DateTime($temp['dataArrivo']);
-            $temp2 = new DateTime($temp['dataPartenza']);
+                $temp1 = new DateTime($temp['dataArrivo']);
+                $temp2 = new DateTime($temp['dataPartenza']);
 
-            $giorniSoggiorno = $temp1->diff($temp2)->format("%a");
-            $prezzoTotale = $giorniSoggiorno * $prezzoCamera;
+                $giorniSoggiorno = $temp1->diff($temp2)->format("%a");
+                $prezzoTotale = $giorniSoggiorno * $prezzoCamera;
 
-            unset($_SESSION['prenotazioneCamera']);
+                unset($_SESSION['prenotazioneCamera']);
+            }
+            else{
+                header('Location: intro.php');
+                exit();
+            }
         }
         else{
-            header('Location: intro.php');
+            if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] != "null"){ 
+                $temp = $_SESSION['prenotazioneAttivita'];
+                $datiAttivita=getDatiAttivita($temp['idAttivita']);
+                $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
+    
+                $oraInizio=$temp['oraInizio'];
+                $oraFine=$temp['oraFine'];
+                settype($oraInizio,"integer");
+                settype($oraFine,"integer");
+    
+                $oraDiAttivita=$oraFine-$oraInizio;
+    
+                $prezzoOrario=$datiAttivita['prezzoOrario'];
+                settype($prezzoOrario,"integer");
+    
+                $prezzoTotale=$prezzoOrario*$oraDiAttivita;
+    
+                unset($_SESSION['prenotazioneAttivita']);
+            }
+            else{
+                header('Location: intro.php');
+                exit();
+            }
         }
         
     }
-    elseif((!(isset($_POST['idAttivita']))) && (!(isset($_SESSION['prenotazioneAttivita'])))){
+    else{
         if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
             if(isset($_POST['ANNULLA'])){
-                unset($_SESSION['prenotazioneCamera']);
-                header('Location: prenotaOra.php');
+                if(isset($_POST['idCamera'])){
+                    unset($_SESSION['prenotazioneCamera']);
+                    header('Location: prenotaOra.php');
+                    exit();
+                }
+                else{
+                    unset($_SESSION['prenotazioneAttivita']);
+                    header('Location: prenotaAttivita.php');
+                }                                    
             }
             else{
-                inserisciPrenotazioneCamera($_POST['idCamera'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['creditiUsati'] , $_POST['dataArrivo'] , $_POST['dataPartenza']);
-                $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($_SESSION['codFiscUtenteLoggato']);
-                header('Location: registrazioneCompletata.php');
+                if(isset($_POST['idCamera'])){
+                    inserisciPrenotazioneCamera($_POST['idCamera'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['creditiUsati'] , $_POST['dataArrivo'] , $_POST['dataPartenza']);
+                    $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($_SESSION['codFiscUtenteLoggato']);
+                    header('Location: registrazioneCompletata.php');
+                }
+                else{
+                    aggiungiPrenotazioneAttivita($_POST['idAttivita'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['dataAttivita'] , $_POST['oraInizio'], $_POST['oraFine'],$_POST['prezzoTotale'], $_POST['creditiUsati']);
+                    header('Location: registrazioneCompletata.php');
+                }                
             }
         }
-        else{
+        else{            
             header('Location: intro.php');
-        }          
+            exit();
+        }                  
     }
-
-    if(isset($_SESSION['prenotazioneAttivita'])){
-        if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] != "null"){ 
-            $temp = $_SESSION['prenotazioneAttivita'];
-            $datiAttivita=getDatiAttivita($temp['idAttivita']);
-            $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
-
-            $oraInizio=$temp['oraInizio'];
-            $oraFine=$temp['oraFine'];
-            settype($oraInizio,"integer");
-            settype($oraFine,"integer");
-
-            $oraDiAttivita=$oraFine-$oraInizio;
-
-            $prezzoOrario=$datiAttivita['prezzoOrario'];
-            settype($prezzoOrario,"integer");
-
-            $prezzoTotale=$prezzoOrario*$oraDiAttivita;
-
-            unset($_SESSION['prenotazioneAttivita']);
-
-    }else{
-        header('Location: intro.php');
-    }
-}else{
-    if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
-        if(isset($_POST['ANNULLA'])){
-            unset($_SESSION['prenotazioneAttivita']);
-            header('Location: prenotaAttivita.php');
-        }
-        else{
-            aggiungiPrenotazioneAttivita($_POST['idAttivita'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['dataAttivita'] , $_POST['oraInizio'], $_POST['oraFine'],$_POST['prezzoTotale'], $_POST['creditiUsati']);
-            header('Location: registrazioneCompletata.php');
-        }
-    }
-    else{
-        header('Location: intro.php');
-    }          
-}
    
-
-   
-
-
 
 
 

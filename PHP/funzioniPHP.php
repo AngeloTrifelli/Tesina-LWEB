@@ -458,6 +458,49 @@ function individuaPortateSelezionate(){
 }
 
 
+// Funzione per capire l'id della prenotazione associata al bottone premuto in visualizzaPrenotazioniRistorante.php
+
+function individuaBottonePrenotazioniRistorante(){
+    $listaIdPrenotazioniTavolo = getIdPrenotazioniTavolo();
+
+    $i=0;
+    $trovato="False";
+
+    while($i < $listaIdPrenotazioniTavolo->length && $trovato == "False"){        
+        $idPrenotazioneTavolo = $listaIdPrenotazioniTavolo->item($i)->textContent;
+        
+        if(isset($_POST[$idPrenotazioneTavolo])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    if($trovato != "True"){
+        $listaIdPrenotazioniSC = getIdPrenotazioniSC();
+
+        $i=0;
+        
+        while($i < $listaIdPrenotazioniSC->length && $trovato == "False"){
+            $idPrenotazioneSC = $listaIdPrenotazioniSC->item($i)->textContent;
+            if(isset($_POST[$idPrenotazioneSC])){
+                $trovato = "True";
+            }
+            else{
+                $i++;
+            }
+        }
+
+        return $idPrenotazioneSC;
+    }
+    else{
+        return $idPrenotazioneTavolo;
+    }
+
+}
+
+
 
 
 

@@ -7,7 +7,7 @@
         if($_SESSION['loginType']=="Admin"){
             
             $numClienti=getNumClientiTotali();
-            $numClientiConSoggiorno=getNumClientiConSoggiorno();
+            $numClientiConSoggiorno=getNumClientiConSoggiornoAttivo();
             $numClientiPresenti=$numClientiConSoggiorno['presenti'];
             $numClientiNonPresenti=$numClientiConSoggiorno['nonPresenti'];
         }else{

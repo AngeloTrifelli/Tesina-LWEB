@@ -1,7 +1,8 @@
 <?php
 // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PER ESTRARRE DATI DA I FILE XML
 
-    require_once("funzioniModificaPHP.php");
+    require_once("funzioniModificaPHP.php");    
+    getIdPrenotazioniSC();
 
 // Funzione per ottenere tutti i soggiorni passati di un cliente in datiPersonali.php
 
@@ -619,7 +620,7 @@ function getSoggiorni(){
             }elseif($statoSoggiorno=="Pagamento rifiutato"){
                 array_push($soggiorniRifiutati , $temp);
             }else{
-                array_push($soggiorniApprovati , $temp);
+                array_push($soggiorniTerminati , $temp);
             }
                 $j++;
         }
@@ -690,5 +691,201 @@ function getCategorie(){
 
     return($tabellaCategorie);
 }
+
+
+
+// Funzione che restituisce tutti le prenotazioni del ristorante effettuate da un cliente
+
+function getPrenotazioniRistorante($codFiscCliente){
+    $xmlStringTavoli = "";
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlStringTavoli .=trim($node);
+    }
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlStringTavoli);
+    
+    $xmlStringSC = "";
+    foreach(file("../XML/ServizioCamera.xml") as $node){
+        $xmlStringSC .=trim($node);
+    }
+    $docServizioCamera = new DOMDocument();
+    $docServizioCamera->loadXML($xmlStringSC);
+
+    $xpathServizioCamera = new DOMXPath($docServizioCamera);
+
+    $tabellaPrenotazioni = array();
+    $prenotazioniAttive = array();
+    $prenotazioniPassate = array();
+    $todayDate = date("Y-m-d");
+
+    $listaTavoli = $docTavoli->documentElement->childNodes;
+
+    for($i=0 ; $i < $listaTavoli->length ; $i++){
+        $tavolo = $listaTavoli->item($i);
+
+        $listaPrenotazioni = $tavolo->getElementsByTagName("prenotazione");
+
+        for($j=0 ; $j < $listaPrenotazioni->length ; $j++){
+            $prenotazione = $listaPrenotazioni->item($j);
+
+            $codFisc = $prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;            
+            if($codFisc == $codFiscCliente){
+                $idPrenotazione = $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+                $numeroTavolo = $tavolo->getAttribute("numero");
+                $locazioneTavolo = $tavolo->firstChild->textContent;
+                $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
+                $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;   
+                
+                $temp = array(
+                    "tipoPrenotazione"=>"Servizio al tavolo",
+                    "idPrenotazione"=>$idPrenotazione,
+                    "numeroTavolo"=>$numeroTavolo,
+                    "locazioneTavolo"=>$locazioneTavolo,
+                    "dataPrenotazione"=>$dataPrenotazione,
+                    "oraPrenotazione"=>$oraPrenotazione
+                );
+
+                if($todayDate >= $dataPrenotazione){
+                    array_push($prenotazioniPassate , $temp);
+                }
+                else{
+                    array_push($prenotazioniAttive , $temp);
+                }
+            }            
+        }
+    }
+
+    $listaPrenotazioniSC = $xpathServizioCamera->query("/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente']");
+    for($i=0 ; $i < $listaPrenotazioniSC->length ; $i++){
+        $prenotazione = $listaPrenotazioniSC->item($i);
+        $idPrenotazione = $prenotazione->getAttribute("id");
+        $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
+        $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;
+
+        $temp = array(
+            "tipoPrenotazione"=>"Servizio in camera",
+            "idPrenotazione"=>$idPrenotazione,            
+            "dataPrenotazione"=>$dataPrenotazione,
+            "oraPrenotazione"=>$oraPrenotazione
+        );      
+        
+        if($todayDate >= $dataPrenotazione){
+            array_push($prenotazioniPassate , $temp);
+        }
+        else{
+            array_push($prenotazioniAttive , $temp);
+        }        
+    }
+
+    if(count($prenotazioniAttive) > 1 ){
+        array_multisort(array_column($prenotazioniAttive, 'dataPrenotazione') , SORT_ASC , $prenotazioniAttive);
+    }
+
+    if(count($prenotazioniPassate) > 1){
+        array_multisort(array_column($prenotazioniPassate, 'dataPrenotazione') , SORT_DESC, $prenotazioniPassate);
+    }
+    
+    array_push($tabellaPrenotazioni , $prenotazioniAttive);
+    array_push($tabellaPrenotazioni , $prenotazioniPassate);
+    
+    return $tabellaPrenotazioni;
+}
+
+
+//Funzione che restituisce tutti gli id delle prenotazioni dei tavoli
+
+function getIdPrenotazioniTavolo(){
+    $xmlStringTavoli = "";
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlStringTavoli .=trim($node);
+    }
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlStringTavoli);
+
+    $xpathTavoli = new DOMXPath($docTavoli);
+
+    $listaID = $xpathTavoli->query("/listaTavoli/tavolo/listaPrenotazioni/prenotazione/idPrenotazione");
+
+    return $listaID;
+}
+
+// Funzione che restituisce tutti gli id delle prenotazioni del servizio in camera
+
+function getIdPrenotazioniSC(){
+    $xmlString = "";
+    foreach(file("../XML/ServizioCamera.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathSC = new DOMXPath($doc);
+
+    $listaID = $xpathSC->query("//@id");
+    
+    return $listaID;
+}
+
+
+// Funzione per restituire tutte le informazioni riguardo una particolare prenotazione del servizio in camera 
+
+function getPrenotazioneServizioCamera($idPrenotazione){
+    $xmlString = "";
+    foreach(file("../XML/ServizioCamera.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $tabellaPortateScelte = array();
+
+    $xpathSC = new DOMXPath($doc);
+
+    $prenotazione = $xpathSC->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']");
+    $prenotazione = $prenotazione->item(0);
+
+    $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
+    $arrayDati['dataPrenotazione'] = $dataPrenotazione;
+
+    $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;
+    $arrayDati['oraPrenotazione'] = $oraPrenotazione;
+
+    $richieste = $prenotazione->getElementsByTagName("richieste")->item(0)->textContent;
+    $arrayDati['richiesteAggiuntive'] = $richieste;
+    
+    $prezzo = $prenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+    $arrayDati['prezzoTotale'] = $prezzo;
+
+    $creditiUsati = $prenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+    $arrayDati['creditiUsati'] = $creditiUsati;
+
+    $listaPortate = $prenotazione->getElementsByTagName("portata");
+
+    for($i=0 ; $i < $listaPortate->length ; $i++){
+        $portata = $listaPortate->item($i);
+
+        $nomePortata = $portata->getElementsByTagName("nome")->item(0)->textContent;
+        $prezzo = $portata->getElementsByTagName("prezzo")->item(0)->textContent;
+        $quantita = $portata->getElementsByTagName("quantita")->item(0)->textContent;
+
+        $temp = array(
+            "descrizione"=>$nomePortata,
+            "prezzo"=>$prezzo,
+            "quantita"=>$quantita
+        );
+
+        array_push($tabellaPortateScelte , $temp);
+    }
+
+    $arrayDati['portateScelte'] = $tabellaPortateScelte;
+    
+    return $arrayDati;
+}
+
+
+
+
+
+
 
 ?>
