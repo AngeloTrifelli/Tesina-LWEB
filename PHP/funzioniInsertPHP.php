@@ -348,6 +348,9 @@ function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   
         $nuovoNome = $doc->createElement("nome" , $portata['descrizione']);
         $nuovaPortata->appendChild($nuovoNome);
 
+        $nuovoPrezzo = $doc->createElement("prezzo", $portata['prezzo']);
+        $nuovaPortata->appendChild($nuovoPrezzo);
+
         $nuovaQuantita =$doc->createElement("quantita" , $portata['quantita']);
         $nuovaPortata->appendChild($nuovaQuantita);
     }
