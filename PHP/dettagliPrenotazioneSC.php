@@ -1,10 +1,11 @@
 <?php
     require_once('funzioniGetPHP.php');
     require_once('funzioniInsertPHP.php');
+    require_once('funzioniDeletePHP.php');
 
     session_start();
 
-    if(isset($_POST['confermaPrenotazione'])){
+    if(isset($_POST['confermaPrenotazione'])){        
         if(isset($_POST['ANNULLA'])){       
             unset($_SESSION['richiestaSC']);
             header('Location: homeRistorante.php');
@@ -18,8 +19,27 @@
             exit();            
         }        
     }
+
+    if(isset($_POST['dettagliPrenotazione'])){
+        if(isset($_POST['INDIETRO'])){
+            header('Location: visualizzaPrenotazioniRistorante.php');
+            exit();
+        }
+        else{
+            if(isset($_COOKIE['Cancella'])){
+                unset($_COOKIE['Cancella']);
+                setcookie('Cancella', '', time() - 3600, '/');
+                rimuoviPrenotazioneServizioCamera($_POST['dettagliPrenotazione']);
+                header('Location: visualizzaPrenotazioniRistorante.php');
+                exit();
+            }  
+            else{
+                $_SESSION['dettagliSC'] = $_POST['dettagliPrenotazione'];
+            }
+        }
+    }
     
-    if(isset($_SESSION['richiestaSC'])){
+    if(isset($_SESSION['richiestaSC'])){        
         if(isset($_SESSION['accessoPermesso'])){
             $temp = $_SESSION['richiestaSC'];
             $portateScelte = $temp['portateScelte'];
@@ -39,8 +59,22 @@
         }
     }
     else{
-        header('Location: areaUtente.php');
-        exit();
+        if(isset($_SESSION['dettagliSC'])){
+            $idPrenotazioneSC = $_SESSION['dettagliSC'];
+            $datiPrenotazione = getPrenotazioneServizioCamera($idPrenotazioneSC);
+
+            $portateScelte = $datiPrenotazione['portateScelte'];
+            $dataPrenotazione = $datiPrenotazione['dataPrenotazione'];
+            $oraPrenotazione = $datiPrenotazione['oraPrenotazione'];
+            $richieste = $datiPrenotazione['richiesteAggiuntive'];
+
+            $dettagliPrenotazione = "True";
+            unset($_SESSION['dettagliSC']);
+        }
+        else{
+            header('Location: areaUtente.php');
+            exit();
+        }
     }
     
 
@@ -75,10 +109,7 @@
         <div class="containerCentrale">
         <h1>DETTAGLI PRENOTAZIONE:</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
-                <div class="mainArea">
-                <?php
-                    if(isset($confermaPrenotazione)){
-                ?>
+                <div class="mainArea">                
                         <div class="row">
                             <span class="info">
                                 Data prenotazione:
@@ -92,10 +123,7 @@
                             <span class="info">
                                 Ora prenotazione: <?php echo substr($oraPrenotazione, 0 , 5);?>                                
                             </span>
-                        </div>
-                <?php
-                    }
-                ?>
+                        </div>                
                     <table>
                         <tr>
                             <td class="item">Nome portata</td>
@@ -146,6 +174,12 @@
                                 <td class="content"><?php echo $cliente['crediti'];?></td>
                         <?php
                             }
+                            else{
+                        ?>
+                                <td class="item">Crediti utilizzati:</td>
+                                <td class="content"><?php echo $datiPrenotazione['creditiUsati'];?></td>
+                        <?php
+                            }
                         ?>
                         </tr>
                         <?php
@@ -170,7 +204,20 @@
                             <td></td>
                             <td></td>
                             <td class="item">Totale complessivo:</td>
-                            <td class="content"><span id="totComplessivo"><?php echo $prezzoPrenotazione;?> &euro;</span></td>
+                            <td class="content">
+                                <span id="totComplessivo">
+                                    <?php
+                                    if(isset($confermaPrenotazione)){
+                                        echo $prezzoPrenotazione;
+                                    }
+                                    else{
+                                        $prezzoDaSottrarre = $datiPrenotazione['creditiUsati'] / 5;
+                                        $totaleComplessivo = $prezzoPrenotazione - $prezzoDaSottrarre;
+                                        echo $totaleComplessivo;
+                                    }
+                                    ?> &euro;
+                                </span>
+                            </td>
                         </tr>
                     </table> 
 
@@ -190,6 +237,13 @@
                             <input type="submit" class="button" name="CONFERMA" value="CONFERMA" />
                     <?php
                         }
+                        else{
+                            echo '<input type="submit" class="button" name="INDIETRO" value="TORNA INDIETRO" />';
+                            $todayDate = date('Y-m-d');
+                            if($todayDate < $dataPrenotazione){
+                                echo '<input type="submit" class="button" name="ANNULLA" onClick=myEvent() value="ANNULLA" />';
+                            }                                
+                        }
                     ?>
                     </div>
                 </div>
@@ -199,6 +253,11 @@
                         <input type="hidden" name="confermaPrenotazione" value="confermaPrenotazione" />
                         <input type="hidden" name="prezzoPrenotazione" value="<?php echo $prezzoPrenotazione;?>" />
                 <?php        
+                    }
+                    else{
+                ?>
+                        <input type="hidden" name="dettagliPrenotazione" value="<?php echo $idPrenotazioneSC;?>" />
+                <?php
                     }
                 ?>            
             </form>
@@ -229,6 +288,18 @@
                     });
                 </script> 
         <?php
+            }
+            else{
+        ?>
+                <script>
+                    function myEvent(){
+                        var choice =confirm("Confermi di voler annullare la prenotazione ?");
+                        if(choice == true){
+                            document.cookie = "Cancella" + "=" + "Cancella" + "" + "; path=/";  
+                        }
+                    }
+                </script>    
+        <?php                
             }
         ?>
 
