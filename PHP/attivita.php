@@ -1,29 +1,34 @@
-<?php 
-echo'<?xml version="1.0" encoding="UTF-8"?>';
-require_once("funzioniGetPHP.php");
-require_once("funzioniPHP.php");
-session_start();
+<?php     
+    require_once("funzioniGetPHP.php");
+    require_once("funzioniPHP.php");
+    session_start();
 
-if(isset($_SESSION['codFiscUtenteLoggato'])){
-    $temp=$_SESSION['soggiornoAttivo'];
-    if($temp!="null"){
-    if($temp['statoSoggiorno']!= "Approvato"){
-        header("Location: areaUtente.php");
+    if(isset($_SESSION['codFiscUtenteLoggato'])){
+        $temp=$_SESSION['soggiornoAttivo'];
+        if($temp!="null"){
+            if($temp['statoSoggiorno']!= "Approvato"){
+                header("Location: areaUtente.php");
+                exit();
+            }
+        }
+        else{
+            header('Location: areaUtente.php');
+            exit();
+        }
     }
-}else{
-    header('Location: areaUtente.php');
-}
-}
-else{
-    header('Location: login.php');
-}
+    else{
+        header('Location: login.php');
+        exit();
+    }
 
-if(isset($_POST['attivitaSelezionata'])){
-$idAttivita=individuaBottoneIdAttivita();
-$_SESSION['idAttivita']=$idAttivita;
-header('Location: prenotaAttivita.php');
-}
+    if(isset($_POST['attivitaSelezionata'])){
+        $idAttivita=individuaBottoneIdAttivita();
+        $_SESSION['idAttivita']=$idAttivita;
+        header('Location: prenotaAttivita.php');
+        exit();
+    }
 
+    echo'<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -60,7 +65,7 @@ header('Location: prenotaAttivita.php');
 
             <div class="comeBack">
 
-              <a class="item" href="../PHP/areaUtente.php">TORNA INDIETRO</a>
+              <a class="item" href="../PHP/areaUtente.php">TORNA ALL'AREA PERSONALE</a>
 
             </div>
             
