@@ -6,15 +6,9 @@
         exit();
     }
     else{
-        if(isset($_SESSION['username'])){
-            unset($_SESSION['nome']);
-            unset($_SESSION['cognome']);
-            unset($_SESSION['codFisc']);
-            unset($_SESSION['dataNascita']);
-            unset($_SESSION['indirizzo']);
-            unset($_SESSION['telefono']);
-            unset($_SESSION['email']);
-            unset($_SESSION['numeroCarta']);
+        if(isset($_SESSION['username'])){   
+            $registrazioneCompletata = "True";         
+            unset($_SESSION['username']);
             header( "refresh:5;url=login.php" );
         }
         else{
@@ -56,7 +50,7 @@
                 <div class="containerCentrale">
                     <h1 id="mainTitle">
                     <?php
-                        if(isset($_SESSION['username'])){
+                        if(isset($registrazioneCompletata)){
                             echo 'REGISTRAZIONE COMPLETATA';
                         }
                         else{
@@ -68,7 +62,7 @@
 
                     <h3 id="title">
                     <?php
-                        if(isset($_SESSION['username'])){
+                        if(isset($registrazioneCompletata)){
                             echo  'Verrai reindirizzato alla pagina di Login tra 5 secondi...';
                         }
                         else{
