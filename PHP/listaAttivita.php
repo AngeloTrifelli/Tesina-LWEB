@@ -1,5 +1,9 @@
 <?php
-    session_start();
+require_once("funzioniGetPHP.php");
+require_once("funzioniPHP.php");
+session_start();
+
+
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
@@ -9,8 +13,11 @@
         header('Location: areaUtente.php');
     }
 
-   
-
+    if(isset($_POST['attivitaSelezionata'])){
+        $idAttivita=individuaBottoneIdAttivita();
+        $_SESSION['idAttivita']=$idAttivita;
+        header('Location: modificaAttivita.php');
+        }
     
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -40,21 +47,33 @@
                
         </div>
 
-    
-         <div class="attivita paragraph">
+        <?php 
+            $numAttivita= numAttivita();
 
-                <h1 class="title">Palestra</h1>
+            for ($i=1 ; $i<= $numAttivita ; $i++){
+
+                $arrayDati=getDatiAttivita("A".$i);
+
+                $nome=$arrayDati['nome'];
+                $descrizione=$arrayDati['descrizione'];
+                $linkImmagine= $arrayDati['linkImmagine'];
+                $oraApertura=substr($arrayDati['oraApertura'],0,5);
+                $oraChiusura=substr($arrayDati['oraChiusura'],0,5);
+                $prezzoOrario=$arrayDati['prezzoOrario'];
+          
+    ?>
+
+
+        <div class="attivita paragraph">
+
+                <h1 class="title"><?php echo $nome;?></h1>
 
                 <p class="alignCenter">
-                    <img class="immagine" src="https://www.destinazioneavventura.it/wp-content/uploads/2019/01/Excelsior-Sport-Hotel-Gala-Milano-Vacanza-Sportive.jpg" alt="Immagine non trovata" />
+                    <img class="immagine" src="<?php echo $linkImmagine;?>" alt="Immagine non trovata" />
                 </p>
 
                 <p class="articolo">
-                    Ubicata all'interno dell'hotel ed equipaggiata con le ultime macchine di Technogym, una palestra interna rappresenta 
-                    la soluzione perfetta per mantenersi in forma anche se lontani da casa. Hotel Sapienza vi propone una palestra dotata di:
-                    <br />Tapis roulant e cyclette<br />Materassini e ball per aerobica e pilates<br />Pesi
-                    e bilancieri di varie dimensioni<br />. Vengono inoltre messi a disposizione gli spogliatoi dotati di armadietti
-                    e docce.
+                <?php echo $descrizione;?>
                 </p>
 
                 <div>
@@ -68,7 +87,7 @@
                                     </div>
                             
                                     <div>
-                                        06:00
+                                    <?php echo $oraApertura;?>
                                     </div>
                                 </div>
                             </td>
@@ -80,7 +99,7 @@
                                     </div>
                             
                                     <div>
-                                        22:00
+                                        <?php echo $oraChiusura;?>
                                     </div>
                                 </div>
                             </td>
@@ -91,26 +110,27 @@
                                     </div>
                             
                                     <div>
-                                      10&euro;
+                                        <?php echo $prezzoOrario."&euro;";?>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <div class="miniBox">
-                                    <input class="bottone" type="submit"  name=MODIFICA value="Modifica">
-                                </div>                                
-                            </td>
                         </tr>
                     </table>
+
                 </div>
 
-                    
-                    
+                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
 
-            </div>
+                    <input class="bottone" type="submit"  name="<?php echo "A".$i;?>" value="Modifica">
+                    <input type="hidden" name="attivitaSelezionata"/>
+
+                </form> 
  
         </div>
-    
+                
+        <?php
+        }
+        ?>
        
     </body>
 </html>
