@@ -1,6 +1,11 @@
 <?php 
     session_start();
 
+    if(isset($_SESSION['loginType']) && $_SESSION['loginType']!="Cliente"){
+        header('Location: areaUtente.php');
+        exit();
+    }
+
     if(isset($_POST['LOGOUT'])){
         if($_SESSION['loginType'] == "Cliente"){
             unset($_SESSION['codFiscUtenteLoggato']);
