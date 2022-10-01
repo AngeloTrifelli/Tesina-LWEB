@@ -1,4 +1,8 @@
 <?php
+    require_once('funzioniGetPHP.php');
+    require_once('funzioniPHP.php');
+    require_once('funzioniDeletePHP.php');
+
     // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PHP PER MODIFICARE I FILE XML
 
 
@@ -280,5 +284,99 @@ function modificaOrariAttivita($idAttivita,$nuovaOraAperturaAttivita,$nuovaOraCh
     $doc->save("../XML/Attivita.xml");
 
 }
+
+// Funzione per modificare la data e/o l'ora di una prenotazione di un servizio in camera
+
+function modificaDataOraPrenotazioneSC($idPrenotazione , $nuovaData , $nuovaOra){
+    $xmlString = "";
+    
+    foreach(file("../XML/ServizioCamera.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathServizioCamera = new DOMXPath($doc);
+
+    $prenotazione = $xpathServizioCamera->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']");
+    $prenotazione = $prenotazione->item(0);
+
+    if($nuovaData != ""){
+        $nodoData = $prenotazione->getElementsByTagName("data")->item(0);
+        $nodoData->nodeValue = "";
+        $nodoData->appendChild($doc->createTextNode($nuovaData));
+    }
+
+    if($nuovaOra != ""){
+        $nodoOra = $prenotazione->getElementsByTagName("ora")->item(0);
+        $nodoOra->nodeValue = "";
+        $nodoOra->appendChild($doc->createTextNode($nuovaOra.":00"));
+    }
+
+    $doc->save("../XML/ServizioCamera.xml");
+}
+
+
+
+// Funzione per modificare i dati di una prenotazione al tavolo
+
+function modificaPrenotazioneTavolo($idPrenotazione , $nuovaData , $nuovaLocazione , $nuovoPasto ,  $nuovoOrario){
+    $xmlStringTavoli = "";
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlStringTavoli .=trim($node);
+    }
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlStringTavoli);
+    $docTavoli->formatOutput = true;
+
+    $xpathTavoli = new DOMXPath($docTavoli);
+
+    $prenotazione = getPrenotazioneTavolo($idPrenotazione);
+    
+    if($prenotazione['locazioneTavolo'] == $nuovaLocazione){
+        $result = verificaDisponibilitaTavolo($prenotazione['numeroTavolo'] , $idPrenotazione ,$nuovaData , $nuovoPasto);
+        if($result == "True"){
+            $numeroTavolo = $prenotazione['numeroTavolo'];
+            $nodoPrenotazione = $xpathTavoli->query("/listaTavoli/tavolo[@numero='$numeroTavolo']/listaPrenotazioni/prenotazione[idPrenotazione='$idPrenotazione']");
+            $nodoPrenotazione = $nodoPrenotazione->item(0);
+
+            $vecchiaData = $nodoPrenotazione->getElementsByTagName("data")->item(0);
+            $vecchiaData->nodeValue ="";
+            $vecchiaData->appendChild($docTavoli->createTextNode($nuovaData));
+
+            $vecchioOrario = $nodoPrenotazione->getElementsByTagName("ora")->item(0);
+            $vecchioOrario->nodeValue="";
+            $vecchioOrario->appendChild($docTavoli->createTextNode($nuovoOrario));
+
+            $docTavoli->save("../XML/Tavoli.xml");
+            return "success";
+        }
+        else{
+            $result = cercaTavoloDisponibile($nuovaData , $nuovaLocazione , $nuovoPasto , $nuovoOrario , $prenotazione['codFiscCliente']);
+            if($result == "success"){
+                rimuoviPrenotazioneTavolo($idPrenotazione);
+                return $result;
+            }
+            else{
+                return "insuccess";
+            }
+        }
+    }
+    else{
+        $result = cercaTavoloDisponibile($nuovaData , $nuovaLocazione , $nuovoPasto , $nuovoOrario , $prenotazione['codFiscCliente']);
+        if($result == "success"){
+            rimuoviPrenotazioneTavolo($idPrenotazione);
+            return $result;
+        }
+        else{
+            return "insuccess";
+        }
+    }
+}
+
+
+
 
 ?>
