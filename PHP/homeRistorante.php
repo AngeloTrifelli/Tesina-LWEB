@@ -5,14 +5,17 @@
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+                exit();
             }
         }
         else{
             header('Location: prenotaOra.php');
+            exit();
         }
     }
     else{
         header('Location: login.php');
+        exit();
     }
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -54,7 +57,7 @@
                 <a class="item" href="./visualizzaMenu.php">VISUALIZZA MEN&Ugrave;</a>
                 <br />
                 <br />
-                <a class="item" href="./areaUtente.php">TORNA INDIETRO</a>
+                <a class="item" href="./areaUtente.php">TORNA ALL'AREA PERSONALE</a>
         
             </div>
             

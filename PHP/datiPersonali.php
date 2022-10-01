@@ -6,13 +6,15 @@
         if(isset($_SESSION['codFiscUtenteLoggato'])){
             $cliente = getDatiCliente($_SESSION['codFiscUtenteLoggato']);
             $soggiorniPassati = getSoggiorniPassati($_SESSION['codFiscUtenteLoggato']);
-        }else{
+        }
+        else{
             $cliente = getDatiCliente($_SESSION['codFiscUtenteDaModificare']);
         }
     }
     else{
         header('Location: intro.php');
-        }
+        exit();
+    }
 
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -36,11 +38,12 @@
     <div class="top">
         <div class="topLeft">
             <?php
-            if(isset($_SESSION['codFiscUtenteLoggato'])){
-            echo "<a href=\"./areaUtente.php\">TORNA INDIETRO</a> ";
-            }else{
-                echo "<a href=\"./visualizzaClienti.php\">TORNA INDIETRO</a> ";
-            }
+                if(isset($_SESSION['codFiscUtenteLoggato'])){
+                    echo "<a href=\"./areaUtente.php\">TORNA INDIETRO</a> ";
+                }
+                else{
+                    echo "<a href=\"./visualizzaClienti.php\">TORNA INDIETRO</a> ";
+                }
             ?>   
         </div>
         <h1 class="alignCenter">Ciao <?php echo $cliente['nome'];?>!</h1>
@@ -191,7 +194,7 @@
     ?>
 
 
-    <h3 class="titoloImportante alignCenter">SOGGIORNI PASSATI:</h3>
+    <h3 class="titoloImportante alignCenter">SOGGIORNI PASSATI/RIFIUTATI:</h3>
     <?php
         $numSoggiorniPassati = count($soggiorniPassati);
         if($numSoggiorniPassati >= 1){
@@ -256,7 +259,7 @@
     <?php
         }
         else{
-            echo '<p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati...</p>';
+            echo '<p class="alignCenter scrittaCentrale marginBottom">Non sono stati trovati soggiorni passati o rifiutati...</p>';
         }
     ?>
 

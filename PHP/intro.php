@@ -64,6 +64,9 @@
                     <a class="item" href="./recensioni.php">RECENSIONI</a>
                     <br/>
 
+                    <a class="item" href="./faq.php">FAQ</a>
+                    <br />
+
                     <?php
                         if(!isset($_SESSION['codFiscUtenteLoggato'])){
                     ?>

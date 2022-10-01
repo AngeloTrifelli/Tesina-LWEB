@@ -1,22 +1,35 @@
-<?php 
-echo'<?xml version="1.0" encoding="UTF-8"?>';
-require_once("funzioniGetPHP.php");
-require_once('funzioniPHP.php');
+<?php     
+    require_once("funzioniGetPHP.php");
+    require_once('funzioniPHP.php');
 
-session_start();
+    session_start();
 
-if(isset($_POST['bottonePremuto'])){
-    individuaBottoneAttivitaDaEliminare();
-   }
+    if(isset($_POST['bottonePremuto'])){
+        individuaBottoneAttivitaDaEliminare();
+    }
 
-if(!(isset($_SESSION['codFiscUtenteLoggato']))){
-    header('Location: login.php');
-}
+    if(isset($_SESSION['codFiscUtenteLoggato'])){
+        $temp=$_SESSION['soggiornoAttivo'];
+        if($temp!="null"){
+            if($temp['statoSoggiorno']!= "Approvato"){
+                header("Location: areaUtente.php");
+                exit();
+            }
+        }
+        else{
+            header('Location: areaUtente.php');
+            exit();
+        }
+    }
+    else{
+        header('Location: login.php');
+        exit();
+    }
 
-$arrayPrenotazioniAttivitaUtente=getPrenotazioniAttivitaUtente($_SESSION['codFiscUtenteLoggato']);
+    $arrayPrenotazioniAttivitaUtente=getPrenotazioniAttivitaUtente($_SESSION['codFiscUtenteLoggato']);
 
 
-
+    echo'<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -45,9 +58,11 @@ $arrayPrenotazioniAttivitaUtente=getPrenotazioniAttivitaUtente($_SESSION['codFis
 
 
             <div id="links">
+               <a class="item" href="../PHP/attivita.php">PRENOTA UN'ATTIVIT&Agrave;</a>               
+            </div>
 
-               <a class="item" href="../PHP/attivita.php">TORNA INDIETRO</a>
-
+            <div class="comeBack">
+              <a class="item" href="../PHP/areaUtente.php">TORNA ALL'AREA PERSONALE</a>
             </div>
             
             

@@ -5,6 +5,10 @@
     background-color:#f4f7f4;
 }
 
+html{
+    padding-bottom: 2%;
+}
+
 a{
     text-decoration: none;  
 
