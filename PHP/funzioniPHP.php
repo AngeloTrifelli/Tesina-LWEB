@@ -149,7 +149,7 @@ function individuaBottoneCamereDisponibili(){
 
 
 
-// Funzione per capire che bottone ha premuto l'utente in attivita.php
+// Funzione per capire che bottone ha premuto l'utente in attivita.php e in listaPrenotazioniAttivita.php
 
 function individuaBottoneidAttivita(){
 
@@ -169,6 +169,50 @@ function individuaBottoneidAttivita(){
     }
 
     return $idAttivita; 
+}
+
+// Funzione per capire che bottone ha premuto l'utente in attivita.php e in listaPrenotazioniAttivita.php
+
+function individuaBottoneidPrenotazioneAttivita(){
+
+    $xmlStringAttivita= "";
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+       $xmlStringAttivita .= trim($node);
+
+   }
+
+   $docAttivita = new DOMDocument();
+   $docAttivita->loadXML($xmlStringAttivita);
+   $docAttivita->formatOutput = true;
+
+   $listaAttivita = $docAttivita->documentElement->childNodes;
+   $i=0;
+   $j = 0;
+   $trovato="False";
+   while($i<$listaAttivita->length && $trovato=="False"){
+
+    $attivita=$listaAttivita->item($i);
+
+   $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
+
+   while($j < count($listaPrenotazione) && $trovato=="False"){
+
+       $prenotazione = $listaPrenotazione->item($j);
+       $idPrenotazione= $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+       
+       if(isset($_POST[$idPrenotazione])){
+        $trovato = "True";
+    }
+    $j++;
+   }
+   $i++;
+}
+
+    return($idPrenotazione);
+
+    
 }
 
 // Funzione per capire che bottone ha premuto l'utente in visualizzaClienti.php
