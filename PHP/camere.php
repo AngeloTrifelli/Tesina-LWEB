@@ -1,5 +1,7 @@
 <?php 
-echo'<?xml version="1.0" encoding="UTF-8"?>';
+    session_start();
+
+    echo'<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -32,17 +34,33 @@ echo'<?xml version="1.0" encoding="UTF-8"?>';
                 <a class="item" href="./intro.php">HOME</a>
                 <br/>
 
-                <a class="item" href="#">RECENSIONI</a>
+                <a class="item" href="./recensioni.php">RECENSIONI</a>
                 <br/>
 
-                <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
-                <br/>
-        
-                <a class="item" href="./login.php">LOGIN</a>
+                <a class="item" href="./faq.php">FAQ</a>
                 <br/>
 
-                <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
-                <br/>
+                <?php
+                    if(!isset($_SESSION['loginType'])){
+                ?>
+                            <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
+                            <br/>
+
+                            <a class="item" href="./registrazioneUtente.php">REGISTRATI</a>
+                            <br/>
+
+                            <a class="item" href="./login.php">LOGIN</a>
+                            <br/>
+                <?php
+                    }
+                    else{
+                        if(isset($_SESSION['soggiornoAttivo']) && $_SESSION['soggiornoAttivo'] == "null"){
+                            echo '
+                            <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
+                            <br />';
+                        }
+                    }
+                ?>                
   
             </div>
             
