@@ -111,6 +111,39 @@ function rimuoviPortataPrenotazioneSC($idPrenotazione, $nomePortataScelta , $qua
     $doc->save("../XML/ServizioCamera.xml");
 }
 
+//Funzione per eliminare una prenotazione di una attivita
 
+function rimuoviPrenotazioneAttivita($idPrenotazioneAttivita){
+   
+    $idAttivita=substr($idPrenotazioneAttivita,0,2);
+    $xmlStringAttivita= "";
+    
+
+    foreach(file("../XML/Attivita.xml") as $node){
+
+       $xmlStringAttivita .= trim($node);
+
+   }
+
+   $docAttivita = new DOMDocument();
+   $docAttivita->loadXML($xmlStringAttivita);
+   $docAttivita->formatOutput = true;
+
+   $xpathAttivita = new DOMXPath($docAttivita);
+
+   $attivita=$xpathAttivita->query("/listaAttivita/attivita[@id='$idAttivita']");
+   $attivita=$attivita->item(0);
+   $listaPrenotazioni=$attivita->lastChild;
+
+
+   $prenotazioneDaEliminare = $xpathAttivita->query("//prenotazione[idPrenotazione='$idPrenotazioneAttivita']");
+   $prenotazioneDaEliminare = $prenotazioneDaEliminare->item(0);
+
+   $listaPrenotazioni->removeChild($prenotazioneDaEliminare);
+   
+
+    $docAttivita->save("../XML/Attivita.xml");
+    
+}
 
 ?>

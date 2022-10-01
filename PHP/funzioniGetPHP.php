@@ -691,6 +691,8 @@ function getCategorie(){
     return($tabellaCategorie);
 }
 
+//Funzione che restituisce le  attivita presenti in Attivita.xml
+
 function getAttivita(){
 
     $xmlString = "";
@@ -732,7 +734,7 @@ function getAttivita(){
 
 }
 
-//Funzione che restituisce le attivita persenti in Attivita.xml
+//Funzione che restituisce le prenotazioni di attivita presenti in Attivita.xml
 
 function getPrenotazioniAttivita($idAttivita){
 
@@ -752,9 +754,9 @@ function getPrenotazioniAttivita($idAttivita){
 
     $listaPrenotazioni = $attivita->getElementsByTagName("prenotazione");
     $i=0;
-    while($i< $listaPrenotazioni->lenght){
+    while($i< count($listaPrenotazioni)){
         $prenotazione=$listaPrenotazioni->item($i);
-        $idPrenotazione=$prenotazione->getElementsByTagName("idPrenotazione");
+        $idPrenotazione=$prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
         $codFisc=$prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
         $data=$prenotazione->getElementsByTagName("data")->item(0)->textContent;
         $oraInizio=$prenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
@@ -778,6 +780,128 @@ function getPrenotazioniAttivita($idAttivita){
 
 
     return($arrayPrenotazioniAttivita);
+
+}
+
+//Funzione che restituisce la prenotazione di attivita presente in Attivita.xml con secifico idPrenotazione
+
+function getPrenotazioneAttivita($idPrenotazione){
+
+    $idAttivita=substr($idPrenotazione,0,2);
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    $attivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']");
+    $attivita = $attivita->item(0);
+
+    $listaPrenotazioni = $attivita->getElementsByTagName("prenotazione");
+    $i=0;
+    $trovato="False";
+    while($i< count($listaPrenotazioni) && $trovato=="False"){
+        $prenotazioneEsaminata=$listaPrenotazioni->item($i);
+        $idPrenotazioneEsaminato=$prenotazioneEsaminata->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+        if($idPrenotazioneEsaminato==$idPrenotazione){
+        $codFisc=$prenotazioneEsaminata->getElementsByTagName("codFisc")->item(0)->textContent;
+        $data=$prenotazioneEsaminata->getElementsByTagName("data")->item(0)->textContent;
+        $oraInizio=$prenotazioneEsaminata->getElementsByTagName("oraInizio")->item(0)->textContent;
+        $oraFine=$prenotazioneEsaminata->getElementsByTagName("oraFine")->item(0)->textContent;
+        $prezzoTotale=$prenotazioneEsaminata->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+        $creditiUsati=$prenotazioneEsaminata->getElementsByTagName("creditiUsati")->item(0)->textContent;
+
+        $prenotazione = array(
+            "idPrenotazione"=>$idPrenotazione,
+            "codFisc"=>$codFisc,
+            "data"=>$data,
+            "oraInizio"=>$oraInizio,
+            "oraFine"=>$oraFine,
+            "prezzoTotale"=>$prezzoTotale,
+            "creditiUsati"=>$creditiUsati
+        );
+        $trovato="True";
+    }
+        $i++;
+    }
+    if($trovato=="True"){
+        return $prenotazione;
+    }else{
+        return null;
+    }
+
+}
+
+//Funzione che restituisce le prenotazioni di attivita presenti in Attivita.xml differenziandole tra attive o passate
+
+
+function getPrenotazioniAttivitaAttive(){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    
+
+    $tabellaPrenotazioniAttivita=array();
+    $arrayPrenotazioniAttivitaAttive=array();
+    $arrayPrenotazioniAttivitaPassate=array();
+    $dataAttuale=date('Y-m-d');
+
+    $listaAttivita = $doc->documentElement->childNodes;
+
+    for($j=0;$j<$listaAttivita->length;$j++){
+    $attivita=$listaAttivita->item($j);
+    $nomeAttivita=$attivita->getElementsByTagName("nome")->item(0)->textContent;
+    $listaPrenotazioni = $attivita->getElementsByTagName("prenotazione");
+    $i=0;
+    while($i< count($listaPrenotazioni)){
+        $prenotazione=$listaPrenotazioni->item($i);
+        $idPrenotazione=$prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+        $codFisc=$prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+        $data=$prenotazione->getElementsByTagName("data")->item(0)->textContent;
+        $oraInizio=$prenotazione->getElementsByTagName("oraInizio")->item(0)->textContent;
+        $oraFine=$prenotazione->getElementsByTagName("oraFine")->item(0)->textContent;
+        $prezzoTotale=$prenotazione->getElementsByTagName("prezzoTotale")->item(0)->textContent;
+        $creditiUsati=$prenotazione->getElementsByTagName("creditiUsati")->item(0)->textContent;
+
+        $temp = array(
+            "nome"=>$nomeAttivita,
+            "idPrenotazione"=>$idPrenotazione,
+            "codFisc"=>$codFisc,
+            "data"=>$data,
+            "oraInizio"=>$oraInizio,
+            "oraFine"=>$oraFine,
+            "prezzoTotale"=>$prezzoTotale,
+            "creditiUsati"=>$creditiUsati
+        );
+
+        if($data>$dataAttuale){
+        array_push($arrayPrenotazioniAttivitaAttive , $temp);
+        }else{
+        array_push($arrayPrenotazioniAttivitaPassate , $temp);
+        }
+        $i++;
+    }
+}
+
+if(count($arrayPrenotazioniAttivitaAttive) >= 1){
+    array_multisort(array_column($arrayPrenotazioniAttivitaAttive, 'data') , SORT_ASC , $arrayPrenotazioniAttivitaAttive);
+}
+
+if(count($arrayPrenotazioniAttivitaPassate) >= 1){
+    array_multisort(array_column($arrayPrenotazioniAttivitaPassate, 'data') , SORT_ASC , $arrayPrenotazioniAttivitaPassate);
+}
+    array_push($tabellaPrenotazioniAttivita , $arrayPrenotazioniAttivitaAttive);
+    array_push($tabellaPrenotazioniAttivita , $arrayPrenotazioniAttivitaPassate);
+
+    return($tabellaPrenotazioniAttivita);
 
 }
 

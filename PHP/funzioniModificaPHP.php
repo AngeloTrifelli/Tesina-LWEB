@@ -379,4 +379,145 @@ function modificaPrenotazioneTavolo($idPrenotazione , $nuovaData , $nuovaLocazio
 
 
 
+function modificaAttivita($idAttivita,$nome,$linkImmagine,$descrizione,$prezzoOrario){
+
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    if($nome!=""){
+    $nomeAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/nome");
+    $nomeAttivita = $nomeAttivita->item(0);
+    $nomeAttivita->nodeValue = "";
+    $nomeAttivita->appendChild($doc->createTextNode($nome));
+    }
+
+    if($linkImmagine!=""){
+        $linkImmagineAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/linkImmagine");
+        $linkImmagineAttivita = $linkImmagine->item(0);
+        $linkImmagineAttivita->nodeValue = "";
+        $linkImmagineAttivita->appendChild($doc->createTextNode($linkImmagine));
+        }
+
+    if($descrizione!=""){
+        $descrizioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/descrizione");
+        $descrizioneAttivita = $descrizioneAttivita->item(0);
+        $descrizioneAttivita->nodeValue = "";
+        $descrizioneAttivita->appendChild($doc->createTextNode($descrizione));
+        }
+
+    if($prezzoOrario!=""){
+        $prezzoOrarioAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/prezzoOrario");
+        $prezzoOrarioAttivita = $prezzoOrarioAttivita->item(0);
+        $prezzoOrarioAttivita->nodeValue = "";
+        $prezzoOrarioAttivita->appendChild($doc->createTextNode($prezzoOrario));
+        }
+
+        $doc->save("../XML/Attivita.xml"); 
+}
+
+function modificaPrenotazioneAttivita($idPrenotazione,$data,$oraInizio,$oraFine){
+    $xmlString = "";
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathAttivita = new DOMXPath($doc);
+
+    $idAttivita=substr($idPrenotazione,0,2);
+
+    if($data!=""){
+        $dataPrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/data");
+        $dataPrenotazioneAttivita = $dataPrenotazioneAttivita->item(0);
+        $dataPrenotazioneAttivita->nodeValue = "";
+        $dataPrenotazioneAttivita->appendChild($doc->createTextNode($data));
+        }
+    if($oraInizio!=""){
+        $oraInizioPrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/oraInizio");
+        $oraInizioPrenotazioneAttivita = $oraInizioPrenotazioneAttivita->item(0);
+        
+        $oraInizioPrenotazioneAttivita->nodeValue = "";
+        $oraInizioPrenotazioneAttivita->appendChild($doc->createTextNode($oraInizio.":00"));
+        }
+    if($oraFine!=""){
+        $oraFinePrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/oraFine");
+        $oraFinePrenotazioneAttivita = $oraFinePrenotazioneAttivita->item(0);
+        $oraFinePrenotazioneAttivita->nodeValue = "";
+        $oraFinePrenotazioneAttivita->appendChild($doc->createTextNode($oraFine.":00"));
+        }
+
+    if($oraInizio!="" || $oraFine!=""){
+        $prezzoOrario=$xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/prezzoOrario");
+        $prezzoOrario=$prezzoOrario->item(0)->textContent;
+        settype($prezzoOrario,"integer");
+        $nuovoPrezzoTotale=0;
+        if($oraInizio!="" && $oraFine!=""){
+            settype($oraInizio,"integer");
+            settype($oraFine,"integer");
+    
+            $oraDiAttivita=$oraFine-$oraInizio;
+    
+            $nuovoPrezzoTotale=$prezzoOrario*$oraDiAttivita;
+        }
+        if($oraInizio!="" && $oraFine==""){
+            $oraFinePrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/oraFine");
+            $oraFinePrenotazioneAttivita = $oraFinePrenotazioneAttivita->item(0)->textContent;
+            $oraFinePrenotazioneAttivita =substr($oraFinePrenotazioneAttivita,0,5);
+            settype($oraInizio,"integer");
+            settype($oraFinePrenotazioneAttivita,"integer");
+
+            $oraDiAttivita=$oraFinePrenotazioneAttivita-$oraInizio;
+    
+            $nuovoPrezzoTotale=$prezzoOrario*$oraDiAttivita;
+        }
+        if($oraInizio=="" && $oraFine!=""){
+            $oraInizioPrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/oraInizio");
+            $oraInizioPrenotazioneAttivita = $oraInizioPrenotazioneAttivita->item(0)->textContent;
+            $oraInizioPrenotazioneAttivita =substr($oraInizioPrenotazioneAttivita,0,5);
+            settype($oraInizioPrenotazioneAttivita,"integer");
+            settype($oraFine,"integer");
+
+            $oraDiAttivita=$oraFine-$oraInizioPrenotazioneAttivita;
+    
+            $nuovoPrezzoTotale=$prezzoOrario*$oraDiAttivita;
+        }
+        $prezzoTotalePrenotazioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/prezzoTotale");
+        $prezzoTotalePrenotazioneAttivita = $prezzoTotalePrenotazioneAttivita->item(0);
+        $vecchioPrezzoTotale=$prezzoTotalePrenotazioneAttivita->textContent;
+        settype($vecchioPrezzoTotale,"integer");
+        $creditiUsati = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/creditiUsati");
+        $vecchiCreditiUsati = $creditiUsati->item(0)->textContent;
+        settype($vecchiCreditiUsati ,"integer");
+        $scontoCrediti=$vecchiCreditiUsati/5;
+        if($nuovoPrezzoTotale<$scontoCrediti){
+            $nuoviCreditiUsati= $nuovoPrezzoTotale*5;
+            $creditiDaRimborsare=$vecchiCreditiUsati-$nuoviCreditiUsati;
+
+            $codFiscCliente= $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/listaPrenotazioni/prenotazione[idPrenotazione = '$idPrenotazione']/codFisc");
+            $codFiscCliente=$codFiscCliente->item(0)->textContent;
+            modificaCreditiCliente($codFiscCliente,$creditiDaRimborsare);
+
+            $creditiUsati->item(0)->nodeValue = "";
+            $creditiUsati->appendChild($doc->createTextNode($nuoviCreditiUsati));
+        
+        }
+        
+        $prezzoTotalePrenotazioneAttivita->nodeValue = "";
+        $prezzoTotalePrenotazioneAttivita->appendChild($doc->createTextNode($nuovoPrezzoTotale));
+
+    }
+
+    
+        $doc->save("../XML/Attivita.xml"); 
+}
+
 ?>

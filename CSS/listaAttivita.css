@@ -11,10 +11,6 @@ body , html{
     padding: 0;
 }
 
-form{
-    display: inline;
-}
-
 .top{
     padding-top: 2%;
     padding-bottom: 1%;
@@ -47,9 +43,11 @@ p{
 
 .attivita{
     padding: 4% 8%;
+    background-color:#f4f7f4;
 }
 
 .paragraph{
+    background-color:#f4f7f4;
     border-radius: 16px;
     margin-left: 1%;
     margin-bottom: 4%;
@@ -107,6 +105,7 @@ p{
 
 .bottone{
     margin-top: 3%;
+    margin-left: 45%;
     margin-bottom: 2%;
     padding: 8px;
     transition: all 1s ease;

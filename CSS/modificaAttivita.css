@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+body , html{
+    font-family: "Lato" , sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    padding-top: 1%;
+    padding-bottom: 5%;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: #871f30;
+}
+
+.containerCentrale{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    height: 820px;
+    border-radius: 70px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.alignCenter{
+    text-align: center;
+}
+
+h1{
+    font-family: 'Bebas Neue', cursive;
+    color: #871f30;
+    font-size: 48px;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+}
+
+.riga{
+    display: flex;
+    background-color: inherit;
+    margin-left: 20%;
+    
+}
+
+.containerColumn{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    background-color: inherit;
+    
+}
+
+.buttonSx{
+    background-color: #871f30;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    width: 90px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 12%;
+}
+.buttonDx{
+    background-color: #871f30;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    width: 90px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 12%;
+    margin-left: 40%;
+}
+
+.buttonSx:hover{
+    background-color: #640c1b;
+}
+
+.buttonDx:hover{
+    background-color: #640c1b;
+}
+
+.errorLabel{
+    margin-top: 5%;
+    color: red;
+    font-weight: bold;
+    background-color: inherit;
+}
+
+.textInput{
+    border: 1px solid #ccc;
+    padding-left: 10px; 
+    padding-right: 15px;
+    height: 40px;
+    width:100%;
+    min-width: 200px;
+}
+
+.descrizione{
+    width: 50%;
+    height: 100px;
+}
+
+#modificaOrari a{
+    text-decoration: none;
+    color: black;
+}
+
+#modificaOrari a:hover{
+    color: #871f30;
+    font-weight: bolder;
+}
+
+#modificaOrari{
+    margin-top: 5%;
+    width: 65%;
+    margin-left: 17%;
+    border-radius: 16px;
+    background-color: white;
+    text-align: center;
+}
+
+.nb{
+    margin-top: 5%;
+    margin-left: 17%;
+   
+}
+
+#inputNumber{
+    width: 25%;
+    height: 30px;
+    margin-left: 38%;
+}
