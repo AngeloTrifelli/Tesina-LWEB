@@ -39,7 +39,7 @@ if(isset($_SESSION['loginType'])){
                     if(isset($_POST['prenotazioneSoggiorno'])){
                         $categoriaDaAggiungere['prenotazioneSoggiorno']=$_POST['prenotazioneSoggiorno'];
                     }else{
-                        $categoriaDaAggiungere['prenotazioneTavolo']="";
+                        $categoriaDaAggiungere['prenotazioneSoggiorno']="";
                     }
                     if(isset($_POST['registrazione'])){
                         $categoriaDaAggiungere['registrazione']=$_POST['registrazione'];
