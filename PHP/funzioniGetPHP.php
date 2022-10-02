@@ -1,8 +1,7 @@
 <?php
 // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PER ESTRARRE DATI DA I FILE XML
 
-    require_once("funzioniModificaPHP.php");    
-    getIdPrenotazioniSC();
+    require_once("funzioniModificaPHP.php");        
 
 // Funzione per ottenere tutti i soggiorni passati di un cliente in datiPersonali.php
 
@@ -964,7 +963,8 @@ function getPrenotazioniAttivitaUtente($codFiscUtenteLoggato){
 
 
 
-// Funzione che restituisce tutti le prenotazioni del ristorante effettuate da un cliente
+// Funzione che restituisce tutti le prenotazioni del ristorante effettuate da un cliente oppure di tutti i clienti (se viene passato
+// come parametro null)
 
 function getPrenotazioniRistorante($codFiscCliente){
     $xmlStringTavoli = "";
@@ -999,7 +999,7 @@ function getPrenotazioniRistorante($codFiscCliente){
             $prenotazione = $listaPrenotazioni->item($j);
 
             $codFisc = $prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;            
-            if($codFisc == $codFiscCliente){
+            if($codFisc == $codFiscCliente || $codFiscCliente == "null"){
                 $idPrenotazione = $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
                 $numeroTavolo = $tavolo->getAttribute("numero");
                 $locazioneTavolo = $tavolo->firstChild->textContent;
@@ -1007,6 +1007,7 @@ function getPrenotazioniRistorante($codFiscCliente){
                 $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;   
                 
                 $temp = array(
+                    "codFiscCliente"=>$codFisc,
                     "tipoPrenotazione"=>"Servizio al tavolo",
                     "idPrenotazione"=>$idPrenotazione,
                     "numeroTavolo"=>$numeroTavolo,
@@ -1025,14 +1026,22 @@ function getPrenotazioniRistorante($codFiscCliente){
         }
     }
 
-    $listaPrenotazioniSC = $xpathServizioCamera->query("/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente']");
+    if($codFiscCliente != "null"){
+        $listaPrenotazioniSC = $xpathServizioCamera->query("/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente']");
+    }
+    else{
+        $listaPrenotazioniSC = $xpathServizioCamera->query("/listaPrenotazioni/prenotazione");
+    }
+    
     for($i=0 ; $i < $listaPrenotazioniSC->length ; $i++){
         $prenotazione = $listaPrenotazioniSC->item($i);
         $idPrenotazione = $prenotazione->getAttribute("id");
+        $codFisc = $prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
         $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
         $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;
 
         $temp = array(
+            "codFiscCliente"=>$codFisc,
             "tipoPrenotazione"=>"Servizio in camera",
             "idPrenotazione"=>$idPrenotazione,            
             "dataPrenotazione"=>$dataPrenotazione,
@@ -1060,6 +1069,11 @@ function getPrenotazioniRistorante($codFiscCliente){
     
     return $tabellaPrenotazioni;
 }
+
+
+
+
+
 
 
 //Funzione che restituisce tutti gli id delle prenotazioni dei tavoli
@@ -1114,6 +1128,9 @@ function getPrenotazioneServizioCamera($idPrenotazione){
     $prenotazione = $xpathSC->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']");
     $prenotazione = $prenotazione->item(0);
 
+    $codFisc = $prenotazione->getElementsByTagName("codFisc")->item(0)->textContent;
+    $arrayDati['codFiscCliente'] = $codFisc;  
+
     $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
     $arrayDati['dataPrenotazione'] = $dataPrenotazione;
 
@@ -1150,6 +1167,55 @@ function getPrenotazioneServizioCamera($idPrenotazione){
     $arrayDati['portateScelte'] = $tabellaPortateScelte;
     
     return $arrayDati;
+}
+
+
+//Funzione per ottenere tutti i dati di una particolare prenotazione al tavolo 
+
+function getPrenotazioneTavolo($idPrenotazione){
+    $xmlStringTavoli = "";
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlStringTavoli .=trim($node);
+    }
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlStringTavoli);
+
+    $xpathTavoli = new DOMXPath($docTavoli);
+
+    $pieces = explode("-",$idPrenotazione);
+    $numeroTavolo = $pieces[0];
+
+    $tavolo = $xpathTavoli->query("/listaTavoli/tavolo[@numero='$numeroTavolo']");
+    $tavolo = $tavolo->item(0);
+
+    $prenotazioneTavolo = $xpathTavoli->query("/listaTavoli/tavolo[@numero='$numeroTavolo']/listaPrenotazioni/prenotazione[idPrenotazione='$idPrenotazione']");
+    $prenotazioneTavolo = $prenotazioneTavolo->item(0);
+
+    $arrayDati['numeroTavolo'] = $tavolo->getAttribute("numero");
+    $arrayDati['locazioneTavolo'] = $tavolo->getElementsByTagName("locazione")->item(0)->textContent;
+    $arrayDati['codFiscCliente'] = $prenotazioneTavolo->getElementsByTagName("codFisc")->item(0)->textContent;
+    $arrayDati['dataPrenotazione'] = $prenotazioneTavolo->getElementsByTagName("data")->item(0)->textContent;
+    $arrayDati['oraPrenotazione'] = $prenotazioneTavolo->getElementsByTagName("ora")->item(0)->textContent;
+    
+    return $arrayDati;
+}
+
+// Funzione per ottenere il prezzo di una determinata portata 
+
+function getPrezzoPortata($nomePortata){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);   
+
+    $xpathRistorante = new DOMXPath($doc);
+
+    $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione='$nomePortata']/prezzo");    
+    $prezzoPortata = $prezzoPortata->item(0)->textContent;        
+
+    return $prezzoPortata;
 }
 
 

@@ -42,7 +42,7 @@
                 <a class="item" href="./listaPrenotazioniAttivita.php">PRENOTAZIONI ATTIVIT&Agrave;</a>
                 <br />
                 <br />
-                <a class="item" href="./areaUtente.php">TORNA INDIETRO</a>
+                <a class="item" href="./areaUtente.php">TORNA ALL'AREA PERSONALE</a>
             </div>
             
         </div>

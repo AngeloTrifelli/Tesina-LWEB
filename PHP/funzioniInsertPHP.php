@@ -354,9 +354,58 @@ function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   
     $doc->save("../XML/ServizioCamera.xml");
 }
 
+// Funzione per inserire una portata all'interno di una prenotazione già esistente
 
+function aggiungiPortataPrenotazioneSC($idPrenotazione ,$nomePortata , $quantitaSelezionata){
+    $xmlString = "";
+    foreach(file("../XML/ServizioCamera.xml") as $node ){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
 
+    $xpathSC = new DOMXPath($doc);
 
+    $prenotazioneSC = $xpathSC->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']");
+    $prenotazioneSC = $prenotazioneSC->item(0);
+    
+    $portata = $xpathSC->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']/listaPortate/portata[nome='$nomePortata']");
+    if($portata->length == 1){
+        $portata = $portata->item(0);
+        $prezzoPortata = $portata->getElementsByTagName("prezzo")->item(0)->textContent;
+        $vecchiaQuantita = $portata->getElementsByTagName("quantita")->item(0);
+
+        $nuovaQuantita = $vecchiaQuantita->textContent + $quantitaSelezionata;
+
+        $vecchiaQuantita->nodeValue="";
+        $vecchiaQuantita->appendChild($doc->createTextNode($nuovaQuantita));
+    }
+    else{
+        $prezzoPortata = getPrezzoPortata($nomePortata);        
+        $listaPortate = $prenotazioneSC ->getElementsByTagName("listaPortate")->item(0);
+
+        $nuovaPortata = $doc->createElement("portata");
+        $listaPortate->appendChild($nuovaPortata);
+
+        $nuovoNome = $doc->createElement("nome", $nomePortata);
+        $nuovaPortata->appendChild($nuovoNome);
+
+        $nuovoPrezzo = $doc->createElement("prezzo", $prezzoPortata);
+        $nuovaPortata->appendChild($nuovoPrezzo);
+
+        $nuovaQuantita = $doc->createElement("quantita", $quantitaSelezionata);
+        $nuovaPortata->appendChild($nuovaQuantita);            
+    }
+
+    $vecchioPrezzoTot = $prenotazioneSC->getElementsByTagName("prezzoTotale")->item(0);
+    $nuovoPrezzoTot = ($vecchioPrezzoTot->textContent) + ($prezzoPortata * $quantitaSelezionata);
+
+    $vecchioPrezzoTot->nodeValue="";
+    $vecchioPrezzoTot->appendChild($doc->createTextNode($nuovoPrezzoTot));
+
+    $doc->save("../XML/ServizioCamera.xml");
+}
 
 
 

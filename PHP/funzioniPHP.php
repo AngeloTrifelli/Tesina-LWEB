@@ -503,6 +503,68 @@ function cercaTavoloDisponibile($dataPrenotazioneScelta, $locazioneScelta , $pas
 
 }
 
+// Funzione per verificare se un determinato tavolo è disponibile 
+
+function verificaDisponibilitaTavolo($numeroTavolo, $idPrenotazioneEsistente , $dataScelta , $pasto){    
+    $xmlStringTavoli = "";
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlStringTavoli .=trim($node);
+    }
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlStringTavoli);    
+
+    $xpathTavoli = new DOMXPath($docTavoli);
+
+    $tavolo = $xpathTavoli->query("/listaTavoli/tavolo[@numero='$numeroTavolo']");
+    $tavolo = $tavolo->item(0);
+
+    $orariRistorante = getOrariRistorante();
+
+    $listaPrenotazioni = $tavolo->getElementsByTagName("prenotazione");      
+    $i=0;
+    $disponibile = "True";    
+
+    while($i < $listaPrenotazioni->length && $disponibile == "True"){
+        $prenotazione = $listaPrenotazioni->item($i);  
+        $idPrenotazione = $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
+        
+        if($idPrenotazione != $idPrenotazioneEsistente){
+            $dataPrenotazione = $prenotazione->getElementsByTagName("data")->item(0)->textContent;
+            if($dataPrenotazione == $dataScelta){            
+                $oraPrenotazione = $prenotazione->getElementsByTagName("ora")->item(0)->textContent;
+                if($pasto == "Pranzo"){
+                    if($oraPrenotazione >= $orariRistorante['aperturaPranzo'] && $oraPrenotazione <= $orariRistorante['chiusuraPranzo']){
+                        $disponibile = "False";
+                    }
+                    else{
+                        $i++;
+                    }
+                }
+                else{
+                    if($oraPrenotazione >= $orariRistorante['aperturaCena'] && $oraPrenotazione <= $orariRistorante['chiusuraCena']){
+                        $disponibile = "False";
+                    }
+                    else{
+                        $i++;
+                    } 
+                }
+
+            }
+            else{
+                $i++;
+            }
+        }
+        else{
+            $i++;
+        }        
+    }
+
+    return $disponibile;
+}
+
+
+
+
 // Funzione per capire quali portate sono state scelte in listaPortate.php
 
 function individuaPortateSelezionate(){

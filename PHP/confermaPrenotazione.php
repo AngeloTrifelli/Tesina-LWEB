@@ -63,6 +63,7 @@
                 else{
                     unset($_SESSION['prenotazioneAttivita']);
                     header('Location: prenotaAttivita.php');
+                    exit();
                 }                                    
             }
             else{
@@ -70,10 +71,12 @@
                     inserisciPrenotazioneCamera($_POST['idCamera'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['creditiUsati'] , $_POST['dataArrivo'] , $_POST['dataPartenza']);
                     $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($_SESSION['codFiscUtenteLoggato']);
                     header('Location: registrazioneCompletata.php');
+                    exit();
                 }
                 else{
                     aggiungiPrenotazioneAttivita($_POST['idAttivita'] , $_SESSION['codFiscUtenteLoggato'] , $_POST['dataAttivita'] , $_POST['oraInizio'], $_POST['oraFine'],$_POST['prezzoTotale'], $_POST['creditiUsati']);
                     header('Location: registrazioneCompletata.php');
+                    exit();
                 }                
             }
         }
@@ -83,9 +86,6 @@
         }                  
     }
    
-
-
-
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 

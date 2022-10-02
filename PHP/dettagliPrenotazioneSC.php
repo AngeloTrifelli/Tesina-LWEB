@@ -5,7 +5,7 @@
 
     session_start();
 
-    if(isset($_POST['confermaPrenotazione'])){        
+    if(isset($_POST['confermaPrenotazione'])){             
         if(isset($_POST['ANNULLA'])){       
             unset($_SESSION['richiestaSC']);
             header('Location: homeRistorante.php');
@@ -20,26 +20,53 @@
         }        
     }
 
-    if(isset($_POST['dettagliPrenotazione'])){
+    if(isset($_POST['dettagliPrenotazione'])){        
         if(isset($_POST['INDIETRO'])){
-            header('Location: visualizzaPrenotazioniRistorante.php');
+            if(isset($_POST['accessoStaff'])){
+                header('Location: prenotazioniRistorante.php ');
+            }
+            else{
+                header('Location: visualizzaPrenotazioniRistorante.php');
+            }            
             exit();
         }
         else{
-            if(isset($_COOKIE['Cancella'])){
-                unset($_COOKIE['Cancella']);
-                setcookie('Cancella', '', time() - 3600, '/');
-                rimuoviPrenotazioneServizioCamera($_POST['dettagliPrenotazione']);
-                header('Location: visualizzaPrenotazioniRistorante.php');
-                exit();
-            }  
+            if(isset($_POST['ANNULLA'])){
+                if(isset($_COOKIE['Cancella'])){
+                    unset($_COOKIE['Cancella']);
+                    setcookie('Cancella', '', time() - 3600, '/');
+                    rimuoviPrenotazioneServizioCamera($_POST['dettagliPrenotazione']);
+                    if(isset($_POST['accessoStaff'])){
+                        header('Location: prenotazioniRistorante.php');    
+                    }
+                    else{
+                        header('Location: visualizzaPrenotazioniRistorante.php');
+                    }        
+                    exit();
+                }  
+                else{
+                    $_SESSION['dettagliSC'] = $_POST['dettagliPrenotazione'];
+                }
+            }
             else{
-                $_SESSION['dettagliSC'] = $_POST['dettagliPrenotazione'];
+                $arrayDati['idPrenotazione'] = $_POST['dettagliPrenotazione'];
+                if(isset($_POST['modificaDataOra'])){                    
+                    $arrayDati['tipoModifica'] = "dataOra";                                        
+                }
+                elseif(isset($_POST['aggiungiPortata'])){
+                    $arrayDati['tipoModifica'] = "aggiungiPortata";                                                                                                                
+                }
+                else{
+                    $arrayDati['tipoModifica'] = "eliminaPortata";
+                }
+                $_SESSION['prenotazioneDaModificare'] = $arrayDati;
+                header('Location: modificaPrenotazioneRistorante.php');
+                exit();
             }
         }
     }
-    
-    if(isset($_SESSION['richiestaSC'])){        
+        
+    if(isset($_SESSION['richiestaSC'])){                 
         if(isset($_SESSION['accessoPermesso'])){
             $temp = $_SESSION['richiestaSC'];
             $portateScelte = $temp['portateScelte'];
@@ -58,8 +85,8 @@
             exit();
         }
     }
-    else{
-        if(isset($_SESSION['dettagliSC'])){
+    else{        
+        if(isset($_SESSION['dettagliSC'])){                        
             $idPrenotazioneSC = $_SESSION['dettagliSC'];
             $datiPrenotazione = getPrenotazioneServizioCamera($idPrenotazioneSC);
 
@@ -70,6 +97,10 @@
 
             $dettagliPrenotazione = "True";
             unset($_SESSION['dettagliSC']);
+
+            if($_SESSION['loginType'] != "Cliente"){
+                $accessoStaff = "True";
+            }
         }
         else{
             header('Location: areaUtente.php');
@@ -77,11 +108,6 @@
         }
     }
     
-
-    
-    
-
-
 
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -238,10 +264,21 @@
                     <?php
                         }
                         else{
-                            echo '<input type="submit" class="button" name="INDIETRO" value="TORNA INDIETRO" />';
+                            echo '
+                                <button class="button" type="submit" name="INDIETRO">
+                                    TORNA ALLE<br />PRENOTAZIONI
+                                </button>';                            
                             $todayDate = date('Y-m-d');
                             if($todayDate < $dataPrenotazione){
-                                echo '<input type="submit" class="button" name="ANNULLA" onClick=myEvent() value="ANNULLA" />';
+                                if(isset($accessoStaff)){
+                                    echo "<input type=\"submit\" class=\"button large\" name=\"aggiungiPortata\" value=\"AGGIUNGI PORTATA\" />";
+                                    echo "<input type=\"submit\" class=\"button large\" name=\"eliminaPortata\" value=\"ELIMINA PORTATA\" />";
+                                    echo "<input type=\"submit\" class=\"button large\" name=\"modificaDataOra\" value=\"MODIFICA DATA/ORA\" />";
+                                }  
+                                echo '
+                                <button class="button" type="submit" name="ANNULLA" onClick=myEvent()>
+                                    ANNULLA<br />PRENOTAZIONE
+                                </button>';                                
                             }                                
                         }
                     ?>
@@ -255,9 +292,10 @@
                 <?php        
                     }
                     else{
-                ?>
-                        <input type="hidden" name="dettagliPrenotazione" value="<?php echo $idPrenotazioneSC;?>" />
-                <?php
+                        echo "<input type=\"hidden\" name=\"dettagliPrenotazione\" value=\"{$idPrenotazioneSC}\" />";    
+                        if(isset($accessoStaff)){
+                            echo "<input type=\"hidden\" name=\"accessoStaff\" value\"accessoStaff\" />";
+                        }                                                    
                     }
                 ?>            
             </form>
