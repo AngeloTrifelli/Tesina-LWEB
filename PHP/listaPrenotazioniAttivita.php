@@ -57,7 +57,7 @@ require_once('funzioniDeletePHP.php');
         <div class="top">
 
             <div class="topLeft">               
-                <a href="./prenotazioniClienti.php">TORNA ALLE PRENOTAZIONI CLIENTI</a>  
+                <a href="./prenotazioniClienti.php">TORNA ALLA PAGINA<br /> DELLE PRENOTAZIONI</a>  
             </div>
 
             <h1 class="alignCenter">LISTA PRENOTAZIONI ATTIVIT&Agrave;</h1>
