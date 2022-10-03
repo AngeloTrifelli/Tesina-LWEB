@@ -58,7 +58,7 @@ require_once('funzioniPHP.php');
         <div class="top">
 
             <div class="topLeft">               
-                <a href="./areaUtente.php">TORNA INDIETRO</a>  
+                <a href="./areaUtente.php">TORNA NELL'AREA UTENTE</a>  
             </div>
 
             <h1 class="alignCenter">LISTA ORARI</h1>

@@ -39,10 +39,10 @@
         <div class="topLeft">
             <?php
                 if(isset($_SESSION['codFiscUtenteLoggato'])){
-                    echo "<a href=\"./areaUtente.php\">TORNA INDIETRO</a> ";
+                    echo "<a href=\"./areaUtente.php\">TORNA NELL'AREA UTENTE</a> ";
                 }
                 else{
-                    echo "<a href=\"./visualizzaClienti.php\">TORNA INDIETRO</a> ";
+                    echo "<a href=\"./visualizzaClienti.php\">TORNA ALLA LISTA CLIENTI</a> ";
                 }
             ?>   
         </div>
