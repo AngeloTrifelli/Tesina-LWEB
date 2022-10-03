@@ -564,4 +564,32 @@ function modificaPortata($nuovoNomePortata,$nuovoPrezzo){
         $doc->save("../XML/Ristorante.xml"); 
 }
 
+function modificaOrariUpdateRistorante($oraInizio,$oraFine){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathRistorante = new DOMXPath($doc);
+    $oraInizioUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraInizioUpdate");
+    $oraInizioUpdate=$oraInizioUpdate->item(0);
+    $oraInizioUpdate->nodeValue="";
+    $oraInizioUpdate->appendChild($doc->createTextNode($oraInizio.":00"));
+
+    $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
+    $oraFineUpdate=$oraFineUpdate->item(0);
+    $oraFineUpdate->nodeValue="";
+    $oraFineUpdate->appendChild($doc->createTextNode($oraFine.":00"));
+
+    $doc->save("../XML/Ristorante.xml"); 
+
+}
+
+
+
+
 ?>
