@@ -23,8 +23,8 @@
             $accessoStaff = "True";
         }
     }
-    $descrizionePortata=array();
-    
+    $oraUpdateConfermata=confermaOraUpdateMenu();
+
     if(isset($_POST['bottonePremuto'])){
 
         $descrizionePortata = individuaBottoneDescrizionePortata();
@@ -44,14 +44,13 @@
 
     }
 
-
-
+    $orariUpdate=getOrariUpdateRistorante();
     $portate = getPortate();
     $antipasti = $portate[0];
     $primiPiatti = $portate[1];
     $secondiPiatti = $portate[2];
     $dolci = $portate[3];
-
+    
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -83,19 +82,14 @@
                 
             </div>
             <?php
-            if(isset($accessoStaff)){
+            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                 ?>
             <form action="./aggiungiPortata.php" method="post"  >
                 <?php
                     }
                 ?>
             <?php 
-                if(!isset($accessoStaff)){
-                    echo '
-                    <h1 class="alignCenter menu">MEN&Ugrave;</h1>
-                    <div style="width: 18.5%;"></div>';
-                }
-                else{
+                if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                     echo '
                     <div>
                     <h1>MEN&Ugrave;</h1>
@@ -105,23 +99,38 @@
                     </div>
                     ';
                 }
+                else{
+                    echo '
+                    <h1 class="alignCenter menu">MEN&Ugrave;</h1>
+                    <div style="width: 18.5%;"></div>';
+                }
             ?>
-
             
         </div>
         <?php
-            if(isset($accessoStaff)){
+            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
         ?>
             </form>
         <?php
             }
         ?>
         <?php
-            if(isset($accessoStaff)){
+            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
         <?php
             }
+        ?>
+        
+        <?php
+        if(isset($accessoStaff) && $oraUpdateConfermata!="True"){
+        ?>
+        <p class="alignCenter" style="color:red"><strong>
+            Non puoi modificare il menu perchè non ti trovi nel range orario per poterlo fare!<br/>
+            Se vuoi modificare le portate devi connetterti tra le <?php echo substr($orariUpdate['oraInizioUpdate'],0,5) ?> e le <?php echo substr($orariUpdate['oraFineUpdate'],0,5) ?>.
+        </strong></p>
+        <?php
+        }
         ?>
     
         <h3 class="titoloImportante alignCenter">ANTIPASTI:</h3>
@@ -148,7 +157,7 @@
                                     <?php echo $temp['prezzo'];?>&euro;
                                 </td>
                             <?php
-                                if(isset($accessoStaff)){
+                                if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                             ?>
                                 <td>
                                     <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
@@ -197,7 +206,7 @@
                                 <?php echo $temp['prezzo'];?>&euro;
                             </td>
                         <?php
-                            if(isset($accessoStaff)){
+                            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                         ?>
                             <td>
                                 <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
@@ -245,7 +254,7 @@
                                 <?php echo $temp['prezzo'];?>&euro;
                             </td>
                         <?php
-                            if(isset($accessoStaff)){
+                            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                         ?>
                             <td>
                                 <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
@@ -293,7 +302,7 @@
                                 <?php echo $temp['prezzo'];?>&euro;
                             </td>
                         <?php
-                            if(isset($accessoStaff)){
+                            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                         ?>
                             <td>
                                 <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
@@ -318,7 +327,7 @@
         ?>
 
         <?php
-            if(isset($accessoStaff)){
+            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                 
         ?>
             <input type="hidden" name="bottonePremuto" />
@@ -327,6 +336,7 @@
         <?php
             }
         ?>
+
         <script>
             function myEvent(){
                 var choice =confirm("Confermi di voler eliminare la portata ?");
