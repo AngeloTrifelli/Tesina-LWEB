@@ -650,7 +650,62 @@ function individuaBottonePrenotazioniRistorante(){
 
 }
 
+function individuaBottoneDescrizionePortata(){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
 
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $listaPortate = $xpathRistorante->query("/ristoranti/ristorante/menu/portata");
+    $i=0;
+    $trovato="False";
+    while($i< $listaPortate->length && $trovato=="False"){
+        $portata = $listaPortate->item($i);
+        $descrizione = $portata->getElementsByTagName("descrizione")->item(0)->textContent;
+
+        $nomePortataNonSeparato = str_replace(" ", "", $descrizione);
+
+            if(isset($_POST[$nomePortataNonSeparato])){
+                $trovato = "True";
+            }
+        
+        $i++;
+    }
+    $nomePortata=array();
+    $nomePortata['nomeSeparato']=$descrizione;
+    $nomePortata['nomeNonSeparato']=$nomePortataNonSeparato;
+    return $nomePortata;
+}
+
+//Funzione che controlla se il nome della portata è già presente nel menu
+
+function checkNomePortata($nomePortata){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $listaPortate = $xpathRistorante->query("/ristoranti/ristorante/menu/portata");
+    $i=0;
+    while($i< $listaPortate->length){
+        $portata = $listaPortate->item($i);
+        $descrizione = $portata->getElementsByTagName("descrizione")->item(0)->textContent;
+            if($descrizione==$nomePortata){
+                return "True";
+                exit();
+            }
+        $i++;
+    }
+    return "False";
+}
 
 
 
