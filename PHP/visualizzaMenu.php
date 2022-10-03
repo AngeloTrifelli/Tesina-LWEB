@@ -1,7 +1,9 @@
 <?php
     require_once('funzioniGetPHP.php');
-
+    require_once('funzioniPHP.php');
+    require_once('funzioniDeletePHP.php');
     session_start();
+
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp = $_SESSION['soggiornoAttivo'];
         if($temp != "null"){
@@ -21,6 +23,28 @@
             $accessoStaff = "True";
         }
     }
+    $descrizionePortata=array();
+    
+    if(isset($_POST['bottonePremuto'])){
+
+        $descrizionePortata = individuaBottoneDescrizionePortata();
+        if($_POST[$descrizionePortata['nomeNonSeparato']]=="ELIMINA"){
+           
+            if(isset($_COOKIE['Cancella'])){
+                unset($_COOKIE['Cancella']);
+                setcookie('Cancella', '', time() - 3600, '/');
+                rimuoviPortataDalMenu($descrizionePortata['nomeSeparato']);
+            }  
+            
+        }else{
+            $_SESSION['descrizionePortata']=$descrizionePortata;
+            header('Location: modificaPortata.php');
+            exit();
+        }
+
+    }
+
+
 
     $portate = getPortate();
     $antipasti = $portate[0];
@@ -45,35 +69,38 @@
 
 
     <body>
-        <?php
-            if(isset($accessoStaff)){
-        ?>
-            <form action="./modificaPortata.php" method="post"  >
-        <?php
-            }
-        ?>
+        
         <div class="top">
             <div class="topLeft">
                 <?php 
                     if(!isset($accessoStaff)){
-                        echo '<a href="./homeRistorante.php">TORNA INDIETRO</a>';
+                        echo '<a href="./homeRistorante.php">TORNA ALLA HOME DEL RISTORANTE</a>';
                     }
                     else{
-                        echo '<a href="./areaUtente.php">TORNA INDIETRO</a>';    
+                        echo '<a href="./areaUtente.php">TORNA NELL\' AEREA UTENTE</a>';    
                     }
                 ?>
                 
             </div>
+            <?php
+            if(isset($accessoStaff)){
+                ?>
+            <form action="./aggiungiPortata.php" method="post"  >
+                <?php
+                    }
+                ?>
             <?php 
                 if(!isset($accessoStaff)){
                     echo '
-                    <h1 class="alignCenter">MEN&Ugrave;</h1>
+                    <h1 class="alignCenter menu">MEN&Ugrave;</h1>
                     <div style="width: 18.5%;"></div>';
                 }
                 else{
                     echo '
-                    <h1 class="alignCenter" style="margin-left: 2%;">MEN&Ugrave;</h1>
-                    <div style="padding-right: 2%;">
+                    <div>
+                    <h1>MEN&Ugrave;</h1>
+                    </div>
+                    <div>
                         <input type="submit" class="fakeLink" name="AGGIUNGI" value="AGGIUNGI PORTATA" />
                     </div>
                     ';
@@ -82,7 +109,20 @@
 
             
         </div>
-
+        <?php
+            if(isset($accessoStaff)){
+        ?>
+            </form>
+        <?php
+            }
+        ?>
+        <?php
+            if(isset($accessoStaff)){
+        ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
+        <?php
+            }
+        ?>
     
         <h3 class="titoloImportante alignCenter">ANTIPASTI:</h3>
         <?php
@@ -111,8 +151,10 @@
                                 if(isset($accessoStaff)){
                             ?>
                                 <td>
-                                    <input type="submit" class="button" name="Antipastodimontagna" value="MODIFICA" />
-                                    <input type="submit" class="button" name="Antipastodimontagna" value="ELIMINA" />
+                                    <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
+                                    <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" onClick="myEvent()" value="ELIMINA" />
+
+
                                 </td>
                             <?php
                                 }
@@ -158,8 +200,9 @@
                             if(isset($accessoStaff)){
                         ?>
                             <td>
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" onClick="myEvent()" value="ELIMINA" />
+
                             </td>
                         <?php
                             }
@@ -205,8 +248,9 @@
                             if(isset($accessoStaff)){
                         ?>
                             <td>
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" onClick="myEvent()" value="ELIMINA" />
+
                             </td>
                         <?php
                             }
@@ -252,8 +296,9 @@
                             if(isset($accessoStaff)){
                         ?>
                             <td>
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="MODIFICA" />
-                                <input type="submit" class="button" name="Spaghetti alla carbonara" value="ELIMINA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" value="MODIFICA" />
+                                <input type="submit" class="button" name="<?php echo str_replace(" ", "", $temp['descrizione']);?>" onClick="myEvent()" value="ELIMINA" />
+
                             </td>
                         <?php
                             }
@@ -274,10 +319,21 @@
 
         <?php
             if(isset($accessoStaff)){
+                
         ?>
+            <input type="hidden" name="bottonePremuto" />
+
             </form>
         <?php
             }
         ?>
+        <script>
+            function myEvent(){
+                var choice =confirm("Confermi di voler eliminare la portata ?");
+                if(choice == true){
+                    document.cookie = "Cancella" + "=" + "Cancella" + "" + "; path=/";  
+                }
+            }
+        </script>
     </body>
 </html>

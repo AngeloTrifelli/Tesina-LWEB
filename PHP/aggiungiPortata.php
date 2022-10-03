@@ -1,5 +1,6 @@
 <?php
     require_once('funzioniGetPHP.php');
+    require_once('funzioniPHP.php');
     session_start();
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
@@ -9,53 +10,35 @@
     else{
         header('Location: areaUtente.php');
     }
-
     $error="False";
     $nomePortataGiaEsistente="False";
-
-
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
-            unset($_SESSION['descrizionePortata']);
             header('Location: visualizzaMenu.php');
             exit();
         }else{
-            if(isset($_SESSION['descrizionePortata'])){
-            if($_POST['nomePortata']!="" || $_POST['prezzo']!=""){
-                if($_POST['nomePortata']!=""){
+            if(isset($_POST['tipoPortata']) && $_POST['nomePortata']!="" && $_POST['prezzo']!=""){
                 $nomePortataGiaEsistente=checkNomePortata($_POST['nomePortata']);
                 if($nomePortataGiaEsistente=="False"){
-                modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
-                unset($_SESSION['descrizionePortata']);
+                aggiungiPortataAlMenu($_POST['tipoPortata'],$_POST['nomePortata'],$_POST['prezzo']);
                 header('Location: visualizzaMenu.php');
                 exit();
                 }
             }else{
-                modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
-                unset($_SESSION['descrizionePortata']);
-                header('Location: visualizzaMenu.php');
-            }
-        }else{
                 $error="True";
             }
         }
-        }
     }
 
-    $descrizionePortata=$_SESSION['descrizionePortata'];
-    $prezzoPortata=getPrezzoPortata($descrizionePortata['nomeSeparato']);
-
-    
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>Modifica menu</title>
+        <title>Aggiungi portata</title>
 
         <style type="text/css">
-            <?php include "../CSS/modificaPortata.css" ?>
+            <?php include "../CSS/aggiungiPortata.css" ?>
         </style>
 
         <link href="https://code.jquery.com/ui/1.13.2/themes/blitzer/jquery-ui.css" rel="stylesheet"/>
@@ -73,33 +56,34 @@
     <body>
 
         <div class="containerCentrale">
-            <h1>MODIFICA PORTATA</h1>
-                
-
+            <h1>AGGIUNGI PORTATA:</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
-
-                <div class="mainArea">
+            
+            <div class="mainArea">
                     <div class="zonaSuperiore">
-                        
                         <div class="zonaSx">
 
-                            <span class="item">Nome portata:</span>
-                                        
-                            <p> <?php echo $descrizionePortata['nomeSeparato']; ?> </p>
-                                  
-                            <span class="item">Nuovo nome:</span>
+                            <span class="item">Scegli il tipo di portata:</span>
 
+                            <select id="selectInput" name="tipoPortata">
+                                <option disabled selected value="Scegli">-- Scegli -- </option>
+                                <option value="antipasto">Antipasto</option>
+                                <option value="primo piatto">Primo piatto</option>
+                                <option value="secondo piatto">Secondo piatto</option>
+                                <option value="dolce">Dolce</option>
+                            </select>
+
+                            <span class="item">Inserisci il nome della portata:</span>
                             <input type="text" class="textInput" name="nomePortata" placeholder="Inserisci il nome" />
-                            
+
                         </div>
 
                         <div class="zonaDx">
-                            <h2 class="noSpace">Prezzo:</h2>
-                                        <p><?php echo $prezzoPortata.'&euro;';?></p>
-                                        <span class="item">Nuovo prezzo:</span>
-                                        <input type="number" class="textInput" name="prezzo" />                      
-                        </div>    
 
+                            <h2>Prezzo:</h2>
+                            <input type="number" class="textInput" name="prezzo" />
+
+                        </div>
                     </div>
 
                     <div class="zonaBottoni">
@@ -107,13 +91,14 @@
                         <input type="submit" class="button" name="CONFERMA" value="CONFERMA" />
 
                     </div>
-                </div>
+
+            </div>
             </form>
             <?php
         if ($error=="True"){
             echo "
                 <div class\"riga\">
-                <p class=\"errorLabel\">Cambiare almeno un dato!</p>
+                <p class=\"errorLabel\">Dati mancanti!</p>
                 </div>
             ";
             }
@@ -126,7 +111,5 @@
                 }
     ?>
         </div>
-
-        
     </body>
 </html>
