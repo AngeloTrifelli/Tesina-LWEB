@@ -72,7 +72,7 @@
     <body>
         <div class="top">
             <div class="topLeft">
-                <a href="./homeRistorante.php">TORNA INDIETRO</a>    
+                <a href="./homeRistorante.php">TORNA NELL'AREA UTENTE</a>    
             </div>
             <h1 class="alignCenter">PRENOTAZIONI RISTORANTE</h1>
             <div style="width: 18.5%;"></div>

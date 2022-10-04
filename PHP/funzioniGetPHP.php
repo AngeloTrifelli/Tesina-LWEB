@@ -1262,7 +1262,25 @@ function getPrezzoPortata($nomePortata){
     return $prezzoPortata;
 }
 
+function getOrariUpdateRistorante(){
+    $arrayOrari=array();
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
 
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $oraInizioUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraInizioUpdate");
+    $arrayOrari['oraInizioUpdate']=$oraInizioUpdate->item(0)->textContent;
+
+    $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
+    $arrayOrari['oraFineUpdate']=$oraFineUpdate->item(0)->textContent;
+
+    return $arrayOrari;
+}
 // Funzione per ottenere le domande in domande.php
 // Se codFiscCliente è diverso da null allora verranno prese solo le domande di un particolare cliente 
 // Se categoria è diverso da null allora verranno prese solo le domande di una particolare categoria

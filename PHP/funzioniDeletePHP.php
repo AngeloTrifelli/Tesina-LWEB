@@ -146,4 +146,33 @@ function rimuoviPrenotazioneAttivita($idPrenotazioneAttivita){
     
 }
 
+function rimuoviPortataDalMenu($descrizionePortata){
+  
+    $xmlStringRistorante= "";
+    
+
+    foreach(file("../XML/Ristorante.xml") as $node){
+
+       $xmlStringRistorante .= trim($node);
+
+   }
+
+   $docRistorante = new DOMDocument();
+   $docRistorante->loadXML($xmlStringRistorante);
+   $docRistorante->formatOutput = true;
+
+   $xpathRistorante = new DOMXPath($docRistorante);
+
+   $ristorante=$xpathRistorante->query("/ristoranti/ristorante");
+   $ristorante=$ristorante->item(0);
+   $menu=$ristorante->lastChild;
+
+   $portataDaEliminare=$xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']");
+   $portataDaEliminare=$portataDaEliminare->item(0);
+
+   $menu->removeChild($portataDaEliminare);
+
+   $docRistorante->save("../XML/Ristorante.xml");
+}
+
 ?>

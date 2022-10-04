@@ -520,6 +520,78 @@ function modificaPrenotazioneAttivita($idPrenotazione,$data,$oraInizio,$oraFine)
         $doc->save("../XML/Attivita.xml"); 
 }
 
+function modificaPortata($nuovoNomePortata,$nuovoPrezzo){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathRistorante = new DOMXPath($doc);
+    $descrizionePortata=$_SESSION['descrizionePortata'];
+    $descrizionePortata=$descrizionePortata['nomeSeparato'];
+  
+    if($nuovoNomePortata!="" && $nuovoPrezzo==""){
+        $nomePortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/descrizione");
+        $nomePortata = $nomePortata->item(0);
+        $nomePortata->nodeValue = "";
+        $nomePortata->appendChild($doc->createTextNode($nuovoNomePortata));
+        }
+
+    if($nuovoPrezzo!="" && $nuovoNomePortata==""){
+            settype($nuovoPrezzo,"integer");
+            $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/prezzo");
+            $prezzoPortata = $prezzoPortata->item(0);
+            $prezzoPortata->nodeValue = "";
+            $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
+        }
+        if($nuovoNomePortata!="" && $nuovoPrezzo!=""){
+            $nomePortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/descrizione");
+            $nomePortata = $nomePortata->item(0);
+            $nomePortata->nodeValue = "";
+            $nomePortata->appendChild($doc->createTextNode($nuovoNomePortata));
+
+            settype($nuovoPrezzo,"integer");
+            $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$nuovoNomePortata']/prezzo");
+            $prezzoPortata = $prezzoPortata->item(0);
+            $prezzoPortata->nodeValue = "";
+            $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
+
+        }
+
+        $doc->save("../XML/Ristorante.xml"); 
+}
+
+function modificaOrariUpdateRistorante($oraInizio,$oraFine){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathRistorante = new DOMXPath($doc);
+    $oraInizioUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraInizioUpdate");
+    $oraInizioUpdate=$oraInizioUpdate->item(0);
+    $oraInizioUpdate->nodeValue="";
+    $oraInizioUpdate->appendChild($doc->createTextNode($oraInizio.":00"));
+
+    $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
+    $oraFineUpdate=$oraFineUpdate->item(0);
+    $oraFineUpdate->nodeValue="";
+    $oraFineUpdate->appendChild($doc->createTextNode($oraFine.":00"));
+
+    $doc->save("../XML/Ristorante.xml"); 
+
+}
+
+
+
+
 //Funzione per modificare l'attributo faq di una domanda
 
 function modificaAttributoFaqDomanda($idDomanda , $nuovoAttributo){

@@ -13,13 +13,12 @@
             header('Location: intro.php');
             exit();
         }
-    }
-    else{
+    }else{
         header('Location: areaUtente.php');
         exit();
-    }
-    
-    if(isset($_POST['ristorante']) || isset($_SESSION['idAttivita']) || isset($_POST['idAttivita'])){
+}
+$checkOrariRistorante="False";
+    if(isset($_POST['ristorante']) || isset($_POST['updateRistorante']) || isset($_SESSION['idAttivita']) || isset($_POST['idAttivita'])){
         
         if(isset($_SESSION['idAttivita'])){
             $idAttivita=$_SESSION['idAttivita'];
@@ -42,6 +41,18 @@
                         }else{
                             $orariScorretti="True";
                         }
+                    }elseif(isset($_POST['updateRistorante'])){
+                        if ($_POST['oraInizioUpdate']!="" && $_POST['oraFineUpdate']!=""){
+                            $checkOrariRistorante=checkOrariRistorante($_POST['oraInizioUpdate'],$_POST['oraFineUpdate']);
+                            if($checkOrariRistorante=="False"){
+                            modificaOrariUpdateRistorante($_POST['oraInizioUpdate'],$_POST['oraFineUpdate']);
+                            header('Location: listaOrari.php');
+                            exit();
+                            }
+                        }else{
+                            $orariScorretti="True";
+                        }
+
                     }else{
                         if($_POST['oraAperturaAttivita']!="" && $_POST['oraChiusuraAttivita']!=""){
                     
@@ -92,6 +103,72 @@
     <div class="containerCentrale">
 
     <h1>MODIFICA ORARI:</h1>
+
+    <?php
+    if(isset($_POST['updateRistorante'])){
+
+    ?>
+        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+
+        <div class="riga">
+
+        <div class="containerColumn">
+
+
+        <p><strong>Inserisci l'orario di inizio update:</strong></p>
+        <?php 
+                        if(isset($_POST['oraInizioUpdate'])){
+                            echo "<input  name=\"oraInizioUpdate\" class=\"oraUpdate\" value=\"{$_POST['oraInizioUpdate']}\" />";                        
+                        }
+                        else{
+                            echo "<input  name=\"oraInizioUpdate\" class=\"oraUpdate\" />";                        
+                        }
+                    
+                    ?>
+        </div>
+
+            <div class="containerColumn">
+
+        <p><strong>Inserisci l'orario di fine update:</strong></p>
+        <?php 
+                        if(isset($_POST['oraFineUpdate'])){
+                            echo "<input  name=\"oraFineUpdate\" class=\"oraUpdate\" value=\"{$_POST['oraFineUpdate']}\" />";                        
+                        }
+                        else{
+                            echo "<input  name=\"oraFineUpdate\" class=\"oraUpdate\" />";                        
+                        }
+                        
+                    ?>
+            
+        </div>
+
+        </div>
+
+        
+        <div class="spaceBetween">
+        <input type="submit" class="buttonSx" value="Annulla" name="annulla" />
+        <input type="submit" class="buttonDx" value="Cambia" name="cambia" />
+        <input type="hidden" name="updateRistorante" value="updateRistorante">
+        </div>
+
+        </form>
+    <?php
+        if ($orariScorretti=="True"){
+            echo "
+                <div class\"riga\">
+                <p class=\"errorLabel\">Dati mancanti!</p>
+                </div>
+            ";
+            }
+            if ($checkOrariRistorante=="True"){
+                echo "
+                    <div class\"riga\">
+                    <p class=\"errorLabel\">Il range orario va in contrasto con gli orari di pranzo e di cena!</p>
+                    </div>
+                ";
+                }
+    } 
+    ?>
 
     <?php
     if(isset($_POST['ristorante'])){
@@ -257,6 +334,8 @@
             $(".oraInizioAttivita").attr("autocomplete" , "off");
             $(".oraFineAttivita").attr("autocomplete" , "off");
 
+            $(".oraUpdate").attr("autocomplete" , "off");
+
             $('.oraInizioAttivita').timepicker({
                 timeFormat: 'HH:mm',
                 interval: 60,
@@ -295,7 +374,16 @@
                 scrollbar: true
             });
 
-
+            
+            $('.oraUpdate').timepicker({
+                timeFormat: 'HH:mm',
+                interval: 60,
+                minTime: "00:00",
+                maxTime: "23:00",
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
 
 
 

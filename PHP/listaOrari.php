@@ -14,6 +14,14 @@ require_once('funzioniPHP.php');
         exit();
     }
 
+    $modificaOrariUpdateRistorante="False";
+    $orariUpdateRistorante=array();
+    if($_SESSION["loginType"]=="Admin"){
+        $modificaOrariUpdateRistorante="True";
+        $orariUpdateRistorante=getOrariUpdateRistorante();
+        $oraInizioUpdate=substr($orariUpdateRistorante['oraInizioUpdate'],0,5);
+        $oraFineUpdate=substr($orariUpdateRistorante['oraFineUpdate'],0,5);
+    }
 
     $arrayAttivita=getAttivita();
     $ristorante=getOrariRistorante();
@@ -50,7 +58,7 @@ require_once('funzioniPHP.php');
         <div class="top">
 
             <div class="topLeft">               
-                <a href="./areaUtente.php">TORNA INDIETRO</a>  
+                <a href="./areaUtente.php">TORNA NELL'AREA UTENTE</a>  
             </div>
 
             <h1 class="alignCenter">LISTA ORARI</h1>
@@ -59,7 +67,32 @@ require_once('funzioniPHP.php');
                
         </div>
 
-    
+        <?php
+            if($modificaOrariUpdateRistorante=="True"){
+        ?>
+
+        <h3 class="titoloImportante alignCenter">ORARI UPDATE RISTORANTE:</h3>
+
+        <div class="mainContainer">
+            
+                <table class="alignCenter tabella"  align="center">
+                    <tr>
+                        <td><strong>Ora inizio update:</strong><br /><?php echo $oraInizioUpdate;?></td>
+                        
+                        <td><strong>Ora fine update:</strong><br /><?php echo $oraFineUpdate;?></td>
+                                  
+                        <form action="./modificaOrari.php"  method="post">
+                        <td><input type="submit" class="button" name="updateRistorante" value="MODIFICA" />  </td>
+                        </form> 
+                    </tr>
+                </table>
+        
+        </div>
+
+        <?php
+            }
+        ?>
+
         <h3 class="titoloImportante alignCenter">RISTORANTE:</h3>
 
         <div class="mainContainer">

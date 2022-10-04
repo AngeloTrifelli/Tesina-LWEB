@@ -650,6 +650,89 @@ function individuaBottonePrenotazioniRistorante(){
 
 }
 
+function individuaBottoneDescrizionePortata(){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $listaPortate = $xpathRistorante->query("/ristoranti/ristorante/menu/portata");
+    $i=0;
+    $trovato="False";
+    while($i< $listaPortate->length && $trovato=="False"){
+        $portata = $listaPortate->item($i);
+        $descrizione = $portata->getElementsByTagName("descrizione")->item(0)->textContent;
+
+        $nomePortataNonSeparato = str_replace(" ", "", $descrizione);
+
+            if(isset($_POST[$nomePortataNonSeparato])){
+                $trovato = "True";
+            }
+        
+        $i++;
+    }
+    $nomePortata=array();
+    $nomePortata['nomeSeparato']=$descrizione;
+    $nomePortata['nomeNonSeparato']=$nomePortataNonSeparato;
+    return $nomePortata;
+}
+
+//Funzione che controlla se il nome della portata è già presente nel menu
+
+function checkNomePortata($nomePortata){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $listaPortate = $xpathRistorante->query("/ristoranti/ristorante/menu/portata");
+    $i=0;
+    while($i< $listaPortate->length){
+        $portata = $listaPortate->item($i);
+        $descrizione = $portata->getElementsByTagName("descrizione")->item(0)->textContent;
+            if($descrizione==$nomePortata){
+                return "True";
+                exit();
+            }
+        $i++;
+    }
+    return "False";
+}
+
+//Funzione che restituisce true se il tempo in cui è chiamata rientra tra gli orari di update della concierge del menu, altrimenti restituisce false
+
+function confermaOraUpdateMenu(){
+    $oraCorrente=time();
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $xpathRistorante = new DOMXPath($doc);
+    $oraInizioUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraInizioUpdate");
+    $oraInizioUpdate=$oraInizioUpdate->item(0)->textContent;
+
+    $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
+    $oraFineUpdate=$oraFineUpdate->item(0)->textContent;
+
+    if($oraCorrente>=$oraInizioUpdate && $oraCorrente<=$oraFineUpdate){
+        return "True";
+    }else{
+        return "False";
+    }
+
+}
 
 // Funzione per individuare l'id della domanda associato al bottone premuto in domande.php
 
@@ -718,14 +801,24 @@ function individuaBottoneRispostaSelezionata($idDomanda){
 }
 
 
+//Funzione per verificare se gli orari inseriti dall'admin per fare l'update del menu non contrastino quelli del pranzo e della cena
 
-
-   
-
-
-
-
-
+function checkOrariRistorante($oraInizioUpdate,$oraFineUpdate){
+    $orariRistoranti=getOrariRistorante();
+    $oraAperturaPranzo=$orariRistoranti['aperturaPranzo'];
+    $oraChiusuraPranzo=$orariRistoranti['chiusuraPranzo'];
+    $oraAperturaCena=$orariRistoranti['aperturaCena'];
+    $oraChiusuraCena=$orariRistoranti['chiusuraCena'];
+    if(($oraInizioUpdate<=$oraAperturaPranzo && $oraFineUpdate<=$oraAperturaPranzo) || ($oraInizioUpdate>=$oraChiusuraPranzo && $oraFineUpdate>=$oraChiusuraPranzo)){
+        if(($oraInizioUpdate<=$oraAperturaCena && $oraFineUpdate<=$oraAperturaCena) || ($oraInizioUpdate>=$oraChiusuraCena && $oraFineUpdate>=$oraChiusuraCena)){
+            return "False";
+        }else{
+            return "True";
+        }
+    }else{
+        return "True";
+    }
+}
 
 
 

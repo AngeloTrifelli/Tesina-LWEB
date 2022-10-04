@@ -416,6 +416,38 @@ function aggiungiPortataPrenotazioneSC($idPrenotazione ,$nomePortata , $quantita
     $doc->save("../XML/ServizioCamera.xml");
 }
 
+//Funzione che aggiunge una nuova portata in Ristorante.xml
+
+function aggiungiPortataAlMenu($tipo,$nome,$prezzo){
+    $xmlString = "";
+    foreach(file("../XML/Ristorante.xml") as $node ){
+        $xmlString .= trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $xpathRistorante = new DOMXPath($doc);
+
+    
+    $menu = $xpathRistorante->query("/ristoranti/ristorante/menu");
+    $menu = $menu->item(0);
+
+    
+    $nuovaPortata= $doc->createElement("portata");
+    $menu->appendChild($nuovaPortata);
+
+    $nuovaTipologiaPortata = $doc->createElement("tipologia" , $tipo);
+    $nuovaPortata->appendChild($nuovaTipologiaPortata);
+
+    $nuovaDescrizione = $doc->createElement("descrizione" , $nome);
+    $nuovaPortata->appendChild($nuovaDescrizione);
+
+    $nuovoPrezzo = $doc->createElement("prezzo" , $prezzo);
+    $nuovaPortata->appendChild($nuovoPrezzo);
+
+    $doc->save("../XML/Ristorante.xml");
+}
 
 // Funzione per associare una o piu categorie ad un cliente 
 

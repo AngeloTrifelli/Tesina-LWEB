@@ -5,6 +5,8 @@
         <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
         <oraAperturaCena>19:00:00</oraAperturaCena>
         <oraChiusuraCena>23:00:00</oraChiusuraCena>
+        <oraInizioUpdate>07:00:00</oraInizioUpdate>
+        <oraFineUpdate>09:00:00</oraFineUpdate>
         <menu>
             <portata>
                 <tipologia>antipasto</tipologia>

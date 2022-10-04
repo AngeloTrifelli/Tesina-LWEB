@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
     <FAQ id="F1">
+        <idDomandaCliente>D4</idDomandaCliente>
         <testoDomanda>
             La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?
         </testoDomanda>
