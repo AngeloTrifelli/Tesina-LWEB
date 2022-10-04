@@ -12,11 +12,74 @@
         <dataArrivo>2022-10-28</dataArrivo>
         <dataPartenza>2022-10-31</dataPartenza>
       </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C110-PC2</idPrenotazione>
+        <codFisc>BRSMTT64E05E472K</codFisc>
+        <statoSoggiorno>Approvato</statoSoggiorno>
+        <creditiUsati>50</creditiUsati>
+        <dataArrivo>2022-12-12</dataArrivo>
+        <dataPartenza>2022-12-20</dataPartenza>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C110-PC3</idPrenotazione>
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <statoSoggiorno>Terminato</statoSoggiorno>
+        <creditiUsati>20</creditiUsati>
+        <dataArrivo>2022-07-13</dataArrivo>
+        <dataPartenza>2022-07-15</dataPartenza>
+      </prenotazione>
     </listaPrenotazioni>
   </Camera>
   <Camera numero="C200">
     <tipo>Standard Singola</tipo>
     <prezzo>30</prezzo>
-    <listaPrenotazioni/>
+    <listaPrenotazioni>
+      <prenotazione>
+        <idPrenotazione>C200-PC1</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
+        <creditiUsati>0</creditiUsati>
+        <dataArrivo>2022-11-09</dataArrivo>
+        <dataPartenza>2022-11-10</dataPartenza>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C200-PC2</idPrenotazione>
+        <codFisc>BNCVNT00R67E472F</codFisc>
+        <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
+        <creditiUsati>0</creditiUsati>
+        <dataArrivo>2022-10-28</dataArrivo>
+        <dataPartenza>2022-10-30</dataPartenza>
+      </prenotazione>
+    </listaPrenotazioni>
+  </Camera>
+  <Camera numero="C300">
+    <tipo>Suite</tipo>
+    <prezzo>150</prezzo>
+    <listaPrenotazioni>
+        <prenotazione>
+          <idPrenotazione>C300-PC1</idPrenotazione>
+          <codFisc>CPZGLC90P11H501W</codFisc>
+          <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
+          <creditiUsati>0</creditiUsati>
+          <dataArrivo>2022-11-18</dataArrivo>
+          <dataPartenza>2022-11-19</dataPartenza>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C300-PC2</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <statoSoggiorno>Pagamento rifiutato</statoSoggiorno>
+        <creditiUsati>0</creditiUsati>
+        <dataArrivo>2022-11-17</dataArrivo>
+        <dataPartenza>2022-11-18</dataPartenza>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C300-PC3</idPrenotazione>
+        <codFisc>VRDRRT00L13E472M</codFisc>
+        <statoSoggiorno>Terminato</statoSoggiorno>
+        <creditiUsati>0</creditiUsati>
+        <dataArrivo>2022-09-17</dataArrivo>
+        <dataPartenza>2022-09-18</dataPartenza>
+      </prenotazione>
+    </listaPrenotazioni>
   </Camera>
 </listaCamere>

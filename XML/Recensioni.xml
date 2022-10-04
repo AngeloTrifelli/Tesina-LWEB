@@ -13,4 +13,29 @@
         <utilita>0</utilita>
         <accordo>0</accordo>
     </recensione>
+    <recensione id="R2">
+        <nomeAutore>Roberto</nomeAutore>
+        <cognomeAutore>Verdi</cognomeAutore>
+        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+        <categoria>Generale</categoria>
+        <testoRecensione>
+            Ho alloggiato nell'hotel la notte del 17 settembre, camera Suite. La camera eccezionale, costa risetto le altre ma è di tutt'altro livello, per questo ne vale la pena.
+            Unica pecca è l'idromassaggio, non vedevo l'ora di provarlo ma durante il mio soggiorno era in manutenzione, e non mi è stato fatto neanche uno sconto sulla camera. Per questo do 3 stelle.
+        </testoRecensione>
+        <voto>3</voto>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+    </recensione>
+    <recensione id="R3">
+        <nomeAutore>Matteo</nomeAutore>
+        <cognomeAutore>Briscola</cognomeAutore>
+        <codFiscAutore>BRSMTT64E05E472K</codFiscAutore>
+        <categoria>Crediti</categoria>
+        <testoRecensione>
+            Fantastica questa funnzione dei crediti, ho risparmiato tantissimo sul mio prossimo soggiorno. 5 stelle piene!
+        </testoRecensione>
+        <voto>5</voto>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+    </recensione>
 </listaRecensioni>

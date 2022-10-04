@@ -13,7 +13,7 @@
       <password>d8578edf8458ce06fbc5bb76a58c5ca4</password>
     </credenziali>
     <crediti>0</crediti>
-    <dataAssegnazioneCrediti>2022-09-21</dataAssegnazioneCrediti>
+    <dataAssegnazioneCrediti>2022-10-03</dataAssegnazioneCrediti>
     <sommaGiudizi>0</sommaGiudizi>
   </cliente>
   <cliente codFisc="VRDRRT00L13E472M">
@@ -30,6 +30,54 @@
     </credenziali>
     <crediti>0</crediti>
     <dataAssegnazioneCrediti>2022-02-01</dataAssegnazioneCrediti>
+    <sommaGiudizi>0</sommaGiudizi>
+  </cliente>
+  <cliente codFisc="CPZGLC90P11H501W">
+    <nome>Gianluca</nome>
+    <cognome>Capozzi</cognome>
+    <dataDiNascita>1990-09-11</dataDiNascita>
+    <indirizzo>via delle baldorie 18</indirizzo>
+    <telefono>3472299220</telefono>
+    <email>gianluca.capozzi@gmail.com</email>
+    <numeroCarta>4545-5454-4545-5454</numeroCarta>
+    <credenziali>
+      <username>GianlucaCapozzi90</username>
+      <password>9180151f16931b45f176374a1105f838</password>
+    </credenziali>
+    <crediti>0</crediti>
+    <dataAssegnazioneCrediti>2022-10-03</dataAssegnazioneCrediti>
+    <sommaGiudizi>0</sommaGiudizi>
+  </cliente>
+  <cliente codFisc="BNCVNT00R67E472F">
+    <nome>Valentina</nome>
+    <cognome>Bianchi</cognome>
+    <dataDiNascita>2000-10-27</dataDiNascita>
+    <indirizzo>via delle camelie 89</indirizzo>
+    <telefono>3886868689</telefono>
+    <email>valentina.bianchi@gmail.com</email>
+    <numeroCarta>1313-1313-1213-1212</numeroCarta>
+    <credenziali>
+      <username>ValeBianchi</username>
+      <password>dc4c436406376b6a492e6e8e65e5a367</password>
+    </credenziali>
+    <crediti>0</crediti>
+    <dataAssegnazioneCrediti>2022-10-03</dataAssegnazioneCrediti>
+    <sommaGiudizi>0</sommaGiudizi>
+  </cliente>
+  <cliente codFisc="BRSMTT64E05E472K">
+    <nome>Matteo</nome>
+    <cognome>Briscola</cognome>
+    <dataDiNascita>1964-05-05</dataDiNascita>
+    <indirizzo>Via pericle 90</indirizzo>
+    <telefono>3493434345</telefono>
+    <email>matteo.briscola@gmail.com</email>
+    <numeroCarta>1232-4545-3468-8634</numeroCarta>
+    <credenziali>
+      <username>MatteBrisco</username>
+      <password>235dafa09887d5fef4700f7c9c3ec588</password>
+    </credenziali>
+    <crediti>0</crediti>
+    <dataAssegnazioneCrediti>2022-10-03</dataAssegnazioneCrediti>
     <sommaGiudizi>0</sommaGiudizi>
   </cliente>
 </listaClienti>

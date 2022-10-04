@@ -20,4 +20,62 @@
             </risposta>
         </listaRisposte>
     </commento>
+    <commento id="CM2">
+        <idRecensione>R2</idRecensione>
+        <nomeAutore>Valentina</nomeAutore>
+        <cognomeAutore>Bianchi</cognomeAutore>
+        <codFiscAutore>BNCVNT00R67E472F</codFiscAutore>
+        <testo>Volevo prenotare proprio una suite oggi, ma sto cambiando idea. Senza l'idromassaggio non conviene.</testo>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+        <listaRisposte>
+            <risposta>
+                <idRisposta>CM2-CMR1</idRisposta>
+                <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
+                <testoRisposta>Tranquilla Valentina, l'idromassaggio è stato sistemato pochi giorni dopo.</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+            <risposta>
+                <idRisposta>CM2-CMR2</idRisposta>
+                <nomeAutoreRisposta>Valentina</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Bianchi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>BNCVNT00R67E472F</codFiscAutoreRisposta>
+                <testoRisposta>Ah menomale, mi stavo preoccupando. Grazie mille per l'informazione.</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+            <risposta>
+                <idRisposta>CM2-CMR3</idRisposta>
+                <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
+                <testoRisposta>Di nulla!</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+        </listaRisposte>
+    </commento>
+    <commento id="CM3">
+        <idRecensione>R3</idRecensione>
+        <nomeAutore>Roberto</nomeAutore>
+        <cognomeAutore>Verdi</cognomeAutore>
+        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+        <testo>Non posso essere più d'accordo, credo sia l'unico hotel che lo faccia.</testo>
+        <utilita>0</utilita>
+        <accordo>0</accordo>
+        <listaRisposte>
+            <risposta>
+                <idRisposta>CM3-CMR1</idRisposta>
+                <nomeAutoreRisposta>Giovanni</nomeAutoreRisposta>
+                <cognomeAutoreRisposta>Rossi</cognomeAutoreRisposta>
+                <codFiscAutoreRisposta>RSSGNN64R03E472G</codFiscAutoreRisposta>
+                <testoRisposta>Che idea pazzesca!</testoRisposta>
+                <utilitaRisposta>0</utilitaRisposta>
+                <accordoRisposta>0</accordoRisposta>
+            </risposta>
+        </listaRisposte>
+    </commento>
 </listaCommenti>

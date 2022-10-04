@@ -12,6 +12,84 @@
             <utente>
                 <codFisc>RSSGNN64R03E472G</codFisc>
             </utente>
+            <utente>
+                <codFisc>VRDRRT00L13E472M</codFisc>
+            </utente>
+        </listaUtenti>
+    </categoria>
+    <categoria>
+        <nome>Generale</nome>
+        <stato>Attiva</stato>
+        <listaAzioni>
+            <azioneUtente>
+                <nomeAzione>Registrazione cliente</nomeAzione>
+            </azioneUtente>
+        </listaAzioni>        
+        <listaUtenti>
+            <utente>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+            </utente>
+            <utente>
+                <codFisc>VRDRRT00L13E472M</codFisc>
+            </utente>
+            <utente>
+                <codFisc>CPZGLC90P11H501W</codFisc>
+            </utente>
+            <utente>
+                <codFisc>BRSMTT64E05E472K</codFisc>
+            </utente>
+            <utente>
+                <codFisc>BNCVNT00R67E472F</codFisc>
+            </utente>
+        </listaUtenti>
+    </categoria>
+    <categoria>
+        <nome>Servizi</nome>
+        <stato>Attiva</stato>
+        <listaAzioni>
+            <azioneUtente>
+                <nomeAzione>Prenotazione tavolo</nomeAzione>
+            </azioneUtente>
+            <azioneUtente>
+                <nomeAzione>Prenotazione servizio in camera</nomeAzione>
+            </azioneUtente>
+            <azioneUtente>
+                <nomeAzione>Prenotazione attivita</nomeAzione>
+            </azioneUtente>
+        </listaAzioni>        
+        <listaUtenti>
+            <utente>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+            </utente>
+            <utente>
+                <codFisc>VRDRRT00L13E472M</codFisc>
+            </utente>
+        </listaUtenti>
+    </categoria>
+    <categoria>
+        <nome>Crediti</nome>
+        <stato>Disabilitata</stato>
+        <listaAzioni>
+            <azioneUtente>
+                <nomeAzione>Registrazione cliente</nomeAzione>
+            </azioneUtente>
+        </listaAzioni>        
+        <listaUtenti>
+            <utente>
+                <codFisc>RSSGNN64R03E472G</codFisc>
+            </utente>
+            <utente>
+                <codFisc>VRDRRT00L13E472M</codFisc>
+            </utente>
+            <utente>
+                <codFisc>CPZGLC90P11H501W</codFisc>
+            </utente>
+            <utente>
+                <codFisc>BRSMTT64E05E472K</codFisc>
+            </utente>
+            <utente>
+                <codFisc>BNCVNT00R67E472F</codFisc>
+            </utente>
         </listaUtenti>
     </categoria>
 </listaCategorie>
