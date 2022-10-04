@@ -93,11 +93,23 @@
                     <td>
                         <strong>Inizio:</strong><br />
                         
-                            <?php echo $soggiorno['dataArrivo'];?>
+                        <?php
+                                            $stringaData = $soggiorno['dataArrivo'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                     </td>
                     <td>
                         <strong>Fine:</strong><br />
-                            <?php echo $soggiorno['dataPartenza'];?>
+                        <?php
+                                            $stringaData = $soggiorno['dataPartenza'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                     </td>
                     <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
                     <td>
@@ -158,11 +170,23 @@
                 <td>
                     <strong>Inizio:</strong><br />
                     
-                        <?php echo $soggiorno['dataArrivo'];?>
+                    <?php
+                                            $stringaData = $soggiorno['dataArrivo'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                 </td>
                 <td>
                     <strong>Fine:</strong><br />
-                        <?php echo $soggiorno['dataPartenza'];?>
+                    <?php
+                                            $stringaData = $soggiorno['dataPartenza'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                 </td>
             </tr>
         </table>
@@ -209,11 +233,23 @@
                 <td>
                     <strong>Inizio:</strong><br />
                     
-                        <?php echo $soggiorno['dataArrivo'];?>
+                    <?php
+                                            $stringaData = $soggiorno['dataArrivo'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                 </td>
                 <td>
                     <strong>Fine:</strong><br />
-                        <?php echo $soggiorno['dataPartenza'];?>
+                    <?php
+                                            $stringaData = $soggiorno['dataPartenza'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                 </td>
             </tr>
         </table>

@@ -88,7 +88,13 @@ require_once('funzioniDeletePHP.php');
                     <tr>
                         <td><strong>Codice fiscale cliente</strong><br /><?php echo $prenotazione['codFisc'];?></td>
                         <td><strong>Nome attivita</strong><br /><?php echo $prenotazione['nome'];?></td>
-                        <td><strong>Data</strong><br /><?php echo $prenotazione['data'];?></td>
+                        <td><strong>Data</strong><br /><?php
+                                            $stringaData = $prenotazione['data'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?></td>
                         <td><strong>Ora inizio</strong><br /><?php echo $oraInizioAttivita;?></td>
                         <td><strong>Ora fine</strong><br /><?php echo $oraFineAttivita;?></td>
                         <td><strong>Prezzo totale</strong><br /><?php echo $prenotazione['prezzoTotale']."&euro;";?></td>
@@ -132,7 +138,13 @@ require_once('funzioniDeletePHP.php');
                     <tr>
                         <td><strong>Codice fiscale cliente</strong><br /><?php echo $prenotazione['codFisc'];?></td>
                         <td><strong>Nome attivita</strong><br /><?php echo $prenotazione['nome'];?></td>
-                        <td><strong>Data</strong><br /><?php echo $prenotazione['data'];?></td>
+                        <td><strong>Data</strong><br /><?php
+                                            $stringaData = $prenotazione['data'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?></td>
                         <td><strong>Ora inizio</strong><br /><?php echo $oraInizioAttivita;?></td>
                         <td><strong>Ora fine</strong><br /><?php echo $oraFineAttivita;?></td>
                         <td><strong>Prezzo totale</strong><br /><?php echo $prenotazione['prezzoTotale']."&euro;";?></td>

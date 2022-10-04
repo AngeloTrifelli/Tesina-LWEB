@@ -86,8 +86,8 @@
                 $nome=$arrayDati['nome'];
                 $descrizione=$arrayDati['descrizione'];
                 $linkImmagine= $arrayDati['linkImmagine'];
-                $oraApertura=$arrayDati['oraApertura'];
-                $oraChiusura=$arrayDati['oraChiusura'];
+                $oraApertura=substr($arrayDati['oraApertura'],0,5);
+                $oraChiusura=substr($arrayDati['oraChiusura'],0,5);
                 $prezzoOrario=$arrayDati['prezzoOrario'];
           
     ?>

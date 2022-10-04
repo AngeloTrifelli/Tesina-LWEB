@@ -108,7 +108,13 @@
                                     </div>
                             
                                     <div>
-                                        <?php echo $prenotazioneUtente['data']; ?>
+                                    <?php
+                                            $stringaData = $prenotazioneUtente['data'];
+                                            $giorno = substr($stringaData, 8,2);       
+                                            $mese = substr($stringaData,5,2 );
+                                            $anno = substr($stringaData,0,4 );
+                                            echo $giorno."-".$mese."-".$anno;
+                                        ?>
                                     </div>
                                     
                                 </div>
@@ -122,7 +128,7 @@
                                     </div>
                             
                                     <div>
-                                        <?php echo $prenotazioneUtente['oraInizio']; ?>
+                                        <?php echo substr($prenotazioneUtente['oraInizio'],0,5); ?>
                                     </div>
                                     
                                 </div>
@@ -136,7 +142,7 @@
                                     </div>
                             
                                     <div>
-                                        <?php echo $prenotazioneUtente['oraFine']; ?>
+                                        <?php echo substr($prenotazioneUtente['oraFine'],0,5); ?>
                                     </div>
                                     
                                 </div>
