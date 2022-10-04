@@ -1,5 +1,6 @@
 <?php
-    require_once("funzioniModificaPHP.php");
+    require_once('funzioniGetPHP.php');
+    require_once("funzioniModificaPHP.php");          
 
 // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PER INSERIRE DATI NEI FILE XML
 
@@ -66,6 +67,8 @@ function inserisciNuovoCliente(){
     $nuovaSommaGiudizi= $docClienti->createElement("sommaGiudizi", 0);
     $nuovoCliente->appendChild($nuovaSommaGiudizi);
 
+    aggiungiCategoriaAdUtente($_POST['codFisc'] , "Registrazione cliente");
+
     $docClienti->save("../XML/Clienti.xml");
 
 }
@@ -123,8 +126,8 @@ function inserisciPrenotazioneCamera($idCamera ,$codFiscCliente , $creditiUsati,
     $nuovaDataPartenza = $doc->createElement("dataPartenza" , $dataPartenza);
     $nuovaPrenotazione->appendChild($nuovaDataPartenza);
 
-
     modificaCreditiCliente($codFiscCliente, -$creditiUsati);    
+    aggiungiCategoriaAdUtente($codFiscCliente , "Prenotazione soggiorno");
 
     $doc->save("../XML/Camere.xml");
 }
@@ -180,6 +183,8 @@ function aggiungiPrenotazioneAttivita($idAttivita,$codFisc,$data,$oraInizio,$ora
     modificaCreditiCliente($codFisc , -$creditiInseriti);
     $nuovoCreditiUsati= $docAttivita->createElement("creditiUsati", $creditiInseriti);
     $nuovaPrenotazione->appendChild($nuovoCreditiUsati);
+
+    aggiungiCategoriaAdUtente($codFisc , "Prenotazione attivita");
 
     $docAttivita->save("../XML/Attivita.xml");
 
@@ -291,6 +296,8 @@ function inserisciPrenotazioneTavolo($numeroTavolo , $codFiscCliente , $data , $
     $nuovaOraPrenotazione = $doc->createElement("ora" , $ora);
     $nuovaPrenotazione->appendChild($nuovaOraPrenotazione);
 
+    aggiungiCategoriaAdUtente($codFiscCliente , "Prenotazione tavolo");
+
     $doc->save("../XML/Tavoli.xml");
 }
 
@@ -351,6 +358,8 @@ function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   
         $nuovaPortata->appendChild($nuovaQuantita);
     }
 
+    aggiungiCategoriaAdUtente($codFiscCliente , "Prenotazione servizio in camera");
+
     $doc->save("../XML/ServizioCamera.xml");
 }
 
@@ -407,6 +416,195 @@ function aggiungiPortataPrenotazioneSC($idPrenotazione ,$nomePortata , $quantita
     $doc->save("../XML/ServizioCamera.xml");
 }
 
+
+// Funzione per associare una o piu categorie ad un cliente 
+
+function aggiungiCategoriaAdUtente($codFiscCliente , $tipoAzione){
+    $xmlString = "";
+    foreach(file("../XML/Categorie.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $listaCategorie = $doc->documentElement->childNodes;
+    for($i=0 ; $i < $listaCategorie->length ; $i++){
+        $categoria = $listaCategorie->item($i);
+        $listaAzioni = $categoria->getElementsByTagName("azioneUtente");
+
+        $azionePresente = "False";
+        $j=0;
+        while($j < $listaAzioni->length && $azionePresente == "False"){
+            $azione = $listaAzioni->item($j);
+            $nomeAzione = $azione->firstChild->textContent;
+            if($nomeAzione == $tipoAzione){
+                $azionePresente = "True";
+            }
+            else{
+                $j++;
+            }
+        }
+        
+        if($azionePresente == "True"){
+            $listaClienti = $categoria->getElementsByTagName("utente");
+            
+            $clientePresente = "False";
+            $k=0;
+
+            while($k < $listaClienti->length && $clientePresente == "False"){
+                $cliente = $listaClienti->item($k);
+                $codFisc = $cliente->firstChild->textContent;
+
+                if($codFisc == $codFiscCliente){
+                    $clientePresente = "True";
+                }
+                else{
+                    $k++;
+                }
+            }
+
+            if($clientePresente == "False"){
+                $nodoListaUtenti = $categoria->getElementsByTagName("listaUtenti")->item(0);
+
+                $nuovoNodoUtente = $doc->createElement("utente");
+                $nodoListaUtenti->appendChild($nuovoNodoUtente);
+
+                $nuovoNodoCodFisc = $doc->createElement("codFisc", $codFiscCliente);
+                $nuovoNodoUtente->appendChild($nuovoNodoCodFisc);
+            }
+            
+        }
+    }
+
+    $doc->save("../XML/Categorie.xml");
+
+
+}
+
+// Funzione per inserire una nuova domanda 
+
+function aggiungiDomanda($codFiscCliente , $categoriaDomanda , $testoDomanda){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString);
+    $docDomande->formatOutput = true;
+    
+    $datiCliente = getDatiCliente($codFiscCliente);
+
+    $elemRadice = $docDomande->documentElement;
+    $listaDomande = $docDomande->documentElement->childNodes;
+    $numDomande = count($listaDomande);
+
+    $nuovaDomanda = $docDomande->createElement("domanda");
+    $nuovaDomanda->setAttribute("id" , "D".($numDomande + 1));
+    $elemRadice->appendChild($nuovaDomanda);
+
+    $nuovoNomeAutore = $docDomande->createElement("nomeAutore" , $datiCliente['nome']);
+    $nuovaDomanda->appendChild($nuovoNomeAutore);
+
+    $nuovoCognomeAutore = $docDomande->createElement("cognomeAutore" , $datiCliente['cognome']);
+    $nuovaDomanda->appendChild($nuovoCognomeAutore);
+
+    $nuovoCodFisc = $docDomande->createElement("codFiscAutore" , $codFiscCliente);
+    $nuovaDomanda->appendChild($nuovoCodFisc);
+    
+    $nuovaCategoria = $docDomande->createElement("categoria" , $categoriaDomanda );
+    $nuovaDomanda->appendChild($nuovaCategoria);    
+
+    $nuovoTestoDomanda = $docDomande->createElement("testoDomanda" , $testoDomanda);
+    $nuovaDomanda->appendChild($nuovoTestoDomanda);    
+
+    $nuovaListaRisposte = $docDomande->createElement("listaRisposte");
+    $nuovaDomanda->appendChild($nuovaListaRisposte);
+
+    $docDomande->save("../XML/Domande.xml");
+}
+
+// Funzione per inserire una risposta ad una domanda
+
+function aggiungiRispostaDomanda($idDomanda , $autoreRisposta , $codFiscCliente , $testoRisposta){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString);
+    $docDomande->formatOutput = true;
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $domanda = $xpathDomande->query("/listaDomande/domanda[@id='$idDomanda']");
+    $domanda = $domanda->item(0);
+
+    $nodoListaRisposte = $domanda->getElementsByTagName("listaRisposte")->item(0);
+    $listaRisposte = $domanda->getElementsByTagName("risposta");
+    $numRisposte = count($listaRisposte);
+
+    $nuovaRisposta = $docDomande->createElement("risposta");
+    $nodoListaRisposte->appendChild($nuovaRisposta);
+
+    $nuovoIdRisposta = $docDomande->createElement("idRisposta", $idDomanda."-RSP".($numRisposte + 1));
+    $nuovaRisposta->appendChild($nuovoIdRisposta);
+
+    $nuovoAutore = $docDomande->createElement("autore" , $autoreRisposta);
+    $nuovaRisposta->appendChild($nuovoAutore);
+
+    if($autoreRisposta == "Cliente"){
+        $datiCliente = getDatiCliente($codFiscCliente);
+
+        $nuovoNomeAutoreRisposta = $docDomande->createElement("nomeAutoreRisposta" , $datiCliente['nome']);
+        $nuovaRisposta->appendChild($nuovoNomeAutoreRisposta);
+
+        $nuovoCognomeAutoreRisposta = $docDomande->createElement("cognomeAutoreRisposta" , $datiCliente['cognome']);
+        $nuovaRisposta->appendChild($nuovoCognomeAutoreRisposta);
+
+        $nuovoCodFiscAutoreRisposta = $docDomande->createElement("codFiscAutoreRisposta" , $codFiscCliente);
+        $nuovaRisposta->appendChild($nuovoCodFiscAutoreRisposta);
+    }
+    
+    $nuovoTestoRisposta = $docDomande->createElement("testoRisposta" , $testoRisposta);
+    $nuovaRisposta->appendChild($nuovoTestoRisposta);
+
+    $docDomande->save("../XML/Domande.xml");
+}
+
+
+//Funzione per aggiungere una faq 
+
+function aggiungiFaq ($testoDomanda , $testoRisposta , $idDomandaCliente){
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docFaq = new DOMDocument();
+    $docFaq->loadXML($xmlString);
+    $docFaq->formatOutput = true;
+
+    $elemRadice = $docFaq->documentElement;
+    $listaFaq = $elemRadice->childNodes;
+    $numFaq = count($listaFaq);
+
+    $nuovaFaq = $docFaq->createElement("FAQ");
+    $nuovaFaq->setAttribute("id" , "F".($numFaq + 1) );
+    $elemRadice->appendChild($nuovaFaq);
+
+    if($idDomandaCliente != "null"){
+        $nuovaIdDomandaCliente = $docFaq->createElement("idDomandaCliente", $idDomandaCliente);
+        $nuovaFaq->appendChild($nuovaIdDomandaCliente);
+    }
+
+    $nuovaDomanda = $docFaq->createElement("testoDomanda", $testoDomanda);
+    $nuovaFaq->appendChild($nuovaDomanda);
+
+    $nuovaRisposta = $docFaq->createElement("testoRisposta" , $testoRisposta);
+    $nuovaFaq->appendChild($nuovaRisposta);
+
+    $docFaq->save("../XML/FAQs.xml");
+}
 
 
 

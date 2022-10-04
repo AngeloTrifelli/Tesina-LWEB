@@ -691,6 +691,50 @@ function getCategorie(){
     return($tabellaCategorie);
 }
 
+// Funzione che restituisce le categorie associate ad un cliente (solo quelle attive)
+
+function getCategorieCliente($codFiscCliente){
+    $xmlString = "";
+    foreach(file("../XML/Categorie.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaCategorie = $doc->documentElement->childNodes;
+
+    for($i=0 ; $i< $listaCategorie->length ; $i++){
+        $categoria = $listaCategorie->item($i);
+        $statoCategoria = $categoria->getElementsByTagName("stato")->item(0)->textContent;
+
+        if($statoCategoria == "Attiva"){        
+            $utentiAssociati = $categoria->getElementsByTagName("utente");
+
+            $presente = "False";
+            $j=0;
+            while($j < $utentiAssociati->length && $presente == "False"){
+                $utente = $utentiAssociati->item($j);
+                $codFisc = $utente->firstChild->textContent;
+                if($codFisc == $codFiscCliente){
+                    $presente = "True";
+                }
+                else{
+                    $j++;
+                }
+            }
+
+            if($presente == "True"){
+                $nomeCategoria = $categoria->getElementsByTagName("nome")->item(0)->textContent;            
+                $arrayDati[$nomeCategoria] = "Attiva";
+            }
+        }
+    }
+
+    return $arrayDati;
+}
+
+
+
 //Funzione che restituisce le  attivita presenti in Attivita.xml
 
 function getAttivita(){
@@ -1219,7 +1263,96 @@ function getPrezzoPortata($nomePortata){
 }
 
 
+// Funzione per ottenere le domande in domande.php
+// Se codFiscCliente è diverso da null allora verranno prese solo le domande di un particolare cliente 
+// Se categoria è diverso da null allora verranno prese solo le domande di una particolare categoria
+// Queste due cose possono essere combinate (solo le domande di un particolare cliente e di una particolare categoria)
 
+function getDomande($codFiscCliente , $categoria){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString); 
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    if($codFiscCliente != "null" && $categoria != "null"  ){
+        $listaDomande = $xpathDomande->query("/listaDomande/domanda[codFiscAutore='$codFiscCliente' and categoria='$categoria']");
+    }
+    else{
+        if($categoria != "null"){
+            $listaDomande = $xpathDomande->query("/listaDomande/domanda[categoria='$categoria']");
+        }
+        elseif($codFiscCliente != "null"){
+            $listaDomande = $xpathDomande->query("/listaDomande/domanda[codFiscAutore='$codFiscCliente']");
+        }   
+        else{
+            $listaDomande = $docDomande->documentElement->childNodes;
+        }     
+    }
+    
+    return $listaDomande;
+}
+
+
+
+// Funzione per ottenere tutti i dati di una particolare domanda
+
+function getDatiDomanda($idDomanda){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString); 
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $domanda = $xpathDomande->query("/listaDomande/domanda[@id='$idDomanda']");
+    $domanda = $domanda->item(0);
+
+    $arrayDati['nomeAutore'] = $domanda->getElementsByTagName("nomeAutore")->item(0)->textContent;
+    $arrayDati['cognomeAutore'] = $domanda->getElementsByTagName("cognomeAutore")->item(0)->textContent;
+    $arrayDati['codFiscAutore'] = $domanda->getElementsByTagName("codFiscAutore")->item(0)->textContent;
+    $arrayDati['categoria'] = $domanda->getElementsByTagName("categoria")->item(0)->textContent;
+    $arrayDati['testoDomanda'] = $domanda->getElementsByTagName("testoDomanda")->item(0)->textContent;
+    $arrayDati['listaRisposte'] = $domanda->getElementsByTagName("risposta");
+
+    return $arrayDati;
+}
+
+
+// Funzione per ottenere tutti i dati di una particolare risposta di una domanda 
+
+function getDatiRisposta($idRisposta){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString); 
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $pieces = explode("-", $idRisposta);
+    $idDomanda = $pieces[0];
+
+    $risposta = $xpathDomande->query("/listaDomande/domanda[@id='$idDomanda']/listaRisposte/risposta[idRisposta='$idRisposta']");
+    $risposta = $risposta->item(0);
+
+
+    $arrayDati['autore'] = $risposta->getElementsByTagName("autore")->item(0)->textContent;
+    if($arrayDati['autore'] != "Staff"){
+        $arrayDati['nomeAutoreRisposta'] = $risposta->getElementsByTagName("nomeAutoreRisposta")->item(0)->textContent;
+        $arrayDati['cognomeAutoreRisposta'] = $risposta->getElementsByTagName("cognomeAutoreRisposta")->item(0)->textContent;
+        $arrayDati['codFiscAutoreRisposta'] = $risposta->getElementsByTagName("codFiscAutoreRisposta")->item(0)->textContent;
+    }
+    $arrayDati['testoRisposta'] = $risposta->getElementsByTagName("testoRisposta")->item(0)->textContent;
+    
+    return $arrayDati;
+}
 
 
 

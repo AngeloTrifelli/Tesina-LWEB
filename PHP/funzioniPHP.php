@@ -651,6 +651,72 @@ function individuaBottonePrenotazioniRistorante(){
 }
 
 
+// Funzione per individuare l'id della domanda associato al bottone premuto in domande.php
+
+function individuaBottoneDomanda(){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString);
+
+    $listaDomande = $docDomande->documentElement->childNodes;
+
+    $trovato = "False";
+    $i=0;
+
+    while ($i < $listaDomande->length && $trovato == "False"){
+        $domanda = $listaDomande->item($i);
+        $idDomanda = $domanda->getAttribute("id");
+
+        if(isset($_POST[$idDomanda])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idDomanda;
+}
+
+
+// Funzione per individuare la risposta selezionata dal concierge o dall'admin in risposteDomanda.php quando si vuole elevare una domanda a faq
+
+function individuaBottoneRispostaSelezionata($idDomanda){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString);
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $domanda = $xpathDomande->query("/listaDomande/domanda[@id='$idDomanda']");
+    $domanda = $domanda->item(0);
+
+    $listaRisposte = $domanda->getElementsByTagName("risposta");
+
+    $trovato = "False";
+    $i=0;
+    
+    while($i < $listaRisposte->length && $trovato == "False"){
+        $risposta = $listaRisposte->item($i);
+        $idRisposta = $risposta->firstChild->textContent;
+
+        if(isset($_POST[$idRisposta])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idRisposta;    
+}
+
 
 
 

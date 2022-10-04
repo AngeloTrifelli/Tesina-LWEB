@@ -17,4 +17,12 @@
             </risposta>
         </listaRisposte>
     </domanda>
+    <domanda id="D2">
+        <nomeAutore>Roberto</nomeAutore>
+        <cognomeAutore>Verdi</cognomeAutore>
+        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+        <categoria>Servizi</categoria>
+        <testoDomanda>Posso usufruire del servizio in camera anche se ho prenotato una camera Standard Singola?</testoDomanda>
+        <listaRisposte />            
+    </domanda>
 </listaDomande>

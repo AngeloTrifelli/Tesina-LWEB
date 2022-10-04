@@ -520,4 +520,30 @@ function modificaPrenotazioneAttivita($idPrenotazione,$data,$oraInizio,$oraFine)
         $doc->save("../XML/Attivita.xml"); 
 }
 
+//Funzione per modificare l'attributo faq di una domanda
+
+function modificaAttributoFaqDomanda($idDomanda , $nuovoAttributo){
+    $xmlString = "";
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString); 
+    $docDomande->formatOutput = true;
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $domanda = $xpathDomande->query("/listaDomande/domanda[@id='$idDomanda']");
+    $domanda = $domanda->item(0);
+
+    if($nuovoAttributo == "true"){
+        $domanda->setAttribute("faq", $nuovoAttributo);    
+    }
+    else{
+        $domanda->removeAttribute("faq");
+    }
+
+    $docDomande->save("../XML/Domande.xml");
+}
+
 ?>
