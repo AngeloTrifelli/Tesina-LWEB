@@ -154,7 +154,7 @@ a{
     height: 10%;
     width: 100%;
     background-color: #871f30;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .specialButton{
@@ -171,4 +171,27 @@ a{
 .specialButton:hover{
     background-color: #000000;
     color:#f8fefa ;
+}
+
+.alignCenter{
+    text-align: center;
+}
+
+.scrittaCentrale{
+    font-size: 24px;
+    font-style: oblique;
+}
+
+.errorLabel{
+    color: red;
+    font-weight: bold;
+}
+
+.bigButton{
+    width: 200px;
+}
+
+.titoloImportante{
+    margin-top: 5%!important;
+    font-size: 32px;
 }
