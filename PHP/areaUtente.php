@@ -104,7 +104,7 @@
                         <a class="item" href="./prenotazioniClienti.php">VISUALIZZA PRENOTAZIONI CLIENTI</a>
                         <br />
             
-                        <a class="item" href="#">DOMANDE</a>
+                        <a class="item" href="./domande.php">DOMANDE</a>
                         <br />';
                         break;
                     case "Admin":
@@ -121,7 +121,7 @@
                         <a class="item" href="./prenotazioniClienti.php">VISUALIZZA PRENOTAZIONI CLIENTI</a>
                         <br />
             
-                        <a class="item" href="#">DOMANDE</a>
+                        <a class="item" href="./domande.php">DOMANDE</a>
                         <br />
         
                         <br />
