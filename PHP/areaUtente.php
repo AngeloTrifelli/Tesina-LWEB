@@ -91,7 +91,10 @@
                         echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';
                         break;
                     case "Concierge":
-                        echo '                         
+                        echo ' 
+                        <a class="item" href="./intro.php">HOME</a>
+                        <br />         
+
                         <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             
@@ -108,7 +111,10 @@
                         <br />';
                         break;
                     case "Admin":
-                        echo '            
+                        echo ' 
+                        <a class="item" href="./intro.php">HOME</a>
+                        <br /> 
+                                   
                         <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             
