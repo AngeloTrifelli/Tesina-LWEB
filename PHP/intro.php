@@ -1,9 +1,8 @@
 <?php 
     session_start();
-
+    $accessoStaff="";
     if(isset($_SESSION['loginType']) && $_SESSION['loginType']!="Cliente"){
-        header('Location: areaUtente.php');
-        exit();
+        $accessoStaff="True";
     }
 
     if(isset($_POST['LOGOUT'])){
@@ -14,6 +13,8 @@
         }
         else{
             unset($_SESSION['loginType']);
+            header('Location: intro.php');
+            exit();
         }
     }
     echo'<?xml version="1.0" encoding="UTF-8"?>';
@@ -68,6 +69,7 @@
                     <br />
 
                     <?php
+                        if($accessoStaff!="True"){
                         if(!isset($_SESSION['codFiscUtenteLoggato'])){
                     ?>
                             <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
@@ -86,6 +88,7 @@
                                 <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
                                 <br />';
                             }
+                        
                     ?>
                             <a class="item" href="./areaUtente.php">AREA PERSONALE</a>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -94,8 +97,16 @@
                             </form>
                     <?php
                         }
+                    }else{
                     ?>
-                    
+                            <a class="item" href="./areaUtente.php">AREA PERSONALE</a>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                            <br />
+                            <input type="submit" class="logoutButton" value="LOGOUT" name="LOGOUT" />
+                            </form>
+                    <?php
+                    }
+                    ?>
           
                     </div>
                     
