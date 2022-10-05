@@ -56,7 +56,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />  
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"> <!--Per importare l'mmagine dell'occhio -->
       </head>
     
     <body>
@@ -267,24 +268,29 @@
                                 }
                             ?>
                             </div>
-
-                            <div class="containerColumn">
-                            <input class="textInput" type="text" name="password" placeholder="Inserisci la password" />  
+                        <div class="containerColumn">
+                            <div class="containerPassword">
+                                <input class="textInput" id="id_password" autocomplete="current-password" type="password" name="password" placeholder="Inserisci la password" />
+                                <i class="far fa-eye occhio" id="togglePassword"></i>
+                            </div>
                             <?php 
                                 if(isset($_POST['registrati']) && $_POST['password']==""){
-                                    echo "<p class=\"errorLabel\">Inserire la password!</p>";
+                                    echo "<p class=\"errorLabelPass\">Inserire la password!</p>";
                                 }                                
                             ?>
                             <br />
-                            <input class="textInput" type="text" name="confermaPassword" placeholder="Conferma password" />   
+                            <div class="containerPassword">
+                            <input class="textInput" type="password" id="id_Confermapassword" autocomplete="current-password" name="confermaPassword" placeholder="Conferma password" />  
+                            <i class="far fa-eye occhio" id="toggleConfermaPassword"></i> 
+                            </div>
                             <?php 
                             if(isset($_POST['registrati']) && $_POST['password']!="" && $_POST['password']!=$_POST['confermaPassword']){
-                                echo "<p class=\"errorLabel\">Le password inserite non corrispondono!</p>";
+                                echo "<p class=\"errorLabelPass\">Le password inserite non corrispondono!</p>";
                             }
                             ?>  
                             </div>
+                            </div>
                         </div>
-
                         <?php 
                             if ($duplicato == "True"){
                             echo "
@@ -310,6 +316,29 @@
             </div>
 
         </div> 
+        <script>
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#id_password');
+
+            const toggleConfermaPassword = document.querySelector('#toggleConfermaPassword');
+            const confermaPassword = document.querySelector('#id_Confermapassword');
+
+            togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            });
+
+            toggleConfermaPassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = confermaPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confermaPassword.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            });
+        </script>
 
     </body>
 
