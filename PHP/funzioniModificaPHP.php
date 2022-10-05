@@ -618,4 +618,26 @@ function modificaAttributoFaqDomanda($idDomanda , $nuovoAttributo){
     $docDomande->save("../XML/Domande.xml");
 }
 
+//Funzione per modificare la risposta di una faq
+
+function modificaFaq($idFaq,$nuovaRisposta){
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docFaq = new DOMDocument();
+    $docFaq->loadXML($xmlString); 
+    $docFaq->formatOutput = true;
+
+    $xpathFaq = new DOMXPath($docFaq);
+
+    $testoRispostaFaq = $xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']/testoRisposta");
+    $testoRispostaFaq = $testoRispostaFaq->item(0);
+    $testoRispostaFaq->nodeValue="";
+    $testoRispostaFaq->appendChild($docFaq->createTextNode($nuovaRisposta));
+
+    $docFaq->save("../XML/FAQs.xml");
+
+}
+
 ?>

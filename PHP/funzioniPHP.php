@@ -189,14 +189,13 @@ function individuaBottoneidPrenotazioneAttivita(){
 
    $listaAttivita = $docAttivita->documentElement->childNodes;
    $i=0;
-   $j = 0;
    $trovato="False";
    while($i<$listaAttivita->length && $trovato=="False"){
 
     $attivita=$listaAttivita->item($i);
 
    $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
-
+   $j = 0;
    while($j < count($listaPrenotazione) && $trovato=="False"){
 
        $prenotazione = $listaPrenotazione->item($j);
@@ -316,7 +315,6 @@ function individuaBottoneCategoriaPremuto(){
 
 
     $i=0;
-    $j=0;
     $trovato="False";
 
     while($i < count($listaCategorieAttivate) && $trovato == "False"){
@@ -329,7 +327,7 @@ function individuaBottoneCategoriaPremuto(){
             $i++;
         }
     }
-
+    $j=0;
     while($j<count($listaCategorieDisattivate) && $trovato == "False"){
         $categoria=$listaCategorieDisattivate[$j];
         $nome=$categoria['nome'];
@@ -371,7 +369,6 @@ function individuaBottoneAttivitaDaEliminare(){
 
    $listaAttivita = $docAttivita->documentElement->childNodes;
    $i=0;
-   $j = 0;
    $trovato="False";
    while($i<$listaAttivita->length && $trovato=="False"){
 
@@ -379,7 +376,7 @@ function individuaBottoneAttivitaDaEliminare(){
 
    $listaPrenotazioni=$attivita->getElementsByTagName("listaPrenotazioni")->item(0);
    $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
-
+   $j = 0;
    while($j < count($listaPrenotazione) && $trovato=="False"){
 
        $prenotazione = $listaPrenotazione->item($j);
@@ -725,8 +722,7 @@ function confermaOraUpdateMenu(){
 
     $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
     $oraFineUpdate=$oraFineUpdate->item(0)->textContent;
-
-    if($oraCorrente>=$oraInizioUpdate && $oraCorrente<=$oraFineUpdate){
+    if($oraCorrente>=strtotime($oraInizioUpdate) && $oraCorrente<=strtotime($oraFineUpdate)){
         return "True";
     }else{
         return "False";
@@ -820,7 +816,36 @@ function checkOrariRistorante($oraInizioUpdate,$oraFineUpdate){
     }
 }
 
+//Funzione per riconoscere che faq ha selezionato la concierge/l'admin in faq.php
 
+function individuaBottoneIdFaq(){
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaFaqs = $doc->documentElement->childNodes;
+
+    $trovato = "False";
+    $i=0;
+
+    while ($i < $listaFaqs->length && $trovato == "False"){
+        $faq = $listaFaqs->item($i);
+        $idFaq = $faq->getAttribute("id");
+
+        if(isset($_POST[$idFaq])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idFaq;
+
+}
 
 
 

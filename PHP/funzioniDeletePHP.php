@@ -175,4 +175,31 @@ function rimuoviPortataDalMenu($descrizionePortata){
    $docRistorante->save("../XML/Ristorante.xml");
 }
 
+function rimuoviFAQ($idFaq){
+
+    $xmlString= "";
+    
+
+    foreach(file("../XML/FAQs.xml") as $node){
+
+       $xmlString .= trim($node);
+
+   }
+
+   $doc = new DOMDocument();
+   $doc->loadXML($xmlString);
+   $doc->formatOutput = true;
+
+   $xpathFaq = new DOMXPath($doc);
+
+   $faqDaEliminare=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']");
+   $faqDaEliminare=$faqDaEliminare->item(0);
+   $listaFaq=$doc->documentElement;
+
+   $listaFaq->removeChild($faqDaEliminare);
+   
+
+    $doc->save("../XML/FAQs.xml");
+}
+
 ?>
