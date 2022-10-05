@@ -204,11 +204,11 @@
                         }
                     ?>
                     </div>
-                    
+                        <div class="divDx">  
                     <?php
                         if(!isset($idCamera)){
                     ?>
-                        <div class="divDx">    
+                          
                             
                             <p class="title">Che tipo di utente sei?</p>
                             <br />
