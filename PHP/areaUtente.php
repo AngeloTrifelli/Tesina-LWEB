@@ -14,6 +14,7 @@
                 unset($_SESSION['loginType']);
             }
             header('Location: intro.php');
+            exit();
         }
 
         if($_SESSION['loginType'] == "Cliente"){
@@ -42,6 +43,7 @@
     }
     else{   
         header('Location: intro.php');
+        exit();
     }
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';

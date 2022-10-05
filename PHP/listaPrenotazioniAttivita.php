@@ -7,10 +7,12 @@ require_once('funzioniDeletePHP.php');
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
+            exit();
         }
     }
     else{
         header('Location: areaUtente.php');
+        exit();
     }
 
     if(isset($_POST['bottonePremuto'])){

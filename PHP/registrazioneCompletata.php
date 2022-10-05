@@ -10,9 +10,11 @@
             $registrazioneCompletata = "True";         
             unset($_SESSION['username']);
             header( "refresh:5;url=login.php" );
+            exit();
         }
         else{
             header("refresh:5;url=areaUtente.php");
+            exit();
         }
     }
 ?>

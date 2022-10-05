@@ -9,15 +9,18 @@
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+                exit();
             }
         }
         else{
             header('Location: prenotaOra.php');
+            exit();
         }
     }
     else{
         if(!isset($_SESSION['loginType'])){   
             header('Location: login.php');
+            exit();
         }
         else{
             $accessoStaff = "True";

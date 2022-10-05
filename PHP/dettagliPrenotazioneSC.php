@@ -24,9 +24,11 @@
         if(isset($_POST['INDIETRO'])){
             if(isset($_POST['accessoStaff'])){
                 header('Location: prenotazioniRistorante.php ');
+                exit();
             }
             else{
                 header('Location: visualizzaPrenotazioniRistorante.php');
+                exit();
             }            
             exit();
         }
@@ -37,10 +39,12 @@
                     setcookie('Cancella', '', time() - 3600, '/');
                     rimuoviPrenotazioneServizioCamera($_POST['dettagliPrenotazione']);
                     if(isset($_POST['accessoStaff'])){
-                        header('Location: prenotazioniRistorante.php');    
+                        header('Location: prenotazioniRistorante.php'); 
+                        exit();   
                     }
                     else{
                         header('Location: visualizzaPrenotazioniRistorante.php');
+                        exit();
                     }        
                     exit();
                 }  

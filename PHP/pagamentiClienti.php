@@ -20,10 +20,12 @@
            
        }else{
            header('Location: areaUtente.php');
+           exit();
        }
        
    }else{
        header('Location: intro.php');
+       exit();
    }
 
   

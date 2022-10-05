@@ -4,6 +4,7 @@
 
     if(isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Cliente"){
         header('Location: areaUtente.php');
+        exit();
     }
 
     if(!isset($_SESSION['soggiornoAttivo']) || $_SESSION['soggiornoAttivo'] == "null"){
@@ -32,6 +33,7 @@
     }
     else{
         header('Location: intro.php');
+        exit();
     }
 
 

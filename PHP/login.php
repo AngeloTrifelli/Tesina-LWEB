@@ -9,6 +9,7 @@
 
     if(isset($_SESSION['loginType'])){
         header('Location: areaUtente.php');
+        exit();
     }
 
     if(isset($_SESSION['prenotazioneCamera'])){
@@ -34,6 +35,7 @@
                         $_SESSION['codFiscUtenteLoggato'] = $codFisc;
                         $_SESSION['loginType'] = "Cliente";
                         header('Location: confermaPrenotazione.php');
+                        exit();
                     }
                     else{
                         $erroreSoggiornoAttivo = "True";
@@ -63,6 +65,7 @@
                         $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
                         $_SESSION['loginType'] = "Cliente";
                         header('Location: intro.php');
+                        exit();
                     }
                 }
                 else{
@@ -71,6 +74,7 @@
                         if($trovato != "False"){
                             $_SESSION['loginType'] = "Concierge";
                             header('Location: areaUtente.php');
+                            exit();
                         }
                     }
                     else{
@@ -78,6 +82,7 @@
                         if($trovato != "False"){
                             $_SESSION['loginType'] = "Admin";
                             header('Location: areaUtente.php');
+                            exit();
                         }
                     }
                 }

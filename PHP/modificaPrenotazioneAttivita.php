@@ -7,10 +7,12 @@ session_start();
 if(!isset($_SESSION['codFiscUtenteLoggato'])){
     if(!isset($_SESSION['loginType'])){
         header('Location: intro.php');
+        exit();
     }
 }
 else{
     header('Location: areaUtente.php');
+    exit();
 }
 if(!isset($_SESSION['idPrenotazioneAttivita']) && !isset($_POST['idPrenotazioneAttivita'])){
     header('Location: listaPrenotazioniAttivita.php');

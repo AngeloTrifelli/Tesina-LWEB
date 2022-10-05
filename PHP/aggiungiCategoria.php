@@ -9,6 +9,7 @@ if(isset($_SESSION['loginType'])){
         if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
             header('Location: categorie.php');
+            exit();
         }
         else{
             $categoriaMancante="False";
@@ -48,6 +49,7 @@ if(isset($_SESSION['loginType'])){
                     }
                     aggiungiCategoriaNuova($categoriaDaAggiungere);
                     header('Location: categorie.php');
+                    exit();
                 }
             }
 
@@ -56,9 +58,11 @@ if(isset($_SESSION['loginType'])){
     }
     }else{
         header('Location: areaUtente.php');
+        exit();
     }
 }else{
     header('Location: intro.php');
+    exit();
 }
 
     echo '<?xml version="1.0" encoding="UTF-8?>'

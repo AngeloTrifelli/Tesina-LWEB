@@ -19,10 +19,12 @@
 
         }else{
             header('Location: areaUtente.php');
+            exit();
         }
         
     }else{
         header('Location: intro.php');
+        exit();
     }
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';

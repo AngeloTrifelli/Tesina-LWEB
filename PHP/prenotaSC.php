@@ -8,6 +8,7 @@
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+                exit();
             }
             else{
                 $oraUpdateConfermata=confermaOraUpdateMenu();
@@ -39,15 +40,18 @@
         }
         else{
             header('Location: prenotaOra.php');
+            exit();
         }
     }
     else{
         header('Location: login.php');
+        exit();
     }
     
     if(isset($_POST['INDIETRO']) || isset($_POST['CONTINUA'])){
         if(isset($_POST['INDIETRO'])){
             header('Location: homeRistorante.php');
+            exit();
         }
         else{
             if($_POST['dataPrenotazione'] != "" && isset($_POST['pasto'])){
@@ -63,6 +67,7 @@
                 $arrayDati['oraPrenotazione'] = $oraPrenotazione;
                 $_SESSION['datiPrenotazioneSC'] = $arrayDati;
                 header('Location: listaPortate.php');
+                exit();
                 
             }
         }

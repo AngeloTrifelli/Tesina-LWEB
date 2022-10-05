@@ -6,10 +6,12 @@
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
+            exit();
         }
     }
     else{
         header('Location: areaUtente.php');
+        exit();
     }
     $oraUpdateConfermata=confermaOraUpdateMenu();
     if($oraUpdateConfermata=="False"){
