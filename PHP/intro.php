@@ -45,10 +45,6 @@
 
 
                     <div id="links">
-                    
-
-                    <a class="item" href="#index">HOME</a>
-                    <br/>
                  
                     <a class="item" href="./camere.php">CAMERE E SUITE</a>
                     <br/> 
