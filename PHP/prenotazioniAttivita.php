@@ -5,7 +5,11 @@
     session_start();
 
     if(isset($_POST['bottonePremuto'])){
-        individuaBottoneAttivitaDaEliminare();
+        if(isset($_COOKIE['Cancella'])){
+            unset($_COOKIE['Cancella']);
+            setcookie('Cancella', '', time() - 3600, '/');
+            individuaBottoneAttivitaDaEliminare();
+        }  
     }
 
     if(isset($_SESSION['codFiscUtenteLoggato'])){
@@ -47,6 +51,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" /> 
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     </head>
 
@@ -182,7 +188,7 @@
                             <td>
                             <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
 
-                                    <input type="submit" class="buttonElimina" name="<?php echo $prenotazioneUtente['idPrenotazione'];?>" value="Elimina" />
+                                    <input type="submit" class="buttonElimina" name="<?php echo $prenotazioneUtente['idPrenotazione'];?>" onClick="myEvent()" value="Elimina" />
                                     <input type="hidden" name="bottonePremuto"/>
  
                             </form>
@@ -198,7 +204,14 @@
             ?>
 
         </div>
-
+        <script>
+            function myEvent(){
+                var choice =confirm("Confermi di voler annullare la prenotazione?");
+                if(choice == true){
+                    document.cookie = "Cancella" + "=" + "Cancella" + "" + "; path=/";  
+                }
+            }
+        </script>
     </body>
 
 </html>
