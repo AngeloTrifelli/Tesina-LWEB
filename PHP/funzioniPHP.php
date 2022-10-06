@@ -816,39 +816,7 @@ function checkOrariRistorante($oraInizioUpdate,$oraFineUpdate){
     }
 }
 
-<<<<<<< HEAD
-// Funzione per individuare il bottone premuto in recensioni.php 
-
-function individuaBottoneRecensione(){
-    $xmlString = "";
-    foreach(file("../XML/recensioni.xml") as $node){
-        $xmlString .= trim($node);
-    }
-    $docRecensioni = new DOMDocument();
-    $docRecensioni->loadXML($xmlString);
-
-    $listaRecensioni = $docRecensioni->documentElement->childNodes;
-
-    $i=0;
-    $trovato = "False";
-
-    while($i < $listaRecensioni->length && $trovato == "False"){
-        $recensione = $listaRecensioni->item($i);
-        $idRecensione = $recensione->getAttribute("id");
-
-        if(isset($_POST[$idRecensione])){
-            $trovato = "True";
-        }
-        else{
-            $i++;
-        }
-    }
-
-    return $idRecensione;
-}
-=======
 //Funzione per riconoscere che faq ha selezionato la concierge/l'admin in faq.php
->>>>>>> f262436844755454e627b4aa218b681f57bb13f7
 
 function individuaBottoneIdFaq(){
     $xmlString = "";

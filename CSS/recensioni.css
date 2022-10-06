@@ -53,14 +53,35 @@ a{
     background-color:white;
     border-radius: 20px;
     margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
+    margin-right: 5%;    
     display: flex;
     flex-direction: column;
     align-items: center;
     height: fit-content;
     min-height: 30%;
 }
+
+.marginTop{
+    margin-top: 5%;
+}
+
+.marginLeft{
+    margin-left: 12%!important;
+}
+
+.noBottomBorder{
+    border-bottom-right-radius: 0;    
+}
+
+.noTopBorder{
+    border-top-right-radius: 0!important;
+    border-top-left-radius: 0!important;
+}
+
+.smallerText{
+    font-size: 27px!important;
+}
+
 
 #mainTitle{
     color: #871f30;
@@ -116,6 +137,10 @@ a{
     background-color: #640c1b;
 }
 
+.bigButton{
+    width: 200px;
+}
+
 
 
 
@@ -123,7 +148,7 @@ a{
     display: flex;
     width: 100%;
     background-color:#871f30;
-    justify-content: space-around;
+    justify-content: space-around;    
     color: white;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -161,6 +186,7 @@ a{
     transition: all 1s ease;
     cursor: pointer;
     width: 165px;
+    height: 40px;
     margin-top: 1%;
     margin-bottom: 1%;
 }
@@ -174,8 +200,26 @@ a{
     color: orange;
 }
 
-
-
 .larger{
     font-size: 25px;
+}
+
+
+.alignCenter{
+    text-align: center;
+}
+
+.scrittaCentrale{
+    font-size: 24px;
+    font-style: oblique;
+}
+
+.errorLabel{
+    color: red;
+    font-weight: bold;
+}
+
+.titoloImportante{
+    margin-top: 5%!important;
+    font-size: 32px;
 }
