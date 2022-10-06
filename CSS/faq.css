@@ -58,6 +58,7 @@ section{
     margin-bottom: 5%;
     padding: 2% 5% 2% 2%;
     box-shadow: 3px 3px 10px;
+    min-width: 1000px;
 }
 
 .innerContainer-link{
