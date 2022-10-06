@@ -69,7 +69,7 @@
     if(isset($_SESSION['tipoAzioneDomanda'])){
         $temp = $_SESSION['tipoAzioneDomanda'];
         if($temp['tipoAzione'] == "aggiungiDomanda"){
-            $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);                    
+            $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);  
             $aggiungiDomanda = "True";
         }
         elseif($temp['tipoAzione'] == "aggiungiRisposta"){
@@ -137,10 +137,17 @@
                             <select id="selectInput" name="scegliCategoria">
                                 <option disabled selected value="Scegli">-- Scegli -- </option> 
                             <?php
-                                $nomiCategorie = array_keys($categorieCliente);
-                                for($i=0; $i < count($nomiCategorie) ; $i++){
-                                    echo "<option value=\"{$nomiCategorie[$i]}\">{$nomiCategorie[$i]}</option>";
-                                }
+                                $nomiCategorie = array_keys($categorieCliente);    
+                                for($i=0 ; $i < count($nomiCategorie) ; $i++){
+                                    $nomeCategoria = $nomiCategorie[$i];
+                                    if($categorieCliente[$nomeCategoria] == "Attiva"){
+                                        echo "<option value=\"{$nomeCategoria}\">{$nomeCategoria}</option>";
+                                    }
+                                    else{
+                                        echo "<option disabled value=\"{$nomeCategoria}\">{$nomeCategoria}</option>";
+                                    }
+                                }                           
+                                                           
                             ?>
                             </select>
                         </div>    
