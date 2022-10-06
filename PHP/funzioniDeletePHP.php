@@ -192,6 +192,12 @@ function rimuoviFAQ($idFaq){
 
    $xpathFaq = new DOMXPath($doc);
 
+   $idDomanda=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']/idDomanda");
+   $idDomanda=$idDomanda->item(0);
+   if(!is_null($idDomanda)){
+    $idDomanda=$idDomanda->textContent;
+    modificaAttributoFaqDomanda($idDomanda,"false");
+   }
    $faqDaEliminare=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']");
    $faqDaEliminare=$faqDaEliminare->item(0);
    $listaFaq=$doc->documentElement;

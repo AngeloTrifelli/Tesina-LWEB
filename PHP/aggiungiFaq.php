@@ -63,15 +63,27 @@
                         <div class="zonaSx">
 
                             <span class="item">Scrivi il testo della domanda:</span>
-                            <textarea type="text" class="textInput note" name="domanda"></textarea>    
-                            
+                            <?php 
+                                    if(isset($_POST['domanda'])){
+                                        echo "<textarea class=\"textInput note\" type=\"text\" name=\"domanda\"/>{$_POST['domanda']}</textarea>";
+                                    }
+                                    else{
+                                        echo "<textarea class=\"textInput note\" type=\"text\" name=\"domanda\"/></textarea>";
+                                    }
+                            ?>                            
                         </div>
 
                         <div class="zonaDx">
 
                             <span class="item">Scrivi il testo della risposta:</span>
-                            <textarea type="text" class="textInput note" name="risposta"></textarea>    
-
+                            <?php
+                            if(isset($_POST['risposta'])){
+                                        echo "<textarea class=\"textInput note\" type=\"text\" name=\"risposta\"/>{$_POST['risposta']}</textarea>";
+                                    }
+                                    else{
+                                        echo "<textarea class=\"textInput note\" type=\"text\" name=\"risposta\"/></textarea>";
+                                    }
+                            ?>
                         </div>
                     </div>
                     
