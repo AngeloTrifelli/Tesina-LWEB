@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
-    <FAQ id="F1">
-        <idDomandaCliente>D4</idDomandaCliente>
-        <testoDomanda>
-            La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?
-        </testoDomanda>
-        <testoRisposta>
-            Certamente. Il ristorante offre la colazione a tutti i clienti, a prescindere dalla tipologia
-            di camera prenotata.
-        </testoRisposta>
-    </FAQ>
+  <FAQ id="F1">
+    <testoDomanda>C'è un ristorante all'Hotel Sapienza?</testoDomanda>
+    <testoRisposta>Si, il nostro ristorante vi aspetta per farvi assaggiare le nostre gustose tipicità regionali.</testoRisposta>
+  </FAQ>
+  <FAQ id="F2">
+    <idDomandaCliente>D4</idDomandaCliente>
+    <testoDomanda>La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?</testoDomanda>
+    <testoRisposta>Certamente. Il ristorante offre la colazione a tutti i clienti, a prescindere dalla tipologia di camera prenotata.</testoRisposta>
+  </FAQ>
+  <FAQ id="F3">
+    <testoDomanda>Offrite connessione Wi-Fi ?</testoDomanda>
+    <testoRisposta>Sì, abbiamo connessione internet wireless gratuita in tutto l’hotel.</testoRisposta>
+  </FAQ>
+  <FAQ id="F4">
+    <testoDomanda>Dove posso parcheggiare?</testoDomanda>
+    <testoRisposta>Abbiamo un ampio parcheggio gratuito adiacente all'albergo.</testoRisposta>
+  </FAQ>
+  <FAQ id="F5">
+    <testoDomanda>Ci sono limitazioni nell’uso delle camere ?</testoDomanda>
+    <testoRisposta>Per motivi di sicurezza, è vietato utilizzare fornelli e fuochi per cucinare in camera.</testoRisposta>
+  </FAQ>
 </listaFAQ>
