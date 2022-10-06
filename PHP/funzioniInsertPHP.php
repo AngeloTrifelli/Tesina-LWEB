@@ -640,4 +640,230 @@ function aggiungiFaq ($testoDomanda , $testoRisposta , $idDomandaCliente){
 
 
 
+// Funzione per inserire un nuova recensione 
+
+function aggiungiRecensione($codFiscCliente , $categoriaScelta , $testoRecensione , $votoScelto){
+    $xmlString = "";
+    foreach(file("../XML/Recensioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString);
+    $docRecensioni->formatOutput = true;
+
+    $elemRadice = $docRecensioni->documentElement;
+    $ultimaRecensione = $elemRadice->lastChild;
+
+    if(is_null($ultimaRecensione)){
+        $idNuovaRecensione = "R1";
+    }
+    else{
+        $idUltimaRecensione = $ultimaRecensione->getAttribute("id");        
+
+        $nuovoNumero = substr($idUltimaRecensione , 1) + 1;
+        $idNuovaRecensione = "R".$nuovoNumero;    
+    }
+
+    $nuovaRecensione = $docRecensioni->createElement("recensione");
+    $nuovaRecensione->setAttribute("id" , $idNuovaRecensione);
+    $elemRadice->appendChild($nuovaRecensione);
+
+    $datiCliente = getDatiCliente($codFiscCliente);
+
+    $nuovoNomeAutore = $docRecensioni->createElement("nomeAutore" , $datiCliente['nome']);
+    $nuovaRecensione->appendChild($nuovoNomeAutore);
+
+    $nuovoCognomeAutore = $docRecensioni->createElement("cognomeAutore" , $datiCliente['cognome']);
+    $nuovaRecensione->appendChild($nuovoCognomeAutore);
+
+    $nuovoCodFiscAutore = $docRecensioni->createElement("codFiscAutore" , $codFiscCliente);
+    $nuovaRecensione->appendChild($nuovoCodFiscAutore);
+
+    $nuovaCategoria = $docRecensioni->createElement("categoria" , $categoriaScelta);
+    $nuovaRecensione->appendChild($nuovaCategoria);
+
+    $nuovoTestoRecensione = $docRecensioni->createElement("testoRecensione", $testoRecensione);
+    $nuovaRecensione->appendChild($nuovoTestoRecensione);
+
+    $nuovoVoto = $docRecensioni->createElement("voto" , $votoScelto);
+    $nuovaRecensione->appendChild($nuovoVoto);
+
+    $nuovaUtilita = $docRecensioni->createElement("utilita" , 0);
+    $nuovaRecensione->appendChild($nuovaUtilita);
+
+    $nuovoAccordo = $docRecensioni->createElement("accordo" , 0);
+    $nuovaRecensione->appendChild($nuovoAccordo);
+
+    $docRecensioni->save("../XML/Recensioni.xml");
+}
+
+//Funzione per inserire un nuovo commento 
+
+function aggiungiCommento($idRecensione , $codFiscCliente , $testoCommento){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    $docCommenti->formatOutput = true;
+
+    $elemRadice = $docCommenti->documentElement;
+    $ultimoCommento = $elemRadice->lastChild;
+
+    if(is_null($ultimoCommento)){
+        $idNuovoCommento = "CM1";
+    }
+    else{
+        $idUltimoCommento = $ultimoCommento->getAttribute("id");        
+
+        $nuovoNumero = substr($idUltimoCommento , 2) + 1;
+        $idNuovoCommento = "CM".$nuovoNumero;    
+    }
+
+    $nuovoCommento = $docCommenti->createElement("commento");
+    $nuovoCommento->setAttribute("id" , $idNuovoCommento);
+    $elemRadice->appendChild($nuovoCommento);
+
+    $nuovoIdRecensione = $docCommenti->createElement("idRecensione" , $idRecensione);
+    $nuovoCommento->appendChild($nuovoIdRecensione);
+
+    $datiCliente = getDatiCliente($codFiscCliente);
+
+    $nuovoNomeAutore = $docCommenti->createElement("nomeAutore" , $datiCliente['nome']);
+    $nuovoCommento->appendChild($nuovoNomeAutore);
+
+    $nuovoCognomeAutore = $docCommenti->createElement("cognomeAutore" , $datiCliente['cognome']);
+    $nuovoCommento->appendChild($nuovoCognomeAutore);
+
+    $nuovoCodFiscAutore = $docCommenti->createElement("codFiscAutore" , $codFiscCliente);
+    $nuovoCommento->appendChild($nuovoCodFiscAutore);    
+
+    $nuovoTestoCommento = $docCommenti->createElement("testo", $testoCommento);
+    $nuovoCommento->appendChild($nuovoTestoCommento);
+
+    $nuovaUtilita = $docCommenti->createElement("utilita" , 0);
+    $nuovoCommento->appendChild($nuovaUtilita);
+
+    $nuovoAccordo = $docCommenti->createElement("accordo" , 0);
+    $nuovoCommento->appendChild($nuovoAccordo);
+
+    $nuovaListaRisposte = $docCommenti->createElement("listaRisposte");
+    $nuovoCommento->appendChild($nuovaListaRisposte);
+
+    $docCommenti->save("../XML/Commenti.xml");
+
+}
+
+//Funzione per aggiungere una risposta ad un particolare commento
+
+function aggiungiRispostaCommento($idCommento , $codFiscCliente , $testoRisposta){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    $docCommenti->formatOutput = true;
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $commento = $xpathCommenti->query("/listaCommenti/commento[@id='$idCommento']");
+    $commento = $commento->item(0);
+
+    $nodoListaRisposte = $commento->getElementsByTagName("listaRisposte")->item(0);
+    $ultimaRisposta = $nodoListaRisposte->lastChild;
+
+    if(is_null($ultimaRisposta)){
+        $idNuovaRisposta = $idCommento."-CMR1";
+    }
+    else{
+        $idUltimaRisposta = $ultimaRisposta->firstChild->textContent;    
+
+        $pieces = explode("-" , $idUltimaRisposta);
+
+        $nuovoNumero = substr($pieces[1] , 3) + 1;
+        $idNuovaRisposta = $idCommento."-CMR".$nuovoNumero;  
+    }
+
+    $nuovaRisposta = $docCommenti->createElement("risposta");    
+    $nodoListaRisposte->appendChild($nuovaRisposta);
+
+    $elemIdRisposta = $docCommenti->createElement("idRisposta" , $idNuovaRisposta);
+    $nuovaRisposta->appendChild($elemIdRisposta);
+
+    $datiCliente = getDatiCliente($codFiscCliente);
+
+    $nuovoNomeAutore = $docCommenti->createElement("nomeAutoreRisposta" , $datiCliente['nome']);
+    $nuovaRisposta->appendChild($nuovoNomeAutore);
+
+    $nuovoCognomeAutore = $docCommenti->createElement("cognomeAutoreRisposta" , $datiCliente['cognome']);
+    $nuovaRisposta->appendChild($nuovoCognomeAutore);
+
+    $nuovoCodFiscAutore = $docCommenti->createElement("codFiscAutoreRisposta" , $codFiscCliente);
+    $nuovaRisposta->appendChild($nuovoCodFiscAutore);    
+
+    $nuovoTestoRisposta = $docCommenti->createElement("testoRisposta", $testoRisposta);
+    $nuovaRisposta->appendChild($nuovoTestoRisposta);
+
+    $nuovaUtilita = $docCommenti->createElement("utilitaRisposta" , 0);
+    $nuovaRisposta->appendChild($nuovaUtilita);
+
+    $nuovoAccordo = $docCommenti->createElement("accordoRisposta" , 0);
+    $nuovaRisposta->appendChild($nuovoAccordo);   
+
+    $docCommenti->save("../XML/Commenti.xml");
+}
+
+
+// Funzione per inserire una nuova valutazione 
+
+function aggiungiValutazione($idOggetto, $tipoOggetto , $codFiscCliente , $votoUtilita , $votoAccordo){
+    $xmlString = "";
+    foreach(file("../XML/Valutazioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docValutazioni = new DOMDocument();
+    $docValutazioni->loadXML($xmlString);
+    $docValutazioni->formatOutput = true;
+
+    $elemRadice = $docValutazioni->documentElement;
+
+    $nuovaValutazione = $docValutazioni->createElement("valutazione");
+    $elemRadice->appendChild($nuovaValutazione);
+
+    $elemIdOggetto = $docValutazioni->createElement("idOggettoValutato", $idOggetto);
+    $nuovaValutazione->appendChild($elemIdOggetto);
+
+    $elemCodFisc = $docValutazioni->createElement("codFisc" , $codFiscCliente);
+    $nuovaValutazione->appendChild($elemCodFisc);
+
+    $elemUtilita = $docValutazioni->createElement("votoUtilita", $votoUtilita);
+    $nuovaValutazione->appendChild($elemUtilita);
+
+    $elemAccordo = $docValutazioni->createElement("votoAccordo", $votoAccordo);
+    $nuovaValutazione->appendChild($elemAccordo);
+
+    if($tipoOggetto == "Recensione"){
+        modificaValutazioneRecensione($idOggetto , "utilita" , $votoUtilita);
+        modificaValutazioneRecensione($idOggetto , "accordo" , $votoAccordo);
+    }
+    elseif($tipoOggetto == "Commento"){
+        modificaValutazioneCommento($idOggetto , "utilita" , $votoUtilita);
+        modificaValutazioneCommento($idOggetto , "accordo" , $votoAccordo);
+    }
+    else{
+        modificaValutazioneRispostaCommento($idOggetto , "utilitaRisposta", $votoUtilita);
+        modificaValutazioneRispostaCommento($idOggetto , "accordoRisposta" , $votoAccordo);
+    }
+
+    $docValutazioni->save("../XML/Valutazioni.xml");    
+}
+
+
+
 ?>

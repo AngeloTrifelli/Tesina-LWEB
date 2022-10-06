@@ -691,7 +691,7 @@ function getCategorie(){
     return($tabellaCategorie);
 }
 
-// Funzione che restituisce le categorie associate ad un cliente (solo quelle attive)
+// Funzione che restituisce le categorie associate ad un cliente 
 
 function getCategorieCliente($codFiscCliente){
     $xmlString = "";
@@ -706,28 +706,33 @@ function getCategorieCliente($codFiscCliente){
     for($i=0 ; $i< $listaCategorie->length ; $i++){
         $categoria = $listaCategorie->item($i);
         $statoCategoria = $categoria->getElementsByTagName("stato")->item(0)->textContent;
+                
+        $utentiAssociati = $categoria->getElementsByTagName("utente");
 
-        if($statoCategoria == "Attiva"){        
-            $utentiAssociati = $categoria->getElementsByTagName("utente");
-
-            $presente = "False";
-            $j=0;
-            while($j < $utentiAssociati->length && $presente == "False"){
-                $utente = $utentiAssociati->item($j);
-                $codFisc = $utente->firstChild->textContent;
-                if($codFisc == $codFiscCliente){
-                    $presente = "True";
-                }
-                else{
-                    $j++;
-                }
+        $presente = "False";
+        $j=0;
+        while($j < $utentiAssociati->length && $presente == "False"){
+            $utente = $utentiAssociati->item($j);
+            $codFisc = $utente->firstChild->textContent;
+            if($codFisc == $codFiscCliente){
+                $presente = "True";
             }
-
-            if($presente == "True"){
-                $nomeCategoria = $categoria->getElementsByTagName("nome")->item(0)->textContent;            
-                $arrayDati[$nomeCategoria] = "Attiva";
+            else{
+                $j++;
             }
         }
+
+        if($presente == "True"){
+            $nomeCategoria = $categoria->getElementsByTagName("nome")->item(0)->textContent;      
+            if($statoCategoria == "Attiva"){
+                $arrayDati[$nomeCategoria] = "Attiva";
+            }   
+            else{
+                $arrayDati[$nomeCategoria] = "Disabilitata";
+            }   
+            
+        }
+    
     }
 
     return $arrayDati;
@@ -1372,6 +1377,161 @@ function getDatiRisposta($idRisposta){
     return $arrayDati;
 }
 
+// Funzione per ottenere le recensioni in recensioni.php
+// Se codFiscCliente è diverso da null allora verranno prese solo le recensioni di un particolare cliente 
+// Se categoria è diverso da null allora verranno prese solo le recensioni di una particolare categoria
+// Queste due cose possono essere combinate (solo le recensioni di un particolare cliente e di una particolare categoria)
+
+function getRecensioni($codFiscCliente , $categoria){
+    $xmlString = "";
+    foreach(file("../XML/Recensioni.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString); 
+
+    $xpathRecensioni = new DOMXPath($docRecensioni);
+
+    if($codFiscCliente != "null" && $categoria != "null"  ){
+        $listaRecensioni = $xpathRecensioni->query("/listaRecensioni/recensione[codFiscAutore='$codFiscCliente' and categoria='$categoria']");
+    }
+    else{
+        if($categoria != "null"){
+            $listaRecensioni = $xpathRecensioni->query("/listaRecensioni/recensione[categoria='$categoria']");
+        }
+        elseif($codFiscCliente != "null"){
+            $listaRecensioni = $xpathRecensioni->query("/listaRecensioni/recensione[codFiscAutore='$codFiscCliente']");
+        }   
+        else{
+            $listaRecensioni = $docRecensioni->documentElement->childNodes;
+        }     
+    }
+    
+    return $listaRecensioni;
+}
+
+// Funzione per ottenere tutti i dati di una particolare recensione 
+
+function getDatiRecensione($idRecensione){
+    $xmlString = "";
+    foreach(file("../XML/Recensioni.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString); 
+
+    $xpathRecensioni = new DOMXPath($docRecensioni);
+
+    $recensione = $xpathRecensioni->query("/listaRecensioni/recensione[@id='$idRecensione']");
+    $recensione = $recensione->item(0);
+
+    $arrayDati['nomeAutore'] = $recensione->getElementsByTagName("nomeAutore")->item(0)->textContent;
+    $arrayDati['cognomeAutore'] = $recensione->getElementsByTagName("cognomeAutore")->item(0)->textContent;
+    $arrayDati['codFiscAutore'] = $recensione->getElementsByTagName("codFiscAutore")->item(0)->textContent;
+    $arrayDati['categoria'] = $recensione->getElementsByTagName("categoria")->item(0)->textContent;
+    $arrayDati['testoRecensione'] = $recensione->getElementsByTagName("testoRecensione")->item(0)->textContent;
+    $arrayDati['voto'] = $recensione->getElementsByTagName("voto")->item(0)->textContent;  
+    $arrayDati['utilita'] = $recensione->getElementsByTagName("utilita")->item(0)->textContent;  
+    $arrayDati['accordo'] = $recensione->getElementsByTagName("accordo")->item(0)->textContent;
+
+    return $arrayDati;
+}
+
+//Funzione per ottenere tutte i commenti di risposta ad una particolare recensione 
+
+function getCommentiRispostaRecensione($idRecensione){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString); 
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $listaCommenti = $xpathCommenti->query("/listaCommenti/commento[idRecensione='$idRecensione']");
+
+    return $listaCommenti;
+}
+
+
+// Funzione per ottenere tutti i dati di un particolare commento
+
+function getDatiCommento($idCommento){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $commento = $xpathCommenti->query("/listaCommenti/commento[@id='$idCommento']");
+    $commento = $commento->item(0);
+
+    $arrayDati['idRecensione'] = $commento->getElementsByTagName("idRecensione")->item(0)->textContent; 
+    $arrayDati['nomeAutore'] = $commento->getElementsByTagName("nomeAutore")->item(0)->textContent;
+    $arrayDati['cognomeAutore'] = $commento->getElementsByTagName("cognomeAutore")->item(0)->textContent;
+    $arrayDati['codFiscAutore'] = $commento->getElementsByTagName("codFiscAutore")->item(0)->textContent;
+    $arrayDati['testo'] = $commento->getElementsByTagName("testo")->item(0)->textContent;
+    $arrayDati['utilita'] = $commento->getElementsByTagName("utilita")->item(0)->textContent;
+    $arrayDati['accordo'] = $commento->getElementsByTagName("accordo")->item(0)->textContent;
+    $arrayDati['listaRisposte'] = $commento->getElementsByTagName("risposta");
+
+    return $arrayDati;
+}
+
+//Funzione per ottenere tutti i dati di una particolare risposta di un commento
+
+function getDatiRispostaCommento($idRisposta){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $risposta = $xpathCommenti->query("/listaCommenti/commento/listaRisposte/risposta[idRisposta='$idRisposta']");
+    $risposta = $risposta->item(0);
+
+    $arrayDati['idRisposta'] = $risposta->getElementsByTagName("idRisposta")->item(0)->textContent; 
+    $arrayDati['nomeAutoreRisposta'] = $risposta->getElementsByTagName("nomeAutoreRisposta")->item(0)->textContent;
+    $arrayDati['cognomeAutoreRisposta'] = $risposta->getElementsByTagName("cognomeAutoreRisposta")->item(0)->textContent;
+    $arrayDati['codFiscAutoreRisposta'] = $risposta->getElementsByTagName("codFiscAutoreRisposta")->item(0)->textContent;
+    $arrayDati['testoRisposta'] = $risposta->getElementsByTagName("testoRisposta")->item(0)->textContent;
+    $arrayDati['utilitaRisposta'] = $risposta->getElementsByTagName("utilitaRisposta")->item(0)->textContent;
+    $arrayDati['accordoRisposta'] = $risposta->getElementsByTagName("accordoRisposta")->item(0)->textContent;
+
+    return $arrayDati;
+}
+
+
+//Funzione per ottenere una particolare valutazione 
+
+function getValutazione($idOggetto , $codFiscCliente){
+    $xmlString = "";
+    foreach(file("../XML/Valutazioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docValutazioni = new DOMDocument();
+    $docValutazioni->loadXML($xmlString);
+
+    $xpathValutazioni = new DOMXPath($docValutazioni);
+
+    $valutazione = $xpathValutazioni->query("/listaValutazioni/valutazione[idOggettoValutato='$idOggetto' and codFisc='$codFiscCliente']");
+    if($valutazione->length == 1){
+        return $valutazione->item(0);
+    }
+    else{
+        return "null";
+    }
+}
 
 
 

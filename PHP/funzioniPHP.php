@@ -183,33 +183,32 @@ function individuaBottoneidPrenotazioneAttivita(){
 
    }
 
-   $docAttivita = new DOMDocument();
-   $docAttivita->loadXML($xmlStringAttivita);
-   $docAttivita->formatOutput = true;
+    $docAttivita = new DOMDocument();
+    $docAttivita->loadXML($xmlStringAttivita);    
 
-   $listaAttivita = $docAttivita->documentElement->childNodes;
-   $i=0;
-   $j = 0;
-   $trovato="False";
-   while($i<$listaAttivita->length && $trovato=="False"){
+    $listaAttivita = $docAttivita->documentElement->childNodes;
+    $i=0;
 
-    $attivita=$listaAttivita->item($i);
+    $trovato="False";
+    while($i<$listaAttivita->length && $trovato=="False"){
+        $attivita=$listaAttivita->item($i);
+        $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
 
-   $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
-
-   while($j < count($listaPrenotazione) && $trovato=="False"){
-
-       $prenotazione = $listaPrenotazione->item($j);
-       $idPrenotazione= $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;
-       
-       if(isset($_POST[$idPrenotazione])){
-        $trovato = "True";
+        $j=0;
+        while($j < count($listaPrenotazione) && $trovato=="False"){
+            $prenotazione = $listaPrenotazione->item($j);
+            $idPrenotazione= $prenotazione->getElementsByTagName("idPrenotazione")->item(0)->textContent;    
+            if(isset($_POST[$idPrenotazione])){
+                $trovato = "True";
+            }
+            else{
+                $j++;
+            }
+        
+        }
+    $i++;
     }
-    $j++;
-   }
-   $i++;
-}
-
+    
     return($idPrenotazione);
 
     
@@ -820,8 +819,91 @@ function checkOrariRistorante($oraInizioUpdate,$oraFineUpdate){
     }
 }
 
+// Funzione per individuare il bottone premuto in recensioni.php 
+
+function individuaBottoneRecensione(){
+    $xmlString = "";
+    foreach(file("../XML/recensioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString);
+
+    $listaRecensioni = $docRecensioni->documentElement->childNodes;
+
+    $i=0;
+    $trovato = "False";
+
+    while($i < $listaRecensioni->length && $trovato == "False"){
+        $recensione = $listaRecensioni->item($i);
+        $idRecensione = $recensione->getAttribute("id");
+
+        if(isset($_POST[$idRecensione])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idRecensione;
+}
 
 
+//Funzione per individuare il bottone premuto in risposteRecensione.php
+
+function individuaBottoneRisposteRecensione($idRecensione){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $listaCommenti = $xpathCommenti->query("/listaCommenti/commento[idRecensione='$idRecensione']");
+
+    $i=0;
+    $trovato = "False";
+    $idOggettoScelto = "";
+
+    while($i < $listaCommenti->length && $trovato == "False"){
+        $commento = $listaCommenti->item($i);
+        $idCommento = $commento->getAttribute("id");
+
+        if(isset($_POST[$idCommento])){
+            $trovato = "True";
+            $idOggettoScelto = $idCommento;
+        }
+        else{
+            $listaRisposteCommento = $commento->getElementsByTagName("risposta");
+            $j=0;
+            
+            while($j < $listaRisposteCommento->length && $trovato == "False"){
+                $risposta = $listaRisposteCommento->item($j);
+                $idRisposta = $risposta->firstChild->textContent;
+
+                if(isset($_POST[$idRisposta])){
+                    $trovato = "True";
+                    $idOggettoScelto = $idRisposta;
+                }
+                else{
+                    $j++;
+                }
+            }
+
+            if($trovato == "False"){
+                $i++;
+            }
+        }
+    }
+
+    return $idOggettoScelto;
+
+
+}
 
 
 
