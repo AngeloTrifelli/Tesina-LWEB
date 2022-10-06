@@ -62,6 +62,10 @@
                 echo "<h3 class=\"titoloImportante alignCenter\">NON CI SONO SOGGIORNI SOSPESI AL MOMENTO</h3>";
                 echo "<span class=\"trePuntini\">...</span>";
                 }
+            ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+
+            <?php
             for($i=0;$i<count($soggiorniSospesi);$i++){
                 $soggiorno=$soggiorniSospesi[$i];
                 $cliente=getDatiCliente($soggiorno['codFisc']);
@@ -113,7 +117,6 @@
                                             echo $giorno."-".$mese."-".$anno;
                                         ?>
                     </td>
-                    <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
                     <td>
 
                         <input type="submit" class="buttonApprova" name="<?php echo $soggiorno['idPrenotazione'];?>" value="Approva" />
@@ -125,7 +128,6 @@
                         <input type="submit" class="button" name="<?php echo $soggiorno['idPrenotazione'];?>" value="Rifiuta" />
 
                     </td>
-                    </form>
                 </tr>
             </table>
 
@@ -133,6 +135,9 @@
 
         <?php 
             }
+        ?>
+            </form>
+        <?php
             if(count($soggiorniApprovati)>0){
                 echo "<h3 class=\"titoloImportante alignCenter\">SOGGIORNI APPROVATI:</h3>";
             }else{

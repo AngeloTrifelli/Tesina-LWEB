@@ -104,17 +104,15 @@ $faqs=getFAQs();
                 <p class="alignCenter scrittaCentrale">Non ci sono FAQ al momento...</p>
             <?php
                 }
+                if(isset($accessoStaff)){
+        ?>
+    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
+        <?php
+            }
                 for($i=0;$i<count($faqs);$i++){
                     $faq=$faqs[$i];
 
             ?>
-            <?php
-                        if(isset($accessoStaff)){
-                ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
-                <?php
-                    }
-                ?>
             <div class="container">
                 <div class="innerContainer">
                     <div class="innerContainer-item" id="<?php echo $faq['id'];?>">
@@ -144,15 +142,16 @@ $faqs=getFAQs();
                     </div>                    
                 </div>
             </div>
-            <?php
-            if(isset($accessoStaff)){
+        <?php
+            
+        }   
+        if(isset($accessoStaff)){
         ?>
-                <input type="hidden" name="bottonePremuto"/>
-            </form>
+            <input type="hidden" name="bottonePremuto"/>
+        </form>  
         <?php
             }
-        }       
-        ?>       
+        ?>        
         </section>
         
         <script>

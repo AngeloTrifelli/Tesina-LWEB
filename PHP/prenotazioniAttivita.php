@@ -84,6 +84,9 @@
                 echo "<h1 id=\"mainTitle\">NON HAI ATTIVITA ATTUALMENTE PRENOTATE</h1>";
                 echo "<span class=\"trePuntini\">...</span>";
                 }
+            ?>
+                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+            <?php
             for($i=0;$i<count($arrayPrenotazioniAttivitaUtente);$i++){
                     $prenotazioneUtente=$arrayPrenotazioniAttivitaUtente[$i];
                         ?>
@@ -186,13 +189,8 @@
                             </td>
 
                             <td>
-                            <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
-
                                     <input type="submit" class="buttonElimina" name="<?php echo $prenotazioneUtente['idPrenotazione'];?>" onClick="myEvent()" value="Elimina" />
                                     <input type="hidden" name="bottonePremuto"/>
- 
-                            </form>
-
                             </td>
         
                         </tr>
@@ -202,6 +200,7 @@
 
                     }
             ?>
+                </form>
 
         </div>
         <script>

@@ -62,6 +62,9 @@
                 echo "<h3 class=\"titoloImportante alignCenter\">NESSUN CLIENTE PRESENTE IN STRUTTURA AL MOMENTO</h3>";
                 echo "<span class=\"trePuntini\">...</span>";
                 }
+            ?>
+                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+            <?php
             for($i=0;$i<$numClienti;$i++){
                 $cliente=restituisciClienteIEsimo($i);
                 $clientePresenteInstruttura=presenzaClienteInStruttura($cliente['codFisc']);
@@ -86,12 +89,9 @@
                                             
                                 </td>
                                 <td>
-                                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
-
                                     <button type="submit" name="<?php echo $cliente['codFisc'];?>">
                                     <input type="hidden" name="utenteSelezionato"/>
                                     <img class="immagine" src="../img/edit.png" />
-                                </form>
                                 </td>
                             </tr>
                             
@@ -100,9 +100,15 @@
                     <?php
                         }
             }
+        ?>
+            </form>
+        <?php
             if($numClientiNonPresenti>0){
                 echo "<h3 class=\"titoloImportante alignCenter\">CLIENTI NON PRESENTI IN STRUTTURA:</h3>";
             }
+        ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+        <?php
             for($j=0;$j<$numClienti;$j++){
                 $cliente=restituisciClienteIEsimo($j);
                 $clientePresenteInstruttura=presenzaClienteInStruttura($cliente['codFisc']);
@@ -127,11 +133,9 @@
                                             
                                 </td>
                                 <td>
-                                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
                                     <button type="submit" name="<?php echo $cliente['codFisc'];?>">
                                     <input type="hidden" name="utenteSelezionato"/>
                                     <img class="immagine" src="../img/edit.png" />
-                                </form>
                                 </td>
                             </tr>
                             
@@ -142,6 +146,10 @@
                         <?php
                         }
             }
+            ?>
+                </form>
+
+            <?php
             if($numClientiPresenti=0 && $numClientiNonPresenti=0){
                 echo "<h3 class=\"titoloImportante alignCenter\">NESSUN CLIENTE RISULTA AVERE UN SOGGIORNO PRENOTATO</h3>";
             }

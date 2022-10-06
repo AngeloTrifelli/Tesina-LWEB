@@ -75,7 +75,7 @@
         <div id="rightColumn">
         
             <h1 id="mainTitle">ATTIVIT&agrave;</h1>
-
+            <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
             <?php 
             $numAttivita= numAttivita();
 
@@ -162,19 +162,15 @@
 
                 </div>
 
-                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
-
                     <input class="bottone" type="submit"  name="<?php echo "A".$i;?>" value="Prenota">
                     <input type="hidden" name="attivitaSelezionata"/>
-
-
-                </form> 
 
             </div>
 
             <?php
         }
     ?>
+           </form> 
 
             
         </div>

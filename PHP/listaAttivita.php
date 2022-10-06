@@ -49,7 +49,7 @@ session_start();
             <div style="width: 18.5%;"></div>
                
         </div>
-
+        <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
         <?php 
             $numAttivita= numAttivita();
 
@@ -121,19 +121,14 @@ session_start();
                     </table>
 
                 </div>
-
-                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
-
                     <input class="bottone" type="submit"  name="<?php echo "A".$i;?>" value="Modifica">
-                    <input type="hidden" name="attivitaSelezionata"/>
-
-                </form> 
- 
+                    <input type="hidden" name="attivitaSelezionata"/> 
         </div>
                 
         <?php
         }
         ?>
-       
+        </form> 
+
     </body>
 </html>

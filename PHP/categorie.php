@@ -60,6 +60,9 @@
                 echo "<h3 class=\"titoloImportante alignCenter red\">NON CI SONO CATEGORIE ATTIVE AL MOMENTO</h3>";
                 echo "<span class=\"trePuntini\">...</span>";
                 }
+            ?>
+                <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+            <?php
             for($i=0;$i<count($categorieAttivate);$i++){
                 $categoria=$categorieAttivate[$i];
         ?>
@@ -73,14 +76,12 @@
                         <strong>Nome categoria:</strong><br />
                         <?php echo $categoria['nome'];?>
                     </td>
-                    <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
                     <td>
 
                         <input type="submit" class="buttonDisattiva" name="<?php echo $categoria['nome'];?>" value="Disattiva" />
                         <input type="hidden" name="bottonePremuto"/>
 
                     </td>
-                    </form>
                 </tr>
 
 
@@ -125,8 +126,8 @@
 
         <?php
             }
-
         ?>
+        </form>
                 <div>
                 <h3 class="title alignCenter">AGGIUNGI CATEGORIA:</h3>
                 </div>

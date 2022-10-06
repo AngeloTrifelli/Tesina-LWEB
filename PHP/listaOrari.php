@@ -117,7 +117,7 @@ require_once('funzioniPHP.php');
 
         <h3 class="titoloImportante alignCenter">ATTIVIT&Agrave;:</h3>
         <div class="mainContainer">
-
+        <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
         <?php
             for($i=0;$i<count($arrayAttivita);$i++){
                     $attivita=$arrayAttivita[$i];
@@ -133,18 +133,17 @@ require_once('funzioniPHP.php');
 
                         <td><strong>Chiusura:</strong><br /><?php echo $oraChiusuraAttivita;?></td>
 
-                        <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
                         <td>
                             <input type="submit" class="button" name="<?php echo $attivita['id'];?>" value="MODIFICA" />
                             <input type="hidden" name="bottonePremuto"/>
                         </td>
-                        </form> 
                     </tr>
                 </table>
                 <?php
                 }
                 ?>
-            
+                </form> 
+
         </div>
        
        
