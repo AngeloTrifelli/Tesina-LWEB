@@ -71,6 +71,13 @@
 
 
     <body>
+        <?php
+            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
+        ?>
+                <form action="./aggiungiPortata.php" method="post"  >
+        <?php
+            }
+        ?>
         
         <div class="top">
             <div class="topLeft">
@@ -79,18 +86,11 @@
                         echo '<a href="./homeRistorante.php">TORNA ALLA HOME DEL RISTORANTE</a>';
                     }
                     else{
-                        echo '<a href="./areaUtente.php">TORNA NELL\' AEREA UTENTE</a>';    
+                        echo '<a href="./areaUtente.php">TORNA NELL\' AREA UTENTE</a>';    
                     }
                 ?>
                 
-            </div>
-            <?php
-            if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
-                ?>
-            <form action="./aggiungiPortata.php" method="post"  >
-                <?php
-                    }
-                ?>
+            </div>            
             <?php 
                 if(isset($accessoStaff) && $oraUpdateConfermata=="True"){
                     echo '

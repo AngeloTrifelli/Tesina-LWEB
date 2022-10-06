@@ -208,4 +208,32 @@ function rimuoviFAQ($idFaq){
     $doc->save("../XML/FAQs.xml");
 }
 
+//Funzione per rimuovere una particolare valutazione
+
+function rimuoviValutazione($idOggetto , $codFiscCliente){
+    $xmlString = "";
+    foreach(file("../XML/Valutazioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docValutazioni = new DOMDocument();
+    $docValutazioni->loadXML($xmlString);
+    $docValutazioni->formatOutput = true;
+
+    $xpathValutazioni = new DOMXPath($docValutazioni);
+
+    $elemRadice = $docValutazioni->documentElement;  
+    
+    $valutazioneDaRimuovere = $xpathValutazioni->query("/listaValutazioni/valutazione[idOggettoValutato='$idOggetto' and codFisc='$codFiscCliente']");
+    $valutazioneDaRimuovere = $valutazioneDaRimuovere->item(0);
+
+    $elemRadice->removeChild($valutazioneDaRimuovere);
+
+    $docValutazioni->save("../XML/Valutazioni.xml");
+}
+
+
+
+
+
 ?>

@@ -618,6 +618,212 @@ function modificaAttributoFaqDomanda($idDomanda , $nuovoAttributo){
     $docDomande->save("../XML/Domande.xml");
 }
 
+//Funzione per modificare la somma delle valutazioni di un cliente 
+
+function modificaSommaGiudiziCliente ($codFiscCliente , $votoDaSommare ){
+    $xmlString = "";
+    foreach(file("../XML/Clienti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docClienti = new DOMDocument();
+    $docClienti->loadXML($xmlString);
+    $docClienti->formatOutput = true;
+
+    $xpathClienti = new DOMXPath($docClienti);
+
+    $cliente = $xpathClienti->query("/listaClienti/cliente[@codFisc='$codFiscCliente']");
+    $cliente = $cliente->item(0);
+
+    $elemSommaGiudizi = $cliente->getElementsByTagName("sommaGiudizi")->item(0);
+
+    $vecchiaSommaGiudizi = $elemSommaGiudizi->textContent;
+    $nuovaSommaGiudizi = $vecchiaSommaGiudizi + $votoDaSommare;
+
+    $elemSommaGiudizi->nodeValue = "";
+    $elemSommaGiudizi->appendChild($docClienti->createTextNode($nuovaSommaGiudizi));
+     
+    $docClienti->save("../XML/Clienti.xml");
+}
+
+
+
+// Funzione per modificare il tag utilita o il tag accordo di una recensione 
+
+function modificaValutazioneRecensione($idRecensione , $tipoVoto , $votoDaSommare){
+    $xmlString = "";
+    foreach(file("../XML/Recensioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString);
+    $docRecensioni->formatOutput = true;
+
+    $xpathRecensioni = new DOMXPath($docRecensioni);
+
+    $recensione = $xpathRecensioni->query("/listaRecensioni/recensione[@id='$idRecensione']");
+    $recensione = $recensione->item(0);
+
+    $elemVoto = $recensione->getElementsByTagName($tipoVoto)->item(0);
+    
+    $vecchioVoto = $elemVoto->textContent;
+    $nuovoVoto = $vecchioVoto + $votoDaSommare;
+
+    $elemVoto->nodeValue = "";
+    $elemVoto->appendChild($docRecensioni->createTextNode($nuovoVoto));
+
+    $codFiscAutore = $recensione->getElementsByTagName("codFiscAutore")->item(0)->textContent;
+    modificaSommaGiudiziCliente($codFiscAutore , $votoDaSommare);
+
+    $docRecensioni->save("../XML/Recensioni.xml");
+}
+
+
+//Funzione per modificare il tag utilita o il tag accordo di un commento 
+
+function modificaValutazioneCommento($idCommento , $tipoVoto , $votoDaSommare){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    $docCommenti->formatOutput = true;
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $commento = $xpathCommenti->query("/listaCommenti/commento[@id='$idCommento']");
+    $commento = $commento->item(0);
+
+    $elemVoto = $commento->getElementsByTagName($tipoVoto)->item(0);
+    
+    $vecchioVoto = $elemVoto->textContent;
+    $nuovoVoto = $vecchioVoto + $votoDaSommare;
+
+    $elemVoto->nodeValue = "";
+    $elemVoto->appendChild($docCommenti->createTextNode($nuovoVoto));
+
+    $codFiscAutore = $commento->getElementsByTagName("codFiscAutore")->item(0)->textContent;
+    modificaSommaGiudiziCliente($codFiscAutore , $votoDaSommare);   
+
+    $docCommenti->save("../XML/Commenti.xml");
+}
+
+
+//Funzione per modificare il tag utilita o il tag accordo di una risposta ad un commento
+
+function modificaValutazioneRispostaCommento($idRisposta , $tipoVoto , $votoDaSommare){
+    $xmlString = "";
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    $docCommenti->formatOutput = true;
+
+    $xpathRecensioni = new DOMXPath($docCommenti);
+
+    $risposta = $xpathRecensioni->query("/listaCommenti/commento/listaRisposte/risposta[idRisposta='$idRisposta']");
+    $risposta = $risposta->item(0);
+
+    $elemVoto = $risposta->getElementsByTagName($tipoVoto)->item(0);
+    
+    $vecchioVoto = $elemVoto->textContent;
+    $nuovoVoto = $vecchioVoto + $votoDaSommare;
+
+    $elemVoto->nodeValue = "";
+    $elemVoto->appendChild($docCommenti->createTextNode($nuovoVoto));
+
+    $codFiscAutore = $risposta->getElementsByTagName("codFiscAutoreRisposta")->item(0)->textContent;
+    modificaSommaGiudiziCliente($codFiscAutore , $votoDaSommare);   
+
+    $docCommenti->save("../XML/Commenti.xml");
+}
+
+
+function modificaValutazione($idOggetto , $tipoOggetto , $codFiscCliente , $nuovoVotoUtilita , $nuovoVotoAccordo){
+    $xmlString = "";
+    foreach(file("../XML/Valutazioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docValutazioni = new DOMDocument();
+    $docValutazioni->loadXML($xmlString);
+    $docValutazioni->formatOutput = true;
+
+    $xpathValutazioni = new DOMXPath($docValutazioni);
+
+    $valutazioneDaModificare = $xpathValutazioni->query("/listaValutazioni/valutazione[idOggettoValutato='$idOggetto' and codFisc='$codFiscCliente']");
+    $valutazioneDaModificare = $valutazioneDaModificare->item(0);
+
+    $vecchioVotoUtilita = $valutazioneDaModificare->getElementsByTagName("votoUtilita")->item(0);
+    $vecchioVotoAccordo = $valutazioneDaModificare->getElementsByTagName("votoAccordo")->item(0);    
+
+    if($nuovoVotoUtilita == 0 && $nuovoVotoAccordo == 0){    
+        $codFiscCliente = $valutazioneDaModificare->getElementsByTagName("codFisc")->item(0)->textContent;    
+        if($tipoOggetto == "Recensione"){            
+            modificaValutazioneRecensione($idOggetto , "utilita" , -$vecchioVotoUtilita->textContent);
+            modificaValutazioneRecensione($idOggetto , "accordo" , -$vecchioVotoAccordo->textContent);                               
+        }
+        elseif($tipoOggetto == "Commento"){
+            modificaValutazioneCommento($idOggetto , "utilita" , -$vecchioVotoUtilita->textContent);
+            modificaValutazioneCommento($idOggetto , "accordo" , -$vecchioVotoAccordo->textContent);
+        }
+        else{
+            modificaValutazioneRispostaCommento($idOggetto , "utilitaRisposta", -$vecchioVotoUtilita->textContent);
+            modificaValutazioneRispostaCommento($idOggetto , "accordoRisposta" , -$vecchioVotoAccordo->textContent);
+        }
+
+        rimuoviValutazione($idOggetto , $codFiscCliente); 
+    }
+    else{
+        $diffUtilita = $nuovoVotoUtilita - $vecchioVotoUtilita->textContent;
+        if($diffUtilita != 0){
+            $vecchioVotoUtilita->nodeValue = "";
+            $vecchioVotoUtilita->appendChild($docValutazioni->createTextNode($nuovoVotoUtilita));
+
+            if($tipoOggetto == "Recensione"){            
+                modificaValutazioneRecensione($idOggetto , "utilita" , $diffUtilita);                                               
+            }
+            elseif($tipoOggetto == "Commento"){
+                modificaValutazioneCommento($idOggetto , "utilita" , $diffUtilita);                
+            }
+            else{
+                modificaValutazioneRispostaCommento($idOggetto , "utilitaRisposta", $diffUtilita);                
+            }
+        }
+
+        $diffAccordo = $nuovoVotoAccordo - $vecchioVotoAccordo->textContent;
+        if($diffAccordo != 0){
+            $vecchioVotoAccordo->nodeValue = "";
+            $vecchioVotoAccordo->appendChild($docValutazioni->createTextNode($nuovoVotoAccordo));
+
+            if($tipoOggetto == "Recensione"){            
+                modificaValutazioneRecensione($idOggetto , "accordo" , $diffAccordo);                                               
+            }
+            elseif($tipoOggetto == "Commento"){
+                modificaValutazioneCommento($idOggetto , "accordo" , $diffAccordo);                
+            }
+            else{
+                modificaValutazioneRispostaCommento($idOggetto , "accordoRisposta", $diffAccordo);                
+            }
+        }
+
+        $docValutazioni->save("../XML/Valutazioni.xml");
+
+    }   
+
+    
+
+
+    
+}
+
+
+
 //Funzione per modificare la risposta di una faq
 
 function modificaFaq($idFaq,$nuovaRisposta){
