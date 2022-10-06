@@ -14,6 +14,7 @@
                 unset($_SESSION['loginType']);
             }
             header('Location: intro.php');
+            exit();
         }
 
         if($_SESSION['loginType'] == "Cliente"){
@@ -42,6 +43,7 @@
     }
     else{   
         header('Location: intro.php');
+        exit();
     }
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -91,7 +93,10 @@
                         echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';
                         break;
                     case "Concierge":
-                        echo '                         
+                        echo ' 
+                        <a class="item" href="./intro.php">HOME</a>
+                        <br />         
+
                         <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             
@@ -108,7 +113,10 @@
                         <br />';
                         break;
                     case "Admin":
-                        echo '            
+                        echo ' 
+                        <a class="item" href="./intro.php">HOME</a>
+                        <br /> 
+                                   
                         <a class="item" href="./visualizzaMenu.php">MODIFICA MENU RISTORANTE</a>
                         <br />
             

@@ -12,16 +12,19 @@
             $numClientiNonPresenti=$numClientiConSoggiorno['nonPresenti'];
         }else{
             header('Location: areaUtente.php');
+            exit();
         }
         
     }else{
         header('Location: intro.php');
+        exit();
     }
 
     if(isset($_POST['utenteSelezionato'])){
         $codFiscUtenteSelezionato=individuaBottoneCodFiscUtenteSelezionato();
         $_SESSION['codFiscUtenteDaModificare']=$codFiscUtenteSelezionato;
         header('Location: datiPersonali.php');
+        exit();
         }
 
 

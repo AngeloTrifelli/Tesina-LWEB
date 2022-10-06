@@ -163,3 +163,20 @@ a{
     margin-top: 7%;
     background-color: inherit;
 }
+
+  .containerPassword{
+    display: flex;
+    width: 45%;
+    background-color: inherit;
+}
+
+.occhio{
+    cursor: pointer;
+    margin-top: 7%;
+}
+
+.errorLabelPass{
+    color : red;
+    /* font-weight: bolder; */
+    text-align: left;
+}

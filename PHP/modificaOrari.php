@@ -73,6 +73,7 @@ $checkOrariRistorante="False";
 
     }else{
         header('Location: listaOrari.php');
+        exit();
     }   
 ?>
 

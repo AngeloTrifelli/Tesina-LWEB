@@ -7,16 +7,19 @@ session_start();
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
+            exit();
         }
     }
     else{
         header('Location: areaUtente.php');
+        exit();
     }
 
     if(isset($_POST['attivitaSelezionata'])){
         $idAttivita=individuaBottoneIdAttivita();
         $_SESSION['idAttivita']=$idAttivita;
         header('Location: modificaAttivita.php');
+        exit();
         }
     
     echo '<?xml version="1.0" encoding="UTF-8"?>';

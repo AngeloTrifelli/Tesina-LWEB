@@ -11,6 +11,7 @@
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
             header('Location: datiPersonali.php');
+            exit();
         }
         else{
             $datoDaModificare = $_POST['datoDaModificare'];
@@ -23,6 +24,7 @@
                     }
                     if($result == "success"){    
                         header('Location: datiPersonali.php');
+                        exit();
                     }
                 }
             }
@@ -34,12 +36,14 @@
                         if($result == "success"){    
                             $_SESSION['codFiscUtenteLoggato'] = $_POST['nuovoCodFisc'];
                             header('Location: datiPersonali.php');
+                            exit();
                         }
                         }else{
                             $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $_POST['nuovoCodFisc']);
                             if($result == "success"){    
                                 $_SESSION['codFiscUtenteDaModificare'] = $_POST['nuovoCodFisc'];
                                 header('Location: datiPersonali.php');
+                                exit();
                             }
                         }
                     }
@@ -54,6 +58,7 @@
                             }
                             if($result == "success"){    
                                 header('Location: datiPersonali.php');
+                                exit();
                             }
                         }
                     }
@@ -67,6 +72,7 @@
                                 }
                                 if($result == "success"){    
                                     header('Location: datiPersonali.php');
+                                    exit();
                                 }
                             }
                         }
@@ -80,6 +86,7 @@
                                     }
                                     if($result == "success"){    
                                         header('Location: datiPersonali.php');
+                                        exit();
                                     }   
                                 }
                             }
@@ -95,6 +102,7 @@
                                         }
                                         if($result == "success"){    
                                             header('Location: datiPersonali.php');
+                                            exit();
                                         }
                                     }
                                 }

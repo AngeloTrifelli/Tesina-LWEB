@@ -5,10 +5,17 @@
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
+            exit();
         }
     }
     else{
         header('Location: areaUtente.php');
+        exit();
+    }
+    $oraUpdateConfermata=confermaOraUpdateMenu();
+    if($oraUpdateConfermata=="False"){
+        header('Location: visualizzaMenu.php');
+        exit();
     }
     $error="False";
     $nomePortataGiaEsistente="False";
@@ -74,15 +81,27 @@
                             </select>
 
                             <span class="item">Inserisci il nome della portata:</span>
-                            <input type="text" class="textInput" name="nomePortata" placeholder="Inserisci il nome" />
-
+                            <?php 
+                                    if(isset($_POST['nomePortata'])){
+                                        echo "<input class=\"textInput\" type=\"text\" name=\"nomePortata\" value=\"{$_POST['nomePortata']}\" placeholder=\"Inserisci il nome\" />";
+                                    }
+                                    else{
+                                        echo "<input class=\"textInput\" type=\"text\" name=\"nomePortata\" placeholder=\"Inserisci il nome\" />";     
+                                    }
+                            ?>
                         </div>
 
                         <div class="zonaDx">
 
                             <h2>Prezzo:</h2>
-                            <input type="number" class="textInput" name="prezzo" />
-
+                            <?php 
+                                if(isset($_POST['prezzo'])){
+                                    echo "<input class=\"textInput\" type=\"number\" name=\"prezzo\" value=\"{$_POST['prezzo']}\"/>";
+                                }
+                                else{
+                                    echo "<input class=\"textInput\" type=\"number\" name=\"prezzo\"/>";     
+                                }
+                            ?>
                         </div>
                     </div>
 

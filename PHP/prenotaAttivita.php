@@ -11,6 +11,7 @@
     if(isset($_POST['annulla'])){
         unset($_SESSION['idAttivita']);
         header('Location:attivita.php');
+        exit();
     }
 
     if(isset($_SESSION['codFiscUtenteLoggato'])){
@@ -18,6 +19,7 @@
         if($temp!="null"){
             if($temp['statoSoggiorno']!= "Approvato"){
                 header("Location: areaUtente.php");
+                exit();
             }else{
                 $stringaData = $temp['dataArrivo'];
                 $giorno = substr($stringaData, 8,2);       
@@ -53,6 +55,7 @@
                             unset($_SESSION['idAttivita']);
                        
                             header('Location: confermaPrenotazione.php');
+                            exit();
                         }else{
                             $orariScorretti="True";
                              }
@@ -66,10 +69,12 @@
             }else{
                 unset($_SESSION['idAttivita']);
                 header('Location: areaUtente.php');
+                exit();
                  }
     }
     else{
         header('Location: login.php');
+        exit();
         }   
              
 ?>

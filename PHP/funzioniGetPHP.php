@@ -1532,7 +1532,79 @@ function getValutazione($idOggetto , $codFiscCliente){
         return "null";
     }
 }
+//Funzione che preleva l'array di FAQ
 
+function getFAQs(){
+    $arrayFAQs=array();
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .= trim($node);
+    }
 
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
 
+    $listaFaq = $doc->documentElement->childNodes;
+    for($i=0;$i<$listaFaq->length;$i++){
+        $faq=$listaFaq->item($i);
+        $id=$faq->getAttribute("id");
+        $domandaId=$faq->getElementsByTagName("idDomandaCliente")->item(0);
+        if(is_null($domandaId)){
+            $domandaId="";
+        }else{
+            $domandaId->textContent;
+        }
+        $testoDomanda=$faq->getElementsByTagName("testoDomanda")->item(0)->textContent;
+        $testoRisposta=$faq->getElementsByTagName("testoRisposta")->item(0)->textContent;
+
+        
+        $temp = array(
+            "id"=>$id,
+            "domandaId"=>$domandaId,
+            "testoDomanda"=>$testoDomanda,
+            "testoRisposta"=>$testoRisposta
+        );
+
+        array_push($arrayFAQs , $temp);
+    }
+
+    return $arrayFAQs;
+}
+
+//Funzione che restituisce la singola Faq con specifico id
+
+function getFaq($idFaq){
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $listaFaq = $doc->documentElement->childNodes;
+    for($i=0;$i<$listaFaq->length;$i++){
+        $faq=$listaFaq->item($i);
+        $id=$faq->getAttribute("id");
+        if($id==$idFaq){
+            $domandaId=$faq->getElementsByTagName("idDomandaCliente")->item(0);
+            if(is_null($domandaId)){
+            $domandaId="";
+            }else{
+            $domandaId->textContent;
+            }
+            $testoDomanda=$faq->getElementsByTagName("testoDomanda")->item(0)->textContent;
+            $testoRisposta=$faq->getElementsByTagName("testoRisposta")->item(0)->textContent;
+
+        
+            $FAQ = array(
+            "id"=>$id,
+            "domandaId"=>$domandaId,
+            "testoDomanda"=>$testoDomanda,
+            "testoRisposta"=>$testoRisposta
+            );
+
+        }
+}
+ return $FAQ;
+}
 ?>

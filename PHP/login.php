@@ -9,6 +9,7 @@
 
     if(isset($_SESSION['loginType'])){
         header('Location: areaUtente.php');
+        exit();
     }
 
     if(isset($_SESSION['prenotazioneCamera'])){
@@ -34,6 +35,7 @@
                         $_SESSION['codFiscUtenteLoggato'] = $codFisc;
                         $_SESSION['loginType'] = "Cliente";
                         header('Location: confermaPrenotazione.php');
+                        exit();
                     }
                     else{
                         $erroreSoggiornoAttivo = "True";
@@ -63,6 +65,7 @@
                         $_SESSION['soggiornoAttivo'] = getSoggiornoAttivo($codFisc);
                         $_SESSION['loginType'] = "Cliente";
                         header('Location: intro.php');
+                        exit();
                     }
                 }
                 else{
@@ -71,6 +74,7 @@
                         if($trovato != "False"){
                             $_SESSION['loginType'] = "Concierge";
                             header('Location: areaUtente.php');
+                            exit();
                         }
                     }
                     else{
@@ -78,6 +82,7 @@
                         if($trovato != "False"){
                             $_SESSION['loginType'] = "Admin";
                             header('Location: areaUtente.php');
+                            exit();
                         }
                     }
                 }
@@ -118,6 +123,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"> <!--Per importare l'mmagine dell'occhio -->
+
       </head>
     
     <body>
@@ -178,37 +185,40 @@
                         }
                     ?>
                         <br>
-                        <input class="textInput" type="text" name="password" placeholder="Inserisci la password" >
+                        <div class="containerPassword">
+                                <input class="textInput" id="id_password" autocomplete="current-password" type="password" name="password" placeholder="Inserisci la password" />
+                                <i class="far fa-eye occhio" id="togglePassword"></i>
+                            </div>
                     <?php
                         if(isset($_POST['accedi']) && $_POST['password'] == ""){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">Inserire la password!</p>";
+                                <p class=\"errorLabelPass\">Inserire la password!</p>";
                         }
                         if(isset($_POST['accedi']) && $_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) && ($codFisc=="null" || $trovato == "False")){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">Username e/o password errati!</p>";
+                                <p class=\"errorLabelPass\">Username e/o password errati!</p>";
                         }
 
                         if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $codFisc == "null"){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">Username e/o password errati!</p>";
+                                <p class=\"errorLabelPass\">Username e/o password errati!</p>";
                         }
 
                         if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $erroreSoggiornoAttivo == "True"){
                             echo "
                                 <br />
-                                <p class=\"errorLabel\">L'utente ha già un soggiorno attivo. Impossibile completare la prenotazione!</p>";
+                                <p class=\"errorLabelPass\">L'utente ha già un soggiorno attivo. Impossibile completare la prenotazione!</p>";
                         }
                     ?>
                     </div>
-                    
+                        <div class="divDx">  
                     <?php
                         if(!isset($idCamera)){
                     ?>
-                        <div class="divDx">    
+                          
                             
                             <p class="title">Che tipo di utente sei?</p>
                             <br />
@@ -250,6 +260,18 @@
             </div>
 
         </div>
+        <script>
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#id_password');
+
+            togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            });
+        </script>
 
     </body>
 

@@ -19,6 +19,7 @@
     else{
         if(!isset($_POST['dataArrivo']) || !isset($_POST['dataPartenza'])){
             header('Location: prenotaOra.php');
+            exit();
         }
         else{
             $idCamera = individuaBottoneCamereDisponibili();
@@ -28,9 +29,11 @@
             $_SESSION['prenotazioneCamera'] = $arrayDati;
             if(isset($_SESSION['codFiscUtenteLoggato'])){
                 header('Location: confermaPrenotazione.php');
+                exit();
             }
             else{
                 header('Location: login.php');
+                exit();
             }
 
         }

@@ -8,6 +8,7 @@
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+                exit();
             }
             else{
                 $todayDate = date("Y-m-d");
@@ -44,10 +45,12 @@
         }
         else{
             header('Location: prenotaOra.php');
+            exit();
         }
     }
     else{
         header('Location: login.php');
+        exit();
     }
 
 
@@ -56,6 +59,7 @@
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
             header('Location: homeRistorante.php');
+            exit();
         }
         else{
             if($_POST['dataPrenotazione'] != "" && isset($_POST['locazione']) && isset($_POST['pasto']) && $_POST['oraPrenotazione'] != ""   ){
@@ -71,6 +75,7 @@
 
                 if($result == "success"){
                     header('Location: registrazioneCompletata.php');
+                    exit();
                 }
             }
         }

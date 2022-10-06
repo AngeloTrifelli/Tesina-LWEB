@@ -8,13 +8,16 @@ session_start();
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
             header('Location: intro.php');
+            exit();
         }
     }
     else{
         header('Location: areaUtente.php');
+        exit();
     }
 
     $error="False";
+    if(isset($_SESSION['idAttivita']) || isset($_POST['idAttivita'])){
     if(isset($_POST['annulla']) || isset($_POST['cambia'])){
         if(isset($_POST['annulla'])){
             unset($_SESSION['idAttivita']);
@@ -24,10 +27,10 @@ session_start();
         else{
             if(isset($_SESSION['idAttivita'])){
                 $idAttivita=$_SESSION['idAttivita'];
+                $_POST['idAttivita']=$idAttivita;
                 unset($_SESSION['idAttivita']);
             }
             if($_POST['nomeAttivita']!="" || $_POST['linkImmagine']!="" || $_POST['descrizione']!="" || $_POST['prezzoOrario']!=""){
-                $_POST['idAttivita']=$idAttivita;
                 modificaAttivita($_POST['idAttivita'],$_POST['nomeAttivita'],$_POST['linkImmagine'],$_POST['descrizione'],$_POST['prezzoOrario']);
                 unset($_SESSION['idAttivita']);
                 header('Location: listaAttivita.php');
@@ -39,6 +42,10 @@ session_start();
         
         }
     }
+}else{
+    header('Location: listaAttivita.php');
+    exit();
+}
 
 echo '<?xml version="1.0" encoding="UTF-8?>';
 ?>
@@ -134,12 +141,10 @@ echo '<?xml version="1.0" encoding="UTF-8?>';
             }
     ?>
 
-    </div>
-
-
-
     <div id="modificaOrari">
         <a  href="./listaOrari.php">Volevi modificare gli orari dell'attività? Clicca qui!</a>
+    </div>
+
     </div>
 
     <div class="nb">

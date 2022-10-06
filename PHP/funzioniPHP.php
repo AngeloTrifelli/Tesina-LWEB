@@ -315,7 +315,6 @@ function individuaBottoneCategoriaPremuto(){
 
 
     $i=0;
-    $j=0;
     $trovato="False";
 
     while($i < count($listaCategorieAttivate) && $trovato == "False"){
@@ -328,7 +327,7 @@ function individuaBottoneCategoriaPremuto(){
             $i++;
         }
     }
-
+    $j=0;
     while($j<count($listaCategorieDisattivate) && $trovato == "False"){
         $categoria=$listaCategorieDisattivate[$j];
         $nome=$categoria['nome'];
@@ -370,7 +369,6 @@ function individuaBottoneAttivitaDaEliminare(){
 
    $listaAttivita = $docAttivita->documentElement->childNodes;
    $i=0;
-   $j = 0;
    $trovato="False";
    while($i<$listaAttivita->length && $trovato=="False"){
 
@@ -378,7 +376,7 @@ function individuaBottoneAttivitaDaEliminare(){
 
    $listaPrenotazioni=$attivita->getElementsByTagName("listaPrenotazioni")->item(0);
    $listaPrenotazione = $attivita->getElementsByTagName("prenotazione");
-
+   $j = 0;
    while($j < count($listaPrenotazione) && $trovato=="False"){
 
        $prenotazione = $listaPrenotazione->item($j);
@@ -724,8 +722,7 @@ function confermaOraUpdateMenu(){
 
     $oraFineUpdate = $xpathRistorante->query("/ristoranti/ristorante/oraFineUpdate");
     $oraFineUpdate=$oraFineUpdate->item(0)->textContent;
-
-    if($oraCorrente>=$oraInizioUpdate && $oraCorrente<=$oraFineUpdate){
+    if($oraCorrente>=strtotime($oraInizioUpdate) && $oraCorrente<=strtotime($oraFineUpdate)){
         return "True";
     }else{
         return "False";
@@ -819,6 +816,7 @@ function checkOrariRistorante($oraInizioUpdate,$oraFineUpdate){
     }
 }
 
+<<<<<<< HEAD
 // Funzione per individuare il bottone premuto in recensioni.php 
 
 function individuaBottoneRecensione(){
@@ -848,6 +846,72 @@ function individuaBottoneRecensione(){
 
     return $idRecensione;
 }
+=======
+//Funzione per riconoscere che faq ha selezionato la concierge/l'admin in faq.php
+>>>>>>> f262436844755454e627b4aa218b681f57bb13f7
+
+function individuaBottoneIdFaq(){
+    $xmlString = "";
+    foreach(file("../XML/FAQs.xml") as $node){
+        $xmlString .=trim($node);
+    }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaFaqs = $doc->documentElement->childNodes;
+
+    $trovato = "False";
+    $i=0;
+
+    while ($i < $listaFaqs->length && $trovato == "False"){
+        $faq = $listaFaqs->item($i);
+        $idFaq = $faq->getAttribute("id");
+
+        if(isset($_POST[$idFaq])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idFaq;
+
+}
+
+
+// Funzione per individuare il bottone premuto in recensioni.php
+
+function individuaBottoneRecensione(){
+    $xmlString = "";
+    foreach(file("../XML/recensioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString);
+
+    $listaRecensioni = $docRecensioni->documentElement->childNodes;
+
+    $i=0;
+    $trovato = "False";
+
+    while($i < $listaRecensioni->length && $trovato == "False"){
+        $recensione = $listaRecensioni->item($i);
+        $idRecensione = $recensione->getAttribute("id");
+
+        if(isset($_POST[$idRecensione])){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $idRecensione;
+}
+
+
+
 
 
 //Funzione per individuare il bottone premuto in risposteRecensione.php

@@ -618,11 +618,27 @@ function aggiungiFaq ($testoDomanda , $testoRisposta , $idDomandaCliente){
 
     $elemRadice = $docFaq->documentElement;
     $listaFaq = $elemRadice->childNodes;
-    $numFaq = count($listaFaq);
+
+    $xpathFaq = new DOMXPath($docFaq);
+
+    if(count($listaFaq)==0){
+        $nuovoIdFaq="F1";
+    }else{
+        $numFaq=count($listaFaq)-1;
+        $FAQ = $xpathFaq->query("/listaFAQ/FAQ");
+        $ultimaFaq = $FAQ->item($numFaq);
+    
+        $idUltimaFaq=$ultimaFaq->getAttribute("id");
+        $numeroId=substr($idUltimaFaq,1,1);
+        settype($numeroId,"integer");
+        $nuovoIdFaq="F".($numeroId+1);
+    }
+
 
     $nuovaFaq = $docFaq->createElement("FAQ");
-    $nuovaFaq->setAttribute("id" , "F".($numFaq + 1) );
+    $nuovaFaq->setAttribute("id" ,$nuovoIdFaq);
     $elemRadice->appendChild($nuovaFaq);
+
 
     if($idDomandaCliente != "null"){
         $nuovaIdDomandaCliente = $docFaq->createElement("idDomandaCliente", $idDomandaCliente);

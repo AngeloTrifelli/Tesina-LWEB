@@ -8,8 +8,11 @@
         if($temp != "null"){
             if($temp['statoSoggiorno'] != "Approvato"){
                 header('Location: areaUtente.php');
+                exit();
             }
             else{
+                $oraUpdateConfermata=confermaOraUpdateMenu();
+                if($oraUpdateConfermata!="True"){
                 $stringaData = $temp['dataArrivo'];
                 $giorno = substr($stringaData, 8,2);       
                 $mese = substr($stringaData,5,2 );
@@ -30,19 +33,25 @@
 
                 $temp2 = new DateTime($orari['chiusuraCena']);                
                 $nuovaOraFineCena = differenzaOrari($temp2 , $hour );   
+                }else{
+                    $orariUpdate=getOrariUpdateRistorante();
+                }
             }
         }
         else{
             header('Location: prenotaOra.php');
+            exit();
         }
     }
     else{
         header('Location: login.php');
+        exit();
     }
     
     if(isset($_POST['INDIETRO']) || isset($_POST['CONTINUA'])){
         if(isset($_POST['INDIETRO'])){
             header('Location: homeRistorante.php');
+            exit();
         }
         else{
             if($_POST['dataPrenotazione'] != "" && isset($_POST['pasto'])){
@@ -58,6 +67,7 @@
                 $arrayDati['oraPrenotazione'] = $oraPrenotazione;
                 $_SESSION['datiPrenotazioneSC'] = $arrayDati;
                 header('Location: listaPortate.php');
+                exit();
                 
             }
         }
@@ -93,6 +103,15 @@
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
                 <div class="mainArea">
                     <div class="zonaSuperiore">
+                    <?php
+                        if($oraUpdateConfermata=="True"){
+                    ?>
+                        <span class="item">Menu in stato di modifica...<br/>
+                        Potrai prenotare dopo le: <?php echo substr($orariUpdate['oraFineUpdate'],0,5);?></span>
+                    </div>
+                    <?php
+                        }else{
+                    ?>
                         <span class="item">Inserisci la data di prenotazione:</span>
                     <?php
                         if(isset($_POST['dataPrenotazione'])){
@@ -133,7 +152,9 @@
                 </div>
             </form>
         </div>
-
+        <?php
+            }
+        ?>
 
         <script>
             var dataInizio=<?php echo json_encode($dataMin); ?>;
