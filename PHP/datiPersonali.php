@@ -46,8 +46,7 @@
                 }
             ?>   
         </div>
-        <h1 class="alignCenter">Ciao <?php echo $cliente['nome'];?>!</h1>
-        <div style="width: 18.5%;"></div>
+        <h1 style="display:inline ;">Ciao <?php echo $cliente['nome'];?>!</h1>        
     </div>
 
     

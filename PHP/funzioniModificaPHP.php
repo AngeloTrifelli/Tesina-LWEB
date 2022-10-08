@@ -4,9 +4,12 @@
     require_once('funzioniDeletePHP.php');
 
     // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PHP PER MODIFICARE I FILE XML
-
+    
 
 function modificaDatiUtente ($codFiscUtente, $datoDaModificare , $valore){
+    if(!isset($_SESSION)){ 
+        session_start(); 
+    } 
     $xmlString = "";
     foreach(file("../XML/Clienti.xml") as $node){
         $xmlString .=trim($node);
@@ -36,6 +39,7 @@ function modificaDatiUtente ($codFiscUtente, $datoDaModificare , $valore){
             else{
                 $cliente->setAttribute('codFisc' , $valore);
                 $doc->save("../XML/Clienti.xml");
+                modificaCodiciFiscali($valore , $codFiscUtente);
                 return "success";
             }
         }
@@ -55,21 +59,86 @@ function modificaDatiUtente ($codFiscUtente, $datoDaModificare , $valore){
         }
 
         if($datoDaModificare == "password"){
-            $oldPassword = $valore['oldPassword'];
-            $test = $xpathClienti->query("/listaClienti/cliente/credenziali[password='$oldPassword']");
-            if($test->length == 1){
-                $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
-                $nodoDato->nodeValue = "";
-                $nodoDato->appendChild($doc->createTextNode($valore['newPassword']));
-                $doc->save("../XML/Clienti.xml");
-                return "success";
+            if($_SESSION['loginType'] == "Cliente"){
+                $oldPassword = $valore['oldPassword'];
+                $test = $xpathClienti->query("/listaClienti/cliente[@codFisc='$codFiscUtente']/credenziali[password='$oldPassword']");
+                if($test->length == 1){                
+                    $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
+                    $nodoDato->nodeValue = "";
+                    $nodoDato->appendChild($doc->createTextNode($valore['newPassword']));
+                    $doc->save("../XML/Clienti.xml");
+                    return "success";
+                }
+                else{
+                    return "insuccess";
+                }
             }
             else{
-                return "insuccess";
+                $nodoDato = $cliente->getElementsByTagName($datoDaModificare)->item(0);
+                $nodoDato->nodeValue = "";
+                $nodoDato->appendChild($doc->createTextNode($valore));
+                $doc->save("../XML/Clienti.xml");
+                return "success";
             }
         }
     }
 }
+
+
+function modificaCredenzialiStaff($vecchioUsername ,  $nuovoUsername , $nuovaPassword , $tipoStaff){
+    $xmlString = "";
+    if($tipoStaff == "Concierge"){
+        foreach(file("../XML/Concierge.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+    else{
+        foreach(file("../XML/Amministratori.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
+
+    $listaStaff = $doc->documentElement->childNodes;
+
+    $i=0;
+    $trovato = "False";
+
+    while($i < $listaStaff->length && $trovato == "False"){
+        $staff = $listaStaff->item($i);
+        $username = $staff->firstChild;
+        $password = $staff->lastChild;
+
+        if($username->textContent == $vecchioUsername){
+            $trovato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    if($nuovoUsername != ""){
+        $username->nodeValue = "";
+        $username->appendChild($doc->createTextNode($nuovoUsername));
+    }
+
+    if($nuovaPassword != ""){
+        $password->nodeValue = "";
+        $password->appendChild($doc->createTextNode($nuovaPassword));
+    }
+
+    if($tipoStaff == "Concierge"){
+        $doc->save("../XML/Concierge.xml");
+    }
+    else{
+        $doc->save("../XML/Amministratori.xml");
+    }
+
+} 
+
 
 
 
@@ -392,34 +461,34 @@ function modificaAttivita($idAttivita,$nome,$linkImmagine,$descrizione,$prezzoOr
     $xpathAttivita = new DOMXPath($doc);
 
     if($nome!=""){
-    $nomeAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/nome");
-    $nomeAttivita = $nomeAttivita->item(0);
-    $nomeAttivita->nodeValue = "";
-    $nomeAttivita->appendChild($doc->createTextNode($nome));
+        $nomeAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/nome");
+        $nomeAttivita = $nomeAttivita->item(0);
+        $nomeAttivita->nodeValue = "";
+        $nomeAttivita->appendChild($doc->createTextNode($nome));
     }
 
     if($linkImmagine!=""){
         $linkImmagineAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/linkImmagine");
-        $linkImmagineAttivita = $linkImmagine->item(0);
+        $linkImmagineAttivita = $linkImmagineAttivita->item(0);
         $linkImmagineAttivita->nodeValue = "";
         $linkImmagineAttivita->appendChild($doc->createTextNode($linkImmagine));
-        }
+    }
 
     if($descrizione!=""){
         $descrizioneAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/descrizione");
         $descrizioneAttivita = $descrizioneAttivita->item(0);
         $descrizioneAttivita->nodeValue = "";
         $descrizioneAttivita->appendChild($doc->createTextNode($descrizione));
-        }
+    }
 
     if($prezzoOrario!=""){
         $prezzoOrarioAttivita = $xpathAttivita->query("/listaAttivita/attivita[@id = '$idAttivita']/prezzoOrario");
         $prezzoOrarioAttivita = $prezzoOrarioAttivita->item(0);
         $prezzoOrarioAttivita->nodeValue = "";
         $prezzoOrarioAttivita->appendChild($doc->createTextNode($prezzoOrario));
-        }
+    }
 
-        $doc->save("../XML/Attivita.xml"); 
+    $doc->save("../XML/Attivita.xml"); 
 }
 
 function modificaPrenotazioneAttivita($idPrenotazione,$data,$oraInizio,$oraFine){
@@ -507,7 +576,7 @@ function modificaPrenotazioneAttivita($idPrenotazione,$data,$oraInizio,$oraFine)
             modificaCreditiCliente($codFiscCliente,$creditiDaRimborsare);
 
             $creditiUsati->item(0)->nodeValue = "";
-            $creditiUsati->appendChild($doc->createTextNode($nuoviCreditiUsati));
+            $creditiUsati->item(0)->appendChild($doc->createTextNode($nuoviCreditiUsati));
         
         }
         
@@ -530,7 +599,7 @@ function modificaPortata($nuovoNomePortata,$nuovoPrezzo){
     $doc->formatOutput = true;
 
     $xpathRistorante = new DOMXPath($doc);
-    $descrizionePortata=$_SESSION['descrizionePortata'];
+    $descrizionePortata=$_SESSION['portataDaModificare'];
     $descrizionePortata=$descrizionePortata['nomeSeparato'];
   
     if($nuovoNomePortata!="" && $nuovoPrezzo==""){
@@ -538,28 +607,28 @@ function modificaPortata($nuovoNomePortata,$nuovoPrezzo){
         $nomePortata = $nomePortata->item(0);
         $nomePortata->nodeValue = "";
         $nomePortata->appendChild($doc->createTextNode($nuovoNomePortata));
-        }
+    }
 
     if($nuovoPrezzo!="" && $nuovoNomePortata==""){
-            settype($nuovoPrezzo,"integer");
-            $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/prezzo");
-            $prezzoPortata = $prezzoPortata->item(0);
-            $prezzoPortata->nodeValue = "";
-            $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
-        }
-        if($nuovoNomePortata!="" && $nuovoPrezzo!=""){
-            $nomePortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/descrizione");
-            $nomePortata = $nomePortata->item(0);
-            $nomePortata->nodeValue = "";
-            $nomePortata->appendChild($doc->createTextNode($nuovoNomePortata));
+        settype($nuovoPrezzo,"integer");
+        $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/prezzo");
+        $prezzoPortata = $prezzoPortata->item(0);
+        $prezzoPortata->nodeValue = "";
+        $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
+    }
 
-            settype($nuovoPrezzo,"integer");
-            $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$nuovoNomePortata']/prezzo");
-            $prezzoPortata = $prezzoPortata->item(0);
-            $prezzoPortata->nodeValue = "";
-            $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
+    if($nuovoNomePortata!="" && $nuovoPrezzo!=""){
+        $nomePortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$descrizionePortata']/descrizione");
+        $nomePortata = $nomePortata->item(0);
+        $nomePortata->nodeValue = "";
+        $nomePortata->appendChild($doc->createTextNode($nuovoNomePortata));
 
-        }
+        settype($nuovoPrezzo,"integer");
+        $prezzoPortata = $xpathRistorante->query("/ristoranti/ristorante/menu/portata[descrizione = '$nuovoNomePortata']/prezzo");
+        $prezzoPortata = $prezzoPortata->item(0);
+        $prezzoPortata->nodeValue = "";
+        $prezzoPortata->appendChild($doc->createTextNode($nuovoPrezzo));
+    }
 
         $doc->save("../XML/Ristorante.xml"); 
 }
@@ -843,7 +912,269 @@ function modificaFaq($idFaq,$nuovaRisposta){
     $testoRispostaFaq->appendChild($docFaq->createTextNode($nuovaRisposta));
 
     $docFaq->save("../XML/FAQs.xml");
-
 }
+
+
+function modificaCodFiscPrenotazioniAttivita($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+    
+    foreach(file("../XML/Attivita.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docAttivita = new DOMDocument();
+    $docAttivita->loadXML($xmlString);
+    $docAttivita->formatOutput = true;
+
+    $xpathAttivita = new DOMXPath($docAttivita);
+
+    $listaPrenotazioni = $xpathAttivita->query("/listaAttivita/attivita/listaPrenotazioni/prenotazione[codFisc='$vecchioCodFisc']");
+
+    for($i=0 ; $i < $listaPrenotazioni->length ; $i++){
+        $prenotazione = $listaPrenotazioni->item($i);
+        $elemCodFisc = $prenotazione->getElementsByTagName("codFisc")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docAttivita->createTextNode($nuovoCodFisc));
+    }
+    $docAttivita->save("../XML/Attivita.xml");
+}
+
+function modificaCodFiscPrenotazioniCamere($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Camere.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCamere = new DOMDocument();
+    $docCamere->loadXML($xmlString);
+    $docCamere->formatOutput = true;
+
+    $xpathCamere = new DOMXPath($docCamere);
+    $listaPrenotazioni = $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc='$vecchioCodFisc']");
+
+    for($i=0 ; $i < $listaPrenotazioni->length ; $i++){
+        $prenotazione = $listaPrenotazioni->item($i);
+        $elemCodFisc = $prenotazione->getElementsByTagName("codFisc")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docCamere->createTextNode($nuovoCodFisc));
+    }
+    $docCamere->save("../XML/Camere.xml");
+}
+
+function modificaCodFiscCategorie($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Categorie.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCategorie = new DOMDocument();
+    $docCategorie->loadXML($xmlString);
+    $docCategorie->formatOutput = true;
+
+    $xpathCategorie = new DOMXPath($docCategorie);
+
+    $listaUtenti = $xpathCategorie->query("/listaCategorie/categoria/listaUtenti/utente[codFisc='$vecchioCodFisc']");
+
+    for($i=0 ; $i < $listaUtenti->length ; $i++){
+        $utente = $listaUtenti->item($i);
+        $elemCodFisc = $utente->firstChild;
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docCategorie->createTextNode($nuovoCodFisc));        
+    }
+    $docCategorie->save("../XML/Categorie.xml");
+}
+
+function modificaCodFiscCommenti($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Commenti.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docCommenti = new DOMDocument();
+    $docCommenti->loadXML($xmlString);
+    $docCommenti->formatOutput = true;
+
+    $xpathCommenti = new DOMXPath($docCommenti);
+
+    $listaCommenti = $xpathCommenti->query("/listaCommenti/commento[codFiscAutore='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaCommenti->length ; $i++){
+        $commento = $listaCommenti->item($i);
+        $elemCodFisc = $commento->getElementsByTagName("codFiscAutore")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docCommenti->createTextNode($nuovoCodFisc));        
+    }
+
+    $listaRisposteCommento = $xpathCommenti->query("/listaCommenti/commento/listaRisposte/risposta[codFiscAutoreRisposta='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaRisposteCommento->length ; $i++){
+        $rispostaCommento = $listaRisposteCommento->item($i);
+        $elemCodFisc = $rispostaCommento->getElementsByTagName("codFiscAutoreRisposta")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docCommenti->createTextNode($nuovoCodFisc));        
+    }
+
+    $docCommenti->save("../XML/Commenti.xml");
+}
+
+
+function modificaCodFiscDomande($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Domande.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docDomande = new DOMDocument();
+    $docDomande->loadXML($xmlString);
+    $docDomande->formatOutput = true;
+
+    $xpathDomande = new DOMXPath($docDomande);
+
+    $listaDomande = $xpathDomande->query("/listaDomande/domanda[codFiscAutore='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaDomande->length ; $i++){
+        $domanda = $listaDomande->item($i);
+        $elemCodFisc = $domanda->getElementsByTagName("codFiscAutore")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docDomande->createTextNode($nuovoCodFisc));        
+    }
+
+    $listaRisposteDomande = $xpathDomande->query("/listaDomande/domanda/listaRisposte/risposta[codFiscAutoreRisposta='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaRisposteDomande->length ; $i++){
+        $rispostaDomanda = $listaRisposteDomande->item($i);
+        $elemCodFisc = $rispostaDomanda->getElementsByTagName("codFiscAutoreRisposta")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docDomande->createTextNode($nuovoCodFisc));        
+    }
+    $docDomande->save("../XML/Domande.xml");
+}
+
+
+function modificaCodFiscRecensioni($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Recensioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docRecensioni = new DOMDocument();
+    $docRecensioni->loadXML($xmlString);
+    $docRecensioni->formatOutput = true;
+
+    $xpathRecensioni = new DOMXPath($docRecensioni);
+
+    $listaRecensioni = $xpathRecensioni->query("/listaRecensioni/recensione[codFiscAutore='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaRecensioni->length ; $i++){
+        $recensione = $listaRecensioni->item($i);
+        $elemCodFisc = $recensione->getElementsByTagName("codFiscAutore")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docRecensioni->createTextNode($nuovoCodFisc));        
+    }
+    $docRecensioni->save("../XML/Recensioni.xml");
+}
+
+
+function modificaCodFiscPrenotazioniSC($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/ServizioCamera.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docSC = new DOMDocument();
+    $docSC->loadXML($xmlString);
+    $docSC->formatOutput = true;
+
+    $xpathSC = new DOMXPath($docSC);
+
+    $listaPrenotazioni = $xpathSC->query("/listaPrenotazioni/prenotazione[codFisc='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaPrenotazioni->length ; $i++){
+        $prenotazione = $listaPrenotazioni->item($i);
+        $elemCodFisc = $prenotazione->getElementsByTagName("codFisc")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docSC->createTextNode($nuovoCodFisc));
+    }
+    $docSC->save("../XML/ServizioCamera.xml");
+}
+
+
+
+function modificaCodFiscPrenotazioniTavolo ($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Tavoli.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docTavoli = new DOMDocument();
+    $docTavoli->loadXML($xmlString);
+    $docTavoli->formatOutput = true;
+
+    $xpathTavoli = new DOMXPath($docTavoli);
+
+    $listaPrenotazioni = $xpathTavoli->query("/listaTavoli/tavolo/listaPrenotazioni/prenotazione[codFisc='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaPrenotazioni->length ; $i++){
+        $prenotazione = $listaPrenotazioni->item($i);
+        $elemCodFisc = $prenotazione->getElementsByTagName("codFisc")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docTavoli->createTextNode($nuovoCodFisc));
+    }
+
+    $docTavoli->save("../XML/Tavoli.xml");
+}
+
+
+function modificaCodFiscValutazioni($nuovoCodFisc , $vecchioCodFisc){
+    $xmlString = "";
+
+    foreach(file("../XML/Valutazioni.xml") as $node){
+        $xmlString .= trim($node);
+    }
+
+    $docValutazioni = new DOMDocument();
+    $docValutazioni->loadXML($xmlString);
+    $docValutazioni->formatOutput = true;
+
+    $xpathValutazioni = new DOMXPath($docValutazioni);
+
+    $listaValutazioni = $xpathValutazioni->query("/listaValutazioni/valutazione[codFisc='$vecchioCodFisc']");
+    for($i=0 ; $i < $listaValutazioni->length ; $i++){
+        $valutazione = $listaValutazioni->item($i);
+        $elemCodFisc = $valutazione->getElementsByTagName("codFisc")->item(0);
+
+        $elemCodFisc->nodeValue = "";
+        $elemCodFisc->appendChild($docValutazioni->createTextNode($nuovoCodFisc));
+    }
+
+    $docValutazioni->save("../XML/Valutazioni.xml");
+}
+
+
+
+//Funzione per aggiornare i codici fiscali di ogni file quando un utente modifica il suo codice fiscale 
+
+function modificaCodiciFiscali($nuovoCodFisc , $vecchioCodFisc){    
+    modificaCodFiscPrenotazioniAttivita($nuovoCodFisc , $vecchioCodFisc);    
+    modificaCodFiscPrenotazioniCamere($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscCategorie($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscCommenti($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscDomande($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscRecensioni($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscPrenotazioniSC($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscPrenotazioniTavolo($nuovoCodFisc , $vecchioCodFisc);
+    modificaCodFiscValutazioni($nuovoCodFisc , $vecchioCodFisc); 
+}
+
 
 ?>

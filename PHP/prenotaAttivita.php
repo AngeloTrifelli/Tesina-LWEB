@@ -4,8 +4,10 @@
     require_once('funzioniInsertPHP.php');
     require_once('funzioniGetPHP.php');
 
+    $patternDate = "/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/";
+    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
+
     session_start();
-    $datiMancanti="";
     $orariScorretti="";
 
     if(isset($_POST['annulla'])){
@@ -38,7 +40,7 @@
                 $oraMax=$attivita['oraChiusura'];
                 if(isset($_POST['prenota'])){
 
-                    if ($_POST['data']!="" && $_POST['oraInizio']!=""  && $_POST['oraFine']!=""){
+                    if (preg_match($patternDate,$_POST['data']) && preg_match($patternOrario, $_POST['oraInizio']) && preg_match($patternOrario, $_POST['oraFine'])){
                         if($_POST['oraFine']>$_POST['oraInizio']){
             
                             $arrayAttivita['idAttivita']=$_SESSION['idAttivita'];
@@ -61,7 +63,15 @@
                              }
             
                     }else{
-                        $datiMancanti = "True";
+                        if($_POST['data'] != "" &&  !preg_match($patternDate , $_POST['data'])){
+                            $erroreDate = "True";
+                        }
+                        if(isset($_POST['oraInizio']) && !preg_match($patternOrario , $_POST['oraInizio'])){
+                            $erroreOrarioInizio = "True";
+                        }
+                        if(isset($_POST['oraFine']) && !preg_match($patternOrario , $_POST['oraFine'])){
+                            $erroreOrarioFine = "True";
+                        }
                     }
             
                 }
@@ -125,6 +135,14 @@
                             else{
                                 echo  "<input type=\"text\" name=\"data\" class=\"dateInput marginRight data\"  />";
                             }
+                            if(isset($_POST['prenota']) && $_POST['data'] ==""){
+
+                                echo '<p class="errorLabel">Inserire una data!</p>';
+                            }
+                            if(isset($_POST['prenota']) && isset($erroreDate)){
+
+                                echo '<p class="errorLabel">La data inserita non è valida!</p>';
+                            }
                             
                         ?>        
                         </div>                    
@@ -143,7 +161,14 @@
                                         else{
                                             echo "<input  name=\"oraInizio\" class=\"oraInizio\" />";                        
                                         }
-                                       
+                                        if(isset($_POST['prenota']) && $_POST['oraInizio'] ==""){
+
+                                            echo '<p class="errorLabel">Inserire un orario di inizio!</p>';
+                                        }
+                                        if(isset($_POST['prenota']) && isset($erroreOrarioInizio) && $_POST['oraInizio']!=""){
+
+                                            echo '<p class="errorLabel">L\'orario di inizio non è valido!</p>';
+                                        }
                                     ?>
                         </div>
                         
@@ -157,8 +182,16 @@
                                         else{
                                             echo "<input  name=\"oraFine\" class=\"oraFine\" />";                        
                                         }
-                                        
+                                        if(isset($_POST['prenota']) && $_POST['oraFine'] ==""){
+
+                                            echo '<p class="errorLabel">Inserire un orario di fine!</p>';
+                                        }
+                                        if(isset($_POST['prenota']) && isset($erroreOrarioFine) && $_POST['oraFine']!=""){
+
+                                            echo '<p class="errorLabel">L\'orario di fine non è valido!</p>';
+                                        }
                                     ?>
+                                
                             
                         </div>
 
@@ -168,17 +201,6 @@
                     <input type="submit" class="buttonSx" value="Annulla" name="annulla" />
                     <input type="submit" class="buttonDx" value="Prenota" name="prenota" />
                     </div>
-                    
-                
-                    <?php
-                        if(isset($_POST['prenota']) && $datiMancanti == "True"){
-                    ?>
-                            <div class="row">
-                                <h2 class="errorLabel">Dati mancanti!</h2>
-                            </div>
-                    <?php
-                        }
-                    ?>
 
                     <?php
                         if(isset($_POST['prenota']) && $orariScorretti == "True"){

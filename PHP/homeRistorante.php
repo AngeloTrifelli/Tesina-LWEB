@@ -1,16 +1,20 @@
 <?php
     session_start();
+
+    $soggiornoApprovato = "";
+
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp = $_SESSION['soggiornoAttivo'];
         if($temp != "null"){
-            if($temp['statoSoggiorno'] != "Approvato"){
-                header('Location: areaUtente.php');
-                exit();
+            if($temp['statoSoggiorno'] == "Approvato"){
+                $soggiornoApprovato = "True";
+            }
+            else{
+                $soggiornoApprovato = "False";
             }
         }
         else{
-            header('Location: prenotaOra.php');
-            exit();
+            $soggiornoApprovato = "False";
         }
     }
     else{
@@ -47,11 +51,16 @@
 
 
             <div id="links">
-            
-                <a class="item" href="./prenotaTavolo.php">PRENOTA UN TAVOLO</a>
-                <br />
-                <a class="item" href="./prenotaSC.php">PRENOTA SERVIZIO IN CAMERA</a>
-                <br />
+            <?php
+                if($soggiornoApprovato == "True"){
+            ?>
+                    <a class="item" href="./prenotaTavolo.php">PRENOTA UN TAVOLO</a>
+                    <br />
+                    <a class="item" href="./prenotaSC.php">PRENOTA SERVIZIO IN CAMERA</a>
+                    <br />
+            <?php
+                }
+            ?>                            
                 <a class="item" href="./visualizzaPrenotazioniRistorante.php">VISUALIZZA PRENOTAZIONI</a>
                 <br />
                 <a class="item" href="./visualizzaMenu.php">VISUALIZZA MEN&Ugrave;</a>

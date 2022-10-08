@@ -14,17 +14,20 @@ body , html{
 }
 
 .top{
-    padding-top: 2%;
-    padding-bottom: 1%;
-    background-color:#871f30;
-    color: white;
-    display: flex;
-    justify-content:space-between;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color:#871f30;    
+    color: white;    
+    text-align: center;
 }
 
 .topLeft{
-    padding: 2% 4%;
-    
+    padding: 3.7% 4%;
+    display: inline;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-right: 2%;
 }
 
 .alignCenter{

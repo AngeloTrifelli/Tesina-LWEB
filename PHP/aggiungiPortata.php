@@ -12,11 +12,13 @@
         header('Location: areaUtente.php');
         exit();
     }
-    $oraUpdateConfermata=confermaOraUpdateMenu();
+
+    $oraUpdateConfermata=confermaOraUpdateMenu();    
     if($oraUpdateConfermata=="False"){
         header('Location: visualizzaMenu.php');
         exit();
     }
+
     $error="False";
     $nomePortataGiaEsistente="False";
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
@@ -130,5 +132,14 @@
                 }
     ?>
         </div>
+
+        <script>
+            $('input[type=number][name=prezzo]').on("change" , function(e){            
+                if(e.target.value < 0){
+                    e.target.value = "";
+                }
+            })
+        </script>
+
     </body>
 </html>

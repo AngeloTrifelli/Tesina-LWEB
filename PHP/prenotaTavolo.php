@@ -2,6 +2,9 @@
     require_once('funzioniGetPHP.php');
     require_once('funzioniPHP.php');
 
+    $patternDate = "/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/";
+    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
+
     session_start();
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp = $_SESSION['soggiornoAttivo'];
@@ -62,7 +65,7 @@
             exit();
         }
         else{
-            if($_POST['dataPrenotazione'] != "" && isset($_POST['locazione']) && isset($_POST['pasto']) && $_POST['oraPrenotazione'] != ""   ){
+            if(preg_match($patternDate , $_POST['dataPrenotazione']) && isset($_POST['locazione']) && isset($_POST['pasto']) && preg_match($patternOrario , $_POST['oraPrenotazione'])   ){                
                 $stringaData = $_POST['dataPrenotazione'];
                 $anno = substr($stringaData, 6 , 4);
                 $mese = substr($stringaData, 3 , 2);
@@ -76,8 +79,18 @@
                 if($result == "success"){
                     header('Location: registrazioneCompletata.php');
                     exit();
+                }                             
+            }
+            else{
+                if($_POST['dataPrenotazione'] != "" &&  !preg_match($patternDate , $_POST['dataPrenotazione'])){
+                    $erroreDate = "True";
+                }
+
+                if(isset($_POST['pasto']) && !preg_match($patternOrario , $_POST['oraPrenotazione'])){
+                    $erroreOrario = "True";
                 }
             }
+                
         }
     }
 
@@ -132,6 +145,10 @@
                             if(isset($_POST['CONFERMA']) && $_POST['dataPrenotazione'] == ""){
                                 echo '<p class="errorLabel">Inserire una data!</p>';
                             }
+
+                            if(isset($_POST['CONFERMA']) && isset($erroreDate)){
+                                echo '<p class="errorLabel">La data inserita non è valida!</p>';
+                            }
                         ?>
                             <h2>Locazione:</h2>
                             <span>
@@ -165,7 +182,12 @@
                             }
                         ?>
                             <span class="item marginTop">Inserisci l'orario di prenotazione:</span>
-                            <input name="oraPrenotazione" class="textInput oraPrenotazione" />                                               
+                            <input name="oraPrenotazione" class="textInput oraPrenotazione" /> 
+                        <?php
+                            if(isset($_POST['CONFERMA']) && isset($erroreOrario)){
+                                echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
+                            }
+                        ?>                                              
                         </div>    
 
                     </div>

@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    $soggiornoAttivo = "";
+    session_start();    
     $tipoLogin = "";
 
     if(isset($_SESSION['loginType'])){
@@ -18,19 +17,7 @@
         }
 
         if($_SESSION['loginType'] == "Cliente"){
-            $tipoLogin = "Cliente";
-            if($_SESSION['soggiornoAttivo'] != "null"){
-                $temp = $_SESSION['soggiornoAttivo'];
-                if($temp['statoSoggiorno'] == "Approvato"){
-                    $soggiornoAttivo = "True";
-                }
-                else{
-                    $soggiornoAttivo = "False";
-                }
-            }
-            else{
-                $soggiornoAttivo = "False";
-            }
+            $tipoLogin = "Cliente";            
         }
         else{
             if($_SESSION['loginType'] == "Concierge"){
@@ -78,19 +65,22 @@
             <?php
                 switch($tipoLogin){
                     case "Cliente":
-                        echo ' <a class="item" href="./intro.php">HOME</a><br />';
-                        if($soggiornoAttivo == "True"){
-                            echo '
-                            <a class="item" href="./homeRistorante.php">SERVIZIO DI RISTORAZIONE</a>
-                            <br /> 
-                          
-                            <a class="item" href="./attivita.php">ATTIVIT&agrave;</a>
-                            <br />
-                
-                            <a class="item" href="./domande.php">DOMANDE</a>
-                            <br />';
-                        }
-                        echo ' <a class="item" href="./datiPersonali.php">DATI PERSONALI</a><br />';
+                        echo '
+                        <a class="item" href="./intro.php">HOME</a>
+                        <br />                
+
+                        <a class="item" href="./homeRistorante.php">SERVIZIO DI RISTORAZIONE</a>
+                        <br /> 
+                        
+                        <a class="item" href="./attivita.php">ATTIVIT&agrave;</a>
+                        <br />
+            
+                        <a class="item" href="./domande.php">DOMANDE</a>
+                        <br />                  
+
+                        <a class="item" href="./datiPersonali.php">DATI PERSONALI</a>
+                        <br />
+                        <br />';
                         break;
                     case "Concierge":
                         echo ' 
@@ -110,7 +100,10 @@
                         <br />
             
                         <a class="item" href="./domande.php">DOMANDE</a>
-                        <br />';
+                        <br />
+
+                        <br />
+                        <a class="item" href="./modificaCredenzialiStaff.php">MODIFICA CREDENZIALI</a>';
                         break;
                     case "Admin":
                         echo ' 
@@ -143,13 +136,15 @@
                         <br />
 
                         <a class="item" href="./visualizzaClienti.php">VISUALIZZA CLIENTI</a>
-                        <br />';
+                        <br />
+                        
+                        <br />
+                        <a class="item" href="./modificaCredenzialiStaff.php">MODIFICA CREDENZIALI</a>';                        
                         break;
                 }
             ?>
 
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <br />
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">                
                 <input type="submit" class="logoutButton" value="LOGOUT" name="LOGOUT" />
             </form>
             <br/>

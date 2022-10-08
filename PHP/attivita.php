@@ -3,17 +3,20 @@
     require_once("funzioniPHP.php");
     session_start();
 
+    $soggiornoApprovato = "";
+
     if(isset($_SESSION['codFiscUtenteLoggato'])){
         $temp=$_SESSION['soggiornoAttivo'];
-        if($temp!="null"){
-            if($temp['statoSoggiorno']!= "Approvato"){
-                header("Location: areaUtente.php");
-                exit();
+        if($temp != "null"){
+            if($temp['statoSoggiorno'] ==  "Approvato"){
+                $soggiornoApprovato = "True";
+            }
+            else{
+                $soggiornoApprovato = "False";
             }
         }
         else{
-            header('Location: areaUtente.php');
-            exit();
+            $soggiornoApprovato = "False";
         }
     }
     else{
@@ -76,11 +79,10 @@
         
             <h1 id="mainTitle">ATTIVIT&agrave;</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
-            <?php 
+        <?php 
             $numAttivita= numAttivita();
 
-            for ($i=1 ; $i<= $numAttivita ; $i++){
-
+            for($i=1 ; $i<= $numAttivita ; $i++){
                 $arrayDati=getDatiAttivita("A".$i);
 
                 $nome=$arrayDati['nome'];
@@ -90,28 +92,20 @@
                 $oraChiusura=substr($arrayDati['oraChiusura'],0,5);
                 $prezzoOrario=$arrayDati['prezzoOrario'];
           
-    ?>
-
+        ?>
             <div class="attivita paragraph">
 
                 <h1 class="title"><?php echo $nome;?></h1>
 
-                <p>
-
-                    <img class="immagine" src="<?php echo $linkImmagine;?>" alt="Immagine non trovata" align="middle">
-            
-                </p>
+                <p><img class="immagine" src="<?php echo $linkImmagine;?>" alt="Immagine non trovata" align="middle" /></p>
 
                 <p class="articolo">
                     <?php echo $descrizione;?>
                 </p>
 
                 <div>
-
                     <table class="box" align="center">
-
-                        <tr>
-                    
+                        <tr>                
                             <td>
                                 <div class="miniBox">
 
@@ -124,7 +118,6 @@
                                     </div>
 
                                 </div>
-
                             </td>
 
                             <td>
@@ -138,7 +131,6 @@
                                     </div>
                                     
                                 </div>
-
                             </td>
 
                             <td>
@@ -153,24 +145,26 @@
                                     </div>
                                     
                                 </div>
-
                             </td>
         
                         </tr>
-
                     </table>
-
                 </div>
-
-                    <input class="bottone" type="submit"  name="<?php echo "A".$i;?>" value="Prenota">
-                    <input type="hidden" name="attivitaSelezionata"/>
+                <?php
+                    if($soggiornoApprovato == "True"){
+                ?>
+                        <input class="bottone" type="submit"  name="<?php echo "A".$i;?>" value="Prenota" />                        
+                <?php
+                    }
+                ?>
+                    
 
             </div>
-
-            <?php
-        }
-    ?>
-           </form> 
+        <?php
+            }
+        ?>
+            <input type="hidden" name="attivitaSelezionata"/>
+            </form> 
 
             
         </div>

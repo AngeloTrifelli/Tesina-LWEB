@@ -311,8 +311,10 @@
         ?>
                 <script>
                     var maxCrediti = <?php echo json_encode($cliente['crediti']); ?>;            
-                    var maxValue = <?php echo json_encode($prezzoPrenotazione); ?>;            
+                    var maxValue = <?php echo json_encode($prezzoPrenotazione); ?>; 
+                    maxCrediti=Number(maxCrediti);
                     $("#textInput").on('change' , function(e){
+                        e.target.value=Number(e.target.value);
                         if(e.target.value < 0){
                             e.target.value = 0;
                         }
@@ -320,10 +322,14 @@
                         if(e.target.value > maxCrediti){
                             e.target.value = maxCrediti; 
                         }
-                        
+
+                        if(e.target.value/5 > maxValue){
+                            e.target.value= maxValue*5;
+                        }
                         var prezzoDaSottrarre = e.target.value / 5;
 
                         var totComplessivo = maxValue - prezzoDaSottrarre;
+                        totComplessivo= Math.round(totComplessivo*100) / 100;
                         var encodedStr = totComplessivo + " &euro;";
                         var decoded = $("<div/>").html(encodedStr).text();
                         $("#totComplessivo").text(decoded);

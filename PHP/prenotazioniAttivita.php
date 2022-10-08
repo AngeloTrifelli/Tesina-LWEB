@@ -12,23 +12,11 @@
         }  
     }
 
-    if(isset($_SESSION['codFiscUtenteLoggato'])){
-        $temp=$_SESSION['soggiornoAttivo'];
-        if($temp!="null"){
-            if($temp['statoSoggiorno']!= "Approvato"){
-                header("Location: areaUtente.php");
-                exit();
-            }
-        }
-        else{
-            header('Location: areaUtente.php');
-            exit();
-        }
-    }
-    else{
+    if(!isset($_SESSION['codFiscUtenteLoggato'])){
         header('Location: login.php');
         exit();
     }
+    
 
     $arrayPrenotazioniAttivitaUtente=getPrenotazioniAttivitaUtente($_SESSION['codFiscUtenteLoggato']);
 

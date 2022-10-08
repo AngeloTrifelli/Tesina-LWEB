@@ -3,56 +3,55 @@
     require_once('funzioniPHP.php');
 
     session_start();
-    if(!isset($_SESSION['codFiscUtenteLoggato'])){
-        if(!isset($_SESSION['loginType'])){
-            header('Location: intro.php');
-            exit();
-        }
+    
+    $oraUpdateConfermata=confermaOraUpdateMenu();
+    $oraUpdateConfermata = "True";
+
+    if(isset($_SESSION['portataDaModificare']) && isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Cliente" && $oraUpdateConfermata == "True"){
+        $descrizionePortata=$_SESSION['portataDaModificare'];
+        $prezzoPortata=getPrezzoPortata($descrizionePortata['nomeSeparato']);
     }
     else{
-        header('Location: areaUtente.php');
-        exit();
-    }
-    $oraUpdateConfermata=confermaOraUpdateMenu();
-    if($oraUpdateConfermata=="False"){
+        unset($_SESSION['portataDaModificare']);
         header('Location: visualizzaMenu.php');
         exit();
     }
 
+      
+
     $error="False";
     $nomePortataGiaEsistente="False";
 
-
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
         if(isset($_POST['ANNULLA'])){
-            unset($_SESSION['descrizionePortata']);
+            unset($_SESSION['portataDaModificare']);
             header('Location: visualizzaMenu.php');
             exit();
-        }else{
-            if(isset($_SESSION['descrizionePortata'])){
+        }
+        else{            
             if($_POST['nomePortata']!="" || $_POST['prezzo']!=""){
                 if($_POST['nomePortata']!=""){
-                $nomePortataGiaEsistente=checkNomePortata($_POST['nomePortata']);
-                if($nomePortataGiaEsistente=="False"){
-                modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
-                unset($_SESSION['descrizionePortata']);
-                header('Location: visualizzaMenu.php');
-                exit();
+                    $nomePortataGiaEsistente=checkNomePortata($_POST['nomePortata']);
+                    if($nomePortataGiaEsistente=="False"){
+                        modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
+                        unset($_SESSION['portataDaModificare']);
+                        header('Location: visualizzaMenu.php');
+                        exit();
+                    }
                 }
-            }else{
-                modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
-                unset($_SESSION['descrizionePortata']);
-                header('Location: visualizzaMenu.php');
+                else{
+                    modificaPortata($_POST['nomePortata'],$_POST['prezzo']);
+                    unset($_SESSION['portataDaModificare']);
+                    header('Location: visualizzaMenu.php');
+                }
             }
-        }else{
+            else{
                 $error="True";
-            }
-        }
+            }        
         }
     }
 
-    $descrizionePortata=$_SESSION['descrizionePortata'];
-    $prezzoPortata=getPrezzoPortata($descrizionePortata['nomeSeparato']);
+    
 
     
     echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -104,9 +103,9 @@
 
                         <div class="zonaDx">
                             <h2 class="noSpace">Prezzo:</h2>
-                                        <p><?php echo $prezzoPortata.'&euro;';?></p>
-                                        <span class="item">Nuovo prezzo:</span>
-                                        <input type="number" class="textInput" name="prezzo" />                      
+                            <p><?php echo $prezzoPortata.'&euro;';?></p>
+                            <span class="item">Nuovo prezzo:</span>
+                            <input type="number" class="textInput" name="prezzo" />                      
                         </div>    
 
                     </div>
@@ -114,8 +113,8 @@
                     <div class="zonaBottoni">
                         <input type="submit" class="button" name="ANNULLA" value="ANNULLA" />
                         <input type="submit" class="button" name="CONFERMA" value="CONFERMA" />
-
                     </div>
+                    
                 </div>
             </form>
             <?php
@@ -136,6 +135,13 @@
     ?>
         </div>
 
+        <script>
+            $('input[type=number][name=prezzo]').on("change" , function(e){            
+                if(e.target.value < 0){
+                    e.target.value = "";
+                }
+            })
+        </script>
         
     </body>
 </html>

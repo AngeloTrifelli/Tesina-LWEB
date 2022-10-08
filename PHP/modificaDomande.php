@@ -69,7 +69,10 @@
     if(isset($_SESSION['tipoAzioneDomanda'])){
         $temp = $_SESSION['tipoAzioneDomanda'];
         if($temp['tipoAzione'] == "aggiungiDomanda"){
-            $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);  
+            // $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);
+            $tabelleCategorie = getCategorie();
+            $categorieAttive = $tabelleCategorie[0];
+            $categorieDisattivate = $tabelleCategorie[1];  
             $aggiungiDomanda = "True";
         }
         elseif($temp['tipoAzione'] == "aggiungiRisposta"){
@@ -136,18 +139,16 @@
                         <div class="row">
                             <select id="selectInput" name="scegliCategoria">
                                 <option disabled selected value="Scegli">-- Scegli -- </option> 
-                            <?php
-                                $nomiCategorie = array_keys($categorieCliente);    
-                                for($i=0 ; $i < count($nomiCategorie) ; $i++){
-                                    $nomeCategoria = $nomiCategorie[$i];
-                                    if($categorieCliente[$nomeCategoria] == "Attiva"){
-                                        echo "<option value=\"{$nomeCategoria}\">{$nomeCategoria}</option>";
-                                    }
-                                    else{
-                                        echo "<option disabled value=\"{$nomeCategoria}\">{$nomeCategoria}</option>";
-                                    }
+                            <?php                                 
+                                for($i=0 ; $i < count($categorieAttive) ; $i++){
+                                    $categoria = $categorieAttive[$i];                                
+                                    echo "<option value=\"{$categoria['nome']}\">{$categoria['nome']}</option>";                                    
                                 }                           
-                                                           
+
+                                for($i=0 ; $i < count($categorieDisattivate) ; $i++){
+                                    $categoria = $categorieDisattivate[$i];                                
+                                    echo "<option disabled value=\"{$categoria['nome']}\">{$categoria['nome']}</option>"; 
+                                }                                                           
                             ?>
                             </select>
                         </div>    

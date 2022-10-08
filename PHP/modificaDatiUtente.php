@@ -92,17 +92,25 @@
                             }
                             else{
                                 if($datoDaModificare == "password"){
-                                    if($_POST['oldPassword']!="" && $_POST['newPassword']!=""){
-                                        $arrayPassword['oldPassword'] = md5($_POST['oldPassword']);
-                                        $arrayPassword['newPassword'] = md5($_POST['newPassword']);
-                                        if(isset($_SESSION['codFiscUtenteLoggato'])){
-                                        $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $arrayPassword);
-                                        }else{
-                                            $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , $arrayPassword);
+                                    if($_SESSION['loginType'] == "Cliente" ){
+                                        if($_POST['oldPassword']!="" && $_POST['newPassword']!=""){
+                                            $arrayPassword['oldPassword'] = md5($_POST['oldPassword']);
+                                            $arrayPassword['newPassword'] = md5($_POST['newPassword']);                                                                                      
+                                            $result = modificaDatiUtente($_SESSION['codFiscUtenteLoggato'],$datoDaModificare , $arrayPassword);                                                                                                                                   
+
+                                            if($result == "success"){    
+                                                header('Location: datiPersonali.php');
+                                                exit();
+                                            }
                                         }
-                                        if($result == "success"){    
-                                            header('Location: datiPersonali.php');
-                                            exit();
+                                    }
+                                    else{
+                                        if($_POST['newPassword'] != ""  ){
+                                            $result = modificaDatiUtente($_SESSION['codFiscUtenteDaModificare'],$datoDaModificare , md5($_POST['newPassword']) );
+                                            if($result == "success"){    
+                                                header('Location: datiPersonali.php');
+                                                exit();
+                                            } 
                                         }
                                     }
                                 }
@@ -117,7 +125,20 @@
     else{
         $datoDaModificare = individuaDatoDaModificare();
         if($datoDaModificare == "null"){    //Se il controllo va a buon fine significa che non sono arrivato in questa pagina mediante datiPersonali.php
-            //Controlla se l'utente è loggato o meno e fai l'header di conseguenza
+            if(isset($_SESSION['loginType'])){
+                if($_SESSION['loginType'] == "Admin"){
+                    header('Location: visualizzaClienti.php');
+                    exit();
+                }
+                else{
+                    header('Location: areaUtente.php');
+                    exit();
+                }
+            }
+            else{
+                header('Location: login.php');
+                exit();
+            }
         }
     }
 ?>
@@ -141,6 +162,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 </head>
 
 <body>
@@ -276,16 +298,34 @@
                                 }
                                 break;
                             case "password":
+                                if(isset($_SESSION['codFiscUtenteLoggato'])){
+
                     ?>
-                                <input type="text" class="textInput" placeholder="Inserisci la vecchia password" name="oldPassword" />
-                                <input type="text" class="textInput" placeholder="Inserisci la nuova password" name="newPassword"/>
+                                    <div class="containerPassword">
+                                        <input class="textInput" id="oldPassword" autocomplete="current-password" type="password" name="oldPassword" placeholder="Inserisci la vecchia password" />
+                                        <i class="far fa-eye occhio" id="toggleOldPassword"></i>
+                                    </div>
+                            <?php
+                                }
+                            ?>
+                                <div class="containerPassword">
+                                    <input class="textInput" type="password" id="newPassword" autocomplete="current-password" name="newPassword" placeholder="Inserisci la nuova password" />  
+                                    <i class="far fa-eye occhio" id="toggleNewPassword"></i> 
+                                </div>                               
                     <?php
-                                if(isset($_POST['CONFERMA']) && ($_POST['oldPassword'] == "" || $_POST['newPassword'] =="") ){
-                                    echo "<p class=\"errorLabel\">Dati mancanti!</p>";
+                                if(isset($_SESSION['codFiscUtenteLoggato'])){
+                                    if(isset($_POST['CONFERMA']) && ($_POST['oldPassword'] == "" || $_POST['newPassword'] =="") ){
+                                        echo "<p class=\"errorLabel\">Dati mancanti!</p>";
+                                    }
+                                    else{
+                                        if(isset($_POST['CONFERMA']) && $_POST['oldPassword']!="" && $_POST['newPassword']!="" && $result == "insuccess"){
+                                            echo "<p class=\"errorLabel\">La vecchia password inserita è errata!</p>";
+                                        }
+                                    }
                                 }
                                 else{
-                                    if(isset($_POST['CONFERMA']) && $_POST['oldPassword']!="" && $_POST['newPassword']!="" && $result == "insuccess"){
-                                        echo "<p class=\"errorLabel\">La vecchia password inserita è errata!</p>";
+                                    if(isset($_POST['CONFERMA']) && $_POST['newPassword'] == "" ){
+                                        echo "<p class=\"errorLabel\">Dati mancanti!</p>";
                                     }
                                 }
                                 break;
@@ -304,8 +344,45 @@
             </form>
         </div>
     </div>
+    <?php
+        if($_SESSION['loginType'] == "Cliente" ){
+    ?>
+        <script>
+                const toggleOldPassword = document.querySelector('#toggleOldPassword');
+                const oldPassword = document.querySelector('#oldPassword');
 
+                const toggleNewPassword = document.querySelector('#toggleNewPassword');
+                const newPassword = document.querySelector('#newPassword');
 
+                toggleOldPassword.addEventListener('click', function (e) {            
+                const type = oldPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                oldPassword.setAttribute('type', type);            
+                this.classList.toggle('fa-eye-slash');
+                });
+
+                toggleNewPassword.addEventListener('click', function (e) {            
+                const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                newPassword.setAttribute('type', type);            
+                this.classList.toggle('fa-eye-slash');
+                });
+        </script>
+    <?php
+        }
+        else{
+    ?>      
+            <script>                
+                const toggleNewPassword = document.querySelector('#toggleNewPassword');
+                const newPassword = document.querySelector('#newPassword');
+                
+                toggleNewPassword.addEventListener('click', function (e) {            
+                const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                newPassword.setAttribute('type', type);            
+                this.classList.toggle('fa-eye-slash');
+                });
+            </script>
+    <?php
+        }
+    ?>
 
 
 </body>

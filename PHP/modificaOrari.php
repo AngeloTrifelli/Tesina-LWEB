@@ -1,9 +1,11 @@
-<?php
-    echo '<?xml version="1.0" encoding="UTF-8?>';
+<?php    
     require_once('funzioniPHP.php');
     require_once('funzioniInsertPHP.php');
     require_once('funzioniGetPHP.php');
     require_once('funzioniModificaPHP.php');
+
+    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
+
 
     session_start();
     $orariScorretti="";
@@ -13,11 +15,13 @@
             header('Location: intro.php');
             exit();
         }
-    }else{
+    }
+    else{
         header('Location: areaUtente.php');
         exit();
-}
-$checkOrariRistorante="False";
+    }
+
+    $checkOrariRistorante="False";
     if(isset($_POST['ristorante']) || isset($_POST['updateRistorante']) || isset($_SESSION['idAttivita']) || isset($_POST['idAttivita'])){
         
         if(isset($_SESSION['idAttivita'])){
@@ -34,12 +38,23 @@ $checkOrariRistorante="False";
                 }
                 else{
                     if(isset($_POST['ristorante'])){
-                        if ($_POST['oraAperturaPranzo']!="" && $_POST['oraChiusuraPranzo']!="" && $_POST['oraAperturaCena']!="" && $_POST['oraChiusuraCena']!=""){
+                        if (preg_match($patternOrario, $_POST['oraAperturaPranzo']) && preg_match($patternOrario, $_POST['oraChiusuraPranzo']) && preg_match($patternOrario, $_POST['oraAperturaCena']) && preg_match($patternOrario, $_POST['oraChiusuraCena'])){
                             modificaOrariRistorante($_POST['oraAperturaPranzo'],$_POST['oraChiusuraPranzo'],$_POST['oraAperturaCena'] , $_POST['oraChiusuraCena']);
                             header('Location: listaOrari.php');
                             exit();
                         }else{
-                            $orariScorretti="True";
+                            if(isset($_POST['oraAperturaPranzo']) && !preg_match($patternOrario , $_POST['oraAperturaPranzo'])){
+                                $erroreOrarioAperturaPranzo = "True";
+                            }
+                            if(isset($_POST['oraChiusuraPranzo']) && !preg_match($patternOrario , $_POST['oraChiusuraPranzo'])){
+                                $erroreOrarioChiusuraPranzo = "True";
+                            }
+                            if(isset($_POST['oraAperturaCena']) && !preg_match($patternOrario , $_POST['oraAperturaCena'])){
+                                $erroreOrarioAperturaCena = "True";
+                            }
+                            if(isset($_POST['oraChiusuraCena']) && !preg_match($patternOrario , $_POST['oraChiusuraCena'])){
+                                $erroreOrarioChiusuraCena = "True";
+                            }
                         }
                     }elseif(isset($_POST['updateRistorante'])){
                         if ($_POST['oraInizioUpdate']!="" && $_POST['oraFineUpdate']!=""){
@@ -54,7 +69,7 @@ $checkOrariRistorante="False";
                         }
 
                     }else{
-                        if($_POST['oraAperturaAttivita']!="" && $_POST['oraChiusuraAttivita']!=""){
+                        if(preg_match($patternOrario,$_POST['oraAperturaAttivita']) && preg_match($patternOrario,$_POST['oraChiusuraAttivita'])){
                     
                         modificaOrariAttivita($_POST['idAttivita'],$_POST['oraAperturaAttivita'],$_POST['oraChiusuraAttivita']);
                         header('Location: listaOrari.php');
@@ -62,19 +77,27 @@ $checkOrariRistorante="False";
                         }
                         else{
                             $idAttivita=$_POST['idAttivita'];
-                            $orariScorretti="True";
+                            if(isset($_POST['oraAperturaAttivita']) && !preg_match($patternOrario , $_POST['oraAperturaAttivita'])){
+                                $erroreOrarioAperturaAttivita = "True";
+                            }
+                            if(isset($_POST['oraChiusuraAttivita']) && !preg_match($patternOrario , $_POST['oraChiusuraAttivita'])){
+                                $erroreOrarioChiusuraAttivita = "True";
+                            }
                         }
                     }
                     
                 }
             }
-
+        
         }
-
-    }else{
+    
+    }
+    else{
         header('Location: listaOrari.php');
         exit();
     }   
+
+    echo '<?xml version="1.0" encoding="UTF-8?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -185,11 +208,20 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di apertura a pranzo:</strong></p>
         <?php 
                         if(isset($_POST['oraAperturaPranzo'])){
-                            echo "<input  name=\"oraAperturaPranzo\" class=\"oraRistorantePranzo\" value=\"{$_POST['oraAperturaPranzo']}\" />";                        
+                            echo "<input type=\"text\" name=\"oraAperturaPranzo\" class=\"textInput oraRistorantePranzo\" value=\"{$_POST['oraAperturaPranzo']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraAperturaPranzo\" class=\"oraRistorantePranzo\" />";                        
+                            echo "<input type=\"text\" name=\"oraAperturaPranzo\" class=\"textInput oraRistorantePranzo\" />";                        
                         }
+                        if(isset($_POST['cambia']) && $_POST['oraAperturaPranzo'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di apertura a pranzo!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioAperturaPranzo) && $_POST['oraAperturaPranzo']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
+                        }
+                        
                     
                     ?>
         </div>
@@ -199,10 +231,18 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di chiusura a pranzo:</strong></p>
         <?php 
                         if(isset($_POST['oraChiusuraPranzo'])){
-                            echo "<input  name=\"oraChiusuraPranzo\" class=\"oraRistorantePranzo\" value=\"{$_POST['oraChiusuraPranzo']}\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraPranzo\" class=\"textInput oraRistorantePranzo\" value=\"{$_POST['oraChiusuraPranzo']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraChiusuraPranzo\" class=\"oraRistorantePranzo\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraPranzo\" class=\"textInput oraRistorantePranzo\" />";                        
+                        }
+                        if(isset($_POST['cambia']) && $_POST['oraChiusuraPranzo'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di chiusura a pranzo!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioChiusuraPranzo) && $_POST['oraChiusuraPranzo']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
                         }
                         
                     ?>
@@ -219,12 +259,20 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di apertura a cena:</strong></p>
         <?php 
                         if(isset($_POST['oraAperturaCena'])){
-                            echo "<input  name=\"oraAperturaCena\" class=\"oraRistoranteCena\" value=\"{$_POST['oraAperturaCena']}\" />";                        
+                            echo "<input type=\"text\"  name=\"oraAperturaCena\" class=\"textInput oraRistoranteCena\" value=\"{$_POST['oraAperturaCena']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraAperturaCena\" class=\"oraRistoranteCena\" />";                        
+                            echo "<input type=\"text\"  name=\"oraAperturaCena\" class=\"textInput oraRistoranteCena\" />";                        
                         }
-                    
+                        if(isset($_POST['cambia']) && $_POST['oraAperturaCena'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di apertura a cena!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioAperturaCena) && $_POST['oraAperturaCena']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
+                        }
+                        
                     ?>
         </div>
 
@@ -233,10 +281,18 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di chiusura a cena:</strong></p>
         <?php 
                         if(isset($_POST['oraChiusuraCena'])){
-                            echo "<input  name=\"oraChiusuraCena\" class=\"oraRistoranteCena\" value=\"{$_POST['oraChiusuraCena']}\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraCena\" class=\"textInput oraRistoranteCena\" value=\"{$_POST['oraChiusuraCena']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraChiusuraCena\" class=\"oraRistoranteCena\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraCena\" class=\"textInput oraRistoranteCena\" />";                        
+                        }
+                        if(isset($_POST['cambia']) && $_POST['oraChiusuraCena'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di chiusura a cena!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioChiusuraCena) && $_POST['oraChiusuraCena']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
                         }
                         
                     ?>
@@ -251,20 +307,11 @@ $checkOrariRistorante="False";
         <input type="hidden" name="ristorante" value="ristorante">
         </div>
 
+
         </form>
-    <?php
-        if ($orariScorretti=="True"){
-            echo "
-                <div class\"riga\">
-                <p class=\"errorLabel\">Dati mancanti!</p>
-                </div>
-            ";
-            }
-    } 
-    ?>
-    
 
     <?php
+    }
     if(isset($idAttivita)){
         $attivita=getDatiAttivita($idAttivita);
 
@@ -279,10 +326,18 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di apertura dell'attività:<?php echo $attivita['nome']?></strong></p>
         <?php 
                         if(isset($_POST['oraAperturaAttivita'])){
-                            echo "<input  name=\"oraAperturaAttivita\" class=\"oraInizioAttivita\" value=\"{$_POST['oraAperturaAttivita']}\" />";                        
+                            echo "<input type=\"text\"  name=\"oraAperturaAttivita\" class=\"oraInizioAttivita\" value=\"{$_POST['oraAperturaAttivita']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraAperturaAttivita\" class=\"oraInizioAttivita\" />";                        
+                            echo "<input type=\"text\"  name=\"oraAperturaAttivita\" class=\"oraInizioAttivita\" />";                        
+                        }
+                        if(isset($_POST['cambia']) && $_POST['oraAperturaAttivita'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di apertura dell\'attività!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioAperturaAttivita) && $_POST['oraAperturaAttivita']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
                         }
                     
                     ?>
@@ -293,10 +348,18 @@ $checkOrariRistorante="False";
         <p><strong>Inserisci l'orario di chiusura dell'attività:<?php echo $attivita['nome']?></strong></p>
         <?php 
                         if(isset($_POST['oraChiusuraAttivita'])){
-                            echo "<input  name=\"oraChiusuraAttivita\" class=\"oraFineAttivita\" value=\"{$_POST['oraChiusuraAttivita']}\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraAttivita\" class=\"oraFineAttivita\" value=\"{$_POST['oraChiusuraAttivita']}\" />";                        
                         }
                         else{
-                            echo "<input  name=\"oraChiusuraAttivita\" class=\"oraFineAttivita\" />";                        
+                            echo "<input type=\"text\"  name=\"oraChiusuraAttivita\" class=\"oraFineAttivita\" />";                        
+                        }
+                        if(isset($_POST['cambia']) && $_POST['oraChiusuraAttivita'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di chiusura dell\'attività!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioChiusuraAttivita) && $_POST['oraChiusuraAttivita']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
                         }
                         
                     ?>
@@ -313,25 +376,13 @@ $checkOrariRistorante="False";
 
         </form>
     <?php
-        if ($orariScorretti=="True"){
-            echo "
-                <div class\"riga\">
-                <p class=\"errorLabel\">Dati mancanti!</p>
-                </div>
-            ";
-            }
     } 
     ?>
     </div>
 
-    <script>
-
-//Perfezionare la parte sottonstanza 
-           
+    <script>                    
             $(".oraRistorantePranzo").attr("autocomplete" , "off");
-            $(".oraRistoranteCena").attr("autocomplete" , "off");
-
-;
+            $(".oraRistoranteCena").attr("autocomplete" , "off");        
             $(".oraInizioAttivita").attr("autocomplete" , "off");
             $(".oraFineAttivita").attr("autocomplete" , "off");
 
@@ -344,8 +395,9 @@ $checkOrariRistorante="False";
                 maxTime: "23:00",
                 dynamic: false,
                 dropdown: true,
-                scrollbar: true
+                scrollbar: true,
             });
+            
             $('.oraFineAttivita').timepicker({
                 timeFormat: 'HH:mm',
                 interval: 60,

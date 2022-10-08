@@ -41,6 +41,13 @@
                     $elevaFaq = "True";
                 }                
             }            
+
+            if(isset($_SESSION['codFiscUtenteLoggato'])){
+                $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);
+                if(array_key_exists($datiDomanda['categoria'] , $categorieCliente  )){
+                    $rispostaPermessa = "True";
+                }
+            }            
         }
         else{
             header('Location: domande.php');
@@ -107,11 +114,16 @@
 
             <div class="bottomBox">
             <?php
-                if($_SESSION['loginType'] != "Cliente" || $_SESSION['codFiscUtenteLoggato'] != $datiDomanda['codFiscAutore']){
+                if($_SESSION['loginType'] != "Cliente"){
                     if(!isset($elevaFaq)){
                         echo '<input type="submit" class="specialButton" name="inserisciRisposta" value="AGGIUNGI RISPOSTA" />';
                     }                    
-                }  
+                }
+                else{
+                    if($_SESSION['codFiscUtenteLoggato'] != $datiDomanda['codFiscAutore'] && isset($rispostaPermessa)){
+                        echo '<input type="submit" class="specialButton" name="inserisciRisposta" value="AGGIUNGI RISPOSTA" />';
+                    }
+                }
             ?>                
             </div>
         </div>

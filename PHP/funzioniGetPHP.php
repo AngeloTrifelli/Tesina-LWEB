@@ -1607,4 +1607,11 @@ function getFaq($idFaq){
 }
  return $FAQ;
 }
+
+
+
+
+
+
+
 ?>

@@ -149,7 +149,7 @@
                 <br/>            
                 <a class="item" href="./camere.php">CAMERE E SUITE</a>
                 <br/>             
-                <a class="item" href="#">RECENSIONI</a>
+                <a class="item" href="./recensioni.php">RECENSIONI</a>
                 <br/>
                 <a class="item" href="./prenotaOra.php">PRENOTA ORA</a>
                 <br/>
@@ -193,24 +193,24 @@
                         if(isset($_POST['accedi']) && $_POST['password'] == ""){
                             echo "
                                 <br />
-                                <p class=\"errorLabelPass\">Inserire la password!</p>";
+                                <p class=\"errorLabel\">Inserire la password!</p>";
                         }
                         if(isset($_POST['accedi']) && $_POST['username']!="" && $_POST['password']!="" && isset($_POST['type']) && ($codFisc=="null" || $trovato == "False")){
                             echo "
                                 <br />
-                                <p class=\"errorLabelPass\">Username e/o password errati!</p>";
+                                <p class=\"errorLabel\">Username e/o password errati!</p>";
                         }
 
                         if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $codFisc == "null"){
                             echo "
                                 <br />
-                                <p class=\"errorLabelPass\">Username e/o password errati!</p>";
+                                <p class=\"errorLabel\">Username e/o password errati!</p>";
                         }
 
                         if(isset($_POST['accedi']) && isset($_POST['idCamera']) && $erroreSoggiornoAttivo == "True"){
                             echo "
                                 <br />
-                                <p class=\"errorLabelPass\">L'utente ha già un soggiorno attivo. Impossibile completare la prenotazione!</p>";
+                                <p class=\"errorLabel\">L'utente ha già un soggiorno attivo. Impossibile completare la prenotazione!</p>";
                         }
                     ?>
                     </div>

@@ -61,10 +61,8 @@ require_once('funzioniPHP.php');
                 <a href="./areaUtente.php">TORNA NELL'AREA UTENTE</a>  
             </div>
 
-            <h1 class="alignCenter">LISTA ORARI</h1>
-           
-            <div style="width: 18.5%;"></div>
-               
+            <h1 style="display:inline ;">LISTA ORARI</h1>
+                          
         </div>
 
         <?php
@@ -116,8 +114,8 @@ require_once('funzioniPHP.php');
         </div>
 
         <h3 class="titoloImportante alignCenter">ATTIVIT&Agrave;:</h3>
-        <div class="mainContainer">
         <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">
+        <div class="mainContainer">
         <?php
             for($i=0;$i<count($arrayAttivita);$i++){
                     $attivita=$arrayAttivita[$i];
@@ -142,10 +140,8 @@ require_once('funzioniPHP.php');
                 <?php
                 }
                 ?>
-                </form> 
-
         </div>
-       
+        </form> 
        
     </body>
 </html>

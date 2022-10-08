@@ -219,7 +219,7 @@
                     <br />
                     <br />
                     <h2>Richieste aggiuntive:</h2>
-                    <textarea type="text" class="textInput note" name="note"></textarea>                 
+                    <textarea type="text" class="textInput note" name="note"><?php if(isset($_POST['note'])){echo $_POST['note'];}?></textarea>                 
 
                     <div class="zonaBottoni">
                         <input type="submit" class="button" name="ANNULLA" value="ANNULLA" />

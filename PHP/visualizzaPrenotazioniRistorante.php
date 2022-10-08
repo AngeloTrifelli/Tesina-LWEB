@@ -23,22 +23,9 @@
 
 
     if(isset($_SESSION['codFiscUtenteLoggato'])){
-        $temp = $_SESSION['soggiornoAttivo'];
-        if($temp != "null"){
-            if($temp['statoSoggiorno'] != "Approvato"){
-                header('Location: areaUtente.php');
-                exit();
-            }
-            else{
-                $prenotazioniCliente = getPrenotazioniRistorante($_SESSION['codFiscUtenteLoggato']);
-                $prenotazioniAttive = $prenotazioniCliente[0];
-                $prenotazioniPassate = $prenotazioniCliente[1];
-            }
-        }
-        else{
-            header('Location: prenotaOra.php');
-            exit();
-        }
+        $prenotazioniCliente = getPrenotazioniRistorante($_SESSION['codFiscUtenteLoggato']);
+        $prenotazioniAttive = $prenotazioniCliente[0];
+        $prenotazioniPassate = $prenotazioniCliente[1];        
     }
     else{
         header('Location: login.php');
@@ -74,8 +61,7 @@
             <div class="topLeft">
                 <a href="./homeRistorante.php">TORNA NELL'AREA UTENTE</a>    
             </div>
-            <h1 class="alignCenter">PRENOTAZIONI RISTORANTE</h1>
-            <div style="width: 18.5%;"></div>
+            <h1 style="display:inline ;">PRENOTAZIONI RISTORANTE</h1>            
         </div>
 
         <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >

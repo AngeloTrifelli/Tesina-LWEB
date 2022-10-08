@@ -4,28 +4,15 @@
 
     session_start();
 
-    if(isset($_SESSION['codFiscUtenteLoggato'])){
-        $temp = $_SESSION['soggiornoAttivo'];
-        if($temp != "null"){
-            if($temp['statoSoggiorno'] != "Approvato"){
-                header('Location: areaUtente.php');
-                exit();
-            }
-        }
-        else{
-            header('Location: prenotaOra.php');
-            exit();
-        }
-    }
-    else{
+    if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(isset($_SESSION['loginType'])){
             $accessoStaff = "True";
         }
         else{
             header('Location: login.php');
             exit();
-        }        
-    }
+        }   
+    }    
 
 
     if(isset($_POST['bottonePremuto'])){

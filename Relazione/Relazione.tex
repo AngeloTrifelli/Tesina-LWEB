@@ -8,6 +8,7 @@
 
 
 
+
 \definecolor {background}{RGB}{237,241,247}
 \definecolor{commentColor}{rgb}{0.4,0.4,0.4}
 \definecolor {keywordColor}{RGB}{224,162,4}
@@ -47,7 +48,7 @@ Si propone di realizzare un sito web dedicato ad un hotel ed in grado di permett
 Il sito è visitabile a partire da una pagina home iniziale, accessibile da tutte le tipologie di utenti, che descrive l'hotel fornendo informazioni su quest'ultimo, una serie di FAQ ed alcune attività che vengono messe a disposizione. Dalla home è poi possibile accedere ad una pagina dedicata per la prenotazione di una camera oppure direttamente alla schermata di login nel caso in cui l'utente è già cliente dell'hotel.\\\\
 Il login (mediante username e password) può essere effettuato da tre tipologie di utenti:
 \begin{itemize}
-\item \textbf{Utente registrato:} cioè un utente che deve essere necessariamente registrato all'interno del sito dell'hotel. La registrazione può avvenire al momento del completamento della prima prenotazione di una camera oppure eventualmente l'utente potrà registrarsi anticipatamente (quindi senza dover necessariamente prenotare una camera).
+\item \textbf{Utente registrato:} cioè un utente che deve essere necessariamente registrato all'interno del sito dell'hotel. La registrazione può essere effettuata dall'utente in un qualunque momento e solo dopo averla effettuata l'utente potrà prenotare una camera.
 \item \textbf{Concierge:} utente moderatore che disporrà di credenziali personali e potrà svolgere operazioni volte alla moderazione del sito.
 \item \textbf{Admin:} un utente amministratore che disporrà di credenziali personali e che potrà effettuare operazioni riservate.
 \end{itemize}
@@ -140,28 +141,23 @@ Mediante un'apposita pagina dedicata è possibile prenotare un soggiorno presso 
 Una camera può essere messa a disposizione anche se ha già una o più prenotazioni associate ad essa (l'importante è che i periodi delle varie prenotazioni non si sovrappongano). Dopo aver selezionato una camera, se l'utente non ha già effettuato l'autenticazione, verrà richiesto di eseguire il login:
 \begin{enumerate}
 \item Se l'utente ha già effettuato la registrazione allora dovrà semplicemente inserire il proprio \textit{username} e \textit{password} per completare la prenotazione in tempi brevi.
-\item Altrimenti, l'utente dovrà necessariamente effettuare la registrazione per completare la prenotazione.
+\item Altrimenti, l'utente dovrà necessariamente effettuare la registrazione per effettuare la sua prima prenotazione all'interno del sito.
 \end{enumerate}
 
 
 \subsection{Registrazione}
-La registrazione all'interno del sito del hotel può essere effettuata esclusivamente da un utente che non sia già registrato (e dunque che non disponga di un account). Essa può essere effettuata in due circostanze:
-\begin{enumerate}
-\item Quando un utente effettua la sua prima prenotazione di una camera. In questo caso, non avendo ancora usufruito dell'hotel dovrà necessariamente registrare un proprio account per completare la prenotazione.
-\item Oppure l'utente potrà registrarsi all'interno del sito anticipatamente (e quindi con la possibilità di effettuare la prima prenotazione in un secondo momento). In questo caso l'utente potrà comunque accedere alla propria pagina personale per poter modificare i propri dati, ma non potrà ovviamente usufruire di funzionalità addizionali finché non prenoterà un soggiorno.
-\end{enumerate}
-Indipendentemente dal momento in cui viene effettuata la registrazione, verranno richiesti di inserire i seguenti dati: \textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}. Una volta inseriti i dati, l'utente per poter diventare a tutti gli effetti un \textit{cliente registrato} dovrà scegliere le proprie credenziali (\textit{username} e \textit{password}) con cui effettuerà il login.
+La registrazione all'interno del sito del hotel può essere effettuata esclusivamente da un utente che non sia già registrato (e dunque che non disponga di un account). Verrà richiesto di inserire i seguenti dati: \textit{nome}, \textit{cognome}, \textit{codice fiscale}, \textit{data di nascita}, \textit{indirizzo}, \textit{telefono}, \textit{email} e \textit{numero della carta di credito}. Una volta inseriti i dati, l'utente per poter diventare a tutti gli effetti un \textit{cliente registrato} dovrà scegliere le proprie credenziali (\textit{username} e \textit{password}) con cui effettuerà il login.
 
 \medskip
 
 \subsection{Login}
 \label{Login}
-Mediante un apposita pagina l'utente è in grado di inserire le proprie credenziali (username e password) per poter effettuare l'autenticazione. Ogni tipologia di utente disporrà di un form separato per poter inserire le proprie credenziali. Ad esempio un utente amministratore per poter effettuare l'autenticazione dovrà inserire le proprie credenziali nel suo form dedicato ed inserirle in un altro form non porterà il successo del login (anche se le credenziali sono corrette). 
+Mediante un apposita pagina l'utente è in grado di inserire le proprie credenziali (username e password) per poter effettuare l'autenticazione. Poiché anche il concierge o l'admin potranno effettuare l'autenticazione, per distinguere la tipologia di utente verrà richiesto nella pagina di login di specificare il proprio ruolo.
 
 \medskip
 
 \subsection{Visualizzazione e modifica delle informazioni personali}
-Un cliente dopo che avrà effettuato l'autenticazione verrà portato in una pagina personale in cui potrà ottenere un riepilogo di tutti i dati inseriti al momento della registrazione (compresi \textit{username} e \textit{password}). Eventualmente, avrà la possibilità di scegliere un qualsiasi dato per poterlo modificare. Tutte queste possibilità vengono date anche ad i clienti che non hanno un soggiorno prenotato. Inoltre, i clienti potranno visualizzare i dati relativi ad eventuali prenotazioni di soggiorni passati e presenti (senza però poterli modificare)
+Un cliente dopo che avrà effettuato l'autenticazione potrà andare in una pagina personale in cui potrà ottenere un riepilogo di tutti i dati inseriti al momento della registrazione (compresi \textit{username} e \textit{password}). Eventualmente, avrà la possibilità di scegliere un qualsiasi dato per poterlo modificare. Tutte queste possibilità vengono date anche ad i clienti che non hanno un soggiorno prenotato. Inoltre, i clienti potranno visualizzare i dati relativi ad eventuali prenotazioni di soggiorni passati e presenti (senza però poterli modificare)
 
 \medskip
 
@@ -196,7 +192,7 @@ Esso presenta una home page accessibile esclusivamente dalla pagina personale di
 \item La \textbf{locazione} del tavolo (che può essere \textit{interna} o \textit{esterna})
 \end{enumerate}
 Tramite un apposito pulsante sarà poi possibile confermare la propria prenotazione (nel caso in cui non vi siano tavoli disponibili che soddisfano le richieste inserite verrà mostrato un apposito messaggio d'errore).
-\item \textbf{Prenotare un servizio in camera:} come per la prenotazione del tavolo, verra richiesto di inserire la \textbf{data} e \textbf{l'orario} della prenotazione. Tuttavia, verrà richiesto inoltre:
+\item \textbf{Prenotare un servizio in camera:} un cliente potrà effettuare questo tipo di prenotazione esclusivamente al di fuori del range orario di modifica nel menu (cioè, l'ora corrente non deve rientrare all'interno del range orario in cui il menù si trova in fase di modifica). Come per la prenotazione del tavolo, verrà richiesto di inserire la \textbf{data} e \textbf{l'orario} della prenotazione. Tuttavia, verrà richiesto inoltre:
 \begin{enumerate}
 \item Le \textbf{portate} che il cliente intende ordinare (volendo un cliente potrà ordinare anche più volte la stessa portata)
 \item Delle eventuali \textbf{richieste} riguardanti il servizio o un particolare piatto, che il cliente può specificare (ad esempio per indicare delle allergie) 
@@ -209,11 +205,10 @@ Verrà poi mostrato un riepilogo delle proprie scelte ed il prezzo totale calcol
 
 \subsection{Attività}
 \label{Attività}
-Dalla pagina personale di un \textit{cliente prenotato} è possibile accedere ad una pagina dedicata alle attività che l'hotel mette a disposizione dei propri clienti. In questa pagina verrà visualizzata una lista delle attività disponibili, ciascuna avente una breve descrizione ed un'immagine illustrativa. Per ogni attività saranno inoltre visualizzati i rispettivi orari di apertura e di chiusura, un eventuale prezzo orario (alcune attività possono essere gratuite) ed un form contenente:
+Dalla pagina personale di un \textit{cliente prenotato} è possibile accedere ad una pagina dedicata alle attività che l'hotel mette a disposizione dei propri clienti. In questa pagina verrà visualizzata una lista delle attività disponibili, ciascuna avente una breve descrizione ed un'immagine illustrativa. Per ogni attività saranno inoltre visualizzati i rispettivi orari di apertura e di chiusura, un eventuale prezzo orario (alcune attività possono essere gratuite). Il cliente potrà scegliere di prenotare un'attività andando a specificare:
 \begin{enumerate}
-\item Un campo per inserire la \textbf{data} di prenotazione (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
-\item Due campi per poter inserire \textbf{l'orario di inizio e di fine} della prenotazione (che devono essere compresi nell'intervallo di apertura e di chiusura dell'attività che si sta prenotando).
-\item Un bottone per poter confermare la propria prenotazione.
+\item La \textbf{data} di prenotazione (deve essere compresa nell'intervallo temporale di soggiorno del cliente).
+\item \textbf{L'orario di inizio e di fine} della prenotazione (che devono essere compresi nell'intervallo di apertura e di chiusura dell'attività che si sta prenotando).
 \end{enumerate}
 Sempre da questa pagina sarà possibile, tramite una voce di un apposito menù,  visualizzare le proprie prenotazioni che eventualmente sono state già effettuate. Nel caso, l'utente potrà selezionare una prenotazione (di cui non ha ancora usufruito) e cancellarla.
 
@@ -231,7 +226,7 @@ Mediante un'apposita voce di un menù della pagina home sarà possibile accedere
 \item \textbf{Eventuali commenti di risposta} (che verranno aggiunti da altri utenti).
 \end{itemize}
 I commenti di risposta a loro volta saranno caratterizzati da: nome e cognome dell'utente che scrive il commento, il testo del commento, giudizi lasciati da altri utenti (analoghi a quelli delle recensioni) ed eventualmente altri commenti di risposta al commento (non sarà però possibile rispondere ad un commento di risposta di un altro commento).\\\\
-Tuttavia, un cliente potrà inserire o giudicare una particolare recensione solamente se la categoria di tale recensione corrisponde ad un servizio utilizzato dal cliente. Analogamente, un cliente potrà inserire un commento o giudicare un commento già esistente solamente nell'ambito di recensioni con categorie "valide" per lo specifico cliente.
+Tuttavia, un cliente potrà inserire o giudicare una particolare recensione solamente se la categoria di tale recensione corrisponde ad un servizio utilizzato dal cliente. Analogamente, un cliente potrà giudicare un commento già esistente solamente nell'ambito di recensioni con categorie "valide" per lo specifico cliente.
 
 \medskip
 
@@ -258,16 +253,17 @@ Ogni domanda sarà composta da una \textit{categoria}, un \textit{testo} e da ev
 
 \subsection{Modifica del menù del ristorante}
 \label{ModificaMenu}
-L'utente moderatore/amministratore sarà portato in una pagina in cui egli potrà scegliere la tipologia di azione che intende compiere:
+L'utente moderatore/amministratore potranno andare nella pagina per visualizzare il menù e disporre di funzionalità aggiuntive rispetto al cliente. In particolare, potranno effettuare le seguenti azioni:
 \begin{itemize}
 \item \textbf{Aggiunta:} verrà mostrato all'utente un form in cui egli dovrà inserire tutti gli attributi (\textit{tipologia}, \textit{nome} e \textit{prezzo}) della portata che intende aggiungere.
-\item \textbf{Modifica/cancellazione:} verrà richiesto, mediante un apposito menù a tendina, di inserire la tipologia di portata (antipasti, primi piatti, ecc..) che si intende modificare/cancellare. Dopodiché, verrà mostrata la lista di portate che corrispondono alla tipologia scelta. L'utente potrà selezionare una portata e, mediante degli appositi pulsanti, decidere se intende cancellarla dal menù oppure modificarla. Nel caso in cui egli intende modificare la portata verrà data la possibilità di modificare il campo del nome e del prezzo.
+\item \textbf{Modifica:} l'utente avrà la possibilità di selezionare una particolare portata e modificare il suo nome oppure il suo prezzo.
+\item \textbf{Cancellazione:} l'utente potrà selezionare una portata per eliminarla completamente dal menù 
 \end{itemize} 
-
+Occorre tuttavia precisare che tutte queste azioni saranno concesse esclusivamente  durante il range orario di modifica del menù. Tale range orario potrà essere modificato dall'admin.
 \medskip
 
 \subsection{Modifica degli orari}
-Verrà mostrata all'utente moderatore/amministratore una lista contenente tutte le attività organizzate dall'hotel con i loro rispettivi orari di inizio e di fine. In questa lista sarà inoltre incluso il ristorante dell'hotel con i rispettivi orari di apertura e chiusura a pranzo ed a cena. L'utente poi potrà selezionare l'attività della quale intende modificare l'orario, inserire le nuove fasce orarie e confermare la modifica mediante un apposito pulsante. Ciò vale anche per il ristorante con la differenza che l'utente potrà modificare al più \textbf{due fasce orarie} (quella del pranzo e quella della cena).
+Verrà mostrata all'utente moderatore/amministratore una lista contenente tutte le attività organizzate dall'hotel con i loro rispettivi orari di inizio e di fine. In questa lista sarà inoltre incluso il ristorante dell'hotel con i rispettivi orari di apertura e chiusura a pranzo ed a cena. L'utente poi potrà selezionare l'attività della quale intende modificare l'orario, inserire le nuove fasce orarie e confermare la modifica mediante un apposito pulsante. Ciò vale anche per il ristorante con la differenza che l'utente potrà modificare al più \textbf{due fasce orarie} (quella del pranzo e quella della cena). Inoltre, l'utente amministratore avrà la possibilità di modificare anche il range orario di modifica del menù (cioè gli orari in cui sarà concesso di modificare il menù del ristorante).
 
 \medskip
 
@@ -278,8 +274,8 @@ All'utente moderatore/amministratore verrà data la possibilità di modificare t
 \label{VisualizzaPrenotazioniClienti}
 Verrà mostrata al concierge (o all'admin) una pagina contenente le prenotazioni di ogni singolo cliente. Le prenotazioni sono distinte tra: prenotazioni del servizio di ristorazione e prenotazioni di attività. A prescindere dal tipo, l'utente sarà in grado di selezionare una specifica prenotazione e poi potrà scegliere se intende annullarla (e quindi cancellarla) oppure modificarla. La modifica dipende dal tipo di prenotazione che è stata selezionata:
 \begin{enumerate}
-\item Se si vuole modificare una prenotazione del servizio al tavolo: l'utente potrà modificare il numero del tavolo (e di conseguenza anche la locazione), l'orario di prenotazione o la data di prenotazione.
-\item Se si vuole modificare una prenotazione del servizio in camera: l'utente potrà modificare l'orario di prenotazione, la data di prenotazione oppure potrà rimuovere una particolare portata dall'ordine.
+\item Se si vuole modificare una prenotazione del servizio al tavolo: l'utente potrà modificare la locazione del tavolo, l'orario di prenotazione o la data di prenotazione.
+\item Se si vuole modificare una prenotazione del servizio in camera: l'utente potrà modificare l'orario di prenotazione, la data di prenotazione oppure potrà aggiungere/rimuovere una particolare portata dall'ordine.
 \item Se si vuole modificare una prenotazione di una attività: l'utente potrà modificare l'orario di inizio o di fine della prenotazione oppure la data della prenotazione stessa.
 \end{enumerate}
 
@@ -291,7 +287,7 @@ Tra le tante domande che i clienti dell'hotel pongono, alcune possono essere sel
 \item Essere stata inserita precedentemente da un'utente moderatore/amministratore
 \item Essere scelta tra le varie risposte date da i clienti dell'hotel.
 \end{enumerate}
-In particolare, nel secondo caso l'utente che ha dato tale risposta verrà premiato mediante l'assegnazione di 100 crediti\\\\
+In particolare, l'utente moderatore/amministratore avrà anche la possibilità di modificare la risposta selezionata (ad esempio per specificare meglio qualcosa) prima di completare l'elevazione a FAQ. L'utente che ha scritto la domanda verrà inoltre premiato mediante l'assegnazione di 100 crediti.\\\\
 In alternativa, l'utente moderatore/amministratore avrà la possibilità di ideare una propria FAQ personale mediante l'inserimento di una domanda e di una risposta entrambe ideate dall'utente (non basandosi dunque sulle domande dei clienti dell'hotel).
 
 \medskip
@@ -383,7 +379,7 @@ File che servirà per memorizzare tutti i clienti dell'hotel (e quindi tutti gli
     <xsd:element name="indirizzo" type="xsd:string" />
     <xsd:element name="telefono">
         <xsd:simpleType>
-            <xsd:restriction base="xsd:int">
+            <xsd:restriction base="xsd:string">
                 <xsd:pattern value="[0-9]{10}" />
             </xsd:restriction>
         </xsd:simpleType>
@@ -616,7 +612,7 @@ File che servirà per memorizzare la lista di camere che l'hotel mette a disposi
 </xsd:schema>
 \end{lstlisting}
 \subsection{Ristorante.xml}
-Questo file verrà utilizzato per conservare al suo interno gli orari di apertura e di chiusura del ristorante ed il menu. In particolare, si avrà: \textit{ora apertura pranzo}, \textit{ora chiusura pranzo}, \textit{ora apertura cena}, \textit{ora chiusura cena} ed una \textit{lista di portate}. Ogni \textit{portata} sarà caratterizzata da:
+Questo file verrà utilizzato per conservare al suo interno gli orari di apertura e di chiusura del ristorante, gli orari di inizio e di fine modifica del menu ed il menu stesso. In particolare, si avrà: \textit{ora apertura pranzo}, \textit{ora chiusura pranzo}, \textit{ora apertura cena}, \textit{ora chiusura cena}, \textit{ora inizio update}, \textit{ora fine update} ed una \textit{lista di portate}. Ogni \textit{portata} sarà caratterizzata da:
 una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto}, \textit{secondo piatto} o \textit{dolce}), una \textit{descrizione} ed il \textit{prezzo}.
 \subsubsection{Ristorante.xml}
 \begin{lstlisting}[style=XML]
@@ -627,6 +623,8 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
         <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
         <oraAperturaCena>19:00:00</oraAperturaCena>
         <oraChiusuraCena>23:00:00</oraChiusuraCena>
+        <oraInizioUpdate>07:00:00</oraInizioUpdate>
+        <oraFineUpdate>09:00:00</oraFineUpdate>     
         <menu>
             <portata>
                 <tipologia>primo piatto</tipologia>
@@ -656,6 +654,8 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
                 <xsd:element ref="oraChiusuraPranzo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraAperturaCena" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="oraChiusuraCena" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraInizioUpdate" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="oraFineUpdate" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="menu" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
         </xsd:complexType>
@@ -665,6 +665,8 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
     <xsd:element name="oraChiusuraPranzo" type="xsd:time" />
     <xsd:element name="oraAperturaCena" type="xsd:time" />
     <xsd:element name="oraChiusuraCena" type="xsd:time" />
+    <xsd:element name="oraInizioUpdate" type="xsd:time" />
+    <xsd:element name="oraFineUpdate" type="xsd:time" />
     <xsd:element name="menu">
         <xsd:complexType>
             <xsd:sequence>
@@ -708,7 +710,7 @@ una \textit{tipologia} (che può essere \textit{antipasto}, \textit{primo piatto
 \medskip
 
 \subsection{Tavoli.xml}
-Il file in questione memorizza tutti i tavoli che vengono messi a disposizione dal ristorante, con le relative prenotazioni associate effettuate dai clienti dell'hotel. In particolare, ogni \textit{tavolo} avrà associato ad esso: il proprio \textit{numero} (univoco), la \textit{locazione} (che può essere \textit{esterna} o \textit{interna}), il \textit{numero di posti} ed una \textit{lista di prenotazioni}. Ogni \textit{prenotazione} avrà ad esso associata: un \textit{id univoco}, il \textit{codice fiscale} del cliente, la \textit{data} e \textit{l'orario} della prenotazione.
+Il file in questione memorizza tutti i tavoli che vengono messi a disposizione dal ristorante, con le relative prenotazioni associate effettuate dai clienti dell'hotel. In particolare, ogni \textit{tavolo} avrà associato ad esso: il proprio \textit{numero} (univoco), la \textit{locazione} (che può essere \textit{esterna} o \textit{interna}) ed una \textit{lista di prenotazioni}. Ogni \textit{prenotazione} avrà ad esso associata: un \textit{id univoco}, il \textit{codice fiscale} del cliente, la \textit{data} e \textit{l'orario} della prenotazione.
 \subsubsection{Tavoli.xml}
 \begin{lstlisting}[style=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -786,7 +788,7 @@ Il file in questione memorizza tutti i tavoli che vengono messi a disposizione d
 \medskip
 
 \subsection{ServizioCamera.xml}
-Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei servizi in camera richiesti da i clienti. Per ogni prenotazione verrà memorizzato: un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha effettuato la prenotazione, la \textit{data}, l'\textit{ora} ed il \textit{prezzo totale} della prenotazione, le eventuali \textit{richieste}, i \textit{crediti} utilizzati per il pagamento e la \textit{lista di portate} ordinate. Per ogni portata si avrà un \textit{nome} e la \textit{quantità} che è stata richiesta.
+Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei servizi in camera richiesti da i clienti. Per ogni prenotazione verrà memorizzato: un \textit{id} (univoco), il \textit{codice fiscale} del cliente che ha effettuato la prenotazione, la \textit{data}, l'\textit{ora} ed il \textit{prezzo totale} della prenotazione, le eventuali \textit{richieste}, i \textit{crediti} utilizzati per il pagamento e la \textit{lista di portate} ordinate. Per ogni portata si avrà un \textit{nome}, il \textit{prezzo} e la \textit{quantità} che è stata richiesta.
 
 \subsubsection{ServizioCamera.xml}
 \begin{lstlisting}[style=XML]
@@ -802,6 +804,7 @@ Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei se
         <listaPortate>
             <portata>
                 <nome>Spaghetti alla carbonara</nome>
+                <prezzo>8</prezzo>
                 <quantita>2</quantita>
             </portata>
         </listaPortate>
@@ -871,6 +874,7 @@ Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei se
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="prezzo" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="quantita" minOccurs="1"
                  maxOccurs="1" />
             </xsd:sequence>
@@ -878,6 +882,14 @@ Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei se
     </xsd:element>
 
     <xsd:element name="nome" type="xsd:string" />
+    <xsd:element name="prezzo">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:int">
+                <xsd:minExclusive value="0" />
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
     <xsd:element name="quantita">
         <xsd:simpleType>
             <xsd:restriction base="xsd:int">
@@ -888,13 +900,13 @@ Questo file servirà per memorizzare al suo interno tutte le prenotazioni dei se
 </xsd:schema>
 \end{lstlisting}
 \subsection{Attivita.xml}
-Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{attività} che l'hotel mette a disposizione, con le relative prenotazioni associate. Per ogni attività si avrà: il relativo \textit{nome} (che sarà univoco tra tutte le attività), una \textit{descrizione}, un \textit{link di un'immagine}, l'\textit{ora d'apertura} e di \textit{chiusura}, il \textit{prezzo orario} ed una \textit{lista di prenotazioni}. Per ogni \textit{prenotazione} si avrà: un \textit{id} univoco, il \textit{codice fiscale} del cliente, la \textit{data}, l'\textit{ora d'inizio e di fine} prenotazione e il \textit{prezzo totale} (dipendente dal prezzo orario dell'attività e dal numero di ore della prenotazione) ed i \textit{crediti} utilizzati per il pagamento.
+Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{attività} che l'hotel mette a disposizione, con le relative prenotazioni associate. Per ogni attività si avrà: un \textit{id} (univoco), il relativo \textit{nome}, una \textit{descrizione}, un \textit{link di un'immagine}, l'\textit{ora d'apertura} e di \textit{chiusura}, il \textit{prezzo orario} ed una \textit{lista di prenotazioni}. Per ogni \textit{prenotazione} si avrà: un \textit{id} univoco, il \textit{codice fiscale} del cliente, la \textit{data}, l'\textit{ora d'inizio e di fine} prenotazione e il \textit{prezzo totale} (dipendente dal prezzo orario dell'attività e dal numero di ore della prenotazione) ed i \textit{crediti} utilizzati per il pagamento.
 
 \subsubsection{Attivita.xml}
 \begin{lstlisting}[style=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <listaAttivita xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Attivita.xsd">
-    <attivita>
+    <attivita id="A1">
         <nome>Palestra</nome>
         <descrizione>
             Ubicata all'interno dell'hotel ed equipaggiata con le ultime
@@ -951,6 +963,7 @@ Questo file verrà utilizzato per memorizzare al suo interno tutte le \textit{at
                 <xsd:element ref="prezzoOrario" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="listaPrenotazioni" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
     </xsd:element>
 
@@ -1392,13 +1405,13 @@ Questo file andrà a memorizzare al suo interno tutte le domande che verranno sc
 \end{lstlisting}
 
 \subsection{FAQs.xml}
-Poiché il concierge o l'amministratore avranno la possibilità di elevare qualsiasi domanda a FAQ oppure di inserire un qualsiasi numero di FAQ a proprio piacimento, questo file servirà per poter permettere tale azioni. Ogni FAQ sarà composta da il \textit{testo della domanda}, una \textit{risposta} ed un eventuale \textit{id} della domanda del cliente (tale id sarà presente esclusivamente se la FAQ proviene da una domanda effettuata da un cliente dell'hotel).
+Poiché il concierge o l'amministratore avranno la possibilità di elevare qualsiasi domanda a FAQ oppure di inserire un qualsiasi numero di FAQ a proprio piacimento, questo file servirà per poter permettere tale azioni. Ogni FAQ sarà composta da un \textit{id} (univoco), il \textit{testo della domanda}, una \textit{risposta} ed un eventuale \textit{id} della domanda del cliente (tale id sarà presente esclusivamente se la FAQ proviene da una domanda effettuata da un cliente dell'hotel).
 
 \subsubsection{FAQs.xml}
 \begin{lstlisting}[style=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <listaFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FAQs.xsd">
-    <FAQ>
+    <FAQ id="F1">
         <testoDomanda>
             La colazione viene inclusa con la prenotazione di un
             qualsiasi tipo di camera?
@@ -1430,6 +1443,7 @@ Poiché il concierge o l'amministratore avranno la possibilità di elevare quals
                 <xsd:element ref="testoDomanda" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="testoRisposta" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required" />
         </xsd:complexType>
     </xsd:element>
 
@@ -1604,6 +1618,132 @@ CM e RCM sono le abbreviazioni di "Commento" e "Risposta commento"
 \end{enumerate}
 In questo modo, mediante una semplice analisi della struttura, si sarà in grado di determinare se l'oggetto valutato deve essere ricercato all'interno del file \textit{Recensioni.xml} o all'interno di \textit{Commenti.xml} (nel momento in cui un utente inserisce o modifica una valutazione).
 
+
+
+\chapter{Manuale utente}
+In questo capitolo sarà presentato al lettore un vero e proprio manuale per l'utilizzo dell'intera piattaforma web. Saranno analizzate tutte le varie interazioni possibili con la piattaforma a seconda dell'utenza che vi fa riferimento, che ricordiamo essere: l'utente \textbf{visitatore}, il \textbf{cliente}, la \textbf{concierge} e l'\textbf{admin}. 
+
+\section{Utente visitatore}
+Definiamo con utente visitatore un qualsiasi utente non registrato o non autenticato all'interno della piattaforma. In questa sezione andremo ad analizzare le varie funzionalità dell'utente in questione, il quale in primo luogo si trova nella schermata iniziale del sito, riportata nella figura \ref{intro}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{HomePage.png}
+\label{intro}
+\caption{Homepage del sito}
+\end{figure}\\
+Tale pagina web è strutturata principalmente in \textbf{due sezioni verticali}, quella di sinistra e di destra. La sezione di destra è composta in \underline{quattro} \underline{sottosezioni orizzontali}: la prima dove vengono mostrate delle \textbf{immagini relative all'hotel} attraverso una animazione a scomparsa ,al di sotto si trovano le restanti sezioni nella quali vengono introdotte le \textbf{attività}, la \textbf{locazione} e i \textbf{contatti} dell'hotel.\\\\
+Nella sezione di sinistra troveremo dei link con i quali l’utente potrà interagire cliccandoci sopra. Tra questi se ne possono trovare alcuni unicamente adibiti a scopo informativo che fanno riferimento a sezioni precise della pagina medesima, e sono: 
+\begin{itemize}
+\item \textbf{Attività:} la quale ci fornisce una piccola introduzione delle varie attività di cui potremmo usufruire avendo un soggiorno attivo.
+\item \textbf{Dove siamo?:} fornisce indicazioni sulla locazione della struttura
+\item \textbf{Contatti:} fornisce dei contatti di riferimento della struttura. 
+\end{itemize}
+I restanti link sono: camere e suite,  recensioni, faq, prenota ora, registrati e login. Le funzionalità dell'utente visitatore sono sei principalmente e le andremo ad analizzare più in dettaglio con i relativi link associati.
+
+\medskip
+
+\subsection{Visualizzare le camere e le suite}
+\begin{figure}[h]
+\centering 
+\includegraphics[scale=0.3]{Camere.png}
+\caption{Camere e suite}
+\label{Camere}
+\end{figure}
+Cliccando sul link denominato \textbf{"Camere e suite"} nella sezione sinistra della pagina, l'utente verrà indirizzato nella pagina mostrata in figura \ref{Camere}. La struttura della pagina è la stessa della homepage, con piccole differenze. La prima è che nella sezione di destra l'utente potrà prendere coscienza delle camere presenti all'interno della struttura con le relative informazioni associate ad ognuna di esse. La seconda è che nella sezione di sinistra troveremo solamente il link home, per tornare alla pagina principale dell'hotel ed i link delle recensioni, delle faq, della prenotazione di una camera, per la registrazione e per il login. 
+
+\medskip
+
+\subsection{Visualizzare le recensioni}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{RecensioniVisitatore.png}
+\caption{Recensioni - visitatore}
+\label{RecensioniVisitatore}
+\end{figure}
+Interagendo con il link \textbf{"Recensioni"} l'utente si ritroverà nella pagina rappresentata nella figura \ref{RecensioniVisitatore} In questa pagina potrà visionare  tutte le recensioni che sono state scritte dai clienti dell'hotel (cioè tutti utenti registrati all'interno del sito).\\\\
+L'utente potrà visionare anche solamente le recensioni delle categorie che più lo interessano andando a selezionare la categoria dal menu a tendina presente nella parte superiore della pagina e andando a cliccare conferma.\\\\
+L'utente visitatore avrà anche la possibilità di visualizzare tutti i commenti di risposta di una particolare recensione, andando a selezionare l'apposito pulsante \textbf{"visualizza commenti"} ed essere portato in una pagina come quella mostrata in figura \ref{RisposteRecensioneVisitatore} \newpage
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{RisposteRecensioneVisitatore.png}
+\caption{Commenti di risposta di una recensione - visitatore}
+\label{RisposteRecensioneVisitatore}
+\end{figure}
+
+\medskip
+
+\subsection{Visualizzare le FAQ}
+Nella pagina delle Faq, figura \ref{FaqVisitatore} , accessibile attraverso l'interazione del link presente in home denominato \textbf{"FAQ"}, l'utente è in grado di visionare tutte le Faq dell'hotel che, per definizione, sono delle domande di rilevante importanza e di maggiore frequenza tra l'utenza della piattaforma.
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.29]{FaqVisitatore.png}
+\caption{Pagina delle FAQ}
+\label{FaqVisitatore}
+\end{figure}
+
+\subsection{Prenotazione di un soggiorno}
+
+
+
+\chapter{Programmazione}
+In questo capitolo verranno analizzati i vari script che costituiscono il sito web. In particolare, per comodità essi possono essere divisi in due macro-categorie:
+\begin{enumerate}
+\item \textbf{Script delle pagine:} sono script php contenuti direttamente nelle pagine stesse visualizzate dagli utenti, i cui compiti principali sono: manipolare i dati della pagina, controllare i dati inseriti dall'utente (ed eventualmente della loro correttezza), impostare variabili di sessione, controllare la legalità degli accessi, richiamare gli script delle funzioni ed effettuare il reindirizzamento dell'utente ad altre pagine.
+\item \textbf{Script delle funzioni:} essi sono script incapsulati all'interno di funzioni PHP e memorizzati all'interno di appositi file dedicati, non accessibili da nessuna tipologia di utente. Essi sono divisi a loro volta in cinque categorie: 
+\begin{enumerate}
+\item \textbf{Funzioni Get:} funzioni il cui compito sarà quello di estrarre dati dai file XML ed, in alcuni casi, effettuare dei controlli sui dati estratti.
+\item \textbf{Funzioni Modifica:} funzioni il cui compito sarà quello di modificare dei dati già esistenti in un file XML
+\item \textbf{Funzioni Insert:} funzioni che andranno ad inserire nuovi dati all'interno di un file XML
+\item \textbf{Funzioni delete:} funzioni che andranno a rimuovere dei dati da un file XML
+\item \textbf{Funzioni PHP:} funzioni generiche che sono necessarie per il funzionamento del sistema ma non catalogabili in una categoria particolare.
+\end{enumerate}
+\end{enumerate}
+
+\section{Script delle pagine}
+In questa sezione verranno analizzati i vari script contenuti all'interno delle pagine del sito e verrà descritto il loro funzionamento. Per motivi pratici, non verranno esaminate le pagine contenenti esclusivamente script di controllo della legalità dell'accesso
+
+
+\subsubsection{registrazioneUtente.php}
+Lo script contenuto all'interno di questa pagina avrà come scopo principale quello di verificare che l'utente abbia inserito tutti i dati richiesti al momento della registrazione ed, in particolare, della loro correttezza (il codice fiscale deve rispettare un determinato pattern, così come il numero di carta di credito, la mail, ecc..).  Se tutti i dati inseriti sono corretti allora egli passerà a controllare, mediante la chiamata delle funzioni \textit{getCodFisc} e \textit{getUsername}, la presenza di eventuali duplicati del codice fiscale o dell'username inseriti. Se anche quest'ultimi due controlli vanno a buon fine allora si andrà a registrare effettivamente l'utente nel file XML mediante la chiamata della funzione \textit{inserisciNuovoCliente}.
+
+\subsubsection{login.php}
+Poiché questa pagina potrà essere aperta in due situazioni differenti (normalmente dalla pagina home oppure automaticamente durante la prenotazione di un soggiorno se l'utente non ha già effettuato il login) il primo scopo di questo script sarà quello di distinguere questi due casi. Ciò viene fatto andando a controllare se la variabile di sessione \textit{prenotazioneCamera} è settata:
+\begin{enumerate}
+\item In caso negativo, allora verrà visualizzata la normale pagina di login. Dopo aver controllato che l'utente abbia inserito tutti i dati, lo script richiamerà la funzione \textit{eseguiLoginCliente} oppure la funzione \textit{eseguiLoginStaff} dipendentemente da quale tipologia di utente è stata selezionata nella pagina. Se il login del cliente va a buon fine, allora verranno impostate tre variabili di sessione che verranno poi utilizzate dalle altre pagine:
+\begin{enumerate}
+\item \textit{loginType} (per distinguere il tipo di login che è stato effettuato).
+\item \textit{codFiscUtenteLoggato}: verrà passata come parametro ad alcune funzioni presenti nelle varie pagine.
+\item \textit{soggiornoAttivo:} memorizza al suo interno la presenza o meno di un soggiorno attivo associato al cliente, cioè con pagamento sospeso oppure con stato \textit{approvato} (un valore \textit{"null"} equivale a dire che il cliente non ha un soggiorno attivo).
+\end{enumerate}  
+Se invece dovesse andare a buon fine il login del concierge o dell'admin allora sarà sufficiente settare solamente la variabile di sessione \textit{loginType} (il cui valore dipende da quale tipologia di login è stata effettuata).
+\item Nel caso in cui la variabile \textit{prenotazioneCamera} dovesse essere settata, allora significa che l'utente stava effettuando la prenotazione di una camera. Dopo aver estratto i dati della prenotazione per poterli salvare in dei campi input \textit{hidden} (in modo da non perderli), verrà visualizzata la normale pagina del login con delle piccole differenze: nella sezione verticale di sinistra verrà visualizzata una sola scritta per annullare la prenotazione in corso e nella sezione di destra non verrà data la possibilità di scegliere il tipo di utente (non si possono associare camere ad utenti registrati come concierge o admin). Il login dopodiché viene svolto normalmente ma con un controllo aggiuntivo: se le credenziali inserite dall'utente sono corrette allora si andrà a controllare, mediante la funzione \textit{getSoggiornoAttivo}, se l'utente che sta effettuando il login ha già un soggiorno attivo. In tal caso, non verrà concesso all'utente di continuare la prenotazione.
+\end{enumerate} 
+
+\subsubsection{visualizzaDisponibilita.php}
+Questo script andrà prima di tutto a controllare che l'utente sia arrivato in questa pagina in modo legale (cioè inserendo prima delle date in \textit{prenotaOra.php}). Dopodiché, dopo aver estratto dalla variabile di sessione le due date scelte dall'utente, le andrà a passare come parametro alla funzione \textit{getCamereDisponibili}: sulla base del risultato di tale funzione verrà costruita una pagina contenenti tutte le camere che possono essere prenotate nel range temporale inserito dall'utente. Quando l'utente andrà a scegliere una camera, lo script richiamerà la funzione \textit{individuaBottoneCamereDisponibili} per poter individuare quale bottone è stato premuto ed ottenere l'id della camera ad esso associato. Infine, verrà controllato se la variabile di sessione \textit{codFiscUtenteLoggato} è settata: in caso affermativo, allora significa che l'utente ha già effettuato il login e dunque può essere portato nella pagina \textit{confermaPrenotazione.php} per completare la prenotazione. In caso negativo, l'utente verrà portato nella pagina di login.
+
+\subsubsection{confermaPrenotazione.php}
+Poiché in questa pagina verranno confermate le prenotazioni di un soggiorno oppure di un'attività, lo script andrà innanzitutto a distinguere quale tipologia di prenotazione l'utente stava effettuando mediante il controllo delle variabili di sessione \textit{prenotazioneCamera} e \textit{prenotazioneAttivita}. Dopo aver estratto i dati necessari che dovranno essere visualizzati all'utente, lo script andrà a costruire una pagina il cui contenuto sarà dipendente dal tipo di variabile di sessione che è stata trovata settata. Se l'utente conferma la prenotazione, allora essa verrà registrata mediante la chiamata della funzione \textit{inserisciPrenotazioneCamera} oppure di \textit{inserisciPrenotazioneAttivita}. Il controllo per capire quale funzione richiamare viene fatto in base a quale input type hidden è stato creato dalla pagina (ad esempio, nel caso della prenotazione di un camera verrà creato un input type hidden  il cui attributo \textit{name} sarà : \textit{idCamera}).
+
+\subsubsection{datiPersonali.php}
+Questa pagina potrà essere utilizzata in due circostanze diverse: 
+\begin{enumerate}
+\item Da un cliente che ha effettuato l'autenticazione e vi accede dalla propria area personale. In tal caso, verrà trovata settata la variabile di sessione \textit{codFiscUtenteLoggato} e dunque verranno estratti i dati personali del cliente mediante la funzione \textit{getDatiCliente} e tutti i soggiorni passati/rifiutati associati a quest'ultimo mediante la funzione \textit{getSoggiorniPassati}
+\item Da un admin dopo che ha selezionato un particolare cliente di cui vuole visualizzare (ed eventualmente modificare) i dati personali. In tal caso verranno solamente estratti i dati personali del cliente.
+\end{enumerate}
+Dopodiché la pagina verrà costruita sulla base dei dati che sono stati estratti
+
+\subsubsection{prenotaTavolo.php}
+Il primo passo dello script di questa pagina sarà la definizione della data minima e di quella massima che potranno essere inserite dall'utente per la prenotazione. In particolare:
+\begin{enumerate}
+\item La data minima viene decisa in base ad un confronto con la data odierna: se quest'ultima è maggiore della data di inizio soggiorno allora la data odierna sarà la minima data che potrà essere scelta. Altrimenti, la data di inizio soggiorno sarà quella minima.
+\item La data massima che potrà essere scelta corrisponderà alla data di fine soggiorno.
+\item Entrambe le date verranno invertite (cioè verranno scritte nell'ordine \textit{giorno - mese - anno}) in modo tale da renderle idonee per essere impostate come date minime e massime. Tale vincolo viene realizzato andando a passare le variabili php contenenti le date invertite a delle variabili \textit{javascript}. Con quest'ultimo si andrà poi ad impostare un \textit{datePicker} con le date che sono state passate.
+\end{enumerate}
+Sempre in questa pagina sarà poi presente un campo in cui l'utente potrà scegliere l'orario di prenotazione. Gli orari ammessi per effettuare una prenotazione vengono mostrati in base alla scelta dell'utente del pasto (\textit{pranzo} o \textit{cena}) ed ovviamente sulla base degli orari di apertura e di chiusura del ristorante. Se l'utente ha inserito tutti i dati lo script andrà a richiamare la funzione \textit{cercaTavoloDisponibile} per verificare se è presente o meno un tavolo in grado di soddisfare le richieste del cliente.
+
+\subsubsection{prenotaSC.php}
+Lo script di questa pagina andrà a costruire il campo della data e dell'orario per la prenotazione del servizio in camera in modo analogo a quanto detto in \textit{prenotaTavolo.php}. L'unica differenza sarà la presenza di un controllo aggiuntivo riguardante gli orari di modifica del menu: infatti, mediante la funzione \textit{confermaOraUpdateMenu} si andrà a verificare se l'ora corrente si trova all'interno del range orario di modifica del menù. In tal caso non verranno mostrati i campi per inserire la data e l'orario e l'utente non avrà la possibilità di proseguire la prenotazione.
 
 
 

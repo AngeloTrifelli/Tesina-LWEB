@@ -17,7 +17,7 @@ session_start();
 
     if(isset($_POST['attivitaSelezionata'])){
         $idAttivita=individuaBottoneIdAttivita();
-        $_SESSION['idAttivita']=$idAttivita;
+        $_SESSION['idAttivitaDaModificare']=$idAttivita;
         header('Location: modificaAttivita.php');
         exit();
         }
@@ -44,9 +44,7 @@ session_start();
                 <a href="./areaUtente.php">TORNA NELL'AREA UTENTE</a>  
             </div>
 
-            <h1 class="alignCenter">LISTA ATTIVIT&Agrave;</h1>
-           
-            <div style="width: 18.5%;"></div>
+            <h1 style="display:inline ;">LISTA ATTIVIT&Agrave;</h1>
                
         </div>
         <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post">

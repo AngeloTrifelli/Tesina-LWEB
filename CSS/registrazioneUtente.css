@@ -164,7 +164,7 @@ a{
     background-color: inherit;
 }
 
-  .containerPassword{
+.containerPassword{
     display: flex;
     width: 45%;
     background-color: inherit;
@@ -176,7 +176,6 @@ a{
 }
 
 .errorLabelPass{
-    color : red;
-    /* font-weight: bolder; */
+    color : red;    
     text-align: left;
 }

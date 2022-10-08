@@ -155,14 +155,24 @@ function aggiungiPrenotazioneAttivita($idAttivita,$codFisc,$data,$oraInizio,$ora
     $attivita = $attivita->item(0);
 
     $listaPrenotazioni=$attivita->getElementsByTagName("listaPrenotazioni")->item(0);
-    $prenotazioni=$attivita->getElementsByTagName("prenotazione");
-    $numPrenotazioni=count($prenotazioni);
-    
+    $ultimaPrenotazione = $listaPrenotazioni->lastChild;
+
+    if(is_null($ultimaPrenotazione)){
+        $idNuovaPrenotazione = $idAttivita."-PA1";
+    }
+    else{
+        $idUltimaPrenotazione = $ultimaPrenotazione->getElementsByTagName('idPrenotazione')->item(0)->textContent;
+
+        $pieces = explode("-",$idUltimaPrenotazione);
+
+        $nuovoNumero = substr($pieces[1] , 2) + 1;
+        $idNuovaPrenotazione = $idAttivita."-PA".$nuovoNumero;    
+    }    
 
     $nuovaPrenotazione = $docAttivita->createElement("prenotazione");
     $listaPrenotazioni->appendChild($nuovaPrenotazione);
 
-    $nuovoIdPrenotazione = $docAttivita->createElement("idPrenotazione", $idAttivita."-PA".($numPrenotazioni+1));
+    $nuovoIdPrenotazione = $docAttivita->createElement("idPrenotazione", $idNuovaPrenotazione);
     $nuovaPrenotazione->appendChild($nuovoIdPrenotazione);
 
     $nuovoCodFisc= $docAttivita->createElement("codFisc", $codFisc);

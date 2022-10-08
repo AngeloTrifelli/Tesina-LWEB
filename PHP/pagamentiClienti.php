@@ -51,8 +51,7 @@
             <div class="topLeft">
                 <a href="./areaUtente.php">TORNA NELL'AREA UTENTE</a>    
             </div>
-            <h1 class="alignCenter">LISTA STATI SOGGIORNO CLIENTI</h1>
-            <div style="width: 18.5%;"></div>
+            <h1 style="display:inline ;">LISTA STATI SOGGIORNO CLIENTI</h1>            
         </div>
 
         <?php

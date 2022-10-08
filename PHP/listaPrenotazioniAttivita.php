@@ -25,8 +25,11 @@ require_once('funzioniDeletePHP.php');
                 rimuoviPrenotazioneAttivita($idPrenotazione);
             }  
             
-        }else{
-            $_SESSION['idPrenotazioneAttivita']=$idPrenotazione;
+        }
+        else{
+            $arrayDati['idPrenotazione'] = $idPrenotazione;
+            $arrayDati['tipoAzione'] = $_POST[$idPrenotazione];        
+            $_SESSION['prenotazioneAttivitaDaModificare'] = $arrayDati;
             header('Location: modificaPrenotazioneAttivita.php');
             exit();
         }
@@ -76,9 +79,8 @@ require_once('funzioniDeletePHP.php');
             }
         ?>
 
-    
-        <div class="mainContainer">
         <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"  >
+        <div class="mainContainer">        
         <?php
             for($i=0;$i<count($arrayPrenotazioniAttivitaAttive);$i++){
                 $prenotazione=$arrayPrenotazioniAttivitaAttive[$i];
@@ -101,11 +103,25 @@ require_once('funzioniDeletePHP.php');
                         <td><strong>Ora fine</strong><br /><?php echo $oraFineAttivita;?></td>
                         <td><strong>Prezzo totale</strong><br /><?php echo $prenotazione['prezzoTotale']."&euro;";?></td>
                         <td><strong>Crediti usati</strong><br /><?php echo $prenotazione['creditiUsati'];?></td>
+                        <td>    
+                            <button type="submit" class="button" name="<?php echo $prenotazione['idPrenotazione'];?>" value="modificaData">
+                                MODIFICA DATA
+                            </button>                                                    
+                        </td>
+                        <td>    
+                            <button type="submit" class="button" name="<?php echo $prenotazione['idPrenotazione'];?>" value="modificaOraInizio">
+                                MODIFICA ORA INIZIO
+                            </button>                                                    
+                        </td>
+                        <td>    
+                            <button type="submit" class="button" name="<?php echo $prenotazione['idPrenotazione'];?>" value="modificaOraFine">
+                                MODIFICA ORA FINE
+                            </button>                                                    
+                        </td>
                         <td>
-                            <input type="submit" class="button" name="<?php echo $prenotazione['idPrenotazione'];?>" value="MODIFICA" />
-                            <input type="submit" class="button" name="<?php echo $prenotazione['idPrenotazione'];?>" onClick="myEvent()" value="ANNULLA" /> 
-                            <input type="hidden" name="bottonePremuto" />
-                        
+                            <button type="submit" class="button" style="width: 120px;" name="<?php echo $prenotazione['idPrenotazione'];?>" onClick="myEvent()" value="ANNULLA" >
+                                ANNULLA PRENOTAZIONE
+                            </button>                            
                         </td>
 
                     </tr>
@@ -114,10 +130,10 @@ require_once('funzioniDeletePHP.php');
         <?php
             }
         ?>
-        
-        </form>
-        
+                        
         </div>
+            <input type="hidden" name="bottonePremuto" />
+        </form>
 
         <?php
             if(count($arrayPrenotazioniAttivitaPassate)>0){

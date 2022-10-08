@@ -1,6 +1,7 @@
 <?php
     session_start();
-    $datiMancanti = "";
+
+    $patternDate = "/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/";
 
     if(isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Cliente"){
         header('Location: areaUtente.php');
@@ -10,21 +11,26 @@
     if(!isset($_SESSION['soggiornoAttivo']) || $_SESSION['soggiornoAttivo'] == "null"){
         if(isset($_POST['VERIFICA'])){
             if($_POST['dataArrivo'] != "" && $_POST['dataPartenza'] != "" ){
-                $stringaData = $_POST['dataArrivo'];
-                $anno = substr($stringaData, 6 , 4);
-                $mese = substr($stringaData, 3 , 2);
-                $giorno = substr($stringaData , 0 , 2 );
-                $arrayDate['dataArrivo'] = $anno."-".$mese."-".$giorno;
-            
-                $stringaData = $_POST['dataPartenza'];
-                $anno = substr($stringaData, 6 , 4);
-                $mese = substr($stringaData, 3 , 2);
-                $giorno = substr($stringaData , 0 , 2 );
-                $arrayDate['dataPartenza'] = $anno."-".$mese."-".$giorno;
+                if(preg_match($patternDate , $_POST['dataArrivo']) && preg_match($patternDate , $_POST['dataPartenza'])){
+                    $stringaData = $_POST['dataArrivo'];
+                    $anno = substr($stringaData, 6 , 4);
+                    $mese = substr($stringaData, 3 , 2);
+                    $giorno = substr($stringaData , 0 , 2 );
+                    $arrayDate['dataArrivo'] = $anno."-".$mese."-".$giorno;
+                
+                    $stringaData = $_POST['dataPartenza'];
+                    $anno = substr($stringaData, 6 , 4);
+                    $mese = substr($stringaData, 3 , 2);
+                    $giorno = substr($stringaData , 0 , 2 );
+                    $arrayDate['dataPartenza'] = $anno."-".$mese."-".$giorno;
 
-                $_SESSION['datePrenotazioneCamera'] = $arrayDate;
-                $_SESSION['accessoPermesso'] = true;
-                header('Location: visualizzaDisponibilita.php');
+                    $_SESSION['datePrenotazioneCamera'] = $arrayDate;
+                    $_SESSION['accessoPermesso'] = true;
+                    header('Location: visualizzaDisponibilita.php');
+                }
+                else{
+                    $erroreDate = "True";
+                }
             }
             else{
                 $datiMancanti = "True";
@@ -70,7 +76,9 @@
             <div id="links">
                 <a class="item" href="./intro.php">HOME</a>
                 <br/>
-                <a class="item" href="#">RECENSIONI</a>
+                <a class="item" href="./recensioni.php">RECENSIONI</a>
+                <br/>
+                <a class="item" href="./faq.php">FAQ</a>
                 <br/>
                 <?php
                     if(!isset($_SESSION['codFiscUtenteLoggato'])){
@@ -111,10 +119,19 @@
                         ?>                            
                     </div>
                     <?php
-                        if(isset($_POST['VERIFICA']) && $datiMancanti = "True"){
+                        if(isset($_POST['VERIFICA']) && isset($datiMancanti)){
                     ?>
                             <div class="row">
                                 <h2 class="errorLabel">Dati mancanti!</h2>
+                            </div>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        if(isset($_POST['VERIFICA']) && isset($erroreDate)){
+                    ?>
+                            <div class="row">
+                                <h2 class="errorLabel">Le date inserite non sono valide!</h2>
                             </div>
                     <?php
                         }

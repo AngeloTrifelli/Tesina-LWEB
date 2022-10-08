@@ -45,6 +45,10 @@ function rimuoviPrenotazioneServizioCamera($idPrenotazione){
 
     $prenotazioneDaEliminare = $xpathSC->query("/listaPrenotazioni/prenotazione[@id='$idPrenotazione']");
     $prenotazioneDaEliminare = $prenotazioneDaEliminare->item(0);
+    
+    $creditiUsati= $prenotazioneDaEliminare->getElementsByTagName("creditiUsati")->item(0)->textContent;
+    $codFiscCliente= $prenotazioneDaEliminare->getElementsByTagName("codFisc")->item(0)->textContent;
+    modificaCreditiCliente($codFiscCliente,$creditiUsati);
 
     $listaPrenotazioni = $doc->documentElement;
 
@@ -139,6 +143,10 @@ function rimuoviPrenotazioneAttivita($idPrenotazioneAttivita){
    $prenotazioneDaEliminare = $xpathAttivita->query("//prenotazione[idPrenotazione='$idPrenotazioneAttivita']");
    $prenotazioneDaEliminare = $prenotazioneDaEliminare->item(0);
 
+   $creditiUsati= $prenotazioneDaEliminare->getElementsByTagName("creditiUsati")->item(0)->textContent;
+   $codFiscCliente= $prenotazioneDaEliminare->getElementsByTagName("codFisc")->item(0)->textContent;
+   modificaCreditiCliente($codFiscCliente,$creditiUsati);
+
    $listaPrenotazioni->removeChild($prenotazioneDaEliminare);
    
 
@@ -179,30 +187,27 @@ function rimuoviFAQ($idFaq){
 
     $xmlString= "";
     
-
     foreach(file("../XML/FAQs.xml") as $node){
-
        $xmlString .= trim($node);
+    }
 
-   }
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $doc->formatOutput = true;
 
-   $doc = new DOMDocument();
-   $doc->loadXML($xmlString);
-   $doc->formatOutput = true;
+    $xpathFaq = new DOMXPath($doc);
+    
+    $idDomanda=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']/idDomandaCliente");
+    $idDomanda=$idDomanda->item(0);   
+    if(!is_null($idDomanda)){        
+            $idDomanda=$idDomanda->textContent;
+            modificaAttributoFaqDomanda($idDomanda,"false");
+    }
+    $faqDaEliminare=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']");
+    $faqDaEliminare=$faqDaEliminare->item(0);
+    $listaFaq=$doc->documentElement;
 
-   $xpathFaq = new DOMXPath($doc);
-
-   $idDomanda=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']/idDomanda");
-   $idDomanda=$idDomanda->item(0);
-   if(!is_null($idDomanda)){
-    $idDomanda=$idDomanda->textContent;
-    modificaAttributoFaqDomanda($idDomanda,"false");
-   }
-   $faqDaEliminare=$xpathFaq->query("/listaFAQ/FAQ[@id='$idFaq']");
-   $faqDaEliminare=$faqDaEliminare->item(0);
-   $listaFaq=$doc->documentElement;
-
-   $listaFaq->removeChild($faqDaEliminare);
+    $listaFaq->removeChild($faqDaEliminare);
    
 
     $doc->save("../XML/FAQs.xml");

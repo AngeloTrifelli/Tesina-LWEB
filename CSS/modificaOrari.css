@@ -21,9 +21,9 @@ body , html{
     flex-direction: column;
     background-color: white;
     text-align: center;
-    width: 100%;
-    height: 550px;
+    width: 100%;        
     border-radius: 70px;
+    padding-bottom: 5%;
     padding-left: 20%;
     padding-right: 20%;
 }
@@ -86,6 +86,23 @@ h1{
 .buttonDx:hover{
     background-color: #640c1b;
 }
+
+
+.textInput{
+    border: 1px solid #ccc;
+    padding-left: 10px; 
+    padding-right: 15px;
+    height: 40px;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.textInput:hover{
+    background-color: honeydew;
+}
+
+
+
 
 .errorLabel{
     margin-top: 5%;

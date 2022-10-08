@@ -4,20 +4,7 @@
     require_once('funzioniDeletePHP.php');
     session_start();
 
-    if(isset($_SESSION['codFiscUtenteLoggato'])){
-        $temp = $_SESSION['soggiornoAttivo'];
-        if($temp != "null"){
-            if($temp['statoSoggiorno'] != "Approvato"){
-                header('Location: areaUtente.php');
-                exit();
-            }
-        }
-        else{
-            header('Location: prenotaOra.php');
-            exit();
-        }
-    }
-    else{
+    if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){   
             header('Location: login.php');
             exit();
@@ -26,7 +13,8 @@
             $accessoStaff = "True";
         }
     }
-    $oraUpdateConfermata=confermaOraUpdateMenu();
+    
+    $oraUpdateConfermata=confermaOraUpdateMenu();    
 
     if(isset($_POST['bottonePremuto'])){
 
@@ -40,7 +28,7 @@
             }  
             
         }else{
-            $_SESSION['descrizionePortata']=$descrizionePortata;
+            $_SESSION['portataDaModificare']=$descrizionePortata;
             header('Location: modificaPortata.php');
             exit();
         }
@@ -83,7 +71,7 @@
             <div class="topLeft">
                 <?php 
                     if(!isset($accessoStaff)){
-                        echo '<a href="./homeRistorante.php">TORNA ALLA HOME DEL RISTORANTE</a>';
+                        echo '<a href="./homeRistorante.php">TORNA ALLA HOME<br />DEL RISTORANTE</a>';
                     }
                     else{
                         echo '<a href="./areaUtente.php">TORNA NELL\' AREA UTENTE</a>';    
@@ -97,15 +85,14 @@
                     <div>
                     <h1>MEN&Ugrave;</h1>
                     </div>
-                    <div>
+                    <div style="position:absolute; right:0 ; top:0; padding-top: 3%">
                         <input type="submit" class="fakeLink" name="AGGIUNGI" value="AGGIUNGI PORTATA" />
                     </div>
                     ';
                 }
                 else{
                     echo '
-                    <h1 class="alignCenter menu">MEN&Ugrave;</h1>
-                    <div style="width: 18.5%;"></div>';
+                    <h1 style="display:inline ;">MEN&Ugrave;</h1>';
                 }
             ?>
             

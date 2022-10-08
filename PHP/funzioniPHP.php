@@ -939,7 +939,44 @@ function individuaBottoneRisposteRecensione($idRecensione){
 
 
 
+//Funzione per verificare se un dato username esiste già all'interno dei file Concierge.xml oppure Amministratori.xml
 
+function checkUsernameDuplicatoStaff($username , $tipoStaff){
+    $xmlString = "";
+
+    if($tipoStaff == "Concierge"){
+        foreach(file("../XML/Concierge.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+    else{
+        foreach(file("../XML/Amministratori.xml") as $node){
+            $xmlString .= trim($node);
+        }
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+
+    $listaStaff = $doc->documentElement->childNodes;
+
+    $i=0;
+    $duplicato = "False";
+
+    while($i < $listaStaff->length && $duplicato == "False"){
+        $staff = $listaStaff->item($i);
+        $usernameStaff = $staff->firstChild->textContent;
+
+        if($usernameStaff == $username){
+            $duplicato = "True";
+        }
+        else{
+            $i++;
+        }
+    }
+
+    return $duplicato;
+}
 
 
 
