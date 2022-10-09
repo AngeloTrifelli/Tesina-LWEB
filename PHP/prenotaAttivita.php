@@ -224,6 +224,24 @@
                 minDate: dataInizio,             //Con questo attributo imposto che la data minima selezionabile è la data odierna
                 maxDate: dataFine
             });
+            $(".data").on("change", function(){ 
+                var annoInizio=dataInizio.substring(6,10);
+                var meseInizio=dataInizio.substring(3,5);
+                var giornoInizio=dataInizio.substring(0,2);
+                var annoFine=dataFine.substring(6,10);
+                var meseFine=dataFine.substring(3,5);
+                var giornoFine=dataFine.substring(0,2);
+                var element = $(this).val();
+                var annoElement=element.substring(6,10);
+                var meseElement=element.substring(3,5);
+                var giornoElement=element.substring(0,2);
+                        if((annoElement<annoInizio) || ((annoElement>=annoInizio) && (meseElement<meseInizio)) ||((annoElement>=annoInizio) && (meseElement>=meseInizio) && (giornoElement<giornoInizio))){
+                            $(this).val(dataInizio);
+                        }
+                        if((annoElement>annoFine) || ((annoElement<=annoFine) && (meseElement>meseFine)) ||((annoElement<=annoFine) && (meseElement<=meseFine) && (giornoElement>giornoFine))){                                                                        
+                            $(this).val(dataFine);
+                        }                                                
+                    });     
 
             var oraInizio=<?php echo json_encode($oraMin); ?>;
             var oraFine=<?php echo json_encode($oraMax); ?>;
@@ -238,6 +256,17 @@
                 dropdown: true,
                 scrollbar: true
             });
+            
+            $(".oraInizio").on("change" , function(){
+                    var element = $(this).val();
+                    if(element < oraInizio){
+                        $(this).val(oraInizio.substring(0,5));
+                    }
+
+                    if(element > oraFine){
+                        $(this).val(oraFine.substring(0,5));
+                    }                    
+                })
             $(".oraFine").attr("autocomplete" , "off");  
             $('.oraFine').timepicker({
                 timeFormat: 'HH:mm',
@@ -248,6 +277,16 @@
                 dropdown: true,
                 scrollbar: true
             });
+            $(".oraFine").on("change" , function(){
+                    var element = $(this).val();
+                    if(element < oraInizio){
+                        $(this).val(oraInizio.substring(0,5));
+                    }
+
+                    if(element > oraFine){
+                        $(this).val(oraFine.substring(0,5));
+                    }                    
+                })
     </script>
 </body>
 

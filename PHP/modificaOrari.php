@@ -471,11 +471,11 @@
                         }
                         
                         if(element < "11:00"){
-                            $(this).val("11:00".substring(0,5));
+                            $(this).val("11:00");
                         }
                         
                         if(element > "17:30"){                                                                        
-                            $(this).val("17:30".substring(0,5));
+                            $(this).val("17:30");
                         }                                                
                     });
             $('.oraRistoranteCena').timepicker({
@@ -494,11 +494,11 @@
                         }
                         
                         if(element < "18:00"){
-                            $(this).val("18:00".substring(0,5));
+                            $(this).val("18:00");
                         }
                         
                         if(element > "23:30"){                                                                        
-                            $(this).val("23:30".substring(0,5));
+                            $(this).val("23:30");
                         }                                                
                     });
 

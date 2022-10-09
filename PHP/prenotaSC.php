@@ -195,6 +195,24 @@
                 minDate: dataInizio,
                 maxDate: dataFine
             });
+            $(".dataPrenotazione").on("change", function(){ 
+                var annoInizio=dataInizio.substring(6,10);
+                var meseInizio=dataInizio.substring(3,5);
+                var giornoInizio=dataInizio.substring(0,2);
+                var annoFine=dataFine.substring(6,10);
+                var meseFine=dataFine.substring(3,5);
+                var giornoFine=dataFine.substring(0,2);
+                var element = $(this).val();
+                var annoElement=element.substring(6,10);
+                var meseElement=element.substring(3,5);
+                var giornoElement=element.substring(0,2);
+                        if((annoElement<annoInizio) || ((annoElement>=annoInizio) && (meseElement<meseInizio)) ||((annoElement>=annoInizio) && (meseElement>=meseInizio) && (giornoElement<giornoInizio))){
+                            $(this).val(dataInizio);
+                        }
+                        if((annoElement>annoFine) || ((annoElement<=annoFine) && (meseElement>meseFine)) ||((annoElement<=annoFine) && (meseElement<=meseFine) && (giornoElement>giornoFine))){                                                                        
+                            $(this).val(dataFine);
+                        }                                                
+                    });    
 
 
             $(".oraPrenotazione").prop("disabled", true);
