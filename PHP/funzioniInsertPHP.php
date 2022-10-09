@@ -287,14 +287,24 @@ function inserisciPrenotazioneTavolo($numeroTavolo , $codFiscCliente , $data , $
     $tavolo = $xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']");
     $tavolo = $tavolo->item(0);
 
-    $listaPrenotazioni = $tavolo->getElementsByTagName("listaPrenotazioni")->item(0);
-    $prenotazioni = $tavolo->getElementsByTagName("prenotazione");
-    $numPrenotazioni = count($prenotazioni);
+    $listaPrenotazioni=$tavolo->getElementsByTagName("listaPrenotazioni")->item(0);
+    $tempListaPrenotazioni=$xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']/listaPrenotazioni");
+    if(count($tempListaPrenotazioni) ==0){
+        $idNuovaPrenotazione = $numeroTavolo."-PT1";
+    }else{
+        $numPrenotazioni= (count($tempListaPrenotazioni))-1;
+        $prenotazione= $xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']/listaPrenotazioni/prenotazione");
+        $ultimaPrenotazione= $prenotazione->item($numPrenotazioni);
+        $idUltimaPrenotazione = $ultimaPrenotazione->getElementsByTagName('idPrenotazione')->item(0)->textContent;
+        $nuovoNumero=substr($idUltimaPrenotazione,5,1);
+        settype($nuovoNumero,"integer");
+        $idNuovaPrenotazione = $numeroTavolo."-PT".($nuovoNumero+1);    
+    }
 
     $nuovaPrenotazione = $doc->createElement("prenotazione");
     $listaPrenotazioni->appendChild($nuovaPrenotazione);
 
-    $nuovoIdPrenotazione = $doc->createElement("idPrenotazione" , $numeroTavolo."-PT".($numPrenotazioni + 1));
+    $nuovoIdPrenotazione = $doc->createElement("idPrenotazione" , $idNuovaPrenotazione);
     $nuovaPrenotazione->appendChild($nuovoIdPrenotazione);
 
     $nuovoCodFisc = $doc->createElement("codFisc" , $codFiscCliente);
@@ -322,12 +332,25 @@ function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   
     $doc->loadXML($xmlString);
     $doc->formatOutput = true;
 
+    $xpathPrenotazioniSC = new DOMXPath($doc);
+
     $elemRadice = $doc->documentElement;
     $listaPrenotazioni = $elemRadice->childNodes;
-    $numPrenotazioni = $listaPrenotazioni->length;
+    if(count($listaPrenotazioni) ==0){
+        $idNuovaPrenotazione ="PSC1";
+    }else{
+        $numPrenotazioni= count($listaPrenotazioni)-1;
+        $prenotazione=$xpathPrenotazioniSC->query("/listaPrenotazioni/prenotazione");
+        $ultimaPrenotazione= $prenotazione->item($numPrenotazioni);
+        $idUltimaPrenotazione = $ultimaPrenotazione->getAttribute("id");
+        $numeroVecchio= substr($idUltimaPrenotazione,3,1);
+        settype($numeroVecchio,"integer");
+        $nuovoNumero= $numeroVecchio+1;
+        $idNuovaPrenotazione ="PSC".$nuovoNumero;    
+    }
 
     $nuovaPrenotazione = $doc->createElement("prenotazione");
-    $nuovaPrenotazione->setAttribute("id" , "PSC".($numPrenotazioni + 1) );
+    $nuovaPrenotazione->setAttribute("id" , $idNuovaPrenotazione );
     $elemRadice->appendChild($nuovaPrenotazione);
 
     $nuovoCodFisc = $doc->createElement("codFisc" , $codFiscCliente);
@@ -536,13 +559,26 @@ function aggiungiDomanda($codFiscCliente , $categoriaDomanda , $testoDomanda){
     $docDomande->formatOutput = true;
     
     $datiCliente = getDatiCliente($codFiscCliente);
+    $xpathDomande = new DOMXPath($docDomande);
 
     $elemRadice = $docDomande->documentElement;
     $listaDomande = $docDomande->documentElement->childNodes;
-    $numDomande = count($listaDomande);
+    if(count($listaDomande) ==0){
+        $idNuovaDomanda ="D1";
+    }else{
+        $numDomande= count($listaDomande)-1;
+        $domanda=$xpathDomande->query("/listaDomande/domanda");
+
+        $ultimaDomanda=$domanda->item($numDomande);
+        
+        $idUltimaDomanda = $ultimaDomanda->getAttribute("id");
+        $nuovoNumero= substr($idUltimaDomanda,1,1);
+        settype($nuovoNumero,"integer");
+        $idNuovaDomanda ="D".($nuovoNumero+1);    
+    }
 
     $nuovaDomanda = $docDomande->createElement("domanda");
-    $nuovaDomanda->setAttribute("id" , "D".($numDomande + 1));
+    $nuovaDomanda->setAttribute("id" , $idNuovaDomanda);
     $elemRadice->appendChild($nuovaDomanda);
 
     $nuovoNomeAutore = $docDomande->createElement("nomeAutore" , $datiCliente['nome']);
