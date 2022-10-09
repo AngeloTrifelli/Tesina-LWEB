@@ -1,5 +1,4 @@
 <?php
-    //aggiungere il javascript per non permettere all'utente di inserire valori numeri sotto lo 0
     require_once("funzioniGetPHP.php");
     require_once("funzioniPHP.php");
     session_start();
