@@ -4,11 +4,11 @@
     require_once('funzioniGetPHP.php');
     require_once('funzioniModificaPHP.php');
 
-    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
-
+    $patternOrarioRistorante = "/^[0-9]{2}:[03]{1}[0]{1}$/";
+    $patternOrarioAttivita = "/^[0-9]{2}:[0]{2}$/";
+    $patternOrarioUpdate = "/^[0-9]{2}:[0]{2}$/";
 
     session_start();
-    $orariScorretti="";
 
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
         if(!isset($_SESSION['loginType'])){
@@ -20,67 +20,83 @@
         header('Location: areaUtente.php');
         exit();
     }
-
     $checkOrariRistorante="False";
-    if(isset($_POST['ristorante']) || isset($_POST['updateRistorante']) || isset($_SESSION['idAttivita']) || isset($_POST['idAttivita'])){
+    if(isset($_POST['ristorante']) || isset($_POST['updateRistorante']) || isset($_SESSION['idAttivitaOrariDaModificare']) || isset($_POST['idAttivita'])){
         
-        if(isset($_SESSION['idAttivita'])){
-            $idAttivita=$_SESSION['idAttivita'];
-            unset($_SESSION['idAttivita']);
+        if(isset($_SESSION['idAttivitaOrariDaModificare'])){
+            $idAttivita=$_SESSION['idAttivitaOrariDaModificare'];
+            unset($_SESSION['idAttivitaOrariDaModificare']);
         }
         else{
 
             if(isset($_POST['annulla']) || isset($_POST['cambia'])){
                 if(isset($_POST['annulla'])){
-                    unset($_SESSION['idAttivita']);
+                    unset($_SESSION['idAttivitaOrariDaModificare']);
                     header('Location: listaOrari.php');
                     exit();
                 }
                 else{
                     if(isset($_POST['ristorante'])){
-                        if (preg_match($patternOrario, $_POST['oraAperturaPranzo']) && preg_match($patternOrario, $_POST['oraChiusuraPranzo']) && preg_match($patternOrario, $_POST['oraAperturaCena']) && preg_match($patternOrario, $_POST['oraChiusuraCena'])){
+                        if (preg_match($patternOrarioRistorante, $_POST['oraAperturaPranzo']) && preg_match($patternOrarioRistorante, $_POST['oraChiusuraPranzo']) && preg_match($patternOrarioRistorante, $_POST['oraAperturaCena']) && preg_match($patternOrarioRistorante, $_POST['oraChiusuraCena'])){
+                            if($_POST['oraAperturaPranzo']<$_POST['oraChiusuraPranzo'] &&  $_POST['oraAperturaCena']<$_POST['oraChiusuraCena']){
                             modificaOrariRistorante($_POST['oraAperturaPranzo'],$_POST['oraChiusuraPranzo'],$_POST['oraAperturaCena'] , $_POST['oraChiusuraCena']);
                             header('Location: listaOrari.php');
                             exit();
+                            }else{
+                                $orariScorretti="True";
+                            }
                         }else{
-                            if(isset($_POST['oraAperturaPranzo']) && !preg_match($patternOrario , $_POST['oraAperturaPranzo'])){
+                            if(isset($_POST['oraAperturaPranzo']) && !preg_match($patternOrarioRistorante , $_POST['oraAperturaPranzo'])){
                                 $erroreOrarioAperturaPranzo = "True";
                             }
-                            if(isset($_POST['oraChiusuraPranzo']) && !preg_match($patternOrario , $_POST['oraChiusuraPranzo'])){
+                            if(isset($_POST['oraChiusuraPranzo']) && !preg_match($patternOrarioRistorante , $_POST['oraChiusuraPranzo'])){
                                 $erroreOrarioChiusuraPranzo = "True";
                             }
-                            if(isset($_POST['oraAperturaCena']) && !preg_match($patternOrario , $_POST['oraAperturaCena'])){
+                            if(isset($_POST['oraAperturaCena']) && !preg_match($patternOrarioRistorante , $_POST['oraAperturaCena'])){
                                 $erroreOrarioAperturaCena = "True";
                             }
-                            if(isset($_POST['oraChiusuraCena']) && !preg_match($patternOrario , $_POST['oraChiusuraCena'])){
+                            if(isset($_POST['oraChiusuraCena']) && !preg_match($patternOrarioRistorante , $_POST['oraChiusuraCena'])){
                                 $erroreOrarioChiusuraCena = "True";
                             }
                         }
                     }elseif(isset($_POST['updateRistorante'])){
-                        if ($_POST['oraInizioUpdate']!="" && $_POST['oraFineUpdate']!=""){
+                        if (preg_match($patternOrarioUpdate,$_POST['oraInizioUpdate']) && preg_match($patternOrarioUpdate,$_POST['oraFineUpdate'])){
                             $checkOrariRistorante=checkOrariRistorante($_POST['oraInizioUpdate'],$_POST['oraFineUpdate']);
                             if($checkOrariRistorante=="False"){
+                                if($_POST['oraInizioUpdate']<$_POST['oraFineUpdate']){
                             modificaOrariUpdateRistorante($_POST['oraInizioUpdate'],$_POST['oraFineUpdate']);
                             header('Location: listaOrari.php');
                             exit();
+                                }else{
+                                    $orariScorretti="True";
+                                }
                             }
                         }else{
-                            $orariScorretti="True";
+                            if(isset($_POST['oraInizioUpdate']) && !preg_match($patternOrarioUpdate, $_POST['oraInizioUpdate'])){
+                                $erroreOrarioInizioUpdate = "True";
+                            }
+                            if(isset($_POST['oraFineUpdate']) && !preg_match($patternOrarioUpdate, $_POST['oraFineUpdate'])){
+                                $erroreOrarioFineUpdate = "True";
+                            }
                         }
 
                     }else{
-                        if(preg_match($patternOrario,$_POST['oraAperturaAttivita']) && preg_match($patternOrario,$_POST['oraChiusuraAttivita'])){
-                    
-                        modificaOrariAttivita($_POST['idAttivita'],$_POST['oraAperturaAttivita'],$_POST['oraChiusuraAttivita']);
-                        header('Location: listaOrari.php');
+                        if(preg_match($patternOrarioAttivita,$_POST['oraAperturaAttivita']) && preg_match($patternOrarioAttivita,$_POST['oraChiusuraAttivita'])){
+                            if($_POST['oraAperturaAttivita']<$_POST['oraChiusuraAttivita']){
+                            modificaOrariAttivita($_POST['idAttivita'],$_POST['oraAperturaAttivita'],$_POST['oraChiusuraAttivita']);
+                            header('Location: listaOrari.php');
                         exit();
+                            }else{
+                                $idAttivita=$_POST['idAttivita'];
+                                $orariScorretti="True";
+                            }
                         }
                         else{
                             $idAttivita=$_POST['idAttivita'];
-                            if(isset($_POST['oraAperturaAttivita']) && !preg_match($patternOrario , $_POST['oraAperturaAttivita'])){
+                            if(isset($_POST['oraAperturaAttivita']) && !preg_match($patternOrarioAttivita , $_POST['oraAperturaAttivita'])){
                                 $erroreOrarioAperturaAttivita = "True";
                             }
-                            if(isset($_POST['oraChiusuraAttivita']) && !preg_match($patternOrario , $_POST['oraChiusuraAttivita'])){
+                            if(isset($_POST['oraChiusuraAttivita']) && !preg_match($patternOrarioAttivita , $_POST['oraChiusuraAttivita'])){
                                 $erroreOrarioChiusuraAttivita = "True";
                             }
                         }
@@ -147,6 +163,14 @@
                         else{
                             echo "<input  name=\"oraInizioUpdate\" class=\"oraUpdate\" />";                        
                         }
+                        if(isset($_POST['cambia']) && $_POST['oraInizioUpdate'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di inizio update!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioInizioUpdate) && $_POST['oraInizioUpdate']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
+                        }
                     
                     ?>
         </div>
@@ -160,6 +184,14 @@
                         }
                         else{
                             echo "<input  name=\"oraFineUpdate\" class=\"oraUpdate\" />";                        
+                        }
+                        if(isset($_POST['cambia']) && $_POST['oraFineUpdate'] ==""){
+
+                            echo '<p class="errorLabel">Inserire l\'ora di fine update!</p>';
+                        }
+                        if(isset($_POST['cambia']) && isset($erroreOrarioFineUpdate) && $_POST['oraFineUpdate']!=""){
+
+                            echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
                         }
                         
                     ?>
@@ -177,13 +209,6 @@
 
         </form>
     <?php
-        if ($orariScorretti=="True"){
-            echo "
-                <div class\"riga\">
-                <p class=\"errorLabel\">Dati mancanti!</p>
-                </div>
-            ";
-            }
             if ($checkOrariRistorante=="True"){
                 echo "
                     <div class\"riga\">
@@ -191,6 +216,13 @@
                     </div>
                 ";
                 }
+            if (isset($orariScorretti)){
+                    echo "
+                        <div class\"riga\">
+                        <p class=\"errorLabel\">L'orario di inizio non può essere maggiore o uguale di quello di fine!</p>
+                        </div>
+                    ";
+                    }
     } 
     ?>
 
@@ -311,6 +343,13 @@
         </form>
 
     <?php
+                if (isset($orariScorretti)){
+                    echo "
+                        <div class\"riga\">
+                        <p class=\"errorLabel\">L'orario d'apertura non può essere maggiore o uguale di quello di chiusura!</p>
+                        </div>
+                    ";
+                    }
     }
     if(isset($idAttivita)){
         $attivita=getDatiAttivita($idAttivita);
@@ -376,6 +415,13 @@
 
         </form>
     <?php
+                if (isset($orariScorretti)){
+                    echo "
+                        <div class\"riga\">
+                        <p class=\"errorLabel\">L'orario d'apertura non può essere maggiore o uguale di quello di chiusura!</p>
+                        </div>
+                    ";
+                    }
     } 
     ?>
     </div>

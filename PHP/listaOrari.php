@@ -32,7 +32,7 @@ require_once('funzioniPHP.php');
 
     if(isset($_POST['bottonePremuto'])){
         $idAttivita=individuaBottoneidAttivita();
-        $_SESSION['idAttivita']=$idAttivita;
+        $_SESSION['idAttivitaOrariDaModificare']=$idAttivita;
         header('Location: modificaOrari.php');
         exit();
     }
