@@ -444,6 +444,7 @@
                 scrollbar: true,
             });
             
+            
             $('.oraFineAttivita').timepicker({
                 timeFormat: 'HH:mm',
                 interval: 60,
@@ -463,6 +464,20 @@
                 dropdown: true,
                 scrollbar: true
             });
+            $(".oraRistorantePranzo").on("change", function(){                                           
+                        var element = $(this).val();             
+                        if(JSON.stringify(element).length > 5){
+                            $(this).val(element.substring(0,5));
+                        }
+                        
+                        if(element < "11:00"){
+                            $(this).val("11:00".substring(0,5));
+                        }
+                        
+                        if(element > "17:30"){                                                                        
+                            $(this).val("17:30".substring(0,5));
+                        }                                                
+                    });
             $('.oraRistoranteCena').timepicker({
                 timeFormat: 'HH:mm',
                 interval: 30,
@@ -472,6 +487,20 @@
                 dropdown: true,
                 scrollbar: true
             });
+            $(".oraRistoranteCena").on("change", function(){                                           
+                        var element = $(this).val();             
+                        if(JSON.stringify(element).length > 5){
+                            $(this).val(element.substring(0,5));
+                        }
+                        
+                        if(element < "18:00"){
+                            $(this).val("18:00".substring(0,5));
+                        }
+                        
+                        if(element > "23:30"){                                                                        
+                            $(this).val("23:30".substring(0,5));
+                        }                                                
+                    });
 
             
             $('.oraUpdate').timepicker({
