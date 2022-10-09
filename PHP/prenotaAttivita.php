@@ -5,18 +5,11 @@
     require_once('funzioniGetPHP.php');
 
     $patternDate = "/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/";
-    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
+    $patternOrario = "/^[0-9]{2}:[0]{2}$/";
 
     session_start();
-    $orariScorretti="";
 
-    if(isset($_POST['annulla'])){
-        unset($_SESSION['idAttivita']);
-        header('Location:attivita.php');
-        exit();
-    }
-
-    if(isset($_SESSION['codFiscUtenteLoggato'])){
+    if(isset($_SESSION['codFiscUtenteLoggato']) && isset($_SESSION['idAttivita'])){
         $temp=$_SESSION['soggiornoAttivo'];
         if($temp!="null"){
             if($temp['statoSoggiorno']!= "Approvato"){
@@ -38,54 +31,60 @@
                 $attivita=getDatiAttivita($_SESSION['idAttivita']);
                 $oraMin=$attivita['oraApertura'];
                 $oraMax=$attivita['oraChiusura'];
-                if(isset($_POST['prenota'])){
+                if(isset($_POST['prenota']) || isset($_POST['annulla'])){
+                    if(isset($_POST['annulla'])){
+                        unset($_SESSION['idAttivita']);
+                        header('Location:attivita.php');
+                        exit();
+                    }else{
+                        if(preg_match($patternDate,$_POST['data']) && preg_match($patternOrario, $_POST['oraInizio']) && preg_match($patternOrario, $_POST['oraFine'])){
 
-                    if (preg_match($patternDate,$_POST['data']) && preg_match($patternOrario, $_POST['oraInizio']) && preg_match($patternOrario, $_POST['oraFine'])){
-                        if($_POST['oraFine']>$_POST['oraInizio']){
+                            if($_POST['oraFine']>$_POST['oraInizio']){
             
-                            $arrayAttivita['idAttivita']=$_SESSION['idAttivita'];
-                            $stringaData = $_POST['data'];
-                            $anno = substr($stringaData, 6 , 4);
-                            $mese = substr($stringaData, 3 , 2);
-                            $giorno = substr($stringaData , 0 , 2 );
-                            $arrayAttivita['dataAttivita'] = $anno."-".$mese."-".$giorno;
-            
-                            $arrayAttivita['oraInizio']=$_POST['oraInizio'];
-                            $arrayAttivita['oraFine']=$_POST['oraFine'];
-                            $_SESSION['prenotazioneAttivita'] = $arrayAttivita;
+                                $arrayAttivita['idAttivita']=$_SESSION['idAttivita'];
+                                $stringaData = $_POST['data'];
+                                $anno = substr($stringaData, 6 , 4);
+                                $mese = substr($stringaData, 3 , 2);
+                                $giorno = substr($stringaData , 0 , 2 );
+                                $arrayAttivita['dataAttivita'] = $anno."-".$mese."-".$giorno;
+                
+                                $arrayAttivita['oraInizio']=$_POST['oraInizio'];
+                                $arrayAttivita['oraFine']=$_POST['oraFine'];
+                                $_SESSION['prenotazioneAttivita'] = $arrayAttivita;
 
-                            unset($_SESSION['idAttivita']);
-                       
-                            header('Location: confermaPrenotazione.php');
-                            exit();
-                        }else{
+                                unset($_SESSION['idAttivita']);
+                        
+                                header('Location: confermaPrenotazione.php');
+                                exit();
+                            }else{
                             $orariScorretti="True";
                              }
-            
-                    }else{
-                        if($_POST['data'] != "" &&  !preg_match($patternDate , $_POST['data'])){
-                            $erroreDate = "True";
-                        }
-                        if(isset($_POST['oraInizio']) && !preg_match($patternOrario , $_POST['oraInizio'])){
-                            $erroreOrarioInizio = "True";
-                        }
-                        if(isset($_POST['oraFine']) && !preg_match($patternOrario , $_POST['oraFine'])){
-                            $erroreOrarioFine = "True";
-                        }
-                    }
-            
+                        }else{
+
+                                if($_POST['data'] != "" &&  !preg_match($patternDate , $_POST['data'])){
+                                    $erroreDate = "True";
+                                }
+                                if(isset($_POST['oraInizio']) && !preg_match($patternOrario , $_POST['oraInizio'])){
+                                    $erroreOrarioInizio = "True";
+                                }
+                                if(isset($_POST['oraFine']) && !preg_match($patternOrario , $_POST['oraFine'])){
+                                    $erroreOrarioFine = "True";
+                                }
+                        }  
+                    }  
                 }
-                }
-            }else{
-                unset($_SESSION['idAttivita']);
-                header('Location: areaUtente.php');
-                exit();
-                 }
-    }
-    else{
+            
+            }    
+        }else{
+            unset($_SESSION['idAttivita']);
+            header('Location: areaUtente.php');
+            exit();
+            }
+    
+    }else{
         header('Location: login.php');
         exit();
-        }   
+    }   
              
 ?>
 
@@ -115,7 +114,7 @@
 <body>
     <div class="containerCentrale">
 
-    <h1>PRENOTA ATTIVIT&Agrave;:</h1>
+        <h1>PRENOTA ATTIVIT&Agrave;:</h1>
 
 
 
@@ -153,8 +152,8 @@
                         <div class="containerColumn">
 
 
-                    <p><strong>Inserisci l'orario di inizio:</strong></p>
-                    <?php 
+                            <p><strong>Inserisci l'orario di inizio:</strong></p>
+                            <?php 
                                         if(isset($_POST['oraInizio'])){
                                             echo "<input  name=\"oraInizio\" class=\"oraInizio\" value=\"{$_POST['oraInizio']}\" />";                        
                                         }
@@ -172,10 +171,10 @@
                                     ?>
                         </div>
                         
-                            <div class="containerColumn">
+                        <div class="containerColumn">
 
-                    <p><strong>Inserisci l'orario di fine:</strong></p>
-                    <?php 
+                            <p><strong>Inserisci l'orario di fine:</strong></p>
+                            <?php 
                                          if(isset($_POST['oraFine'])){
                                             echo "<input  name=\"oraFine\" class=\"oraFine\" value=\"{$_POST['oraFine']}\" />";                        
                                         }
@@ -203,20 +202,16 @@
                     </div>
 
                     <?php
-                        if(isset($_POST['prenota']) && $orariScorretti == "True"){
+                        if(isset($_POST['prenota']) && isset($orariScorretti)){
                     ?>
                             <div class="row">
-                                <h2 class="errorLabel">Inserire degli orari accettabili!</h2>
+                                <h2 class="errorLabel" style="font-size:16px">L'ora di inizio attivi&agrave; non pu&ograve; essere maggiore o uguale di quella finale!</h2>
                             </div>
                     <?php
                         }
                     ?>
 
-                </div>
-
             </form>
-        
-        </div>
 
     </div>
 
