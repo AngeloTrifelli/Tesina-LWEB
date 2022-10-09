@@ -5,7 +5,24 @@
     session_start();
 
     if(!isset($_SESSION['codFiscUtenteLoggato'])){
-        if(!isset($_SESSION['loginType'])){
+        if(isset($_SESSION['loginType']) && isset($_SESSION['idFaq'])){
+            if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
+                if(isset($_POST['ANNULLA'])){
+                    unset($_SESSION['idFaq']);
+                    header('Location: faq.php');
+                    exit();
+                }
+                else{
+                    modificaFaq($_SESSION['idFaq'],$_POST['risposta']);
+                    unset($_SESSION['idFaq']);
+                    header('Location: faq.php');
+                    exit();
+                }
+            }
+        
+            $faq=getFAQ($_SESSION['idFaq']);
+
+        }else{
             header('Location: intro.php');
             exit();
         }
@@ -15,22 +32,6 @@
         exit();
     }
 
-    $datiNonInseriti="False";
-    if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
-        if(isset($_POST['ANNULLA'])){
-            unset($_SESSION['idFaq']);
-            header('Location: faq.php');
-            exit();
-        }
-        else{
-            modificaFaq($_SESSION['idFaq'],$_POST['risposta']);
-            unset($_SESSION['idFaq']);
-            header('Location: faq.php');
-            exit();
-        }
-    }
-
-    $faq=getFAQ($_SESSION['idFaq']);
 
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>

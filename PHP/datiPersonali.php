@@ -8,7 +8,12 @@
             $soggiorniPassati = getSoggiorniPassati($_SESSION['codFiscUtenteLoggato']);
         }
         else{
+            if(!isset($_SESSION['codFiscUtenteDaModificare'])){
+                header('Location: areaUtente.php');
+                exit();
+            }else{
             $cliente = getDatiCliente($_SESSION['codFiscUtenteDaModificare']);
+            }
         }
     }
     else{
