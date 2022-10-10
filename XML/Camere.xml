@@ -28,6 +28,14 @@
         <dataArrivo>2022-07-13</dataArrivo>
         <dataPartenza>2022-07-15</dataPartenza>
       </prenotazione>
+      <prenotazione>
+        <idPrenotazione>C110-PC4</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <statoSoggiorno>Approvato</statoSoggiorno>
+        <creditiUsati>0</creditiUsati>
+        <dataArrivo>2022-11-11</dataArrivo>
+        <dataPartenza>2022-11-13</dataPartenza>
+      </prenotazione>
     </listaPrenotazioni>
   </Camera>
   <Camera numero="C200">
@@ -36,14 +44,6 @@
     <listaPrenotazioni>
       <prenotazione>
         <idPrenotazione>C200-PC1</idPrenotazione>
-        <codFisc>CPZGLC90P11H501W</codFisc>
-        <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
-        <creditiUsati>0</creditiUsati>
-        <dataArrivo>2022-11-09</dataArrivo>
-        <dataPartenza>2022-11-10</dataPartenza>
-      </prenotazione>
-      <prenotazione>
-        <idPrenotazione>C200-PC2</idPrenotazione>
         <codFisc>BNCVNT00R67E472F</codFisc>
         <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
         <creditiUsati>0</creditiUsati>
@@ -56,16 +56,8 @@
     <tipo>Suite</tipo>
     <prezzo>150</prezzo>
     <listaPrenotazioni>
-        <prenotazione>
-          <idPrenotazione>C300-PC1</idPrenotazione>
-          <codFisc>CPZGLC90P11H501W</codFisc>
-          <statoSoggiorno>Pagamento sospeso</statoSoggiorno>
-          <creditiUsati>0</creditiUsati>
-          <dataArrivo>2022-11-18</dataArrivo>
-          <dataPartenza>2022-11-19</dataPartenza>
-      </prenotazione>
       <prenotazione>
-        <idPrenotazione>C300-PC2</idPrenotazione>
+        <idPrenotazione>C300-PC1</idPrenotazione>
         <codFisc>CPZGLC90P11H501W</codFisc>
         <statoSoggiorno>Pagamento rifiutato</statoSoggiorno>
         <creditiUsati>0</creditiUsati>
@@ -73,7 +65,7 @@
         <dataPartenza>2022-11-18</dataPartenza>
       </prenotazione>
       <prenotazione>
-        <idPrenotazione>C300-PC3</idPrenotazione>
+        <idPrenotazione>C300-PC2</idPrenotazione>
         <codFisc>VRDRRT00L13E472M</codFisc>
         <statoSoggiorno>Terminato</statoSoggiorno>
         <creditiUsati>0</creditiUsati>
