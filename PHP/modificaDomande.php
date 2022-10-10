@@ -68,8 +68,7 @@
 
     if(isset($_SESSION['tipoAzioneDomanda'])){
         $temp = $_SESSION['tipoAzioneDomanda'];
-        if($temp['tipoAzione'] == "aggiungiDomanda"){
-            // $categorieCliente = getCategorieCliente($_SESSION['codFiscUtenteLoggato']);
+        if($temp['tipoAzione'] == "aggiungiDomanda"){            
             $tabelleCategorie = getCategorie();
             $categorieAttive = $tabelleCategorie[0];
             $categorieDisattivate = $tabelleCategorie[1];  

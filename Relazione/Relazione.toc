@@ -1,99 +1,180 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Tipi di utente}{6}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Visitatore}{7}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Cliente}{7}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}Concierge}{8}{subsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.1.4}Amministratore}{8}{subsection.1.1.4}%
-\contentsline {section}{\numberline {1.2}Casi d'uso}{8}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Visualizzazione informazioni relative all'hotel}{9}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Prenotazione di un soggiorno}{9}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Registrazione}{10}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Login}{10}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {1.2.5}Visualizzazione e modifica delle informazioni personali}{10}{subsection.1.2.5}%
-\contentsline {subsection}{\numberline {1.2.6}Pagamento mediante denaro e/o crediti}{10}{subsection.1.2.6}%
-\contentsline {subsection}{\numberline {1.2.7}Servizio di ristorazione}{11}{subsection.1.2.7}%
-\contentsline {subsection}{\numberline {1.2.8}Attività}{12}{subsection.1.2.8}%
-\contentsline {subsection}{\numberline {1.2.9}Scrittura e commento di recensioni/commenti}{13}{subsection.1.2.9}%
-\contentsline {subsection}{\numberline {1.2.10}Valutazione di recensioni e di commenti}{14}{subsection.1.2.10}%
-\contentsline {subsection}{\numberline {1.2.11}Inserimento e risposta alle domande}{14}{subsection.1.2.11}%
-\contentsline {subsection}{\numberline {1.2.12}Modifica del menù del ristorante}{15}{subsection.1.2.12}%
-\contentsline {subsection}{\numberline {1.2.13}Modifica degli orari}{15}{subsection.1.2.13}%
-\contentsline {subsection}{\numberline {1.2.14}Modifica delle attività}{15}{subsection.1.2.14}%
-\contentsline {subsection}{\numberline {1.2.15}Visualizzazione delle prenotazioni dei clienti}{16}{subsection.1.2.15}%
-\contentsline {subsection}{\numberline {1.2.16}Elevazione/inserimento di domande come FAQ}{16}{subsection.1.2.16}%
-\contentsline {subsection}{\numberline {1.2.17}Inserimento/disattivazione di una categoria}{17}{subsection.1.2.17}%
-\contentsline {subsection}{\numberline {1.2.18}Approvazione di un pagamento}{17}{subsection.1.2.18}%
-\contentsline {subsection}{\numberline {1.2.19}Visualizzazione dei clienti attuali}{17}{subsection.1.2.19}%
-\contentsline {section}{\numberline {1.3}Strutture dati}{18}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Clienti.xml}{18}{subsection.1.3.1}%
-\contentsline {subsubsection}{Clienti.xml}{18}{section*.2}%
-\contentsline {subsubsection}{Clienti.xsd}{19}{section*.3}%
-\contentsline {subsection}{\numberline {1.3.2}Concierge.xml}{20}{subsection.1.3.2}%
-\contentsline {subsubsection}{Concierge.xml}{21}{section*.4}%
-\contentsline {subsubsection}{Concierge.xsd}{21}{section*.5}%
-\contentsline {subsection}{\numberline {1.3.3}Amministratori.xml}{21}{subsection.1.3.3}%
-\contentsline {subsubsection}{Amministratori.xml}{21}{section*.6}%
-\contentsline {subsubsection}{Amministratori.xsd}{22}{section*.7}%
-\contentsline {subsection}{\numberline {1.3.4}Camere.xml}{22}{subsection.1.3.4}%
-\contentsline {subsubsection}{Camere.xml}{23}{section*.8}%
-\contentsline {subsubsection}{Camere.xsd}{23}{section*.9}%
-\contentsline {subsection}{\numberline {1.3.5}Ristorante.xml}{25}{subsection.1.3.5}%
-\contentsline {subsubsection}{Ristorante.xml}{25}{section*.10}%
-\contentsline {subsubsection}{Ristorante.xsd}{26}{section*.11}%
-\contentsline {subsection}{\numberline {1.3.6}Tavoli.xml}{28}{subsection.1.3.6}%
-\contentsline {subsubsection}{Tavoli.xml}{28}{section*.12}%
-\contentsline {subsubsection}{Tavoli.xsd}{28}{section*.13}%
-\contentsline {subsection}{\numberline {1.3.7}ServizioCamera.xml}{30}{subsection.1.3.7}%
-\contentsline {subsubsection}{ServizioCamera.xml}{30}{section*.14}%
-\contentsline {subsubsection}{ServizioCamera.xsd}{30}{section*.15}%
-\contentsline {subsection}{\numberline {1.3.8}Attivita.xml}{32}{subsection.1.3.8}%
-\contentsline {subsubsection}{Attivita.xml}{32}{section*.16}%
-\contentsline {subsubsection}{Attivita.xsd}{33}{section*.17}%
-\contentsline {subsection}{\numberline {1.3.9}Recensioni.xml}{35}{subsection.1.3.9}%
-\contentsline {subsubsection}{Recensioni.xml}{35}{section*.18}%
-\contentsline {subsubsection}{Recensioni.xsd}{36}{section*.19}%
-\contentsline {subsection}{\numberline {1.3.10}Commenti.xml}{37}{subsection.1.3.10}%
-\contentsline {subsubsection}{Commenti.xml}{38}{section*.20}%
-\contentsline {subsubsection}{Commenti.xsd}{38}{section*.21}%
-\contentsline {subsection}{\numberline {1.3.11}Valutazioni.xml}{41}{subsection.1.3.11}%
-\contentsline {subsubsection}{Valutazioni.xml}{41}{section*.22}%
-\contentsline {subsubsection}{Valutazioni.xsd}{41}{section*.23}%
-\contentsline {subsection}{\numberline {1.3.12}Domande.xml}{42}{subsection.1.3.12}%
-\contentsline {subsubsection}{Domande.xml}{42}{section*.24}%
-\contentsline {subsubsection}{Domande.xsd}{43}{section*.25}%
-\contentsline {subsection}{\numberline {1.3.13}FAQs.xml}{45}{subsection.1.3.13}%
-\contentsline {subsubsection}{FAQs.xml}{45}{section*.26}%
-\contentsline {subsubsection}{FAQs.xsd}{45}{section*.27}%
-\contentsline {subsection}{\numberline {1.3.14}Categorie.xml}{46}{subsection.1.3.14}%
-\contentsline {subsubsection}{Categorie.xml}{46}{section*.28}%
-\contentsline {subsubsection}{Categorie.xsd}{47}{section*.29}%
-\contentsline {section}{\numberline {1.4}Elementi XML}{49}{section.1.4}%
-\contentsline {subsubsection}{Clienti.xml: dataAssegnazioneCrediti}{49}{section*.30}%
-\contentsline {subsubsection}{Clienti.xml: sommaGiudizi}{49}{section*.31}%
-\contentsline {subsubsection}{Camere.xml: idPrenotazione}{49}{section*.32}%
-\contentsline {subsubsection}{Camere.xml: codFisc}{50}{section*.33}%
-\contentsline {subsubsection}{Ristorante.xml: tipologia}{50}{section*.34}%
-\contentsline {subsubsection}{Tavoli.xml: idPrenotazione}{50}{section*.35}%
-\contentsline {subsubsection}{Tavoli.xml: ora}{51}{section*.36}%
-\contentsline {subsubsection}{Attivita.xml: prezzoTotale}{51}{section*.37}%
-\contentsline {subsubsection}{Recensioni.xml: id}{51}{section*.38}%
-\contentsline {subsubsection}{Recensioni.xml: utilita}{51}{section*.39}%
-\contentsline {subsubsection}{Commenti.xml: idRisposta}{52}{section*.40}%
-\contentsline {subsubsection}{Valutazioni.xml: idOggettoValutato}{52}{section*.41}%
-\contentsline {chapter}{\numberline {2}Manuale utente}{55}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Utente visitatore}{55}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Visualizzare le camere e le suite}{56}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Visualizzare le recensioni}{57}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Visualizzare le FAQ}{58}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Prenotazione di un soggiorno}{59}{subsection.2.1.4}%
-\contentsline {chapter}{\numberline {3}Programmazione}{61}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Script delle pagine}{62}{section.3.1}%
-\contentsline {subsubsection}{registrazioneUtente.php}{62}{section*.42}%
-\contentsline {subsubsection}{login.php}{62}{section*.43}%
-\contentsline {subsubsection}{visualizzaDisponibilita.php}{63}{section*.44}%
-\contentsline {subsubsection}{confermaPrenotazione.php}{64}{section*.45}%
-\contentsline {subsubsection}{datiPersonali.php}{64}{section*.46}%
-\contentsline {subsubsection}{prenotaTavolo.php}{64}{section*.47}%
-\contentsline {subsubsection}{prenotaSC.php}{65}{section*.48}%
+\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Tipi di utente}{8}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Visitatore}{9}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Cliente}{9}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Concierge}{10}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Amministratore}{10}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}Casi d'uso}{10}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Visualizzazione informazioni relative all'hotel}{11}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Prenotazione di un soggiorno}{11}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Registrazione}{12}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Login}{12}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Visualizzazione e modifica delle informazioni personali}{12}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Pagamento mediante denaro e/o crediti}{12}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Servizio di ristorazione}{13}{subsection.1.2.7}%
+\contentsline {subsection}{\numberline {1.2.8}Attività}{14}{subsection.1.2.8}%
+\contentsline {subsection}{\numberline {1.2.9}Scrittura e commento di recensioni/commenti}{15}{subsection.1.2.9}%
+\contentsline {subsection}{\numberline {1.2.10}Valutazione di recensioni e di commenti}{16}{subsection.1.2.10}%
+\contentsline {subsection}{\numberline {1.2.11}Inserimento e risposta alle domande}{16}{subsection.1.2.11}%
+\contentsline {subsection}{\numberline {1.2.12}Modifica del menù del ristorante}{17}{subsection.1.2.12}%
+\contentsline {subsection}{\numberline {1.2.13}Modifica degli orari}{17}{subsection.1.2.13}%
+\contentsline {subsection}{\numberline {1.2.14}Modifica delle attività}{17}{subsection.1.2.14}%
+\contentsline {subsection}{\numberline {1.2.15}Visualizzazione delle prenotazioni dei clienti}{18}{subsection.1.2.15}%
+\contentsline {subsection}{\numberline {1.2.16}Elevazione/inserimento di domande come FAQ}{18}{subsection.1.2.16}%
+\contentsline {subsection}{\numberline {1.2.17}Inserimento/disattivazione di una categoria}{19}{subsection.1.2.17}%
+\contentsline {subsection}{\numberline {1.2.18}Approvazione di un pagamento}{19}{subsection.1.2.18}%
+\contentsline {subsection}{\numberline {1.2.19}Visualizzazione dei clienti attuali}{19}{subsection.1.2.19}%
+\contentsline {section}{\numberline {1.3}Strutture dati}{20}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Clienti.xml}{20}{subsection.1.3.1}%
+\contentsline {subsubsection}{Clienti.xml}{20}{section*.2}%
+\contentsline {subsubsection}{Clienti.xsd}{21}{section*.3}%
+\contentsline {subsection}{\numberline {1.3.2}Concierge.xml}{22}{subsection.1.3.2}%
+\contentsline {subsubsection}{Concierge.xml}{23}{section*.4}%
+\contentsline {subsubsection}{Concierge.xsd}{23}{section*.5}%
+\contentsline {subsection}{\numberline {1.3.3}Amministratori.xml}{23}{subsection.1.3.3}%
+\contentsline {subsubsection}{Amministratori.xml}{23}{section*.6}%
+\contentsline {subsubsection}{Amministratori.xsd}{24}{section*.7}%
+\contentsline {subsection}{\numberline {1.3.4}Camere.xml}{24}{subsection.1.3.4}%
+\contentsline {subsubsection}{Camere.xml}{25}{section*.8}%
+\contentsline {subsubsection}{Camere.xsd}{25}{section*.9}%
+\contentsline {subsection}{\numberline {1.3.5}Ristorante.xml}{27}{subsection.1.3.5}%
+\contentsline {subsubsection}{Ristorante.xml}{27}{section*.10}%
+\contentsline {subsubsection}{Ristorante.xsd}{28}{section*.11}%
+\contentsline {subsection}{\numberline {1.3.6}Tavoli.xml}{30}{subsection.1.3.6}%
+\contentsline {subsubsection}{Tavoli.xml}{30}{section*.12}%
+\contentsline {subsubsection}{Tavoli.xsd}{30}{section*.13}%
+\contentsline {subsection}{\numberline {1.3.7}ServizioCamera.xml}{32}{subsection.1.3.7}%
+\contentsline {subsubsection}{ServizioCamera.xml}{32}{section*.14}%
+\contentsline {subsubsection}{ServizioCamera.xsd}{32}{section*.15}%
+\contentsline {subsection}{\numberline {1.3.8}Attivita.xml}{34}{subsection.1.3.8}%
+\contentsline {subsubsection}{Attivita.xml}{34}{section*.16}%
+\contentsline {subsubsection}{Attivita.xsd}{35}{section*.17}%
+\contentsline {subsection}{\numberline {1.3.9}Recensioni.xml}{37}{subsection.1.3.9}%
+\contentsline {subsubsection}{Recensioni.xml}{37}{section*.18}%
+\contentsline {subsubsection}{Recensioni.xsd}{38}{section*.19}%
+\contentsline {subsection}{\numberline {1.3.10}Commenti.xml}{39}{subsection.1.3.10}%
+\contentsline {subsubsection}{Commenti.xml}{40}{section*.20}%
+\contentsline {subsubsection}{Commenti.xsd}{40}{section*.21}%
+\contentsline {subsection}{\numberline {1.3.11}Valutazioni.xml}{43}{subsection.1.3.11}%
+\contentsline {subsubsection}{Valutazioni.xml}{43}{section*.22}%
+\contentsline {subsubsection}{Valutazioni.xsd}{43}{section*.23}%
+\contentsline {subsection}{\numberline {1.3.12}Domande.xml}{44}{subsection.1.3.12}%
+\contentsline {subsubsection}{Domande.xml}{44}{section*.24}%
+\contentsline {subsubsection}{Domande.xsd}{45}{section*.25}%
+\contentsline {subsection}{\numberline {1.3.13}FAQs.xml}{47}{subsection.1.3.13}%
+\contentsline {subsubsection}{FAQs.xml}{47}{section*.26}%
+\contentsline {subsubsection}{FAQs.xsd}{47}{section*.27}%
+\contentsline {subsection}{\numberline {1.3.14}Categorie.xml}{48}{subsection.1.3.14}%
+\contentsline {subsubsection}{Categorie.xml}{48}{section*.28}%
+\contentsline {subsubsection}{Categorie.xsd}{49}{section*.29}%
+\contentsline {section}{\numberline {1.4}Elementi XML}{51}{section.1.4}%
+\contentsline {subsubsection}{Clienti.xml: dataAssegnazioneCrediti}{51}{section*.30}%
+\contentsline {subsubsection}{Clienti.xml: sommaGiudizi}{51}{section*.31}%
+\contentsline {subsubsection}{Camere.xml: idPrenotazione}{51}{section*.32}%
+\contentsline {subsubsection}{Camere.xml: codFisc}{52}{section*.33}%
+\contentsline {subsubsection}{Ristorante.xml: tipologia}{52}{section*.34}%
+\contentsline {subsubsection}{Tavoli.xml: idPrenotazione}{52}{section*.35}%
+\contentsline {subsubsection}{Tavoli.xml: ora}{53}{section*.36}%
+\contentsline {subsubsection}{Attivita.xml: prezzoTotale}{53}{section*.37}%
+\contentsline {subsubsection}{Recensioni.xml: id}{53}{section*.38}%
+\contentsline {subsubsection}{Recensioni.xml: utilita}{53}{section*.39}%
+\contentsline {subsubsection}{Commenti.xml: idRisposta}{54}{section*.40}%
+\contentsline {subsubsection}{Valutazioni.xml: idOggettoValutato}{54}{section*.41}%
+\contentsline {chapter}{\numberline {2}Manuale utente}{57}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Utente visitatore}{57}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Visualizzare le camere e le suite}{58}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Visualizzare le recensioni}{59}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Visualizzare le FAQ}{60}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Prenotazione di un soggiorno}{61}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Autenticarsi}{62}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Registrazione}{63}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}Cliente}{64}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Accedere all'area cliente}{65}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Prenotare un soggiorno}{65}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Prenotare un tavolo}{67}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Prenotare un servizio in camera}{68}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Visualizzare le prenotazioni del servizio di ristorazione ed annullarle}{70}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Visualizzare il menu}{71}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}Prenotare un'attività}{72}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.8}Visualizzare le prenotazioni delle attività ed annullarle}{74}{subsection.2.2.8}%
+\contentsline {subsection}{\numberline {2.2.9}Visualizzare le domande e le relative risposte}{74}{subsection.2.2.9}%
+\contentsline {subsection}{\numberline {2.2.10}Aggiungere una domanda}{75}{subsection.2.2.10}%
+\contentsline {subsection}{\numberline {2.2.11}Rispondere ad una domanda}{76}{subsection.2.2.11}%
+\contentsline {subsection}{\numberline {2.2.12}Aggiungere una recensione}{76}{subsection.2.2.12}%
+\contentsline {subsection}{\numberline {2.2.13}Rispondere ad una recensione o ad un commento}{77}{subsection.2.2.13}%
+\contentsline {subsection}{\numberline {2.2.14}Giudicare una recensione/un commento/una risposta al commento}{78}{subsection.2.2.14}%
+\contentsline {subsection}{\numberline {2.2.15}Visualizzare i propri dati e modificarli}{78}{subsection.2.2.15}%
+\contentsline {section}{\numberline {2.3}Concierge}{80}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Modifica del menù del ristorante}{80}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Modifica degli orari delle attività e del ristorante}{82}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Modifica delle attività}{84}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Visualizzare le prenotazioni del servizio di ristorazione, modificarle ed annullarle}{86}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Visualizzare le prenotazioni delle attività, modificarle e annullarle}{90}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Rispondere alle domande ed elevarle a FAQ}{91}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Aggiungere, modificare o rimuovere una FAQ}{92}{subsection.2.3.7}%
+\contentsline {section}{\numberline {2.4}Admin}{94}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Attivare, disattivare e aggiungere una categoria}{95}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Approvare o rifiutare un pagamento}{96}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Visualizzare i clienti e modificarne i dati}{97}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Modificare gli orari di update del menù}{98}{subsection.2.4.4}%
+\contentsline {chapter}{\numberline {3}Programmazione}{101}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Script delle pagine}{102}{section.3.1}%
+\contentsline {subsubsection}{registrazioneUtente.php}{102}{section*.42}%
+\contentsline {subsubsection}{login.php}{102}{section*.43}%
+\contentsline {subsubsection}{visualizzaDisponibilita.php}{103}{section*.44}%
+\contentsline {subsubsection}{confermaPrenotazione.php}{104}{section*.45}%
+\contentsline {subsubsection}{datiPersonali.php}{104}{section*.46}%
+\contentsline {subsubsection}{modificaDatiUtente.php}{104}{section*.47}%
+\contentsline {subsubsection}{prenotaTavolo.php}{105}{section*.48}%
+\contentsline {subsubsection}{prenotaSC.php}{106}{section*.49}%
+\contentsline {subsubsection}{listaPortate.php}{106}{section*.50}%
+\contentsline {subsubsection}{dettagliPrenotazioneSC.php}{107}{section*.51}%
+\contentsline {subsubsection}{visualizzaPrenotazioniRistorante.php}{107}{section*.52}%
+\contentsline {subsubsection}{visualizzaMenu.php}{108}{section*.53}%
+\contentsline {subsubsection}{attivita.php}{109}{section*.54}%
+\contentsline {subsubsection}{prenotazioniAttivita.php}{109}{section*.55}%
+\contentsline {subsubsection}{domande.php}{109}{section*.56}%
+\contentsline {subsubsection}{risposteDomanda.php}{111}{section*.57}%
+\contentsline {subsubsection}{modificaDomande.php}{111}{section*.58}%
+\contentsline {subsubsection}{recensioni.php}{112}{section*.59}%
+\contentsline {subsubsection}{risposteRecensione.php}{113}{section*.60}%
+\contentsline {subsubsection}{modificaRecensione.php}{113}{section*.61}%
+\contentsline {subsubsection}{inserisciGiudizio.php}{113}{section*.62}%
+\contentsline {subsubsection}{listaOrari.php}{114}{section*.63}%
+\contentsline {subsubsection}{listaAttivita.php}{114}{section*.64}%
+\contentsline {subsubsection}{modificaAttivita.php}{114}{section*.65}%
+\contentsline {subsubsection}{prenotazioniRistorante.php}{114}{section*.66}%
+\contentsline {subsubsection}{modificaPrenotazioneRistorante.php}{115}{section*.67}%
+\contentsline {section}{\numberline {3.2}Script delle funzioni}{116}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}FunzioniGetPHP}{116}{subsection.3.2.1}%
+\contentsline {subsubsection}{getDatiCliente}{116}{section*.68}%
+\contentsline {subsubsection}{getSoggiornoAttivo}{117}{section*.69}%
+\contentsline {subsubsection}{getIdCamere}{118}{section*.70}%
+\contentsline {subsubsection}{getSoggiorniPassati}{119}{section*.71}%
+\contentsline {subsubsection}{getCamereDisponibili}{119}{section*.72}%
+\contentsline {subsubsection}{getDomande}{120}{section*.73}%
+\contentsline {subsection}{\numberline {3.2.2}FunzioniModificaPHP}{120}{subsection.3.2.2}%
+\contentsline {subsubsection}{modificaDatiUtente}{120}{section*.74}%
+\contentsline {subsubsection}{modificaDataCreditiGiornalieri}{121}{section*.75}%
+\contentsline {subsubsection}{modificaStatoSoggiorno}{122}{section*.76}%
+\contentsline {subsubsection}{modificaPrenotazioneTavolo}{122}{section*.77}%
+\contentsline {subsubsection}{modificaPrenotazioneAttivita}{123}{section*.78}%
+\contentsline {subsubsection}{modificaValutazione}{123}{section*.79}%
+\contentsline {subsection}{\numberline {3.2.3}FunzioniInsertPHP}{124}{subsection.3.2.3}%
+\contentsline {subsubsection}{inserisciPrenotazioneCamera}{124}{section*.80}%
+\contentsline {subsubsection}{aggiungiPortataPrenotazioneSC}{125}{section*.81}%
+\contentsline {subsubsection}{aggiungiCategoriaAdUtente}{125}{section*.82}%
+\contentsline {subsection}{\numberline {3.2.4}FunzioniDeletePHP}{126}{subsection.3.2.4}%
+\contentsline {subsubsection}{rimuoviPortataPrenotazioneSC}{126}{section*.83}%
+\contentsline {subsection}{\numberline {3.2.5}FunzioniPHP}{127}{subsection.3.2.5}%
+\contentsline {subsubsection}{individuaBottoneCamereDisponibili}{127}{section*.84}%
+\contentsline {subsubsection}{eseguiLoginCliente}{127}{section*.85}%
+\contentsline {subsubsection}{cercaTavoloDisponibile}{128}{section*.86}%
+\contentsline {subsubsection}{checkNomePortata}{129}{section*.87}%
+\contentsline {subsubsection}{checkOrariRistorante}{129}{section*.88}%
+\contentsline {chapter}{\numberline {4}Elenco utenze}{131}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Clienti}{131}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Concierge}{131}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Amministratori}{132}{section.4.3}%
