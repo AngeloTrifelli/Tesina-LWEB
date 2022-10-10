@@ -4,6 +4,8 @@
     require_once('funzioniModificaPHP.php');
     require_once('funzioniInsertPHP.php');
     require_once('funzioniDeletePHP.php');
+    $patternDate = "/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/";
+    $patternOrario = "/^[0-9]{2}:[0-9]{2}$/";
     session_start();
 
     if(isset($_POST['ANNULLA']) || isset($_POST['CONFERMA'])){
@@ -20,7 +22,18 @@
         }
         else{
             if(isset($_POST['modificaPrenotazioneTavolo'])){
-                if($_POST['dataPrenotazione'] != "" && isset($_POST['locazione']) && isset($_POST['pasto']) && $_POST['oraPrenotazione'] != ""){
+                if($_POST['dataPrenotazione']!="" && isset($_POST['locazione']) && isset($_POST['pasto']) && $_POST['oraPrenotazione']!=""){
+                    if(!preg_match($patternDate,$_POST['dataPrenotazione']) || !preg_match($patternOrario,$_POST['oraPrenotazione'])){
+                        if(!preg_match($patternDate,$_POST['dataPrenotazione'])){
+                            $erroreData="True";
+                        }
+                        if(!preg_match($patternOrario,$_POST['oraPrenotazione'])  ){
+                            $erroreOra="True";
+                        }
+                            $arrayDati['idPrenotazione'] = $_POST['idPrenotazione']; 
+                            $_SESSION['prenotazioneDaModificare'] = $arrayDati;
+                    }else{
+
                     $stringaData = $_POST['dataPrenotazione'];
                     $anno = substr($stringaData, 6 , 4);
                     $mese = substr($stringaData, 3 , 2);
@@ -30,7 +43,6 @@
                     $oraPrenotazione = $_POST['oraPrenotazione'].":00";
     
                     $result = modificaPrenotazioneTavolo($_POST['idPrenotazione'], $dataPrenotazione , $_POST['locazione'] , $_POST['pasto'] , $oraPrenotazione);
-    
                     if($result == "success"){
                         header('Location: prenotazioniRistorante.php');
                         exit();
@@ -40,7 +52,9 @@
                         $_SESSION['prenotazioneDaModificare'] = $arrayDati;
                     }
                 }
+                }
                 else{
+                    $datiMancantiTavolo="True";
                     $arrayDati['idPrenotazione'] = $_POST['idPrenotazione']; 
                     $_SESSION['prenotazioneDaModificare'] = $arrayDati;                        
                 }
@@ -80,18 +94,26 @@
             elseif(isset($_POST['modificaDataOra'])){
                 if($_POST['dataPrenotazione'] != "" || isset($_POST['pasto']) ){
                     if($_POST['dataPrenotazione'] != ""){
-                        $stringaData = $_POST['dataPrenotazione'];
-                        $anno = substr($stringaData, 6 , 4);
-                        $mese = substr($stringaData, 3 , 2);
-                        $giorno = substr($stringaData , 0 , 2 );
-                        $dataPrenotazione= $anno."-".$mese."-".$giorno;
+                        if(preg_match($patternDate,$_POST['dataPrenotazione'])){
+                            $stringaData = $_POST['dataPrenotazione'];
+                            $anno = substr($stringaData, 6 , 4);
+                            $mese = substr($stringaData, 3 , 2);
+                            $giorno = substr($stringaData , 0 , 2 );
+                            $dataPrenotazione= $anno."-".$mese."-".$giorno;
+                        }else{
+                            $erroreData="True";
+                        }
                     }
                     else{
                         $dataPrenotazione = "";
                     }
 
                     if(isset($_POST['pasto'])){
+                        if(preg_match($patternOrario,$_POST['oraPrenotazione'])){
                         modificaDataOraPrenotazioneSC($_POST['idPrenotazione'] , $dataPrenotazione , $_POST['oraPrenotazione']);
+                        }else{
+                            $erroreOra="True";
+                        }
                     }
                     else{
                         modificaDataOraPrenotazioneSC($_POST['idPrenotazione'] , $dataPrenotazione , "");
@@ -300,6 +322,9 @@
                                 if(isset($_POST['CONFERMA']) && $_POST['dataPrenotazione'] == "" && isset($modificaPrenotazioneTavolo)){
                                     echo '<p class="errorLabel">Inserire una data!</p>';
                                 }
+                                if(isset($_POST['CONFERMA']) && !preg_match($patternDate,$_POST['dataPrenotazione']) && $_POST['dataPrenotazione'] != ""){
+                                    echo '<p class="errorLabel">La data inserita non è valida!</p>';
+                                }
                                 if(isset($modificaPrenotazioneTavolo)){
                             ?>
                                     <h2>Locazione:</h2>
@@ -351,6 +376,11 @@
                                 echo '
                                 <span class="item">Inserisci l\'orario di prenotazione</span>
                                 <input name="oraPrenotazione" class="textInput oraPrenotazione" />';
+                                if(isset($_POST['pasto'])){
+                                if($_POST['CONFERMA'] && !preg_match($patternOrario,$_POST['oraPrenotazione'])){
+                                    echo '<p class="errorLabel">L\'orario inserito non è valido!</p>';
+                                  }
+                                }
                             }
                         ?>                                   
                         </div>    
@@ -363,7 +393,10 @@
 
                     if(isset($datiMancanti)){
                         echo '<p class="errorLabel">Dati mancanti!<br />Inserire almeno la data e/o l\'orario</p>';
-                    }          
+                    } 
+                    if(isset($datiMancantiTavolo)){
+                        echo '<p class="errorLabel">Dati mancanti!</p>';
+                    }           
                     
                     if(isset($result) && $result == "insuccess"){
                         echo '<p class="errorLabel">Non sono stati trovati tavoli disponibili!</p>';
