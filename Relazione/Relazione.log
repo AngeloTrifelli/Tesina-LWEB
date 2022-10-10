@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.11.2)  6 OCT 2022 23:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.11.2)  10 OCT 2022 03:12
 entering extended mode
 **./Relazione.tex
 (Relazione.tex
@@ -281,26 +281,26 @@ File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
 ) (Relazione.aux)
 \openout1 = `Relazione.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Info: Redefining \it@ocap on input line 39.
-LaTeX Info: Redefining \it@ccap on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Info: Redefining \it@ocap on input line 38.
+LaTeX Info: Redefining \it@ccap on input line 38.
 
 
 File italian.ldf warning: 
@@ -308,7 +308,7 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 39.
+italian.ldf    on input line 38.
 
 
 (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pd
@@ -336,7 +336,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 ys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 39.
+Package hyperref Info: Link coloring OFF on input line 38.
 
 (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.st
 y
@@ -352,18 +352,18 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count288
 )
-LaTeX Info: Redefining \ref on input line 39.
-LaTeX Info: Redefining \pageref on input line 39.
-LaTeX Info: Redefining \nameref on input line 39.
+LaTeX Info: Redefining \ref on input line 38.
+LaTeX Info: Redefining \pageref on input line 38.
+LaTeX Info: Redefining \nameref on input line 38.
  (Relazione.out) (Relazione.out)
 \@outlinefile=\write3
 \openout3 = `Relazione.out'.
 
 \c@lstlisting=\count289
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 43.
+(Font)              <14.4> on input line 42.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 43.
+(Font)              <7> on input line 42.
  [1
 
 
@@ -376,76 +376,77 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
- [3])
+ [3] [4])
 \tf@toc=\write4
 \openout4 = `Relazione.toc'.
 
- [4]
+ [5]
+[6
+
+]
 Capitolo 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--50
+Underfull \hbox (badness 10000) in paragraph at lines 46--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--50
+Underfull \hbox (badness 10000) in paragraph at lines 46--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--59
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--59
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--59
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--59
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
 
  []
 
-[5
-
-] [6] [7] [8] [9]
-Overfull \hbox (1.46452pt too wide) in paragraph at lines 159--159
+[7] [8] [9] [10] [11]
+Overfull \hbox (1.46452pt too wide) in paragraph at lines 158--158
 []\OT1/cmr/bx/n/14.4 Visualizzazione e mo-di-fi-ca del-le in-for-ma-zio-ni per-
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--174
+Underfull \hbox (badness 10000) in paragraph at lines 171--173
 
  []
 
-[10] [11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 228--230
+[12] [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 227--229
 
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 240--242
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 239--241
 
  []
 
-[14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 290--292
+[16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 289--291
 
  []
 
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 302--304
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 301--303
 
  []
 
-[17]
+[19]
 (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.s
 ty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
@@ -455,32 +456,28 @@ y
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 3
-24.
+23.
  (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/bx/n' in size <10> not available
-(Font)              Font shape `OML/cmm/b/it' tried instead on input line 324.
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 323.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 324.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 323.
 
-[18]
+[20]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
-83.
+82.
  (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 383.
- [19] [20] [21] [22] [23]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 382.
+ [21] [22] [23] [24] [25]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24]
-[25] [26]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [27]
-[28]
+ [26]
+[27] [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [29]
@@ -488,117 +485,753 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [31]
-[32] [33]
+[32]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
-[35] [36] [37] [38]
+ [33]
+[34] [35]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39]
+ [36]
+[37] [38] [39] [40]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [40]
-[41] [42] [43]
+ [41]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44]
-[45] [46] [47]
+ [42]
+[43] [44] [45]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
-[49] [50] [51] [52] [53] [54
+ [46]
+[47] [48] [49]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [50]
+[51] [52] [53] [54] [55] [56
 
 ]
 Capitolo 2.
-<../Screenshots//HomePage.png, id=1716, 1204.5pt x 598.48593pt>
+<../Screenshots//HomePage.png, id=1934, 1204.5pt x 598.48593pt>
 File: ../Screenshots//HomePage.png Graphic file (type png)
 <use ../Screenshots//HomePage.png>
-Package pdftex.def Info: ../Screenshots//HomePage.png  used on input line 1630.
+Package pdftex.def Info: ../Screenshots//HomePage.png  used on input line 1629.
 
 (pdftex.def)             Requested size: 361.35278pt x 179.54716pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1627--1636
+Underfull \hbox (badness 10000) in paragraph at lines 1626--1635
 
  []
 
-[55 <../Screenshots//HomePage.png>]
-<../Screenshots//Camere.png, id=1725, 1204.5pt x 596.2275pt>
+[57 <../Screenshots//HomePage.png>]
+<../Screenshots//Camere.png, id=1942, 1204.5pt x 596.2275pt>
 File: ../Screenshots//Camere.png Graphic file (type png)
 <use ../Screenshots//Camere.png>
-Package pdftex.def Info: ../Screenshots//Camere.png  used on input line 1648.
+Package pdftex.def Info: ../Screenshots//Camere.png  used on input line 1647.
 (pdftex.def)             Requested size: 361.35278pt x 178.86963pt.
- [56 <../Screenshots//Camere.png>]
-<../Screenshots//RecensioniVisitatore.png, id=1733, 1204.5pt x 677.53125pt>
+ [58 <../Screenshots//Camere.png>]
+<../Screenshots//RecensioniVisitatore.png, id=1950, 1204.5pt x 677.53125pt>
 File: ../Screenshots//RecensioniVisitatore.png Graphic file (type png)
 <use ../Screenshots//RecensioniVisitatore.png>
 Package pdftex.def Info: ../Screenshots//RecensioniVisitatore.png  used on inpu
-t line 1659.
+t line 1658.
 (pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1663--1665
+Underfull \hbox (badness 10000) in paragraph at lines 1662--1664
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1663--1665
+Underfull \hbox (badness 10000) in paragraph at lines 1662--1664
 
  []
 
-[57 <../Screenshots//RecensioniVisitatore.png>]
-<../Screenshots//RisposteRecensioneVisitatore.png, id=1743, 1204.5pt x 677.5312
+[59 <../Screenshots//RecensioniVisitatore.png>]
+<../Screenshots//RisposteRecensioneVisitatore.png, id=1960, 1204.5pt x 677.5312
 5pt>
 File: ../Screenshots//RisposteRecensioneVisitatore.png Graphic file (type png)
 <use ../Screenshots//RisposteRecensioneVisitatore.png>
 Package pdftex.def Info: ../Screenshots//RisposteRecensioneVisitatore.png  used
- on input line 1668.
+ on input line 1667.
 (pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
-<../Screenshots//FaqVisitatore.png, id=1745, 1204.5pt x 677.53125pt>
+<../Screenshots//FaqVisitatore.png, id=1962, 1204.5pt x 677.53125pt>
 File: ../Screenshots//FaqVisitatore.png Graphic file (type png)
 <use ../Screenshots//FaqVisitatore.png>
 Package pdftex.def Info: ../Screenshots//FaqVisitatore.png  used on input line 
-1679.
+1678.
 (pdftex.def)             Requested size: 349.29605pt x 196.47902pt.
- [58 <../Screenshots//RisposteRecensioneVisitatore.png> <../Screenshots//FaqVis
-itatore.png>] [59] [60
+<../Screenshots//PrenotaOra.png, id=1966, 1204.5pt x 596.98032pt>
+File: ../Screenshots//PrenotaOra.png Graphic file (type png)
+<use ../Screenshots//PrenotaOra.png>
+Package pdftex.def Info: ../Screenshots//PrenotaOra.png  used on input line 168
+7.
+(pdftex.def)             Requested size: 361.35278pt x 179.09547pt.
+ [60 <../Screenshots//RisposteRecensioneVisitatore.png> <../Screenshots//FaqVis
+itatore.png>]
+<../Screenshots//VisualizzaDisponibilita.png, id=1974, 1204.5pt x 677.53125pt>
+File: ../Screenshots//VisualizzaDisponibilita.png Graphic file (type png)
+<use ../Screenshots//VisualizzaDisponibilita.png>
+Package pdftex.def Info: ../Screenshots//VisualizzaDisponibilita.png  used on i
+nput line 1694.
+(pdftex.def)             Requested size: 289.0859pt x 162.61081pt.
+ [61 <../Screenshots//PrenotaOra.png> <../Screenshots//VisualizzaDisponibilita.
+png>]
+<../Screenshots//LoginPrenotazione.png, id=1984, 1204.5pt x 677.53125pt>
+File: ../Screenshots//LoginPrenotazione.png Graphic file (type png)
+<use ../Screenshots//LoginPrenotazione.png>
+Package pdftex.def Info: ../Screenshots//LoginPrenotazione.png  used on input l
+ine 1701.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//Login.png, id=1985, 1204.5pt x 677.53125pt>
+File: ../Screenshots//Login.png Graphic file (type png)
+<use ../Screenshots//Login.png>
+Package pdftex.def Info: ../Screenshots//Login.png  used on input line 1709.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1716
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1716
+
+ []
+
+[62 <../Screenshots//LoginPrenotazione.png> <../Screenshots//Login.png>]
+<../Screenshots//Registrazione.png, id=1995, 1204.5pt x 677.53125pt>
+File: ../Screenshots//Registrazione.png Graphic file (type png)
+<use ../Screenshots//Registrazione.png>
+Package pdftex.def Info: ../Screenshots//Registrazione.png  used on input line 
+1720.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+[63 <../Screenshots//Registrazione.png>]
+<../Screenshots//HomePageCliente.png, id=2005, 1204.5pt x 677.53125pt>
+File: ../Screenshots//HomePageCliente.png Graphic file (type png)
+<use ../Screenshots//HomePageCliente.png>
+Package pdftex.def Info: ../Screenshots//HomePageCliente.png  used on input lin
+e 1736.
+(pdftex.def)             Requested size: 289.0859pt x 162.61081pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1730--1739
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1730--1739
+
+ []
+
+[64 <../Screenshots//HomePageCliente.png>]
+<../Screenshots//AreaCliente.png, id=2011, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AreaCliente.png Graphic file (type png)
+<use ../Screenshots//AreaCliente.png>
+Package pdftex.def Info: ../Screenshots//AreaCliente.png  used on input line 17
+44.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1748--1750
+
+ []
+
+<../Screenshots//ConfermaPrenotazioneCamera.png, id=2017, 1204.5pt x 677.53125p
+t>
+File: ../Screenshots//ConfermaPrenotazioneCamera.png Graphic file (type png)
+<use ../Screenshots//ConfermaPrenotazioneCamera.png>
+Package pdftex.def Info: ../Screenshots//ConfermaPrenotazioneCamera.png  used o
+n input line 1755.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//PrenotazioneCompletata.png, id=2018, 1204.5pt x 677.53125pt>
+File: ../Screenshots//PrenotazioneCompletata.png Graphic file (type png)
+<use ../Screenshots//PrenotazioneCompletata.png>
+Package pdftex.def Info: ../Screenshots//PrenotazioneCompletata.png  used on in
+put line 1761.
+(pdftex.def)             Requested size: 313.16261pt x 176.15396pt.
+[65 <../Screenshots//AreaCliente.png>]
+<../Screenshots//HomepageRistorante.png, id=2027, 1204.5pt x 677.53125pt>
+File: ../Screenshots//HomepageRistorante.png Graphic file (type png)
+<use ../Screenshots//HomepageRistorante.png>
+Package pdftex.def Info: ../Screenshots//HomepageRistorante.png  used on input 
+line 1770.
+(pdftex.def)             Requested size: 397.48624pt x 223.586pt.
+
+Overfull \hbox (7.48624pt too wide) in paragraph at lines 1770--1771
+ [][] 
+ []
+
+[66 <../Screenshots//ConfermaPrenotazioneCamera.png> <../Screenshots//Prenotazi
+oneCompletata.png>] [67 <../Screenshots//HomepageRistorante.png>]
+<../Screenshots//PrenotaTavolo.png, id=2044, 1204.5pt x 677.53125pt>
+File: ../Screenshots//PrenotaTavolo.png Graphic file (type png)
+<use ../Screenshots//PrenotaTavolo.png>
+Package pdftex.def Info: ../Screenshots//PrenotaTavolo.png  used on input line 
+1776.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [68 <../Screenshots//PrenotaTavolo.png>]
+<../Screenshots//PrenotaSC.png, id=2056, 1204.5pt x 677.53125pt>
+File: ../Screenshots//PrenotaSC.png Graphic file (type png)
+<use ../Screenshots//PrenotaSC.png>
+Package pdftex.def Info: ../Screenshots//PrenotaSC.png  used on input line 1785
+.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//ScegliPortateSC.png, id=2057, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ScegliPortateSC.png Graphic file (type png)
+<use ../Screenshots//ScegliPortateSC.png>
+Package pdftex.def Info: ../Screenshots//ScegliPortateSC.png  used on input lin
+e 1791.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [69 <../Screenshots//PrenotaSC.png> <../Screenshots//ScegliPortateSC.png>]
+<../Screenshots//ConfermaPrenotazioneSC.png, id=2064, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ConfermaPrenotazioneSC.png Graphic file (type png)
+<use ../Screenshots//ConfermaPrenotazioneSC.png>
+Package pdftex.def Info: ../Screenshots//ConfermaPrenotazioneSC.png  used on in
+put line 1797.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [70 <../Screenshots//ConfermaPrenotazioneSC.png>]
+<../Screenshots//PrenotazioniRistoranteCliente.png, id=2073, 1204.5pt x 677.531
+25pt>
+File: ../Screenshots//PrenotazioniRistoranteCliente.png Graphic file (type png)
+
+<use ../Screenshots//PrenotazioniRistoranteCliente.png>
+Package pdftex.def Info: ../Screenshots//PrenotazioniRistoranteCliente.png  use
+d on input line 1806.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//MenuCliente.png, id=2076, 1204.5pt x 677.53125pt>
+File: ../Screenshots//MenuCliente.png Graphic file (type png)
+<use ../Screenshots//MenuCliente.png>
+Package pdftex.def Info: ../Screenshots//MenuCliente.png  used on input line 18
+15.
+(pdftex.def)             Requested size: 313.16261pt x 176.15396pt.
+
+[71 <../Screenshots//PrenotazioniRistoranteCliente.png> <../Screenshots//MenuCl
+iente.png>]
+<../Screenshots//ListaAttivitaCliente.png, id=2087, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ListaAttivitaCliente.png Graphic file (type png)
+<use ../Screenshots//ListaAttivitaCliente.png>
+Package pdftex.def Info: ../Screenshots//ListaAttivitaCliente.png  used on inpu
+t line 1828.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1822--1831
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1822--1831
+
+ []
+
+[72 <../Screenshots//ListaAttivitaCliente.png>]
+<../Screenshots//PrenotaAttivita.png, id=2096, 1204.5pt x 677.53125pt>
+File: ../Screenshots//PrenotaAttivita.png Graphic file (type png)
+<use ../Screenshots//PrenotaAttivita.png>
+Package pdftex.def Info: ../Screenshots//PrenotaAttivita.png  used on input lin
+e 1834.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//ConfermaPrenotazioneAttivita.png, id=2097, 1204.5pt x 677.5312
+5pt>
+File: ../Screenshots//ConfermaPrenotazioneAttivita.png Graphic file (type png)
+<use ../Screenshots//ConfermaPrenotazioneAttivita.png>
+Package pdftex.def Info: ../Screenshots//ConfermaPrenotazioneAttivita.png  used
+ on input line 1840.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [73 <../Screenshots//PrenotaAttivita.png> <../Screenshots//ConfermaPrenotazion
+eAttivita.png>]
+<../Screenshots//PrenotazioniAttivitaCliente.png, id=2107, 1204.5pt x 677.53125
+pt>
+File: ../Screenshots//PrenotazioniAttivitaCliente.png Graphic file (type png)
+<use ../Screenshots//PrenotazioniAttivitaCliente.png>
+Package pdftex.def Info: ../Screenshots//PrenotazioniAttivitaCliente.png  used 
+on input line 1849.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [74 <../Screenshots//PrenotazioniAttivitaCliente.png>]
+<../Screenshots//DomandeCliente.png, id=2118, 1204.5pt x 677.53125pt>
+File: ../Screenshots//DomandeCliente.png Graphic file (type png)
+<use ../Screenshots//DomandeCliente.png>
+Package pdftex.def Info: ../Screenshots//DomandeCliente.png  used on input line
+ 1858.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//RisposteDomandaCliente.png, id=2119, 1204.5pt x 677.53125pt>
+File: ../Screenshots//RisposteDomandaCliente.png Graphic file (type png)
+<use ../Screenshots//RisposteDomandaCliente.png>
+Package pdftex.def Info: ../Screenshots//RisposteDomandaCliente.png  used on in
+put line 1864.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//AggiungiDomanda.png, id=2122, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AggiungiDomanda.png Graphic file (type png)
+<use ../Screenshots//AggiungiDomanda.png>
+Package pdftex.def Info: ../Screenshots//AggiungiDomanda.png  used on input lin
+e 1873.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [75 <../Screenshots//DomandeCliente.png> <../Screenshots//RisposteDomandaClien
+te.png>] [76 <../Screenshots//AggiungiDomanda.png>]
+<../Screenshots//RecensioniCliente.png, id=2140, 1204.5pt x 677.53125pt>
+File: ../Screenshots//RecensioniCliente.png Graphic file (type png)
+<use ../Screenshots//RecensioniCliente.png>
+Package pdftex.def Info: ../Screenshots//RecensioniCliente.png  used on input l
+ine 1885.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//AggiungiRecensione.png, id=2141, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AggiungiRecensione.png Graphic file (type png)
+<use ../Screenshots//AggiungiRecensione.png>
+Package pdftex.def Info: ../Screenshots//AggiungiRecensione.png  used on input 
+line 1892.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [77 <../Screenshots//RecensioniCliente.png> <../Screenshots//AggiungiRecension
+e.png>]
+<../Screenshots//InserisciGiudizio.png, id=2148, 1204.5pt x 677.53125pt>
+File: ../Screenshots//InserisciGiudizio.png Graphic file (type png)
+<use ../Screenshots//InserisciGiudizio.png>
+Package pdftex.def Info: ../Screenshots//InserisciGiudizio.png  used on input l
+ine 1904.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//DatiPersonali.png, id=2153, 1204.5pt x 597.73312pt>
+File: ../Screenshots//DatiPersonali.png Graphic file (type png)
+<use ../Screenshots//DatiPersonali.png>
+Package pdftex.def Info: ../Screenshots//DatiPersonali.png  used on input line 
+1913.
+(pdftex.def)             Requested size: 361.35278pt x 179.32132pt.
+ [78 <../Screenshots//InserisciGiudizio.png>]
+<../Screenshots//ModificaDatiPersonali.png, id=2160, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaDatiPersonali.png Graphic file (type png)
+<use ../Screenshots//ModificaDatiPersonali.png>
+Package pdftex.def Info: ../Screenshots//ModificaDatiPersonali.png  used on inp
+ut line 1920.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//AreaConcierge.png, id=2162, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AreaConcierge.png Graphic file (type png)
+<use ../Screenshots//AreaConcierge.png>
+Package pdftex.def Info: ../Screenshots//AreaConcierge.png  used on input line 
+1931.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1926--1935
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1926--1935
+
+ []
+
+[79 <../Screenshots//DatiPersonali.png> <../Screenshots//ModificaDatiPersonali.
+png>]
+<../Screenshots//MenuStaff.png, id=2173, 1204.5pt x 677.53125pt>
+File: ../Screenshots//MenuStaff.png Graphic file (type png)
+<use ../Screenshots//MenuStaff.png>
+Package pdftex.def Info: ../Screenshots//MenuStaff.png  used on input line 1940
+.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1937--1946
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1937--1946
+
+ []
+
+[80 <../Screenshots//AreaConcierge.png>] [81 <../Screenshots//MenuStaff.png>]
+<../Screenshots//ModificaPortata.png, id=2190, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaPortata.png Graphic file (type png)
+<use ../Screenshots//ModificaPortata.png>
+Package pdftex.def Info: ../Screenshots//ModificaPortata.png  used on input lin
+e 1950.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//AggiungiPortata.png, id=2191, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AggiungiPortata.png Graphic file (type png)
+<use ../Screenshots//AggiungiPortata.png>
+Package pdftex.def Info: ../Screenshots//AggiungiPortata.png  used on input lin
+e 1957.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1963--1967
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1963--1967
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1963--1967
+
+ []
+
+[82 <../Screenshots//ModificaPortata.png> <../Screenshots//AggiungiPortata.png>
+]
+<../Screenshots//ListaOrari.png, id=2201, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ListaOrari.png Graphic file (type png)
+<use ../Screenshots//ListaOrari.png>
+Package pdftex.def Info: ../Screenshots//ListaOrari.png  used on input line 197
+0.
+(pdftex.def)             Requested size: 264.99081pt x 149.05733pt.
+<../Screenshots//ModificaOrariRistorante.png, id=2202, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaOrariRistorante.png Graphic file (type png)
+<use ../Screenshots//ModificaOrariRistorante.png>
+Package pdftex.def Info: ../Screenshots//ModificaOrariRistorante.png  used on i
+nput line 1977.
+(pdftex.def)             Requested size: 277.02917pt x 155.8289pt.
+ [83 <../Screenshots//ListaOrari.png> <../Screenshots//ModificaOrariRistorante.
+png>]
+<../Screenshots//ModificaOrariAttivita.png, id=2212, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaOrariAttivita.png Graphic file (type png)
+<use ../Screenshots//ModificaOrariAttivita.png>
+Package pdftex.def Info: ../Screenshots//ModificaOrariAttivita.png  used on inp
+ut line 1984.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//ListaAttivitaStaff.png, id=2215, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ListaAttivitaStaff.png Graphic file (type png)
+<use ../Screenshots//ListaAttivitaStaff.png>
+Package pdftex.def Info: ../Screenshots//ListaAttivitaStaff.png  used on input 
+line 1993.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [84 <../Screenshots//ModificaOrariAttivita.png>]
+<../Screenshots//ModificaAttivita.png, id=2223, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaAttivita.png Graphic file (type png)
+<use ../Screenshots//ModificaAttivita.png>
+Package pdftex.def Info: ../Screenshots//ModificaAttivita.png  used on input li
+ne 2000.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85 <../Screenshots//ListaAttivitaStaff.png> <../Screenshots//ModificaAttivita
+.png>]
+<../Screenshots//PrenotazioniClienti.png, id=2231, 1204.5pt x 677.53125pt>
+File: ../Screenshots//PrenotazioniClienti.png Graphic file (type png)
+<use ../Screenshots//PrenotazioniClienti.png>
+Package pdftex.def Info: ../Screenshots//PrenotazioniClienti.png  used on input
+ line 2008.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+[86 <../Screenshots//PrenotazioniClienti.png>]
+<../Screenshots//PrenotazioniRistoranteStaff.png, id=2241, 1204.5pt x 677.53125
+pt>
+File: ../Screenshots//PrenotazioniRistoranteStaff.png Graphic file (type png)
+<use ../Screenshots//PrenotazioniRistoranteStaff.png>
+Package pdftex.def Info: ../Screenshots//PrenotazioniRistoranteStaff.png  used 
+on input line 2020.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//DettagliPrenotazioneSCStaff.png, id=2243, 1204.5pt x 677.53125
+pt>
+File: ../Screenshots//DettagliPrenotazioneSCStaff.png Graphic file (type png)
+<use ../Screenshots//DettagliPrenotazioneSCStaff.png>
+Package pdftex.def Info: ../Screenshots//DettagliPrenotazioneSCStaff.png  used 
+on input line 2027.
+(pdftex.def)             Requested size: 301.12427pt x 169.38239pt.
+<../Screenshots//AggiungiPortataPrenotazioneSC.png, id=2247, 1204.5pt x 677.531
+25pt>
+File: ../Screenshots//AggiungiPortataPrenotazioneSC.png Graphic file (type png)
+
+<use ../Screenshots//AggiungiPortataPrenotazioneSC.png>
+Package pdftex.def Info: ../Screenshots//AggiungiPortataPrenotazioneSC.png  use
+d on input line 2037.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2024--2040
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2024--2040
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2024--2040
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2024--2040
+
+ []
+
+[87 <../Screenshots//PrenotazioniRistoranteStaff.png> <../Screenshots//Dettagli
+PrenotazioneSCStaff.png>] [88 <../Screenshots//AggiungiPortataPrenotazioneSC.pn
+g>]
+<../Screenshots//EliminaPortata.png, id=2263, 1204.5pt x 677.53125pt>
+File: ../Screenshots//EliminaPortata.png Graphic file (type png)
+<use ../Screenshots//EliminaPortata.png>
+Package pdftex.def Info: ../Screenshots//EliminaPortata.png  used on input line
+ 2044.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//ModificaDataOraPrenotazioneSC.png, id=2264, 1204.5pt x 677.531
+25pt>
+File: ../Screenshots//ModificaDataOraPrenotazioneSC.png Graphic file (type png)
+
+<use ../Screenshots//ModificaDataOraPrenotazioneSC.png>
+Package pdftex.def Info: ../Screenshots//ModificaDataOraPrenotazioneSC.png  use
+d on input line 2051.
+(pdftex.def)             Requested size: 240.89574pt x 135.50385pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2056--2058
+
+ []
+
+[89 <../Screenshots//EliminaPortata.png> <../Screenshots//ModificaDataOraPrenot
+azioneSC.png>]
+<../Screenshots//ModificaPrenotazioneTavolo.png, id=2273, 1204.5pt x 677.53125p
+t>
+File: ../Screenshots//ModificaPrenotazioneTavolo.png Graphic file (type png)
+<use ../Screenshots//ModificaPrenotazioneTavolo.png>
+Package pdftex.def Info: ../Screenshots//ModificaPrenotazioneTavolo.png  used o
+n input line 2061.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [90 <../Screenshots//ModificaPrenotazioneTavolo.png>]
+<../Screenshots//ListaPrenotazioniAttivitaStaff.png, id=2282, 1204.5pt x 677.53
+125pt>
+File: ../Screenshots//ListaPrenotazioniAttivitaStaff.png Graphic file (type png
+)
+<use ../Screenshots//ListaPrenotazioniAttivitaStaff.png>
+Package pdftex.def Info: ../Screenshots//ListaPrenotazioniAttivitaStaff.png  us
+ed on input line 2071.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2076--2079
+
+ []
+
+[91 <../Screenshots//ListaPrenotazioniAttivitaStaff.png>]
+<../Screenshots//DomandeStaff.png, id=2290, 1204.5pt x 677.53125pt>
+File: ../Screenshots//DomandeStaff.png Graphic file (type png)
+<use ../Screenshots//DomandeStaff.png>
+Package pdftex.def Info: ../Screenshots//DomandeStaff.png  used on input line 2
+086.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//FaqStaff.png, id=2291, 1204.5pt x 677.53125pt>
+File: ../Screenshots//FaqStaff.png Graphic file (type png)
+<use ../Screenshots//FaqStaff.png>
+Package pdftex.def Info: ../Screenshots//FaqStaff.png  used on input line 2095.
+
+(pdftex.def)             Requested size: 301.12427pt x 169.38239pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2099--2103
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2099--2103
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2099--2103
+
+ []
+
+[92 <../Screenshots//DomandeStaff.png> <../Screenshots//FaqStaff.png>]
+<../Screenshots//AggiungiFaq.png, id=2302, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AggiungiFaq.png Graphic file (type png)
+<use ../Screenshots//AggiungiFaq.png>
+Package pdftex.def Info: ../Screenshots//AggiungiFaq.png  used on input line 21
+06.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+ [93 <../Screenshots//AggiungiFaq.png>]
+<../Screenshots//ModificaFaq.png, id=2310, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaFaq.png Graphic file (type png)
+<use ../Screenshots//ModificaFaq.png>
+Package pdftex.def Info: ../Screenshots//ModificaFaq.png  used on input line 21
+13.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2119--2121
+
+ []
+
+<../Screenshots//AreaAdmin.png, id=2312, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AreaAdmin.png Graphic file (type png)
+<use ../Screenshots//AreaAdmin.png>
+Package pdftex.def Info: ../Screenshots//AreaAdmin.png  used on input line 2124
+.
+(pdftex.def)             Requested size: 289.0859pt x 162.61081pt.
+[94 <../Screenshots//ModificaFaq.png> <../Screenshots//AreaAdmin.png>]
+<../Screenshots//Categorie.png, id=2320, 1204.5pt x 677.53125pt>
+File: ../Screenshots//Categorie.png Graphic file (type png)
+<use ../Screenshots//Categorie.png>
+Package pdftex.def Info: ../Screenshots//Categorie.png  used on input line 2133
+.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2137--2142
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2137--2142
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2137--2142
+
+ []
+
+[95 <../Screenshots//Categorie.png>]
+<../Screenshots//AggiungiCategoria.png, id=2329, 1204.5pt x 677.53125pt>
+File: ../Screenshots//AggiungiCategoria.png Graphic file (type png)
+<use ../Screenshots//AggiungiCategoria.png>
+Package pdftex.def Info: ../Screenshots//AggiungiCategoria.png  used on input l
+ine 2145.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//Pagamenti.png, id=2330, 1204.5pt x 677.53125pt>
+File: ../Screenshots//Pagamenti.png Graphic file (type png)
+<use ../Screenshots//Pagamenti.png>
+Package pdftex.def Info: ../Screenshots//Pagamenti.png  used on input line 2153
+.
+(pdftex.def)             Requested size: 301.12427pt x 169.38239pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2157--2160
+
+ []
+
+[96 <../Screenshots//AggiungiCategoria.png> <../Screenshots//Pagamenti.png>]
+<../Screenshots//ListaClienti.png, id=2340, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ListaClienti.png Graphic file (type png)
+<use ../Screenshots//ListaClienti.png>
+Package pdftex.def Info: ../Screenshots//ListaClienti.png  used on input line 2
+164.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2168--2172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2168--2172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2168--2172
+
+ []
+
+[97 <../Screenshots//ListaClienti.png>]
+<../Screenshots//ListaOrariAdmin.png, id=2350, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ListaOrariAdmin.png Graphic file (type png)
+<use ../Screenshots//ListaOrariAdmin.png>
+Package pdftex.def Info: ../Screenshots//ListaOrariAdmin.png  used on input lin
+e 2177.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+<../Screenshots//ModificaOrariUpdate.png, id=2353, 1204.5pt x 677.53125pt>
+File: ../Screenshots//ModificaOrariUpdate.png Graphic file (type png)
+<use ../Screenshots//ModificaOrariUpdate.png>
+Package pdftex.def Info: ../Screenshots//ModificaOrariUpdate.png  used on input
+ line 2185.
+(pdftex.def)             Requested size: 361.35278pt x 203.26094pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2181--2189
+
+ []
+
+[98 <../Screenshots//ListaOrariAdmin.png>] [99 <../Screenshots//ModificaOrariUp
+date.png>] [100
 
 ]
 Capitolo 3.
-[61] [62]
+[101] [102]
 Underfull \vbox (badness 3058) has occurred while \output is active []
 
- [63]
-[64] [65] (Relazione.aux)
+ [103]
+[104] [105] [106] [107]
+Underfull \hbox (badness 10000) in paragraph at lines 2290--2292
+
+ []
+
+[108] [109]
+(C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.s
+ty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+(C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang2.s
+ty
+File: lstlang2.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+2325.
+ (C:\Users\HP 840 G1\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [110] [111]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [112]
+[113] [114]
+Underfull \hbox (badness 10000) in paragraph at lines 2424--2425
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2424--2425
+
+ []
+
+[115]
+Underfull \hbox (badness 10000) in paragraph at lines 2428--2430
+
+ []
+
+[116]
+Overfull \hbox (10.06274pt too wide) in paragraph at lines 2456--2457
+[][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+
+Overfull \hbox (5.20161pt too wide) in paragraph at lines 2468--2469
+[][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+
+Overfull \hbox (9.9933pt too wide) in paragraph at lines 2471--2473
+[][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[117]
+Underfull \vbox (badness 6825) has occurred while \output is active []
+
+ [118]
+[119] [120] [121] [122] [123] [124] [125] [126] [127] [128] [129] [130
+
+]
+Capitolo 4.
+[131] [132] (Relazione.aux)
 Package rerunfilecheck Info: File `Relazione.out' has not changed.
-(rerunfilecheck)             Checksum: 08B9A2997F0944C4245C7F849CFFA556;8644.
+(rerunfilecheck)             Checksum: 74E5E5F4C24F1265CED79E657DE52CC1;17637.
  ) 
 Here is how much of TeX's memory you used:
- 12554 strings out of 478927
- 188910 string characters out of 2850603
- 736425 words of memory out of 3000000
- 28914 multiletter control sequences out of 15000+600000
- 411937 words of font info for 55 fonts, out of 8000000 for 9000
+ 15427 strings out of 478927
+ 247104 string characters out of 2850603
+ 845300 words of memory out of 3000000
+ 31327 multiletter control sequences out of 15000+600000
+ 412234 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,8n,66p,1121b,1976s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,8n,66p,1694b,3266s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\HP 840 G1\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
-tcrm1000.pk> <C:\Users\HP 840 G1\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
-ec/dpi600\tcrm1200.pk><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/HP 840 G1/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/HP 840
- G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C
-:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmr10.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmr12.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/HP 840 G1/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/HP 840 G1
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Us
-ers/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt
-10.pfb>
-Output written on Relazione.pdf (65 pages, 3046345 bytes).
+tctt1000.pk> <C:\Users\HP 840 G1\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\tcrm1000.pk> <C:\Users\HP 840 G1\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/HP 840 G1/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/HP 840 G1/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/HP 840 G1/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Us
+ers/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
+b10.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/HP 840 G1/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/HP 840 G1/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users
+/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.
+pfb><C:/Users/HP 840 G1/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmtt10.pfb>
+Output written on Relazione.pdf (132 pages, 17213950 bytes).
 PDF statistics:
- 2139 PDF objects out of 2487 (max. 8388607)
- 1356 named destinations out of 1440 (max. 500000)
- 426 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3177 PDF objects out of 3580 (max. 8388607)
+ 1751 named destinations out of 2073 (max. 500000)
+ 1034 words of extra memory for PDF output out of 10000 (max. 10000000)
 

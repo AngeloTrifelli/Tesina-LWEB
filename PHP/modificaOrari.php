@@ -177,7 +177,7 @@
 
             <div class="containerColumn">
 
-        <p><strong>Inserisci l'orario di fine update:</strong></p>
+        <p><strong>Inserisci l'orario di fine<br /> update:</strong></p>
         <?php 
                         if(isset($_POST['oraFineUpdate'])){
                             echo "<input  name=\"oraFineUpdate\" class=\"oraUpdate\" value=\"{$_POST['oraFineUpdate']}\" />";                        
