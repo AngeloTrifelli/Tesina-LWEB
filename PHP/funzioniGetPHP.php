@@ -1,7 +1,7 @@
 <?php
 // FILE CHE CONTIENE TUTTE E SOLO LE FUNZIONI PER ESTRARRE DATI DA I FILE XML
 
-    require_once("funzioniModificaPHP.php");        
+    require_once("funzioniModificaPHP.php");              
 
 // Funzione per ottenere tutti i soggiorni passati di un cliente in datiPersonali.php
 
@@ -70,8 +70,7 @@ function getSoggiornoAttivo($codFiscCliente){
 
     $xpathCamere = new DOMXPath($doc);
 
-    $prenotazione= $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente' and (statoSoggiorno='Approvato' or statoSoggiorno='Pagamento sospeso')]");
-   
+    $prenotazione= $xpathCamere->query("/listaCamere/Camera/listaPrenotazioni/prenotazione[codFisc='$codFiscCliente' and (statoSoggiorno='Approvato' or statoSoggiorno='Pagamento sospeso')]");        
     if($prenotazione->length == 1){
         $prenotazione = $prenotazione->item(0);
         $dataPartenza = $prenotazione->getElementsByTagName("dataPartenza")->item(0)->textContent;

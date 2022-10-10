@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ristoranti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Ristorante.xsd">
-    <ristorante>
-        <oraAperturaPranzo>12:00:00</oraAperturaPranzo>
-        <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
-        <oraAperturaCena>19:00:00</oraAperturaCena>
-        <oraChiusuraCena>23:00:00</oraChiusuraCena>
-        <oraInizioUpdate>07:00:00</oraInizioUpdate>
-        <oraFineUpdate>09:00:00</oraFineUpdate>
-        <menu>
-            <portata>
-                <tipologia>antipasto</tipologia>
-                <descrizione>Antipasto di montagna</descrizione>
-                <prezzo>8</prezzo>
-            </portata>
-            <portata>
-                <tipologia>antipasto</tipologia>
-                <descrizione>Antipasto di mare</descrizione>
-                <prezzo>9</prezzo>
-            </portata>
-            <portata>
-                <tipologia>primo piatto</tipologia>
-                <descrizione>Spaghetti alla carbonara</descrizione>
-                <prezzo>8</prezzo>
-            </portata>
-            <portata>
-                <tipologia>primo piatto</tipologia>
-                <descrizione>Lasagne</descrizione>
-                <prezzo>9</prezzo>
-            </portata>
-            <portata>
-                <tipologia>secondo piatto</tipologia>
-                <descrizione>Tagliata di manzo</descrizione>
-                <prezzo>15</prezzo>
-            </portata>
-            <portata>
-                <tipologia>secondo piatto</tipologia>
-                <descrizione>Grigliata mista</descrizione>
-                <prezzo>20</prezzo>
-            </portata>
-            <portata>
-                <tipologia>dolce</tipologia>
-                <descrizione>Tiramisu</descrizione>
-                <prezzo>3</prezzo>
-            </portata>
-            <portata>
-                <tipologia>dolce</tipologia>
-                <descrizione>Sorbetto al limone</descrizione>
-                <prezzo>2</prezzo>
-            </portata>
-        </menu>
-    </ristorante>
+  <ristorante>
+    <oraAperturaPranzo>12:00:00</oraAperturaPranzo>
+    <oraChiusuraPranzo>15:00:00</oraChiusuraPranzo>
+    <oraAperturaCena>19:00:00</oraAperturaCena>
+    <oraChiusuraCena>23:00:00</oraChiusuraCena>
+    <oraInizioUpdate>07:00:00</oraInizioUpdate>
+    <oraFineUpdate>09:00:00</oraFineUpdate>
+    <menu>
+      <portata>
+        <tipologia>antipasto</tipologia>
+        <descrizione>Antipasto di montagna</descrizione>
+        <prezzo>8</prezzo>
+      </portata>
+      <portata>
+        <tipologia>antipasto</tipologia>
+        <descrizione>Antipasto di mare</descrizione>
+        <prezzo>12</prezzo>
+      </portata>
+      <portata>
+        <tipologia>primo piatto</tipologia>
+        <descrizione>Spaghetti alla carbonara</descrizione>
+        <prezzo>8</prezzo>
+      </portata>
+      <portata>
+        <tipologia>primo piatto</tipologia>
+        <descrizione>Lasagne</descrizione>
+        <prezzo>9</prezzo>
+      </portata>
+      <portata>
+        <tipologia>secondo piatto</tipologia>
+        <descrizione>Tagliata di manzo</descrizione>
+        <prezzo>15</prezzo>
+      </portata>
+      <portata>
+        <tipologia>secondo piatto</tipologia>
+        <descrizione>Grigliata mista</descrizione>
+        <prezzo>20</prezzo>
+      </portata>
+      <portata>
+        <tipologia>dolce</tipologia>
+        <descrizione>Tiramisu</descrizione>
+        <prezzo>3</prezzo>
+      </portata>
+      <portata>
+        <tipologia>dolce</tipologia>
+        <descrizione>Sorbetto al limone</descrizione>
+        <prezzo>2</prezzo>
+      </portata>
+    </menu>
+  </ristorante>
 </ristoranti>

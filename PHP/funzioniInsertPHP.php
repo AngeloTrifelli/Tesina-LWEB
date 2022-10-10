@@ -288,17 +288,18 @@ function inserisciPrenotazioneTavolo($numeroTavolo , $codFiscCliente , $data , $
     $tavolo = $tavolo->item(0);
 
     $listaPrenotazioni=$tavolo->getElementsByTagName("listaPrenotazioni")->item(0);
-    $tempListaPrenotazioni=$xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']/listaPrenotazioni");
-    if(count($tempListaPrenotazioni) ==0){
+    $ultimaPrenotazione = $listaPrenotazioni->lastChild;
+
+    if(is_null($ultimaPrenotazione)){
         $idNuovaPrenotazione = $numeroTavolo."-PT1";
     }else{
-        $numPrenotazioni= (count($tempListaPrenotazioni))-1;
-        $prenotazione= $xpathTavoli->query("/listaTavoli/tavolo[@numero = '$numeroTavolo']/listaPrenotazioni/prenotazione");
-        $ultimaPrenotazione= $prenotazione->item($numPrenotazioni);
         $idUltimaPrenotazione = $ultimaPrenotazione->getElementsByTagName('idPrenotazione')->item(0)->textContent;
-        $nuovoNumero=substr($idUltimaPrenotazione,5,1);
-        settype($nuovoNumero,"integer");
-        $idNuovaPrenotazione = $numeroTavolo."-PT".($nuovoNumero+1);    
+        
+        $pieces = explode("-",$idUltimaPrenotazione);
+
+        $nuovoNumero = substr($pieces[1] , 2) + 1;
+                
+        $idNuovaPrenotazione = $numeroTavolo."-PT".$nuovoNumero;    
     }
 
     $nuovaPrenotazione = $doc->createElement("prenotazione");
@@ -343,7 +344,7 @@ function inserisciPrenotazioneServizioCamera($portateScelte , $codFiscCliente   
         $prenotazione=$xpathPrenotazioniSC->query("/listaPrenotazioni/prenotazione");
         $ultimaPrenotazione= $prenotazione->item($numPrenotazioni);
         $idUltimaPrenotazione = $ultimaPrenotazione->getAttribute("id");
-        $numeroVecchio= substr($idUltimaPrenotazione,3,1);
+        $numeroVecchio= substr($idUltimaPrenotazione,3);
         settype($numeroVecchio,"integer");
         $nuovoNumero= $numeroVecchio+1;
         $idNuovaPrenotazione ="PSC".$nuovoNumero;    
@@ -572,7 +573,7 @@ function aggiungiDomanda($codFiscCliente , $categoriaDomanda , $testoDomanda){
         $ultimaDomanda=$domanda->item($numDomande);
         
         $idUltimaDomanda = $ultimaDomanda->getAttribute("id");
-        $nuovoNumero= substr($idUltimaDomanda,1,1);
+        $nuovoNumero= substr($idUltimaDomanda,1);
         settype($nuovoNumero,"integer");
         $idNuovaDomanda ="D".($nuovoNumero+1);    
     }

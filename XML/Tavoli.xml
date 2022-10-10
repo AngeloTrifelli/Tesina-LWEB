@@ -1,34 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaTavoli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Tavoli.xsd">
-    <tavolo numero="T2">
-        <locazione>Interna</locazione>
-        <listaPrenotazioni>
-            <prenotazione>
-                <idPrenotazione>T2-PT1</idPrenotazione>
-                <codFisc>RSSGNN64R03E472G</codFisc>
-                <data>2022-10-30</data>
-                <ora>21:30:00</ora>
-            </prenotazione>
-        </listaPrenotazioni>
-    </tavolo>
-    <tavolo numero="T5">
-        <locazione>Interna</locazione>
-        <listaPrenotazioni></listaPrenotazioni>
-    </tavolo>
-    <tavolo numero="T8">
-        <locazione>Interna</locazione>
-        <listaPrenotazioni /> 
-    </tavolo>
-    <tavolo numero="T10">
-        <locazione>Esterna</locazione>
-        <listaPrenotazioni />
-    </tavolo>
-    <tavolo numero="T17">
-        <locazione>Esterna</locazione>
-        <listaPrenotazioni></listaPrenotazioni>
-    </tavolo>
-    <tavolo numero="T25">
-        <locazione>Esterna</locazione>
-        <listaPrenotazioni />
-    </tavolo>
+  <tavolo numero="T2">
+    <locazione>Interna</locazione>
+    <listaPrenotazioni>
+      <prenotazione>
+        <idPrenotazione>T2-PT1</idPrenotazione>
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <data>2022-10-30</data>
+        <ora>21:30:00</ora>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>T2-PT2</idPrenotazione>
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <data>2022-10-28</data>
+        <ora>12:30:00</ora>
+      </prenotazione>
+      <prenotazione>
+        <idPrenotazione>T2-PT3</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <data>2022-11-13</data>
+        <ora>13:15:00</ora>
+      </prenotazione>
+    </listaPrenotazioni>
+  </tavolo>
+  <tavolo numero="T5">
+    <locazione>Interna</locazione>
+    <listaPrenotazioni>
+      <prenotazione>
+        <idPrenotazione>T5-PT1</idPrenotazione>
+        <codFisc>VRDRRT00L13E472M</codFisc>
+        <data>2022-09-17</data>
+        <ora>20:30:00</ora>
+      </prenotazione>
+    </listaPrenotazioni>
+  </tavolo>
+  <tavolo numero="T8">
+    <locazione>Interna</locazione>
+    <listaPrenotazioni/>
+  </tavolo>
+  <tavolo numero="T10">
+    <locazione>Esterna</locazione>
+    <listaPrenotazioni>
+      <prenotazione>
+        <idPrenotazione>T10-PT1</idPrenotazione>
+        <codFisc>RSSGNN64R03E472G</codFisc>
+        <data>2022-06-13</data>
+        <ora>13:00:00</ora>
+      </prenotazione>
+    </listaPrenotazioni>
+  </tavolo>
+  <tavolo numero="T17">
+    <locazione>Esterna</locazione>
+    <listaPrenotazioni/>
+  </tavolo>
+  <tavolo numero="T25">
+    <locazione>Esterna</locazione>
+    <listaPrenotazioni/>
+  </tavolo>
 </listaTavoli>

@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaDomande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Domande.xsd">
-    <domanda id="D1">
-        <nomeAutore>Giovanni</nomeAutore>
-        <cognomeAutore>Rossi</cognomeAutore>
-        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
-        <categoria>Generale</categoria>
-        <testoDomanda>La palestra e' dotata di un phon?</testoDomanda>
-        <listaRisposte>
-            <risposta>
-                <idRisposta>D1-RSP1</idRisposta>
-                <autore>Cliente</autore>
-                <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
-                <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
-                <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
-                <testoRisposta>Si, certo</testoRisposta>
-            </risposta>
-            <risposta>
-                <idRisposta>D1-RSP2</idRisposta>
-                <autore>Cliente</autore>
-                <nomeAutoreRisposta>Matteo</nomeAutoreRisposta>
-                <cognomeAutoreRisposta>Briscola</cognomeAutoreRisposta>
-                <codFiscAutoreRisposta>RSMTT64E05E472K</codFiscAutoreRisposta>
-                <testoRisposta>Si, anche se di solito sono sempre tutti occupati. Consiglio comunque di portare quello personale.</testoRisposta>
-            </risposta>
-            <risposta>
-                <idRisposta>D1-RSP3</idRisposta>
-                <autore>Staff</autore>
-                <testoRisposta>Salve gentile cliente, disponiamo di ben 5 phon.</testoRisposta>
-            </risposta>
-        </listaRisposte>
-    </domanda>
-    <domanda id="D2">
-        <nomeAutore>Roberto</nomeAutore>
-        <cognomeAutore>Verdi</cognomeAutore>
-        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
-        <categoria>Crediti</categoria>
-        <testoDomanda>Qualcuno sa come si utilizzano i crediti?</testoDomanda>
-        <listaRisposte>
-            <risposta>
-                <idRisposta>D2-RSP1</idRisposta>
-                <autore>Cliente</autore>
-                <nomeAutoreRisposta>Matteo</nomeAutoreRisposta>
-                <cognomeAutoreRisposta>Briscola</cognomeAutoreRisposta>
-                <codFiscAutoreRisposta>BRSMTT64E05E472K</codFiscAutoreRisposta>
-                <testoRisposta>Se non sbaglio in base a quanto vengono apprezzate le tue recensioni.</testoRisposta>
-            </risposta>
-            <risposta>
-                <idRisposta>D2-RSP2</idRisposta>
-                <autore>Staff</autore>
-                <testoRisposta>Salve gentile cliente, i crediti vengono accumulati giornalmente in base a quanto le sue recensioni o le sue risposte vengono apprezzate, posso essere usati per ricevere degli sconti sulla prenotazione di una camera, un'attività, di un tavolo o la prenotazione del servizio in camera.</testoRisposta>
-            </risposta>
-        </listaRisposte>
-    </domanda>
-    <domanda id="D3">
-        <nomeAutore>Valentina</nomeAutore>
-        <cognomeAutore>Bianchi</cognomeAutore>
-        <codFiscAutore>BNCVNT00R67E472F</codFiscAutore>
-        <categoria>Servizi</categoria>
-        <testoDomanda>Quanto ci vuole per avere il piatto ordinato con il servizio in camera?</testoDomanda>
-        <listaRisposte>
-            <risposta>
-                <idRisposta>D3-RSP1</idRisposta>
-                <autore>Cliente</autore>
-                <nomeAutoreRisposta>Gianluca</nomeAutoreRisposta>
-                <cognomeAutoreRisposta>Capozzi</cognomeAutoreRisposta>
-                <codFiscAutoreRisposta>CPZGLC90P11H501W</codFiscAutoreRisposta>
-                <testoRisposta>Dai 20/30 minuti di solito. Dipende da quanto è elaborato il piatto. Assicurati di essere in camera però, altrimenti il piatto viene riportato in cucina.</testoRisposta>
-            </risposta>
-        </listaRisposte>
-    </domanda>
-    <domanda id="D4">
-        <nomeAutore>Roberto</nomeAutore>
-        <cognomeAutore>Verdi</cognomeAutore>
-        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
-        <categoria>Servizi</categoria>
-        <testoDomanda>La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?</testoDomanda>
-        <listaRisposte>
-            <risposta>
-                <idRisposta>D4-RSP1</idRisposta>
-                <autore>Staff</autore>
-                <testoRisposta>Certamente. Il ristorante offre la colazione a tutti i clienti, a prescindere dalla tipologia di camera prenotata.</testoRisposta>
-            </risposta>
-        </listaRisposte>
-    </domanda>
-    <domanda id="D5">
-        <nomeAutore>Roberto</nomeAutore>
-        <cognomeAutore>Verdi</cognomeAutore>
-        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
-        <categoria>Servizi</categoria>
-        <testoDomanda>Posso usufruire del servizio in camera anche se ho prenotato una camera Standard Singola?</testoDomanda>
-        <listaRisposte />            
-    </domanda>
+  <domanda id="D1">
+    <nomeAutore>Giovanni</nomeAutore>
+    <cognomeAutore>Rossi</cognomeAutore>
+    <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+    <categoria>Generale</categoria>
+    <testoDomanda>La palestra e' dotata di un phon?</testoDomanda>
+    <listaRisposte>
+      <risposta>
+        <idRisposta>D1-RSP1</idRisposta>
+        <autore>Cliente</autore>
+        <nomeAutoreRisposta>Roberto</nomeAutoreRisposta>
+        <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
+        <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
+        <testoRisposta>Si, certo</testoRisposta>
+      </risposta>
+      <risposta>
+        <idRisposta>D1-RSP2</idRisposta>
+        <autore>Cliente</autore>
+        <nomeAutoreRisposta>Matteo</nomeAutoreRisposta>
+        <cognomeAutoreRisposta>Briscola</cognomeAutoreRisposta>
+        <codFiscAutoreRisposta>RSMTT64E05E472K</codFiscAutoreRisposta>
+        <testoRisposta>Si, anche se di solito sono sempre tutti occupati. Consiglio comunque di portare quello personale.</testoRisposta>
+      </risposta>
+      <risposta>
+        <idRisposta>D1-RSP3</idRisposta>
+        <autore>Staff</autore>
+        <testoRisposta>Salve gentile cliente, disponiamo di ben 5 phon.</testoRisposta>
+      </risposta>
+    </listaRisposte>
+  </domanda>
+  <domanda id="D2">
+    <nomeAutore>Roberto</nomeAutore>
+    <cognomeAutore>Verdi</cognomeAutore>
+    <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+    <categoria>Crediti</categoria>
+    <testoDomanda>Qualcuno sa come si utilizzano i crediti?</testoDomanda>
+    <listaRisposte>
+      <risposta>
+        <idRisposta>D2-RSP1</idRisposta>
+        <autore>Cliente</autore>
+        <nomeAutoreRisposta>Matteo</nomeAutoreRisposta>
+        <cognomeAutoreRisposta>Briscola</cognomeAutoreRisposta>
+        <codFiscAutoreRisposta>BRSMTT64E05E472K</codFiscAutoreRisposta>
+        <testoRisposta>Se non sbaglio in base a quanto vengono apprezzate le tue recensioni.</testoRisposta>
+      </risposta>
+      <risposta>
+        <idRisposta>D2-RSP2</idRisposta>
+        <autore>Staff</autore>
+        <testoRisposta>Salve gentile cliente, i crediti vengono accumulati giornalmente in base a quanto le sue recensioni o le sue risposte vengono apprezzate, posso essere usati per ricevere degli sconti sulla prenotazione di una camera, un'attività, di un tavolo o la prenotazione del servizio in camera.</testoRisposta>
+      </risposta>
+    </listaRisposte>
+  </domanda>
+  <domanda id="D3">
+    <nomeAutore>Valentina</nomeAutore>
+    <cognomeAutore>Bianchi</cognomeAutore>
+    <codFiscAutore>BNCVNT00R67E472F</codFiscAutore>
+    <categoria>Servizi</categoria>
+    <testoDomanda>Quanto ci vuole per avere il piatto ordinato con il servizio in camera?</testoDomanda>
+    <listaRisposte>
+      <risposta>
+        <idRisposta>D3-RSP1</idRisposta>
+        <autore>Cliente</autore>
+        <nomeAutoreRisposta>Gianluca</nomeAutoreRisposta>
+        <cognomeAutoreRisposta>Capozzi</cognomeAutoreRisposta>
+        <codFiscAutoreRisposta>CPZGLC90P11H501W</codFiscAutoreRisposta>
+        <testoRisposta>Dai 20/30 minuti di solito. Dipende da quanto è elaborato il piatto. Assicurati di essere in camera però, altrimenti il piatto viene riportato in cucina.</testoRisposta>
+      </risposta>
+    </listaRisposte>
+  </domanda>
+  <domanda id="D4" faq="true">
+    <nomeAutore>Roberto</nomeAutore>
+    <cognomeAutore>Verdi</cognomeAutore>
+    <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+    <categoria>Servizi</categoria>
+    <testoDomanda>La colazione viene inclusa con la prenotazione di un qualsiasi tipo di camera?</testoDomanda>
+    <listaRisposte>
+      <risposta>
+        <idRisposta>D4-RSP1</idRisposta>
+        <autore>Staff</autore>
+        <testoRisposta>Certamente. Il ristorante offre la colazione a tutti i clienti, a prescindere dalla tipologia di camera prenotata.</testoRisposta>
+      </risposta>
+    </listaRisposte>
+  </domanda>
+  <domanda id="D5">
+    <nomeAutore>Roberto</nomeAutore>
+    <cognomeAutore>Verdi</cognomeAutore>
+    <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+    <categoria>Servizi</categoria>
+    <testoDomanda>Posso usufruire del servizio in camera anche se ho prenotato una camera Standard Singola?</testoDomanda>
+    <listaRisposte/>
+  </domanda>
 </listaDomande>

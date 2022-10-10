@@ -50,4 +50,34 @@
       </portata>
     </listaPortate>
   </prenotazione>
+  <prenotazione id="PSC3">
+    <codFisc>CPZGLC90P11H501W</codFisc>
+    <data>2022-11-12</data>
+    <ora>20:00:00</ora>
+    <richieste/>
+    <prezzoTotale>31</prezzoTotale>
+    <creditiUsati>0</creditiUsati>
+    <listaPortate>
+      <portata>
+        <nome>Antipasto di montagna</nome>
+        <prezzo>8</prezzo>
+        <quantita>1</quantita>
+      </portata>
+      <portata>
+        <nome>Lasagne</nome>
+        <prezzo>9</prezzo>
+        <quantita>2</quantita>
+      </portata>
+      <portata>
+        <nome>Sorbetto al limone</nome>
+        <prezzo>2</prezzo>
+        <quantita>1</quantita>
+      </portata>
+      <portata>
+        <nome>Tiramisu</nome>
+        <prezzo>3</prezzo>
+        <quantita>1</quantita>
+      </portata>
+    </listaPortate>
+  </prenotazione>
 </listaPrenotazioni>

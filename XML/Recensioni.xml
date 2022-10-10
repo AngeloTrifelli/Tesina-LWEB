@@ -1,41 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaRecensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Recensioni.xsd">
-    <recensione id="R1">
-        <nomeAutore>Giovanni</nomeAutore>
-        <cognomeAutore>Rossi</cognomeAutore>
-        <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
-        <categoria>Servizi</categoria>
-        <testoRecensione>
-            Soggiorno fantastico! Il ristorante offre sempre piatti di immensa qualità ed il personale è 
-            estremamente professionale e sempre disponibile. 
-        </testoRecensione>
-        <voto>5</voto>
-        <utilita>0</utilita>
-        <accordo>0</accordo>
-    </recensione>
-    <recensione id="R2">
-        <nomeAutore>Roberto</nomeAutore>
-        <cognomeAutore>Verdi</cognomeAutore>
-        <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
-        <categoria>Generale</categoria>
-        <testoRecensione>
-            Ho alloggiato nell'hotel la notte del 17 settembre, camera Suite. La camera eccezionale, costa risetto le altre ma è di tutt'altro livello, per questo ne vale la pena.
-            Unica pecca è l'idromassaggio, non vedevo l'ora di provarlo ma durante il mio soggiorno era in manutenzione, e non mi è stato fatto neanche uno sconto sulla camera. Per questo do 3 stelle.
-        </testoRecensione>
-        <voto>3</voto>
-        <utilita>0</utilita>
-        <accordo>0</accordo>
-    </recensione>
-    <recensione id="R3">
-        <nomeAutore>Matteo</nomeAutore>
-        <cognomeAutore>Briscola</cognomeAutore>
-        <codFiscAutore>BRSMTT64E05E472K</codFiscAutore>
-        <categoria>Crediti</categoria>
-        <testoRecensione>
-            Fantastica questa funzione dei crediti, ho risparmiato un sacco sul mio prossimo soggiorno. 5 stelle piene!
-        </testoRecensione>
-        <voto>5</voto>
-        <utilita>0</utilita>
-        <accordo>0</accordo>
-    </recensione>
+  <recensione id="R1">
+    <nomeAutore>Giovanni</nomeAutore>
+    <cognomeAutore>Rossi</cognomeAutore>
+    <codFiscAutore>RSSGNN64R03E472G</codFiscAutore>
+    <categoria>Servizi</categoria>
+    <testoRecensione>Soggiorno fantastico! Il ristorante offre sempre piatti di immensa qualità ed il personale è estremamente professionale e sempre disponibile.</testoRecensione>
+    <voto>5</voto>
+    <utilita>3</utilita>
+    <accordo>3</accordo>
+  </recensione>
+  <recensione id="R2">
+    <nomeAutore>Roberto</nomeAutore>
+    <cognomeAutore>Verdi</cognomeAutore>
+    <codFiscAutore>VRDRRT00L13E472M</codFiscAutore>
+    <categoria>Generale</categoria>
+    <testoRecensione>Ho alloggiato nell'hotel la notte del 17 settembre, camera Suite. La camera eccezionale, costa risetto le altre ma è di tutt'altro livello, per questo ne vale la pena.Unica pecca è l'idromassaggio, non vedevo l'ora di provarlo ma durante il mio soggiorno era in manutenzione, e non mi è stato fatto neanche uno sconto sulla camera. Per questo do 3 stelle.</testoRecensione>
+    <voto>3</voto>
+    <utilita>5</utilita>
+    <accordo>0</accordo>
+  </recensione>
+  <recensione id="R3">
+    <nomeAutore>Matteo</nomeAutore>
+    <cognomeAutore>Briscola</cognomeAutore>
+    <codFiscAutore>BRSMTT64E05E472K</codFiscAutore>
+    <categoria>Crediti</categoria>
+    <testoRecensione>Fantastica questa funzione dei crediti, ho risparmiato un sacco sul mio prossimo soggiorno. 5 stelle piene!</testoRecensione>
+    <voto>5</voto>
+    <utilita>0</utilita>
+    <accordo>6</accordo>
+  </recensione>
 </listaRecensioni>

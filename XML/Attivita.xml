@@ -26,6 +26,15 @@
         <prezzoTotale>30</prezzoTotale>
         <creditiUsati>50</creditiUsati>
       </prenotazione>
+      <prenotazione>
+        <idPrenotazione>A1-PA3</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <data>2022-11-11</data>
+        <oraInizio>15:00:00</oraInizio>
+        <oraFine>17:00:00</oraFine>
+        <prezzoTotale>20</prezzoTotale>
+        <creditiUsati>0</creditiUsati>
+      </prenotazione>
     </listaPrenotazioni>
   </attivita>
   <attivita id="A2">
@@ -45,6 +54,15 @@
         <prezzoTotale>100</prezzoTotale>
         <creditiUsati>0</creditiUsati>
       </prenotazione>
+      <prenotazione>
+        <idPrenotazione>A2-PA2</idPrenotazione>
+        <codFisc>CPZGLC90P11H501W</codFisc>
+        <data>2022-11-13</data>
+        <oraInizio>16:00:00</oraInizio>
+        <oraFine>18:00:00</oraFine>
+        <prezzoTotale>40</prezzoTotale>
+        <creditiUsati>0</creditiUsati>
+      </prenotazione>
     </listaPrenotazioni>
   </attivita>
   <attivita id="A3">
@@ -54,7 +72,6 @@
     <oraApertura>08:00:00</oraApertura>
     <oraChiusura>12:00:00</oraChiusura>
     <prezzoOrario>5</prezzoOrario>
-    <listaPrenotazioni>
-    </listaPrenotazioni>
+    <listaPrenotazioni/>
   </attivita>
 </listaAttivita>

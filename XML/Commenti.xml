@@ -8,7 +8,7 @@
     <testo>Concordo pienamente!</testo>
     <utilita>0</utilita>
     <accordo>0</accordo>
-    <listaRisposte />      
+    <listaRisposte/>
   </commento>
   <commento id="CM2">
     <idRecensione>R2</idRecensione>
@@ -17,7 +17,7 @@
     <codFiscAutore>BNCVNT00R67E472F</codFiscAutore>
     <testo>Volevo prenotare proprio una suite oggi, ma sto cambiando idea. Senza l'idromassaggio non conviene.</testo>
     <utilita>0</utilita>
-    <accordo>0</accordo>
+    <accordo>6</accordo>
     <listaRisposte>
       <risposta>
         <idRisposta>CM2-CMR1</idRisposta>
@@ -25,7 +25,7 @@
         <cognomeAutoreRisposta>Verdi</cognomeAutoreRisposta>
         <codFiscAutoreRisposta>VRDRRT00L13E472M</codFiscAutoreRisposta>
         <testoRisposta>Tranquilla Valentina, l'idromassaggio è stato sistemato pochi giorni dopo.</testoRisposta>
-        <utilitaRisposta>0</utilitaRisposta>
+        <utilitaRisposta>5</utilitaRisposta>
         <accordoRisposta>0</accordoRisposta>
       </risposta>
       <risposta>
